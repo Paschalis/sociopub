@@ -12,6 +12,8 @@
 
 session_start();
 
+include("genericFunctions.php");
+
 // Include database class
 require("database.php");
 

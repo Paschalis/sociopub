@@ -138,23 +138,7 @@ if ($_SESSION['registerErrors'] != "0") {
 
 }
 
-/*
- * Print code and a message
- * */
-function printMessage($code, $msg)
-{
-    $result = array(
-        "result" => $code,
-        "message" => $msg
-    );
-    //Hide other info
 
-    $_SESSION['registerErrors'] = 0;
-
-    echo json_encode($result);
-    die();
-
-}
 
 
 /* Functions
@@ -217,7 +201,7 @@ function registerUserToDatabase()
     $strMessage = "Hello " . $_SESSION['name'] . ",\nWelcome to Social Publishing system.\n" .
         "\n\nTo activate your account please follow this link: \n\n" .
         _URL .
-        "activate.php?username=" . $_SESSION['username'] .
+        "/scripts/activate.php?username=" . $_SESSION['username'] .
         "&code=" . $activationCode . "\n\nThank you,\nSocioPub Team";
 
 
@@ -229,7 +213,7 @@ function registerUserToDatabase()
     } else {
         $_SESSION['registerErrors'] = "1";
 
-        printError("Email address is invalid!</br>");
+        printMessage(0, "Email address is invalid!</br>");
 
     }
 
@@ -283,18 +267,3 @@ function isEmailCorrect($email)
 }
 
 
-// Database Error
-function dbError($pError)
-{
-
-    $result = array(
-        "result" => "0",
-        "message" => "Database Error :("
-    );
-    //Hide other info
-
-    $_SESSION['registerErrors'] = 0;
-    echo json_encode($result);
-    die();
-
-}

@@ -45,6 +45,12 @@
                         </tr>
 
                         <tr>
+                            <td class="normalfont">Gender:</td>
+                            <td>
+                                <input type="text" class="formInput" name="gender" /></td>
+                        </tr>
+
+                        <tr>
                             <td class="normalfont">Country:</td>
                             <td>
                                 <input type="text" class="formInput" name="country" /></td>

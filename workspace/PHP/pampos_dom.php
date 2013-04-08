@@ -1,3 +1,6 @@
+<html>
+<body>
+<br>
 <?php
 /**
  * Created by JetBrains PhpStorm.
@@ -16,4 +19,25 @@ foreach ($anchor_tags as $tag) {
     $keywords[] = strtolower($tag->nodeValue);
 }
 }
+//testing something
+
+
+
+$x=5; // global scope
+$y=4;
+function myTest($x)
+{
+    $y=6;
+    $z=7;
+
+    echo "Tha tipwsw to x+y+z: </br> Do3asi: ";
+    echo $x+$y+$z; // local scope
+    echo "</br> $x+$y+$z </br>";
+    $GLOBALS['y']=$GLOBALS['x']+$GLOBALS['y'];
+}
+echo "Y before:",$y,"</br>";
+myTest($x);
+echo "Y after:",$y;
 ?>
+</body>
+</html>

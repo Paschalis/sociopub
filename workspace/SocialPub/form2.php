@@ -9,7 +9,7 @@
             <br />
 
             <div>
-                <form method="post" action="doregister.php">
+                <form method="post"  action="register.php">
 
                     <table cellspacing="1" cellpadding="3" border="0">
                         <tbody>

@@ -18,12 +18,10 @@ require("database.php");
 $database = new Database();
 
 if(!$database->connect()){
-    //Show error end exit
-//    $database->printError($database->errorMessage);
-    echo "Database error<br>";
-    die();
+    // save error
+    $_SESSION["errorMessage"]="Database error";
 
 }
 else{
-    echo "Successfully connected to db<br>";
+    $_SESSION["errorMessage"]="";
 }

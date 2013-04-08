@@ -14,6 +14,11 @@ define('DB_USER', 'paschal_sp');
 // Db password
 define('DB_PASSWORD', '867070');
 
+// Social pub email
+define('_EMAIL', 'socialpub@paschalis.mp');
+
+define('_URL', 'http://paschalis.mp/projects/socialpub/');
+
 //Salt for database password protection
 define('_SALT', '#W$ZSDF$%FD');
 

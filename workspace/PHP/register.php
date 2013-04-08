@@ -14,55 +14,67 @@ include("initializeSession.php");
 
 //Get data from webpage
 $_SESSION['username'] = $_POST['username'];
+$_SESSION['email'] = $_POST['email'];
 $_SESSION['password'] = $_POST['password'];
 $_SESSION['confPassword'] = $_POST['confPassword'];
 $_SESSION['name'] = $_POST['name'];
 $_SESSION['surname'] = $_POST['surname'];
-$_SESSION['email'] = $_POST['email'];
-$_SESSION['country'] = $_POST['telephone'];
+$_SESSION['country'] = $_POST['country'];
 $_SESSION['gender'] = $_POST['gender'];
 
 
 //Save errors to inform user
 $_SESSION['registerErrors'] = "0";
-$_SESSION['regMessage'] = "";
+
+$_SESSION['errorMessage'] = "";
+
+
 
 
 //Gather errors
 if ($_SESSION['username'] == "" || strlen($_SESSION['username']) > 30) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in username<br>";
 }
 
 if ($_SESSION['password'] == "" || strlen($_SESSION['password']) > 40) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in password<br>";
 }
 
 if ($_SESSION['confPassword'] == "" || strlen($_SESSION['confPassword']) > 40) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in password confirmation<br>";
 }
 
 if ($_SESSION['password'] != $_SESSION['confPassword']) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Password and confirmation dont match<br>";
 }
 
 if ($_SESSION['name'] == "" || strlen($_SESSION['name']) > 40) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in name<br>";
 }
 
 if ($_SESSION['surname'] == "" || strlen($_SESSION['surname']) > 50) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in surname<br>";
 }
 
 if ($_SESSION['email'] == "" || !isEmailCorrect($_SESSION['email']) || strlen($_SESSION['email']) > 80) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error at email<br>";
 }
 
-if ($_SESSION['country'] == "" || strlen($_SESSION['country'] > 60) ) {
+if ($_SESSION['country'] == "" || strlen($_SESSION['country'] > 60)) {
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in country<br>";
 }
 
-if ($_SESSION['gender'] == "" || strlen($_SESSION['gender'] != 1) ) {
+if (!($_SESSION['gender'] == "f" || $_SESSION['gender'] == "m")){
     $_SESSION['registerErrors'] = 1;
+    $_SESSION['errorMessage'].="Error in gender<br>";
 }
 
 // Check username uniqueness
@@ -75,7 +87,7 @@ $usernameMatchesNum = mysql_num_rows($usernameMatches);
 
 if ($usernameMatchesNum > 0) {
     $_SESSION['registerErrors'] = 1;
-    $_SESSION['registerErrorMessage'] .= "Username already registered</br>";
+    $_SESSION['errorMessage'].= "Username already registered</br>";
 }
 
 
@@ -86,12 +98,13 @@ $emailMatchesNum = mysql_num_rows($emailMatches);
 // Email already registered
 if ($emailMatchesNum > 0) {
     $_SESSION['registerErrors'] = 1;
-    $_SESSION['registerErrorMessage'] .= "Email already registered</br>";
+    $_SESSION['errorMessage'].= "Email already registered</br>";
 }
 
 
+
 // Registration input is correct
-if ($_SESSION['registerErrors'] == "0") {
+if ($_SESSION['registerErrors'] == 0) {
 
     //Register user to database
     registerUserToDatabase();
@@ -103,40 +116,36 @@ if ($_SESSION['registerErrors'] == "0") {
         } else {
 
 
-            $msg = "You have successfully registered.<br>".
-            "Please activate your account using your email address";
+            $msg = "You have successfully registered.<br>" .
+                "Please activate your account using your email address";
 
+            printMessage(1,$msg);
 
+            //Clear error messages+codes
+            $_SESSION['errorMessage']="";
 
-            $result = array(
-                "result" => "1",
-                "message" => $msg
-            );
-
-            echo json_encode($result);
-            die();
         }
 
     }
 
 }
 
-//Registration Info is wrong
+// Something went wrong
 if ($_SESSION['registerErrors'] != "0") {
 
-    if ($_SESSION['isMobileDevice']) {
-        mobileSendRegisterError();
-    } else {
-        printError();
-    }
+    printMessage(0,$_SESSION["errorMessage"]);
+
 
 }
 
-function printError()
+/*
+ * Print code and a message
+ * */
+function printMessage($code, $msg)
 {
     $result = array(
-        "result" => "0",
-        "message" => $_SESSION['regMessage']
+        "result" => $code,
+        "message" => $msg
     );
     //Hide other info
 
@@ -183,72 +192,44 @@ function registerUserToDatabase()
     $encPassword = md5($encPassword);
 
 
-    $queryInsertUser = sprintf("INSERT INTO USER (username, password, name, surname, email,"
-            . "telephone,allowRequests,activationCode, level) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+    // Create query string
+    $queryInsertUser = sprintf("INSERT INTO USER (USERNAME, PASSWORD, NAME, SURNAME, COUNTRY,"
+            . "EMAIL, GENDER, STATUS, ACTIVATION_CODE) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",
         mysql_real_escape_string($_SESSION['username']),
         mysql_real_escape_string($encPassword),
-        mysql_real_escape_string($_SESSION['REGname']),
-        mysql_real_escape_string($_SESSION['REGsurname']),
-        mysql_real_escape_string($_SESSION['REGemail']),
-        mysql_real_escape_string($_SESSION['REGtelephone']),
-        $allowRequests,
-        mysql_real_escape_string($activationCode),
-        $_SESSION['foundLevel']
+        mysql_real_escape_string($_SESSION['name']),
+        mysql_real_escape_string($_SESSION['surname']),
+        mysql_real_escape_string($_SESSION['country']),
+        mysql_real_escape_string($_SESSION['email']),
+        mysql_real_escape_string($_SESSION['gender']),
+        "0",
+        mysql_real_escape_string($activationCode)
     );
 
     //Insert User to database
     $insert = mysql_query($queryInsertUser) or dbError(mysql_error());
 
 
-    //Library has a email server
-    if ($_SESSION['foundLevel'] == "3") {
-
-        $strTo = $_SESSION['REGemail'];
-        $strSubject = "SmartLib " . _NAME . " Activation";
-        $strHeader = "From: Smartlib " . _NAME . " <" . _EMAIL . ">";
-        $strMessage = "Hello " . $_SESSION['REGname'] . ",\nWelcome to the library of the modern world.\n" .
-            "\n\nTo activate your account please follow this link: \n\n" .
-            _LIB_URL .
-            "activate.php?uLnk=yes&uLnkUsername=" . $_SESSION['username'] .
-            "&activationCode=" . $activationCode . "\n\nThank you,\nSmartLib Team";
+    // Notify user to activate the account
+    $strTo = $_SESSION['email'];
+    $strSubject = "Sociopub Activation";
+    $strHeader = "From: Sociopub <" . _EMAIL . ">";
+    $strMessage = "Hello " . $_SESSION['name'] . ",\nWelcome to Social Publishing system.\n" .
+        "\n\nTo activate your account please follow this link: \n\n" .
+        _URL .
+        "activate.php?username=" . $_SESSION['username'] .
+        "&code=" . $activationCode . "\n\nThank you,\nSocioPub Team";
 
 
-        // @ = avoid showing error
-        //$flgSend = ;
+    // @ = avoid showing error
+    //$flgSend = ;
 
-        if (@mail($strTo, $strSubject, $strMessage, $strHeader)) {
-        } else {
-            $_SESSION['errEmail'] = "1";
-            $_SESSION['registerErrors'] = "1";
-            $_SESSION['regMessage'] .= "Email address is invalid!</br>";
-
-            printError();
-
-        }
+    // Send email to user
+    if (@mail($strTo, $strSubject, $strMessage, $strHeader)) {
     } else {
+        $_SESSION['registerErrors'] = "1";
 
-        $strTo = $_SESSION['REGemail'];
-        $strSubject = "SmartLib " . _NAME . "  Activation";
-        $strHeader = "From: Smartlib " . _NAME . " <" . _EMAIL . ">";
-        $strMessage = "Hello " . $_SESSION['REGname'] . ",\nWelcome to the library of the modern world.\n" .
-            "\n\nTo activate your account please follow this link: \n\n" .
-            _LIB_URL .
-            "activate.php?uLnk=yes&uLnkUsername=" . $_SESSION['username'] .
-            "&activationCode=" . $activationCode . "\n\nThank you,\nSmartLib Team";
-
-
-        // @ = avoid showing error
-        //$flgSend = ;
-
-        if (@mail($strTo, $strSubject, $strMessage, $strHeader)) {
-        } else {
-            $_SESSION['errEmail'] = "1";
-            $_SESSION['registerErrors'] = "1";
-            $_SESSION['regMessage'] .= "Email address is invalid!</br>";
-
-            printError();
-
-        }
+        printError("Email address is invalid!</br>");
 
     }
 
@@ -257,44 +238,6 @@ function registerUserToDatabase()
 
 ////////////// Functions
 
-//Returns the URL user is, without include the last page in the URL path
-
-function getCustomURL()
-{
-
-    $len = strlen($_SERVER['REQUEST_URI']);
-
-    for ($i = $len - 1; $i > 0; $i--) {
-        //Remove the last name of the URI
-        if ($_SERVER['REQUEST_URI'][$i] == "/") {
-
-            $found = 1;
-
-            $urlResult = substr($_SERVER['REQUEST_URI'], 0, $i + 1);
-            break;
-        }
-
-    }
-
-    if (!$found)
-        $urlResult = $_SERVER['REQUEST_URI'];
-
-    return $_SERVER['SERVER_NAME'] . $urlResult;
-
-}
-
-
-function isTelephoneCorrect($telephone)
-{
-    if (!ereg("^((\+[1-9]{3,4}|0[1-9]{4}|00[1-9]{3})\-?)?[0-9]{8,20}$", $telephone)) {
-        // Email invalid because wrong number of characters
-        // in one section or wrong number of @ symbols.
-        return false;
-    } // else if($telephone=="")
-    // TODO Check if its correct!   return false;
-    else
-        return true;
-}
 
 //Checks if the email is correct
 function isEmailCorrect($email)
@@ -339,69 +282,10 @@ function isEmailCorrect($email)
 
 }
 
-//Mobile Device Functions
-// Sends error to mobile device using JSON Object Format
-function mobileSendRegisterError()
-{
-    //Convert HTML New Line to Java New Line
-    $javaMSG = $_SESSION['regMessage'];
-    $oldNL = "</br>";
-    ;
-    $newNL = "\n";
-
-    $offset = 0;
-    $i = 1;
-    $tmpOldStrLength = strlen($oldNL);
-    while (($offset = strpos($javaMSG, $oldNL, $offset)) !== false) {
-        $javaMSG = substr_replace($javaMSG, $newNL, $offset, $tmpOldStrLength);
-    }
-
-
-    $result = array(
-        "result" => "0",
-        "message" => $javaMSG
-    );
-    //Encode Answer
-    echo json_encode($result);
-
-    die();
-}
-
-//Mobile Device Functions
-// Sends error to mobile device using JSON Object Format
-function mobileSendLoginSuccess()
-{
-    $result = array(
-        "result" => "1"
-    );
-    //Encode Answer
-    echo json_encode($result);
-
-    die();
-}
-
-
-// TODO Sends error to mobile device using JSON Object Format
-function mobileSendDatabaseError()
-{
-    $result[] = array(
-        "result" => "-11"
-    );
-    //Encode Answer
-    echo json_encode($result);
-
-    die();
-}
-
 
 // Database Error
 function dbError($pError)
 {
-
-    if ($_SESSION['isMobileDevice']) {
-        //Inform Mobile Device about database Error
-        mobileSendDatabaseError();
-    }
 
     $result = array(
         "result" => "0",

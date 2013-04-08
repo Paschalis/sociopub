@@ -18,5 +18,6 @@ function get_data($url) {
     return $data;
 }
 
+
 $returned_content = get_data('http://davidwalsh.name');
 ?>

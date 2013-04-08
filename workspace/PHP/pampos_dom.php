@@ -32,7 +32,7 @@ function myTest($x)
 
     echo "Tha tipwsw to x+y+z: </br> Do3asi: ";
     echo $x+$y+$z; // local scope
-    echo "</br> $x+$y+$z </br>";
+    echo "</br> $x+$y+$z  </br>";
     $GLOBALS['y']=$GLOBALS['x']+$GLOBALS['y'];
 }
 echo "Y before:",$y,"</br>";

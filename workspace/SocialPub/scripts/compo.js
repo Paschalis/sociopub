@@ -14,6 +14,9 @@
  */
 
 
+/* EINAI MALAKIA PROS TO PARON MIN DWDSETE SIMASIA*/
+
+
 function getXHR() {
     if (window.XMLHttpRequest) {
         // Chrome, Firefox, IE7+, Opera, Safari

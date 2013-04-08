@@ -1,5 +1,7 @@
 <html>
 <head>
+
+<script type="text/javascript" src="checks.js"</script>
 </head>
 <body>
 <table width="100%">

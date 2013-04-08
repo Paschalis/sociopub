@@ -7,10 +7,10 @@
 <table width="100%">
     <tbody>
     <tr>
-        <td class=""><span style="font-family: arial,verdana; font-size: 10pt;">Please fill out the form below to register:<br />
+        <td class=""><span style="font-family:arial,verdana;font-size: 10pt;">Please fill out the form below to register:<br />
             <br />
 
-            <div>
+            <div id="register">
                 <form method="post"  action="scripts/register.php">
 
                     <table cellspacing="1" cellpadding="3" border="0">

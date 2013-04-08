@@ -13,7 +13,7 @@ Home of PHP Scripts.
 
 
 
-jkh pampos
+jkh pamposs
 boo!!
 
 

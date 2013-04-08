@@ -25,6 +25,12 @@ https://github.com/dmsl/smartlib/tree/master/Webpage<br>
 <br>
 <br>
 <br>
-<br>
     JAVA SCRIPT DIRECTORY:<br>
 http://www.paschalis.mp/projects/socialpub/scripts/checks.js<br>
+<br>
+<br>
+
+TODO:<br>
+AJAX:<br>
+http://net.tutsplus.com/tutorials/javascript-ajax/5-ways-to-make-ajax-calls-with-jquery/<br>
+<br>

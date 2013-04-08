@@ -20,6 +20,13 @@
                             <td>
                                 <input type="text" class="formInput" name="username" /></td>
                         </tr>
+
+                        <tr>
+                            <td class="normalfont">Email:</td>
+                            <td>
+                                <input type="text" class="formInput" name="email" /></td>
+                        </tr>
+
                         <tr>
                             <td class="normalfont">Password:</td>
                             <td>
@@ -40,10 +47,12 @@
                             <td>
                                 <input type="text" class="formInput" name="lname"  /></td>
                         </tr>
+
+
                         <tr>
-                            <td class="normalfont">Email:</td>
+                            <td class="normalfont">Gender:</td>
                             <td>
-                                <input type="text" class="formInput" name="email" /></td>
+                                <input type="text" class="formInput" name="gender" /></td>
                         </tr>
 
                         <tr>

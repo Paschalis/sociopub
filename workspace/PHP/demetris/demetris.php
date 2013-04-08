@@ -8,16 +8,12 @@
  */
 
 
+$url = "http://www.google.com";
+
+$str = file_get_contents($url);
+echo $str;
+
 ?>
-
-Home of PHP Scripts.
-
-tytj
-parto esi
-boo!!
-
-\
-
-dimi
-k
-p
+jvjhvjhvj
+mvmvb
+jhvghjvggzxgfdz

@@ -20,114 +20,92 @@ $_SESSION['name'] = $_POST['name'];
 $_SESSION['surname'] = $_POST['surname'];
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['country'] = $_POST['telephone'];
+$_SESSION['gender'] = $_POST['gender'];
 
 
 //Save errors to inform user
-$_SESSION['regHasErrors'] = "0";
+$_SESSION['registerErrors'] = "0";
 $_SESSION['regMessage'] = "";
 
 
 //Gather errors
 if ($_SESSION['username'] == "" || strlen($_SESSION['username']) > 30) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['password'] == "" || strlen($_SESSION['password']) > 40) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['confPassword'] == "" || strlen($_SESSION['confPassword']) > 40) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['password'] != $_SESSION['confPassword']) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['name'] == "" || strlen($_SESSION['name']) > 40) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['surname'] == "" || strlen($_SESSION['surname']) > 50) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['email'] == "" || !isEmailCorrect($_SESSION['email']) || strlen($_SESSION['email']) > 80) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
 if ($_SESSION['country'] == "" || strlen($_SESSION['country'] > 60) ) {
-    $_SESSION['regHasErrors'] = 1;
+    $_SESSION['registerErrors'] = 1;
 }
 
-
-// TODO LEFTHERE
-
-//Check if is the first User (= Admin/Owner)
-
-$queryFirstUser = sprintf("SELECT username FROM SMARTLIB_USER");
-$allUsernames = mysql_query($queryFirstUser);
-$allUsernamesNum = mysql_num_rows($allUsernames);
-
-
-//User level is admin
-if ($allUsernamesNum == 0) {
-    $_SESSION['foundLevel'] = "3";
-} else {
-    $_SESSION['foundLevel'] = "0";
+if ($_SESSION['gender'] == "" || strlen($_SESSION['gender'] != 1) ) {
+    $_SESSION['registerErrors'] = 1;
 }
 
 // Check username uniqueness
-$queryFindUsernames = sprintf("SELECT username FROM SMARTLIB_USER WHERE username='%s'",
+$strQueryFindUsernames = sprintf("SELECT USERNAME FROM USER WHERE USERNAME='%s'",
     mysql_real_escape_string($_SESSION['username']));
 
 
-$usernameMatches = mysql_query($queryFindUsernames);
+$usernameMatches = mysql_query($strQueryFindUsernames);
 $usernameMatchesNum = mysql_num_rows($usernameMatches);
 
 if ($usernameMatchesNum > 0) {
-    $_SESSION['errUsername'] = "1";
-    $_SESSION['regHasErrors'] = 1;
-    $_SESSION['regMessage'] .= "Username already registered</br>";
+    $_SESSION['registerErrors'] = 1;
+    $_SESSION['registerErrorMessage'] .= "Username already registered</br>";
 }
 
 
-// Check email uniqueness
-$emailMatches = mysql_query("SELECT email FROM SMARTLIB_USER WHERE email='" . $_SESSION['REGemail'] . "'");
+// Username already registered
+$emailMatches = mysql_query("SELECT EMAIL FROM USER WHERE EMAIL='" . $_SESSION['email'] . "'");
 $emailMatchesNum = mysql_num_rows($emailMatches);
 
-//Already registered email
+// Email already registered
 if ($emailMatchesNum > 0) {
-    $_SESSION['errEmail'] = "1";
-    $_SESSION['regHasErrors'] = 1;
-    $_SESSION['regMessage'] .= "Email already registered</br>";
+    $_SESSION['registerErrors'] = 1;
+    $_SESSION['registerErrorMessage'] .= "Email already registered</br>";
 }
 
 
-//Registration Input was correct
-if ($_SESSION['regHasErrors'] == "0") {
+// Registration input is correct
+if ($_SESSION['registerErrors'] == "0") {
 
     //Register user to database
     registerUserToDatabase();
 
     //Registration completed
-    if ($_SESSION['regHasErrors'] == "0") {
+    if ($_SESSION['registerErrors'] == "0") {
         if ($_SESSION['isMobileDevice']) {
             mobileSendLoginSuccess();
         } else {
 
 
-            $msg = "";
+            $msg = "You have successfully registered.<br>".
+            "Please activate your account using your email address";
 
-            if ($_SESSION['foundLevel'] == "3") {
-                $msg = "Your administrator/owner account successfully created<br>" .
-                    " No activation threw email needed for this account.<br>" .
-                    "All other accounts must be activated using their email address given.";
-            } else {
-                $msg = "Your account successfully created<br>" .
-                    "Please Activate it using your email: <br>" . $_SESSION['REGemail'];
-
-            }
 
 
             $result = array(
@@ -144,7 +122,7 @@ if ($_SESSION['regHasErrors'] == "0") {
 }
 
 //Registration Info is wrong
-if ($_SESSION['regHasErrors'] != "0") {
+if ($_SESSION['registerErrors'] != "0") {
 
     if ($_SESSION['isMobileDevice']) {
         mobileSendRegisterError();
@@ -162,7 +140,7 @@ function printError()
     );
     //Hide other info
 
-    $_SESSION['regHasErrors'] = 0;
+    $_SESSION['registerErrors'] = 0;
 
     echo json_encode($result);
     die();
@@ -170,8 +148,8 @@ function printError()
 }
 
 
-//Functions
-//Generates the Activation Code
+/* Functions
+Generates the Activation Code */
 function generateActivationCode()
 {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -186,7 +164,7 @@ function generateActivationCode()
     return $str;
 }
 
-//Registers a user to Database
+/* Registers a user to Database */
 function registerUserToDatabase()
 {
 
@@ -197,30 +175,15 @@ function registerUserToDatabase()
     $salt = _SALT;
     $pepper = _PEPPER;
 
-    $encPassword = $_SESSION['REGpassword'];
+    $encPassword = $_SESSION['password'];
     // Put salt&pepper on password
     $encPassword = $salt . $encPassword . $pepper;
 
     // Password Encryption
     $encPassword = md5($encPassword);
 
-    $allowRequests = 0;
 
-
-    //User allow app Notifications
-    if ($_SESSION['REGappNotif'] == "on") {
-        //User allows Both Notifications
-        if ($_SESSION['REGemailNotif'] == "on") {
-            $allowRequests = 3;
-        } //User wants only App notifications
-        else $allowRequests = 1;
-    } //User wants only Email notifications
-    else if ($_SESSION['REGemailNotif'] == "on") {
-        $allowRequests = 2;
-    } //User wont share its books
-    else $allowRequests = 0;
-
-    $queryInsertUser = sprintf("INSERT INTO SMARTLIB_USER (username, password, name, surname, email,"
+    $queryInsertUser = sprintf("INSERT INTO USER (username, password, name, surname, email,"
             . "telephone,allowRequests,activationCode, level) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",
         mysql_real_escape_string($_SESSION['username']),
         mysql_real_escape_string($encPassword),
@@ -256,7 +219,7 @@ function registerUserToDatabase()
         if (@mail($strTo, $strSubject, $strMessage, $strHeader)) {
         } else {
             $_SESSION['errEmail'] = "1";
-            $_SESSION['regHasErrors'] = "1";
+            $_SESSION['registerErrors'] = "1";
             $_SESSION['regMessage'] .= "Email address is invalid!</br>";
 
             printError();
@@ -280,7 +243,7 @@ function registerUserToDatabase()
         if (@mail($strTo, $strSubject, $strMessage, $strHeader)) {
         } else {
             $_SESSION['errEmail'] = "1";
-            $_SESSION['regHasErrors'] = "1";
+            $_SESSION['registerErrors'] = "1";
             $_SESSION['regMessage'] .= "Email address is invalid!</br>";
 
             printError();
@@ -446,7 +409,7 @@ function dbError($pError)
     );
     //Hide other info
 
-    $_SESSION['regHasErrors'] = 0;
+    $_SESSION['registerErrors'] = 0;
     echo json_encode($result);
     die();
 

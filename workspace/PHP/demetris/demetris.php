@@ -6,18 +6,9 @@
  * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.
  */
+$url = "http://www.howtogeek.com";
 
+$str = file_get_contents($url);
 
 ?>
 
-Home of PHP Scripts.
-
-tytj
-parto esi
-boo!!
-
-\
-
-dimi
-k
-p

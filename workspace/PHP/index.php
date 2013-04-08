@@ -9,9 +9,8 @@
 
 ?>
 
-Home of PHP Scripts.
+Home of PHP Scripts
+
 
 
 boo!!
-
-

@@ -14,6 +14,9 @@ define('DB_USER', 'paschal_sp');
 // Db password
 define('DB_PASSWORD', '867070');
 
+// Our name
+define('_NAME', 'SocioPub');
+
 // Social pub email
 define('_EMAIL', 'socialpub@paschalis.mp');
 

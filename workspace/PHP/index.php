@@ -12,12 +12,14 @@
 
 Home of PHP Scripts.
 
-tytj
-parto esi
-boo!!
 
-\
 
-dimi
-k
-p
+PHP SCRIPTS:
+
+http://www.paschalis.mp/projects/socialpub/scripts
+
+Pampos:
+
+Dimitris:
+
+http://www.paschalis.mp/projects/socialpub/scripts/dimitris

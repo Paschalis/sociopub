@@ -24,7 +24,7 @@ foreach ($anchor_tags as $tag) {
 
 
 $x=5; // global scope
-
+$y=4;
 function myTest($x)
 {
     $y=6;
@@ -32,10 +32,12 @@ function myTest($x)
 
     echo "Tha tipwsw to x+y+z: </br> Do3asi: ";
     echo $x+$y+$z; // local scope
-    echo "</br> $x+$y+$z";
+    echo "</br> $x+$y+$z </br>";
+    $GLOBALS['y']=$GLOBALS['x']+$GLOBALS['y'];
 }
-
+echo "Y before:",$y,"</br>";
 myTest($x);
+echo "Y after:",$y;
 ?>
 </body>
 </html>

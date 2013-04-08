@@ -11,9 +11,8 @@
 
 Home of PHP Scripts.
 
-
-
-jkh pamposss
+tytj
+parto esi
 boo!!
 
 

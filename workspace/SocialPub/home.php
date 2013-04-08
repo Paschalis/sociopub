@@ -16,3 +16,8 @@ HOME PAGE FOR BOOTSTRAP:<br>
 http://www.paschalis.mp/projects/socialpub/scripts/<br>
 containts php scripts<br>
 
+<br>
+<br>
+<br>
+    JAVA SCRIPT DIRECTORY:<br>
+http://www.paschalis.mp/projects/socialpub/scripts/checks.js<br>

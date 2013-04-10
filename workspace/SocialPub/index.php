@@ -7,6 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
+include("scripts/initializeSession.php");
 ?>
 
 
@@ -44,11 +45,11 @@
 </head>
 
 <body>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="#">SocioPub</a>
+
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li>
@@ -69,11 +70,11 @@
         <div class="span3" id="leftContent">LEFT</div>
         <div class="span5" id="mainContent">
             <?php
-            include('scripts/loginScreen.php');
+            include('scripts/mainContent.php');
             ?>
 
         </div>
-        <div class="span3" id="rightContent" >RIGHT</div>
+        <div class="span3" id="rightContent">RIGHT</div>
 
 
     </div>

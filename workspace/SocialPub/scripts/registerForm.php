@@ -6,7 +6,7 @@
     <label>Last Name</label>
     <input type="text" value="" class="input-xlarge" id="surnameForm">
     <label>Email</label>
-    <input type="text" value="" class="input-xlarge" id="emailForm">
+    <input value="" class="input-xlarge" id="emailForm" type="email" required>
     <label>Password</label>
     <input type="password" value="" class="input-xlarge" id="passwordForm">
     <label>Password Confirmation</label>

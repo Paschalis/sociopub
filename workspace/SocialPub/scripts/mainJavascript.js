@@ -67,6 +67,8 @@ function checkRegisterForm() {
     var dataCorrect = true;
 
     // TODO PAMPOS IMPLEMENT THIS!
+    // NA KAMES OLA TA LA8OS INPUT DATA KOKKINA!
+    // GIREPSE EDW PROS TO TELOS TOU FORMS: http://twitter.github.io/bootstrap/base-css.html?#forms
 
     // Google search and implement:
     // update bootstrap form with wrong fields (eg turn red the outline of input boxes)

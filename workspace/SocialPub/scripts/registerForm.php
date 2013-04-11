@@ -1,22 +1,22 @@
-<form id="tab">
+<form id="registerForm" >
     <label>Username</label>
-    <input type="text" value="" class="input-xlarge" name="username">
+    <input type="text" value="" class="input-xlarge" id="usernameForm">
     <label>First Name</label>
-    <input type="text" value="" class="input-xlarge" name="name">
+    <input type="text" value="" class="input-xlarge" id="nameForm">
     <label>Last Name</label>
-    <input type="text" value="" class="input-xlarge" name="surname">
+    <input type="text" value="" class="input-xlarge" id="surnameForm">
     <label>Email</label>
-    <input type="text" value="" class="input-xlarge" name="email">
+    <input type="text" value="" class="input-xlarge" id="emailForm">
     <label>Password</label>
-    <input type="password" value="" class="input-xlarge" name="password">
+    <input type="password" value="" class="input-xlarge" id="passwordForm">
     <label>Password Confirmation</label>
-    <input type="password" value="" class="input-xlarge" name="confPassword">
+    <input type="password" value="" class="input-xlarge" id="confPasswordForm">
     <label>Gender</label>
-    <input type="text" value="" class="input-xlarge" name="gender">
+    <input type="text" value="" class="input-xlarge" id="genderForm">
     <label>Country</label>
-    <input type="text" value="" class="input-xlarge" name="country">
+    <input type="text" value="" class="input-xlarge" id="countryForm">
 
     <div>
-        <button class="btn btn-primary">Create Account</button>
+        <button class="btn btn-primary" id="registerButton">Create Account</button>
     </div>
 </form>

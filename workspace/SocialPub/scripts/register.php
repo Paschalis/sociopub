@@ -12,6 +12,7 @@
 
 include("initializeSession.php");
 
+
 //Get data from webpage
 $_SESSION['username'] = $_POST['username'];
 $_SESSION['email'] = $_POST['email'];
@@ -28,7 +29,7 @@ $_SESSION['registerErrors'] = "0";
 
 $_SESSION['errorMessage'] = "";
 
-
+//TODO REMOVE
 
 
 //Gather errors

@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="" method="POST">
+<form id="loginForm" class="form-horizontal" method="post">
     <fieldset>
         <div id="legend">
             <legend class="">Login</legend>
@@ -23,7 +23,7 @@
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button class="btn btn-success">Login</button>
+                <button type="submit" class="btn btn-success">Login</button>
             </div>
         </div>
     </fieldset>

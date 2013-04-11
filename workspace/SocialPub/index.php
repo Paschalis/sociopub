@@ -69,6 +69,11 @@ include("scripts/initializeSession.php");
     <div class="row-fluid">
         <div class="span3" id="leftContent">LEFT</div>
         <div class="span5" id="mainContent">
+            <!--Notifications - If no notifications this is disappeared -->
+            <div id="notification" class="alert alert-info" style="display: none">
+                <span id="notificationMessage">No notifications</span>
+                <button id="notificationClose" class="close">&times;</button>
+            </div>
             <?php
             include('scripts/mainContent.php');
             ?>
@@ -78,7 +83,6 @@ include("scripts/initializeSession.php");
 
 
     </div>
-
 </div>
 <!-- /container -->
 
@@ -86,6 +90,7 @@ include("scripts/initializeSession.php");
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery.js"></script>
+<script src="scripts/mainJavascript.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-alert.js"></script>
 <script src="js/bootstrap-modal.js"></script>
@@ -98,8 +103,5 @@ include("scripts/initializeSession.php");
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
-<script>
-
-</script>
 </body>
 </html>

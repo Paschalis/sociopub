@@ -17,7 +17,7 @@
 <body>
 
 <script>
-    function geturl(){
+    function getcategory(){
 
        /* var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
         var pathArray = window.location.pathname.split( '/' );
@@ -25,11 +25,14 @@
         alert(pathArray[0] );
 */
 var url=document.getElementsByName("url")[0].value;
-    var home=url.split('.');
+    var home=url.split('/');
         //alert(url);
-        alert(home);
+        //alert(home[1]);
+var possible_category=home[3];
+        alert("possible category is " + possible_category);
 
     }
+
 
 
 </script>
@@ -39,7 +42,7 @@ var url=document.getElementsByName("url")[0].value;
 
     Insert URL <input type="text" name="url"><br>
 
-    <input type="submit" value="Submit" onclick="geturl()">
+    <input type="submit" value="Submit" onclick="getcategory()">
 
 
 

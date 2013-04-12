@@ -27,45 +27,45 @@
 <body>
 
 <script>
-    function getcategory(){
 
-        /* var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-         var pathArray = window.location.pathname.split( '/' );
-         var secondLevelLocation = pathArray[0];
-         alert(pathArray[0] );
-         */
-        var url=document.getElementsByName("url")[0].value;
-        var home=url.split('/');
-        //alert(url);
-        //alert(home[1]);
-        var possible_category=home[3];
-        alert("possible category is " + possible_category);
-
-    }
-
-    function gettitle(){
-        var url=document.getElementsByName("title")[0].value;
-
-        // htmlcode=document.documentElement.outerHTML;
-        //alert(htmlcode);
 
         var xmlHttp = null;
 
-        xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", url, false );
-        xmlHttp.send( null );
-        return xmlHttp.validationMessage;
+        function GetCustomerInfo()
+        {
+            var CustomerNumber = document.getElementById( "TextBoxCustomerNumber" ).value;
+            var Url = "GetCustomerInfoAsJson.aspx?number=" + CustomerNumber;
 
-    }
+            xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = ProcessRequest;
+            xmlHttp.open( "GET", Url, true );
+            xmlHttp.send( null );
+        }
+
+        function ProcessRequest()
+        {
+            if ( xmlHttp.readyState == 4 && xmlHttp.status == 200 )
+            {
+                if ( xmlHttp.responseText == "Not found" )
+                {
+                    document.getElementById( "TextBoxCustomerName"    ).value = "Not found";
+                    document.getElementById( "TextBoxCustomerAddress" ).value = "";
+                }
+                else
+                {
+                    var info = eval ( "(" + xmlHttp.responseText + ")" );
+
+                    // No parsing necessary with JSON!
+                    document.getElementById( "TextBoxCustomerName"    ).value = info.jsonData[ 0 ].cmname;
+                    document.getElementById( "TextBoxCustomerAddress" ).value = info.jsonData[ 0 ].cmaddr1;
+                }
+            }
+        }
+
 
 </script>
 
-<h4>GET URL</h4>
-
-
-Insert URL to get CATEGORY<input type="text" name="url"><br>
-
-<input type="submit" value="Submit" onclick="getcategory()">
+<h4>GET TITLE</h4>
 
 Insert URL to get TITLE <input type="text" name="title"><br>
 

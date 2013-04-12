@@ -33,18 +33,28 @@ var possible_category=home[3];
 
     }
 
+function gettitle(){
 
+    var htmlcode=document.documentElement.outerHTML
+    alert(htmlcode);
+
+
+}
 
 </script>
 
 <h4>GET URL</h4>
 
 
-    Insert URL <input type="text" name="url"><br>
+    Insert URL to get CATEGORY<input type="text" name="url"><br>
 
     <input type="submit" value="Submit" onclick="getcategory()">
 
+Insert URL to get TITLE <input type="text" name="title"><br>
 
+
+<br>
+<button type="button"  onclick="gettitle()">GET TITLE</button>
 
 
 

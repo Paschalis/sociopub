@@ -24,8 +24,10 @@
         var secondLevelLocation = pathArray[0];
         alert(pathArray[0] );
 */
-
-        alert(document.URL);
+var url=document.getElementsByName("url")[0].value;
+    var home=url.split('.');
+        //alert(url);
+        alert(home);
 
     }
 
@@ -34,15 +36,15 @@
 
 <h4>GET URL</h4>
 
-<form id="myform" action="geturl.asp">
+
     Insert URL <input type="text" name="url"><br>
 
-    <input type="submit" value="Submit">
-</form>
+    <input type="submit" value="Submit" onclick="geturl()">
 
 
 
 
-<button type="button" onclick="geturl()">GET URL</button>
+
+<!--<button type="button" onclick="geturl()">GET URL</button>-->
 </body>
 </html>

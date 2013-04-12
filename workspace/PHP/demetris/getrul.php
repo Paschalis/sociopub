@@ -34,10 +34,17 @@ var possible_category=home[3];
     }
 
 function gettitle(){
+    var url=document.getElementsByName("title")[0].value;
 
-    var htmlcode=document.documentElement.outerHTML
-    alert(htmlcode);
+    // htmlcode=document.documentElement.outerHTML;
+    //alert(htmlcode);
 
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false );
+    xmlHttp.send( null );
+    return xmlHttp.validationMessage;
 
 }
 
@@ -51,7 +58,6 @@ function gettitle(){
     <input type="submit" value="Submit" onclick="getcategory()">
 
 Insert URL to get TITLE <input type="text" name="title"><br>
-
 
 <br>
 <button type="button"  onclick="gettitle()">GET TITLE</button>

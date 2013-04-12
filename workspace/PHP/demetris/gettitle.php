@@ -1,3 +1,8 @@
+//2 helping URLS
+//http://answers.yahoo.com/question/index?qid=20101225061238AAdMvnH
+//http://stackoverflow.com/questions/247483/http-get-request-in-javascript/4033310#4033310
+
+
 <?php
 /**
  * Created by JetBrains PhpStorm.

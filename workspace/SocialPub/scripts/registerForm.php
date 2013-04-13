@@ -14,7 +14,7 @@
     <input type="password" value="" class="input-xlarge" id="confPasswordForm">
     <label>Gender</label>
     <!--<input type="text" value="" class="input-xlarge" id="genderForm">-->
-    <select>
+    <select id="genderForm">
         <option value="Select">Select</option>}
         <option value="m">Male</option>
         <option value="f">Female</option>

@@ -1,7 +1,7 @@
-//2 helping URLS
-//http://answers.yahoo.com/question/index?qid=20101225061238AAdMvnH
-//http://stackoverflow.com/questions/247483/http-get-request-in-javascript/4033310#4033310
-
+<!--2 helping URLS
+http://answers.yahoo.com/question/index?qid=20101225061238AAdMvnH
+http://stackoverflow.com/questions/247483/http-get-request-in-javascript/4033310#4033310
+-->
 
 <?php
 /**
@@ -36,9 +36,9 @@
 
         var xmlHttp = null;
 
-        function GetCustomerInfo()
+        function gettitle()
         {
-            var CustomerNumber = document.getElementById( "TextBoxCustomerNumber" ).value;
+            //var CustomerNumber = document.getElementById( "TextBoxCustomerNumber" ).value;
             var Url = "GetCustomerInfoAsJson.aspx?number=" + CustomerNumber;
 
             xmlHttp = new XMLHttpRequest();

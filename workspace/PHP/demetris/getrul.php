@@ -34,7 +34,7 @@ var possible_category=home[3];
     }
 
 function gettitle(){
-    /*var url=document.getElementsByName("title")[0].value;
+    var url=document.getElementsByName("title")[0].value;
 
     // htmlcode=document.documentElement.outerHTML;
     //alert(htmlcode);
@@ -44,9 +44,9 @@ function gettitle(){
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url, false );
     xmlHttp.send( null );
-    return xmlHttp.responseText;*/
+    //return xmlHttp.responseText;
     var message="kokos";
-    //message=xmlHttp.responseText.toString();
+    message=xmlHttp.responseText;
     alert(message);
 
 }

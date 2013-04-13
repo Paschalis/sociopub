@@ -80,7 +80,7 @@ function checkRegisterForm() {
     //Check username
     if (username == "" || username.length>15) {//or lenghth >15=>problem
         //TODO MAKE USERNAME RED
-        msg += "Invalid Username ";
+        msg += "Invalid Username \n";
         dataCorrect = false;
         //kame to kouti kokkino
 
@@ -98,7 +98,7 @@ function checkRegisterForm() {
     }
 
     if(confPassword!==password){
-        msg+="Wrong confirmation of password!"
+        msg+="Wrong confirmation of password!\n"
         dataCorrect = false;
     }
 

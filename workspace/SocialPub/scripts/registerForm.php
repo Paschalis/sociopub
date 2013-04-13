@@ -13,9 +13,16 @@
     <label>Password Confirmation</label>
     <input type="password" value="" class="input-xlarge" id="confPasswordForm">
     <label>Gender</label>
-    <input type="text" value="" class="input-xlarge" id="genderForm">
+    <!--<input type="text" value="" class="input-xlarge" id="genderForm">-->
+    <select>
+        <option value="Select">Select</option>}
+        <option value="m">Male</option>
+        <option value="f">Female</option>
+        <option value="Neha">Neha Saini</option>
+    </select>
     <label>Country</label>
     <input type="text" value="" class="input-xlarge" id="countryForm">
+
 
     <div>
         <button class="btn btn-primary" id="registerButton">Create Account</button>

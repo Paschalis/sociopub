@@ -148,7 +148,7 @@ function checkRegisterForm() {
     if (!dataCorrect) {
         //TODO MAKE THIS notification
         alert("Input is wrong!\n" + msg);
-        $("#usernameForm").color({border:"red"});
+
         return "";
     }
     else {

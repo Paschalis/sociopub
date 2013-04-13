@@ -78,7 +78,7 @@ function checkRegisterForm() {
     var result = "";
 
     //Check username
-    if (username == "" || username.length>15) {//or lenghth >15=>problem
+    if (username == "" ) {//or lenghth >15=>problem
         //TODO MAKE USERNAME RED
         msg += "You must fill the username field\n";
         dataCorrect = false;
@@ -92,7 +92,7 @@ function checkRegisterForm() {
 
     if (password == "") {
         //TODO MAKE password RED
-        msg += "Please fill the Passwors box \n";
+        msg += "Please fill the Passwors field \n";
         dataCorrect = false;
     }
     if (confPassword == "") {
@@ -102,18 +102,13 @@ function checkRegisterForm() {
         dataCorrect = false;
     }
 
-    if(confPassword!==password){
-        msg+="Wrong confirmation of password!\n"
-        dataCorrect = false;
-    }
-
-
-
-    if (confPassword != password) {
+    if(confPassword!=password){
         //TODO Passwords dont match
-        msg += "pass!=Cpass ";
+        msg+="Wrong confirmation of password!\n";
         dataCorrect = false;
     }
+
+
 
     if (name == "") {
         //TODO make name red

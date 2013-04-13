@@ -78,24 +78,31 @@ function checkRegisterForm() {
     var result = "";
 
     //Check username
-    if (username == "") {//or lenghth >15=>problem
+    if (username == "" || username.length>15) {//or lenghth >15=>problem
         //TODO MAKE USERNAME RED
-        msg += "username ";
+        msg += "Invalid Username ";
         dataCorrect = false;
         //kame to kouti kokkino
 
     }
     if (password == "") {
         //TODO MAKE password RED
-        msg += "pass ";
+        msg += "Please fill the Passwors box \n";
         dataCorrect = false;
     }
     if (confPassword == "") {
         //TODO MAKE confpassword RED
-        msg += "Cpass ";
+        msg += "Please confirm your password\n";
 
         dataCorrect = false;
     }
+
+    if(confPassword!==password){
+        msg+="Wrong confirmation of password!"
+        dataCorrect = false;
+    }
+
+
 
     if (confPassword != password) {
         //TODO Passwords dont match
@@ -169,7 +176,7 @@ function isEmailCorrect(email) {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     return (reg.test(email));
-    //this copied from paschalis code
+    //this copied from paschalis code OK
 }
 
 

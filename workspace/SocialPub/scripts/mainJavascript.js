@@ -80,11 +80,16 @@ function checkRegisterForm() {
     //Check username
     if (username == "" || username.length>15) {//or lenghth >15=>problem
         //TODO MAKE USERNAME RED
-        msg += "Invalid Username \n";
+        msg += "You must fill the username field\n";
         dataCorrect = false;
         //kame to kouti kokkino
 
     }
+    if(username.length>15){
+        msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
+        dataCorrect = false;
+    }
+
     if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors box \n";
@@ -124,7 +129,7 @@ function checkRegisterForm() {
 
     if (gender != "m" && gender != "f") {
         //TODO make gender red
-        msg += "gender ";
+        msg += "gender \n";
         dataCorrect = false;
     }
 
@@ -136,7 +141,7 @@ function checkRegisterForm() {
 
     if (country == "") {
         //TODO make email red
-        msg += "Country ";
+        msg += "Country \n";
         dataCorrect = false;
     }
 

@@ -112,13 +112,13 @@ function checkRegisterForm() {
 
     if (name == "") {
         //TODO make name red
-        msg += "name ";
+        msg += "You must fill in the name field. \n";
         dataCorrect = false;
     }
 
     if (surname == "") {
         //TODO make surname red
-        msg += "surname ";
+        msg += "You must fill in the surname field. \n";
         dataCorrect = false;
     }
 
@@ -130,13 +130,13 @@ function checkRegisterForm() {
 
     if (email == "" || !isEmailCorrect(email)) {
         //TODO make email red
-        msg += "Invalid email address";
+        msg += "Invalid email address\n";
         dataCorrect = false;
     }
 
     if (country == "") {
         //TODO make email red
-        msg += "country ";
+        msg += "Country ";
         dataCorrect = false;
     }
 

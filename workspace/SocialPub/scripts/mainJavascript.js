@@ -33,7 +33,8 @@ $(document).ready(function () {
 
 
     });
-
+   //p.x. username.ontextChange
+    //
 
     //When login button is clicked TODO
 
@@ -77,10 +78,12 @@ function checkRegisterForm() {
     var result = "";
 
     //Check username
-    if (username == "") {
+    if (username == "") {//or lenghth >15=>problem
         //TODO MAKE USERNAME RED
         msg += "username ";
         dataCorrect = false;
+        //kame to kouti kokkino
+
     }
     if (password == "") {
         //TODO MAKE password RED
@@ -161,7 +164,7 @@ function checkRegisterForm() {
  */
 function isEmailCorrect(email) {
     //TODO PAMPOS COPY EMAIL FUNCTION FROM MY SMARTLIB GITHUB PROJECT HERE!
-
+//COPY-paste pou kwdika github
     return true;
 }
 
@@ -211,6 +214,7 @@ function ajaxRegisterSuccess(result) {
     //Show notification alert
     $("#notification").show(200);
     $("#notification").css({class:"alert-success"});
+    //-success,-info,-waning, alla3e xrwma
     //TODO parse this json object and show results
     $("#notificationMessage").text('server: ' + result);
 

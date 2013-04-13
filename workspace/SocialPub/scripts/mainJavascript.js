@@ -82,6 +82,7 @@ function checkRegisterForm() {
         //TODO MAKE USERNAME RED
         msg += "You must fill the username field\n";
         dataCorrect = false;
+        $("#usernameForm").css({class:"alert-success"});
         //kame to kouti kokkino
 
     }

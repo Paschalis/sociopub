@@ -123,7 +123,7 @@ function checkRegisterForm() {
 
     if (email == "" || !isEmailCorrect(email)) {
         //TODO make email red
-        msg += "email ";
+        msg += "Invalid email address";
         dataCorrect = false;
     }
 
@@ -165,7 +165,11 @@ function checkRegisterForm() {
 function isEmailCorrect(email) {
     //TODO PAMPOS COPY EMAIL FUNCTION FROM MY SMARTLIB GITHUB PROJECT HERE!
 //COPY-paste pou kwdika github
-    return true;
+   // return true;
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    return (reg.test(email));
+    //this copied from paschalis code
 }
 
 

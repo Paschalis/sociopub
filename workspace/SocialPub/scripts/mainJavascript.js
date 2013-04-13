@@ -82,14 +82,15 @@ function checkRegisterForm() {
         //TODO MAKE USERNAME RED
         msg += "You must fill the username field\n";
         dataCorrect = false;
-        $("#usernameForm").css({class:"alert alert-error fade in"});
+       // $("#usernameForm").css({class:"alert alert-error fade in"});
         //$("#usernameForm").css({class:"alert-error"});
         //kame to kouti kokkino
 
     }
     if(username.length>15){
         msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
-        $("#usernameForm").css({class:"controls-inputError"});
+        //$("#usernameForm").css({class:"controls-inputError"});
+        $("#usernameForm").color({border:"red"});
         dataCorrect = false;
     }
 

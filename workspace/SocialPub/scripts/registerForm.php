@@ -15,10 +15,9 @@
     <label>Gender</label>
     <!--<input type="text" value="" class="input-xlarge" id="genderForm">-->
     <select id="genderForm">
-        <option value="Select">Select</option>}
+        <option value="Select Gender">Select</option>}
         <option value="m">Male</option>
         <option value="f">Female</option>
-        <option value="Neha">Neha Saini</option>
     </select>
     <label>Country</label>
     <input type="text" value="" class="input-xlarge" id="countryForm">

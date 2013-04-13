@@ -143,7 +143,7 @@ function checkRegisterForm() {
 
     if (!dataCorrect) {
         //TODO MAKE THIS notification
-        alert("Input is wrong" + msg);
+        alert("Input is wrong!\n" + msg);
         return "";
     }
     else {

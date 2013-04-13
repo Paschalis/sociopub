@@ -82,7 +82,7 @@ function checkRegisterForm() {
         //TODO MAKE USERNAME RED
         msg += "You must fill the username field\n";
         dataCorrect = false;
-        $("#usernameForm").css({class:"alert-success"});
+        $("#usernameForm").css({class:"alert-error"});
         //kame to kouti kokkino
 
     }

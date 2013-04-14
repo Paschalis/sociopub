@@ -117,6 +117,9 @@ function checkRegisterForm() {
         $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
+    else{
+        $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
+    }
     if (confPassword == "") {
         //TODO MAKE confpassword RED
         msg += "Please confirm your password\n";
@@ -168,6 +171,9 @@ function checkRegisterForm() {
         msg += "Invalid email address\n";
         $('#emailForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
+    }
+    else{
+        $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
 
     if (country == "") {

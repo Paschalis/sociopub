@@ -134,6 +134,7 @@ function checkRegisterForm() {
     if (name == "") {
         //TODO make name red
         msg += "You must fill in the name field. \n";
+        $('#nameForm').css('boxShadow', '4px 4px 4px red');
         dataCorrect = false;
     }
 

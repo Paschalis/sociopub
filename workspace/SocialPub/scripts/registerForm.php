@@ -1,7 +1,10 @@
 
 <form id="registerForm" >
-    <label for="usernameForm">Username</label>
+   <div> <label for="usernameForm">Username</label>
     <input type="text" value="" class="input-xlarge" id="usernameForm">
+   <span></span>
+   </div>
+
     <label>First Name</label>
     <input type="text" value="" class="input-xlarge" id="nameForm">
     <label>Last Name</label>

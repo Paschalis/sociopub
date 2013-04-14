@@ -21,6 +21,7 @@
     </select>
     <label>Country</label>
     <!-- <input type="text" value="" class="input-xlarge" id="countryForm">-->
+<select id="countryForm">
     <option value="">Select Country</option>}
     <option value="Cyprus">Cyprus</option>
     <option value="Other">Other</option>

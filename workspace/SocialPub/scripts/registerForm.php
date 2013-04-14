@@ -15,13 +15,15 @@
     <label>Gender</label>
     <!--<input type="text" value="" class="input-xlarge" id="genderForm">-->
     <select id="genderForm">
-        <option value="Select Gender">Select</option>}
+        <option value="Select Gender">Select Gender</option>}
         <option value="m">Male</option>
         <option value="f">Female</option>
     </select>
     <label>Country</label>
-    <input type="text" value="" class="input-xlarge" id="countryForm">
-
+    <!-- <input type="text" value="" class="input-xlarge" id="countryForm">-->
+    <option value="">Select Country</option>}
+    <option value="Cyprus">Cyprus</option>
+    <option value="Other">Other</option>
 
     <div>
         <button class="btn btn-primary" id="registerButton">Create Account</button>

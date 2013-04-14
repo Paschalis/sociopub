@@ -103,6 +103,9 @@ function checkRegisterForm() {
         //$("#usernameForm").color({border:"red"});
         dataCorrect = false;
     }
+    if(username!="" && username.length<15){
+        $('#usernameForm').css('boxShadow', '2px 2px 2px  lightgreen');
+    }
 
     if (password == "") {
         //TODO MAKE password RED

@@ -89,6 +89,7 @@ function checkRegisterForm() {
         //TODO MAKE USERNAME RED
         msg += "You must fill the username field\n";
         dataCorrect = false;
+        $('#usernameForm').css('boxShadow', '2px 2px 2px  red');
        // $("#usernameForm").css({class:"alert alert-error fade in"});
         //$("#usernameForm").css({class:"alert-error"});
         //kame to kouti kokkino
@@ -98,8 +99,9 @@ function checkRegisterForm() {
         msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
        // $("#usernameForm").css("border-bottom-color", "#fff");
        // $('#usernameForm').css('border-bottom', 'solid 10px red');
-        $('#usernameForm').css('borderColor', 'green');
-        $('#usernameForm').css('boxShadow', '1px 3px 6px red');
+
+       // $('#usernameForm').css('borderColor', 'green');
+        $('#usernameForm').css('boxShadow', '2px 2px 2px red');
 
         // usernmame.keyup()
         //document.getElementById($("#usernameForm")).style.border = "4px solid red";
@@ -112,13 +114,13 @@ function checkRegisterForm() {
     if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors field \n";
-
+        $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
     if (confPassword == "") {
         //TODO MAKE confpassword RED
         msg += "Please confirm your password\n";
-
+        $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
 
@@ -147,18 +149,24 @@ function checkRegisterForm() {
     if (surname == "") {
         //TODO make surname red
         msg += "You must fill in the surname field. \n";
+        $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
+    }
+    else{
+        $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
 
     if (gender != "m" && gender != "f") {
         //TODO make gender red
         msg += "gender \n";
+
         dataCorrect = false;
     }
 
     if (email == "" || !isEmailCorrect(email)) {
         //TODO make email red
         msg += "Invalid email address\n";
+        $('#emailForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
 

@@ -125,7 +125,7 @@ function checkRegisterForm() {
     if(confPassword!=password){
         //TODO Passwords dont match
         msg+="Wrong confirmation of password!\n";
-        $('#paswordForm').css('border-color', 'green');
+        $('#paswordForm').css('boxShadow', '2px 2px 2px  green');
         dataCorrect = false;
     }
 

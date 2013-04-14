@@ -129,7 +129,7 @@ function checkRegisterForm() {
         dataCorrect = false;
     }
     else{
-        $('#confPasswordForm').css('boxShadow', '3px 3px 3px green');
+        $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
 
 
@@ -137,11 +137,11 @@ function checkRegisterForm() {
     if (name == "") {
         //TODO make name red
         msg += "You must fill in the name field. \n";
-        $('#nameForm').css('boxShadow', '4px 4px 4px red');
+        $('#nameForm').css('boxShadow', '3px 3px 3px red');
         dataCorrect = false;
     }
     else{
-        $('#nameForm').css('boxShadow', '2px 3px 3px lightgreen');
+        $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
 
     if (surname == "") {

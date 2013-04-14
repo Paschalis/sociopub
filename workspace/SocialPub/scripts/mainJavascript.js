@@ -11,12 +11,12 @@
  */
 
 //AKiri
-function username_Changed(usernameForm)
+/**function username_Changed(usernameForm)
 {
     $("#usernameForm").style.borderColor=($("#usernameForm").val().length>15) ? "#FF0000" : $("#usernameForm").style.borderColor="#e52213";
 }
 
-
+*/
 $(document).ready(function () {
 
     //When register button is clicked
@@ -349,3 +349,13 @@ function updateFormFieldStatusConfirmPassword(that) {
 }
 
 
+function updateFormFieldStatusSimple(that) {
+    //Something is filled
+    if ($(that).val() != "") {
+        $(that).addClass('filled').removeClass('empty');
+    }
+    else {
+        $(that).addClass('empty').removeClass('filled');
+    }
+
+}

@@ -41,6 +41,18 @@
 
 
 <script>
+
+    $(document).ready(function () {
+
+        $("#usernameForm, #passwordForm," +
+            " #confPasswordForm, #nameForm, #surnameForm").
+            each(function () {
+                updateFormFieldStatusSimple($(this))
+            });
+        ;
+
+
+
 updateFormFieldStatusEmail($("#emailForm"));
 
 <!--updateFormFieldStatusTelephone($("#register-form-telephone"));-->
@@ -50,6 +62,35 @@ updateFormFieldStatusConfirmPassword($("#confPasswordForm"));
 
 updateFormFieldStatusPassword($("#passwordForm"));
 <!--drop down menus-->
+
+
+        $("#usernameForm, #passwordForm," +
+            " #confPasswordForm, #nameForm," +
+            " #surnameForm").keyup(function () {
+//Something is filled
+                updateFormFieldStatusSimple(this);
+            });
+
+        $('#emailForm').keyup(function () {
+//Something is filled
+            updateFormFieldStatusEmail(this);
+        });
+
+
+
+        $('#confPasswordForm').keyup(function () {
+//Something is filled
+            updateFormFieldStatusConfirmPassword(this);
+        });
+
+        $('#passwordForm').keyup(function () {
+//Something is filled
+            updateFormFieldStatusPassword(this);
+        });
+
+
+    });
+
 </script>
 </body>
 </html>

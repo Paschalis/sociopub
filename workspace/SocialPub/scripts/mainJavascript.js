@@ -129,7 +129,7 @@ function checkRegisterForm() {
         dataCorrect = false;
     }
     else{
-        $('#nameForm').css('boxShadow', '4px 4px 4px green');
+        $('confPasswordForm').css('boxShadow', '4px 4px 4px green');
     }
 
 

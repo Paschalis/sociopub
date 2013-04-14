@@ -1,7 +1,7 @@
 
 <form id="registerForm" >
    <div> <label for="usernameForm">Username</label>
-    <input type="text" value="" class="input-xlarge" id="usernameForm">
+    <input type="text" value="" class="input-xlarge" id="usernameForm" onchange="username_Changed(this)"/>
    <span></span>
    </div>
 

@@ -9,6 +9,11 @@
 /**
  * When the document is ready (fully loaded)
  */
+function username_Changed(usernameForm)
+{
+    $("#usernameForm").style.borderColor=($("#usernameForm").val().length>15) ? "#FF0000" : usernameForm.style.borderColor="#e52213";
+}
+
 
 $(document).ready(function () {
 
@@ -89,6 +94,7 @@ function checkRegisterForm() {
     }
     if(username.length>15){
         msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
+       // usernmame.keyup()
         //document.getElementById($("#usernameForm")).style.border = "4px solid red";
         //$("#usernameForm").css({box-shadow: 0 0 4px green;});
         //$("#usernameForm").css({class:"controls-inputError"});

@@ -44,7 +44,7 @@
     </div>
     </div>
 
-
+<!--
 
 <script src="js/jquery.js"></script>
 <script src="scripts/mainJavascript.js"></script>
@@ -60,7 +60,7 @@
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
-
+-->
 
     </bodY>
     </html>

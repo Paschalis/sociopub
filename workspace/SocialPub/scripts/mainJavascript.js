@@ -9,6 +9,8 @@
 /**
  * When the document is ready (fully loaded)
  */
+
+//AKiri
 function username_Changed(usernameForm)
 {
     $("#usernameForm").style.borderColor=($("#usernameForm").val().length>15) ? "#FF0000" : $("#usernameForm").style.borderColor="#e52213";

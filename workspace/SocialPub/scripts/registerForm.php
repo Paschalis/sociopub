@@ -6,7 +6,7 @@
    </div>
 
     <label>First Name</label>
-    <input type="text" value="" class="input-xlarge" id="nameForm">
+    <input type="text" value="" class="input-xlarge" id="nameForm" required>
     <label>Last Name</label>
     <input type="text" value="" class="input-xlarge" id="surnameForm">
     <label>Email</label>

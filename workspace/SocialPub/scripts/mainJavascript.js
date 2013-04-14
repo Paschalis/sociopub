@@ -112,6 +112,7 @@ function checkRegisterForm() {
     if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors field \n";
+        $('#paswordForm').css('borderColor', 'green');
         dataCorrect = false;
     }
     if (confPassword == "") {

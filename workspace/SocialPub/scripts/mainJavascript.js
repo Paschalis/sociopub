@@ -98,6 +98,7 @@ function checkRegisterForm() {
         msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
        // $("#usernameForm").css("border-bottom-color", "#fff");
        // $('#usernameForm').css('border-bottom', 'solid 10px red');
+        $('#usernameForm').css('borderColor', 'green');
         $('#usernameForm').css('boxShadow', '1px 3px 6px red');
 
         // usernmame.keyup()

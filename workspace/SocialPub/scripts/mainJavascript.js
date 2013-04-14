@@ -285,3 +285,67 @@ function updateFormFieldStatusEmail(that) {
 
 }
 
+
+
+function updateFormFieldStatusPassword(that) {
+
+    var pass = $(that).val();
+    var conf = $("#confPasswordForm").val();
+
+    //If is empty
+    if (pass == "") {
+        //Mark empty
+        $(that).addClass('empty').removeClass('filled').removeClass('error');
+
+        //Confirmation is wrong
+        if (conf != "")
+            $("#register-form-confPassword").addClass('error').removeClass('empty').removeClass('filled');
+
+        return;
+    }
+
+
+    //Passwords match: mark filled
+    if (conf == pass) {
+        $(that).addClass('filled').removeClass('empty').removeClass('error');
+        $("#register-form-confPassword").addClass('filled').removeClass('empty').removeClass('error');
+        return;
+    }
+
+    //Conf isnt wrong yet
+    if (conf == "") return;
+
+    // Confirmation password is wrong
+    $("#confPasswordForm").addClass('error').removeClass('empty').removeClass('filled');
+
+}
+
+
+//Updates the status according of forms Confirm Password field
+function updateFormFieldStatusConfirmPassword(that) {
+
+    var confPass = $(that).val();
+    //If is empty
+    if (confPass == "") {
+        $(that).addClass('empty').removeClass('filled').removeClass('error');
+        return;
+    }
+
+    var pass = $("#passwordForm").val();
+
+    //Password is filled
+    if (pass != "") {
+
+        if (confPass == pass) {
+            $(that).addClass('filled').removeClass('empty').removeClass('error');
+            return;
+        }
+
+
+    }
+    // Confirmation password is wrong
+    $(that).addClass('error').removeClass('empty').removeClass('filled');
+
+}
+
+

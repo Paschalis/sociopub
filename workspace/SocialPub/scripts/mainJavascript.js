@@ -33,7 +33,7 @@ $(document).ready(function () {
 
 
     });
-   //p.x. username.ontextChange
+    //p.x. username.ontextChange
     //
 
     //When login button is clicked TODO
@@ -55,7 +55,7 @@ $(document).ready(function () {
  * */
 function checkRegisterForm() {
 
-    var username = $("#usernameForm").val();
+    var username = $("#usernameForm"); //TODO PAMPOS ALLA3A TO GIA NA PIASW TO ELEMENT! de an ine swsto! aN INE ALLA3E KAI TA KATW ELEMENTSS (fie to .val() kai kame ta methodous)
     var password = $("#passwordForm").val();
     var confPassword = $("#confPasswordForm").val();
     var name = $("#nameForm").val();
@@ -77,43 +77,23 @@ function checkRegisterForm() {
     var msg = "";
     var result = "";
 
-    //Check username
-    if (username == "" ) {//or lenghth >15=>problem
-        //TODO MAKE USERNAME RED
-        msg += "You must fill the username field\n";
-        dataCorrect = false;
-        $('#usernameForm').css('boxShadow', '2px 2px 2px  red');
-       // $("#usernameForm").css({class:"alert alert-error fade in"});
-        //$("#usernameForm").css({class:"alert-error"});
-        //kame to kouti kokkino
+    // Check username TODO KAME TES IPOLOIPES METHODOUS OPWS TOUTIN!
+    // PWS? kame nea methodo, kai copy paste ta IF pukatw gia ka8e input + vale tous extra elegxous
+    // (analoga me ta sizes tis vasis)
+    msg += checkUsername(username);
 
-    }
-    if(username.length>15){
-        msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
-       // $("#usernameForm").css("border-bottom-color", "#fff");
-       // $('#usernameForm').css('border-bottom', 'solid 10px red');
 
-       // $('#usernameForm').css('borderColor', 'green');
-        $('#usernameForm').css('boxShadow', '2px 2px 2px red');
 
-        // usernmame.keyup()
-        //document.getElementById($("#usernameForm")).style.border = "4px solid red";
-        //$("#usernameForm").css({box-shadow: 0 0 4px green;});
-        //$("#usernameForm").css({class:"controls-inputError"});
-        //$("#usernameForm").color({border:"red"});
-        dataCorrect = false;
-    }
-    if(username!="" && username.length<15){
-        $('#usernameForm').css('boxShadow', '2px 2px 2px  lightgreen');
-    }
-
+//TODO KAME KAI TA IPOLOIPA ETSI!
+    // alla3e to panw na pianei to element(an ine swsto)
+    // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
     if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors field \n";
         $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
-    else{
+    else {
         $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
     if (confPassword == "") {
@@ -123,16 +103,15 @@ function checkRegisterForm() {
         dataCorrect = false;
     }
 
-    if(confPassword!=password){
+    if (confPassword != password) {
         //TODO Passwords dont match
-        msg+="Wrong confirmation of password!\n";
+        msg += "Wrong confirmation of password!\n";
         $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
-    else if(confPassword==password && password!="" && confPassword!=""){
+    else if (confPassword == password && password != "" && confPassword != "") {
         $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
-
 
 
     if (name == "") {
@@ -141,7 +120,7 @@ function checkRegisterForm() {
         $('#nameForm').css('boxShadow', '3px 3px 3px red');
         dataCorrect = false;
     }
-    else{
+    else {
         $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
 
@@ -151,7 +130,7 @@ function checkRegisterForm() {
         $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
-    else{
+    else {
         $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
 
@@ -168,7 +147,7 @@ function checkRegisterForm() {
         $('#emailForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
-    else{
+    else {
         $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
 
@@ -211,7 +190,7 @@ function checkRegisterForm() {
 function isEmailCorrect(email) {
     //TODO PAMPOS COPY EMAIL FUNCTION FROM MY SMARTLIB GITHUB PROJECT HERE!
 //COPY-paste pou kwdika github
-   // return true;
+    // return true;
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
     return (reg.test(email));
@@ -219,9 +198,6 @@ function isEmailCorrect(email) {
 }
 
 
-function liveFormCheck() {
-    //TODO CHECK FORM LIVE AS USER TYPES
-}
 
 
 /**
@@ -291,95 +267,57 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 }
 
 
-function updateFormFieldStatusEmail(that) {
-    //If is empty
-    if ($(that).val() == "") {
-        $(that).addClass('empty').removeClass('filled').removeClass('error');
-    }
-    else {
-        //Check if its a valid email address
-        if (isEmailCorrect($(that).val())) {
-            $(that).addClass('filled').removeClass('empty').removeClass('error');
-        }
-        else {
-            $(that).addClass('error').removeClass('empty').removeClass('filled');
-        }
+/*
+ * Checks input fields and updates the UI
+ *
+ * */
+function checkInputField(element) {
+
+
+// Get elements id
+    switch ($(element).attr("id")) {
+        case "usernameForm":
+            checkUsername(element);
+            break;
+        case "passwordForm":
+            //TODO
+            break;
+        //TODO OTHERS
 
     }
+
 
 }
 
 /*
+ * Checks if the username is correct
+ * */
+function checkUsername(username) {
 
-function updateFormFieldStatusPassword(that) {
-
-    var pass = $(that).val();
-    var conf = $("#confPasswordForm").val();
-
-    //If is empty
-    if (pass == "") {
-        //Mark empty
-        $(that).addClass('empty').removeClass('filled').removeClass('error');
-
-        //Confirmation is wrong
-        if (conf != "")
-            $("#register-form-confPassword").addClass('error').removeClass('empty').removeClass('filled');
-
-        return;
-    }
+    var value = $(username).val();
+    var msg = "";
 
 
-    //Passwords match: mark filled
-    if (conf == pass) {
-        $(that).addClass('filled').removeClass('empty').removeClass('error');
-        $("#register-form-confPassword").addClass('filled').removeClass('empty').removeClass('error');
-        return;
-    }
+// Username is correct
+    if (value != "" && value.length <= 15) {
 
-    //Conf isnt wrong yet
-    if (conf == "") return;
-
-    // Confirmation password is wrong
-    $("#confPasswordForm").addClass('error').removeClass('empty').removeClass('filled');
-
-}
-
-
-//Updates the status according of forms Confirm Password field
-function updateFormFieldStatusConfirmPassword(that) {
-
-    var confPass = $(that).val();
-    //If is empty
-    if (confPass == "") {
-        $(that).addClass('empty').removeClass('filled').removeClass('error');
-        return;
-    }
-
-    var pass = $("#passwordForm").val();
-
-    //Password is filled
-    if (pass != "") {
-
-        if (confPass == pass) {
-            $(that).addClass('filled').removeClass('empty').removeClass('error');
-            return;
-        }
-
+            $(username).parent().removeClass('error').addClass("success");
 
     }
-    // Confirmation password is wrong
-    $(that).addClass('error').removeClass('empty').removeClass('filled');
-
-}
-
-
-function updateFormFieldStatusSimple(that) {
-    //Something is filled
-    if ($(that).val() != "") {
-        $(that).addClass('filled').removeClass('empty');
-    }
+    // Username is wrong
     else {
-        $(that).addClass('empty').removeClass('filled');
+
+            $(username).parent().removeClass('success').addClass("error");
+
+            if (value.length > 15) {
+                msg = "Username cant be more than 15 characters<br>";
+            }
+            else {
+                msg = "Username cant be empty<br>";
+            }
+
     }
 
-} */
+    return msg;
+}
+

@@ -1,4 +1,4 @@
-<div class="" id="loginModal" >
+<div class="" id="loginModal">
     <div class="modal-header">
         <h3>Have an Account?</h3>
     </div>
@@ -7,7 +7,7 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs" id="loginTabs">
                     <li class="active"><a href="#loginFormTab" data-toggle="tab">Login</a></li>
-                    <li ><a href="#registerFormTab" data-toggle="tab">Create Account</a></li>
+                    <li><a href="#registerFormTab" data-toggle="tab">Create Account</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="loginFormTab">
@@ -21,6 +21,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Checks for Login and Register form
+
+
+    $(document).ready(function () {
+
+
+        // TODO  PAMPOS vale ola ta IPOLOIPOA STOIXEIA FORMAS sto query (me komma meta to surnameForm )
+        // When form fields has changed TODO ele3e an en swsto ta ids: usernameForm, passwordForm etc!
+        // TODO TRICKY: password + password confirm! prepei na en ta idia gia na en swsta! diaforetika kokkina kai ta 2!
+        $("#usernameForm, #passwordForm, #nameForm, #surnameForm").keyup(function () {
+
+            checkInputField(this); // TODO ilopoiise tin methodo sto mainJavascript . Arkepsa tin egw!
+        });
+
+
+    });
+
+</script>
 
 
 

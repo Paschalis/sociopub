@@ -309,7 +309,7 @@ function updateFormFieldStatusEmail(that) {
 
 }
 
-
+/*
 
 function updateFormFieldStatusPassword(that) {
 
@@ -382,4 +382,4 @@ function updateFormFieldStatusSimple(that) {
         $(that).addClass('empty').removeClass('filled');
     }
 
-}
+}*/

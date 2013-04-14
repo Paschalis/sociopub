@@ -128,7 +128,7 @@ function checkRegisterForm() {
         $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
         dataCorrect = false;
     }
-    else{
+    else if(confPassword==password && password!="" && confPassword!=""){
         $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
 

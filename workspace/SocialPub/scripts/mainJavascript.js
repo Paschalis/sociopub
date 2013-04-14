@@ -96,8 +96,11 @@ function checkRegisterForm() {
     }
     if(username.length>15){
         msg += "Invalid Username. You must choose a smaller than 15 characters.\n";
-        $("#usernameForm").css("border-bottom-color", "#fff");
-       // usernmame.keyup()
+       // $("#usernameForm").css("border-bottom-color", "#fff");
+        $('#usernameForm').css('border-bottom', 'solid 10px red');
+
+
+        // usernmame.keyup()
         //document.getElementById($("#usernameForm")).style.border = "4px solid red";
         //$("#usernameForm").css({box-shadow: 0 0 4px green;});
         //$("#usernameForm").css({class:"controls-inputError"});

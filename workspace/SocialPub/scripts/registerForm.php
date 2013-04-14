@@ -8,13 +8,13 @@
     <label>First Name</label>
     <input type="text" value="" class="input-xlarge" id="nameForm" required>
     <label>Last Name</label>
-    <input type="text" value="" class="input-xlarge" id="surnameForm">
+    <input type="text" value="" class="input-xlarge" id="surnameForm" required>
     <label>Email</label>
-    <input value="" class="input-xlarge" id="emailForm" type="email">
+    <input value="" class="input-xlarge" id="emailForm" type="email" required="">
     <label>Password</label>
-    <input type="password" value="" class="input-xlarge" id="passwordForm">
+    <input type="password" value="" class="input-xlarge" id="passwordForm" required="">
     <label>Password Confirmation</label>
-    <input type="password" value="" class="input-xlarge" id="confPasswordForm">
+    <input type="password" value="" class="input-xlarge" id="confPasswordForm" required="">
     <label>Gender</label>
     <!--<input type="text" value="" class="input-xlarge" id="genderForm">-->
     <select id="genderForm">

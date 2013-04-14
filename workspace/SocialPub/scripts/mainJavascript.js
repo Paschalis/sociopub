@@ -266,3 +266,22 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 
 }
 
+
+function updateFormFieldStatusEmail(that) {
+    //If is empty
+    if ($(that).val() == "") {
+        $(that).addClass('empty').removeClass('filled').removeClass('error');
+    }
+    else {
+        //Check if its a valid email address
+        if (isEmailCorrect($(that).val())) {
+            $(that).addClass('filled').removeClass('empty').removeClass('error');
+        }
+        else {
+            $(that).addClass('error').removeClass('empty').removeClass('filled');
+        }
+
+    }
+
+}
+

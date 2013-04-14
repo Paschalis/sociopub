@@ -382,4 +382,4 @@ function updateFormFieldStatusSimple(that) {
         $(that).addClass('empty').removeClass('filled');
     }
 
-}*/
+} */

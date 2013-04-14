@@ -1,7 +1,10 @@
+<!DOCTYPE html>
+<html lang=en>
 
+<body>
 <form id="registerForm" >
    <div> <label for="usernameForm">Username</label>
-    <input type="text" value="" class="input-xlarge" id="usernameForm" onchange="username_Changed(this)"/>
+    <input type="text" value="" class="input-xlarge" id="usernameForm" onchange="username_Changed(this)" required="">
    <span></span>
    </div>
 
@@ -34,4 +37,16 @@
     </div>
 </form>
 
-<!--drop down menus->
+
+updateFormFieldStatusEmail($("#emailForm"));
+
+<!--updateFormFieldStatusTelephone($("#register-form-telephone"));-->
+
+
+updateFormFieldStatusConfirmPassword($("#confPasswordForm"));
+
+updateFormFieldStatusPassword($("#passwordForm"));
+<!--drop down menus-->
+
+</body>
+</html>

@@ -112,7 +112,7 @@ function checkRegisterForm() {
     if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors field \n";
-        $('#paswordForm').css('borderColor', 'green');
+
         dataCorrect = false;
     }
     if (confPassword == "") {
@@ -125,6 +125,7 @@ function checkRegisterForm() {
     if(confPassword!=password){
         //TODO Passwords dont match
         msg+="Wrong confirmation of password!\n";
+        $('#paswordForm').css('borderColor', 'green');
         dataCorrect = false;
     }
 

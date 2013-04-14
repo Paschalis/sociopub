@@ -24,7 +24,7 @@
     <option value="">Select Country</option>}
     <option value="Cyprus">Cyprus</option>
     <option value="Other">Other</option>
-
+</sselect>
     <div>
         <button class="btn btn-primary" id="registerButton">Create Account</button>
     </div>

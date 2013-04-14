@@ -138,7 +138,7 @@ function checkRegisterForm() {
         dataCorrect = false;
     }
     else{
-        $('#nameForm').css('boxShadow', '2px 3px 3px green');
+        $('#nameForm').css('boxShadow', '2px 3px 3px lightgreen');
     }
 
     if (surname == "") {

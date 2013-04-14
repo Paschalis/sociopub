@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang=en>
 
@@ -38,6 +40,7 @@
 </form>
 
 
+<script>
 updateFormFieldStatusEmail($("#emailForm"));
 
 <!--updateFormFieldStatusTelephone($("#register-form-telephone"));-->
@@ -47,6 +50,6 @@ updateFormFieldStatusConfirmPassword($("#confPasswordForm"));
 
 updateFormFieldStatusPassword($("#passwordForm"));
 <!--drop down menus-->
-
+</script>
 </body>
 </html>

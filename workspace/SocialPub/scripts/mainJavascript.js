@@ -336,6 +336,12 @@ function checkPassword(password, confPassword)
     else{
         $(password).parent().removeClass('success').addClass("error");
         $(confPassword).parent().removeClass('success').addClass("error");
+        if(value=="" || valueConf==""){
+            msg="Please fill the Password and Password Confirmation fields<br>";
+        }
+        else if(value!=valueConf){
+            msg="Wrong confirmation of Password<br>";
+        }
     }
 
 

@@ -83,11 +83,11 @@ function checkRegisterForm() {
     msg += checkUsername(username);
     msg += checkPassword(password,confPassword);
     msg += checkName(name);
-
+    msg += checkSurname(surname);
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
-
+/*
 
     if (surname == "") {
         //TODO make surname red
@@ -98,7 +98,7 @@ function checkRegisterForm() {
     else {
         $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
-
+*/
     if (gender != "m" && gender != "f") {
         //TODO make gender red
         msg += "gender \n";
@@ -252,6 +252,9 @@ function checkInputField(element) {
         case "nameForm":
         checkName(element);
             break;
+        case "surnameForm":
+            checkSurname(element);
+            break;
         //TODO OTHERS
 
     }
@@ -333,6 +336,36 @@ function checkName(name){
     }
 return msg;
 }
+
+function checkSurname(surname){
+    var value=$(surname).val();
+    var msg="";
+
+    if(value!="" && value.length<=40){
+        $(surname).parent().removeClass('error').addClass("success");
+    }
+    else{
+        $(surname).parent().removeClass('success').addClass("error");
+
+        if(value==""){
+            msg = "Surname field cant be empty<br>";
+        }
+        else if(value.length>40){
+            msg = "Surname must be smaller than 40 characters<br>";
+        }
+    }
+    return msg;
+}
+/*
+if (surname == "") {
+    //TODO make surname red
+    msg += "You must fill in the surname field. \n";
+    $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
+    dataCorrect = false;
+}
+else {
+    $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
+}*/
 /*
 if (name == "") {
     //TODO make name red

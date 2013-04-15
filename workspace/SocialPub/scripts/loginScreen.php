@@ -36,6 +36,7 @@
 
             checkInputField(this); // TODO ilopoiise tin methodo sto mainJavascript . Arkepsa tin egw!
         });
+
         $("#passwordForm, #confPasswordForm").keyup(function(){
             checkPassword($("#passwordForm"),$("#confPasswordForm"));
         });

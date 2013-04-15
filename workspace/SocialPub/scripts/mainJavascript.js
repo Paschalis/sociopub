@@ -281,6 +281,7 @@ function checkInputField(element) {
             break;
         case "passwordForm":
             //TODO
+            checkPassword(element);
             break;
         //TODO OTHERS
 

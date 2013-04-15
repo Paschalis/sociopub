@@ -100,13 +100,7 @@ function checkRegisterForm() {
     else {
         $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
-/*
-    if (country == "") {
-        //TODO make email red
-        msg += "Country \n";
-        dataCorrect = false;
-    }
-*/
+
 
     if (!dataCorrect) {
         //TODO MAKE THIS notification

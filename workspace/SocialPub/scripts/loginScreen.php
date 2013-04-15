@@ -40,6 +40,9 @@
         $("#passwordForm, #confPasswordForm").keyup(function(){
             checkPassword($("#passwordForm"),$("#confPasswordForm"));
         });
+        $("#countryForm, #genderForm").mouseleave(function(){
+            checkInputField(this);
+        });
 
 
     });

@@ -85,6 +85,7 @@ function checkRegisterForm() {
     msg += checkPassword(password,confPassword);
     msg += checkName(name);
     msg += checkSurname(surname);
+    msg += checkGender(gender);
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
@@ -100,13 +101,14 @@ function checkRegisterForm() {
         $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
 */
+    /*
     if (gender != "m" && gender != "f") {
         //TODO make gender red
         msg += "gender \n";
 
         dataCorrect = false;
     }
-
+*/
     if (email == "" || !isEmailCorrect(email)) {
         //TODO make email red
         msg += "Invalid email address\n";
@@ -256,6 +258,9 @@ function checkInputField(element) {
         case "surnameForm":
             checkSurname(element);
             break;
+        case "genderForm":
+            checkGender(element);
+            break;
         //TODO OTHERS
 
     }
@@ -359,6 +364,25 @@ function checkSurname(surname){
         dataCorrect=false;
     }
     return msg;
+}
+
+function checkGender(gender){
+    var value=$(gender).val();
+    var msg="";
+
+    if (value == "m" || value == "f") {
+        //TODO make gender red
+        $(gender).parent().removeClass('error').addClass("success");
+
+    }
+    else{
+        $(gender).parent().removeClass('success').addClass("error");
+        msg = "Specify your gender \n";
+        dataCorrect = false;
+    }
+
+    return msg;
+
 }
 /*
 if (surname == "") {

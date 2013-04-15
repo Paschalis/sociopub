@@ -81,13 +81,13 @@ function checkRegisterForm() {
     // PWS? kame nea methodo, kai copy paste ta IF pukatw gia ka8e input + vale tous extra elegxous
     // (analoga me ta sizes tis vasis)
     msg += checkUsername(username);
-
+    msg += checkPassword(password,confPassword);
 
 
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
-    if (password == "") {
+  /*  if (password == "") {
         //TODO MAKE password RED
         msg += "Please fill the Passwors field \n";
         $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
@@ -112,7 +112,7 @@ function checkRegisterForm() {
     else if (confPassword == password && password != "" && confPassword != "") {
         $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
     }
-
+*/
 
     if (name == "") {
         //TODO make name red
@@ -321,3 +321,47 @@ function checkUsername(username) {
     return msg;
 }
 
+function checkPassword(password, confPassword)
+{
+    var value= $(password).val();
+    var valueConf=$(confPassword).val();
+    var msg="";
+    if(value==valueConf && value!="" && valueConf!=""){
+        $(password).parent().removeClass('error').addClass("success");
+        $(confPassword).parent().removeClass('error').addClass("success");
+    }
+    // password and confirmPassword are not equal or their fields ar empty
+    else{
+        $(password).parent().removeClass('success').addClass("error");
+        $(confPassword).parent().removeClass('success').addClass("error");
+    }
+
+
+}
+/*
+if (password == "") {
+    //TODO MAKE password RED
+    msg += "Please fill the Passwors field \n";
+    $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
+    dataCorrect = false;
+}
+else {
+    $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
+}
+if (confPassword == "") {
+    //TODO MAKE confpassword RED
+    msg += "Please confirm your password\n";
+    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
+    dataCorrect = false;
+}
+
+if (confPassword != password) {
+    //TODO Passwords dont match
+    msg += "Wrong confirmation of password!\n";
+    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
+    dataCorrect = false;
+}
+else if (confPassword == password && password != "" && confPassword != "") {
+    $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
+}
+*/

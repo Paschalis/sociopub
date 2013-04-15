@@ -123,7 +123,7 @@ function checkRegisterForm() {
     }
 
 
-    if (!dataCorrect || msg!="") {
+    if (!dataCorrect || msg.length<1) {
         //TODO MAKE THIS notification
         alert("Input is wrong!\n" + msg);
 

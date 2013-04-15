@@ -31,10 +31,13 @@
 
         // TODO  PAMPOS vale ola ta IPOLOIPOA STOIXEIA FORMAS sto query (me komma meta to surnameForm )
         // When form fields has changed TODO ele3e an en swsto ta ids: usernameForm, passwordForm etc!
-        // TODO TRICKY: password + password confirm! prepei na en ta idia gia na en swsta! diaforetika kokkina kai ta 2!
-        $("#usernameForm, #passwordForm, #nameForm, #surnameForm").keyup(function () {
+        // TODO TRICKY: password + password confirm! prepei na en ta idia gia na en swsta! diaforetika kokkina kai ta 2!  #passwordForm,
+        $("#usernameForm, #nameForm, #surnameForm, #emailForm").keyup(function () {
 
             checkInputField(this); // TODO ilopoiise tin methodo sto mainJavascript . Arkepsa tin egw!
+        });
+        $("#passwordForm, #confPasswordForm").keyup(function(){
+            checkPassword($("#passwordForm"),$("#confPasswordForm"));
         });
 
 

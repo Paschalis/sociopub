@@ -19,18 +19,19 @@
     <div class="control-group success">
         <label>Email</label>
         <input value="" class="input-xlarge" id="emailForm" type="email"">
+    </div>
         <div class="control-group success">
-        </div>
+
         <label>Password</label>
         <input type="password" value="" class="input-xlarge" id="passwordForm">
-
+    </div>
         <div class="control-group success">
-        </div>
+
         <label>Password Confirmation</label>
         <input type="password" value="" class="input-xlarge" id="confPasswordForm">
-
+    </div>
         <div class="control-group success">
-        </div>
+
         <label>Gender</label>
         <select id="genderForm">
             <option value="">Select Gender</option>

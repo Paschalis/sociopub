@@ -87,20 +87,10 @@ function checkRegisterForm() {
     msg += checkSurname(surname);
     msg += checkGender(gender);
     msg += checkCountry(country);
+    msg += checkEmail(email);
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
-
-    if (email == "" || !isEmailCorrect(email)) {
-        //TODO make email red
-        msg += "Invalid email address\n";
-        $('#emailForm').css('boxShadow', '2px 2px 2px  red');
-        dataCorrect = false;
-    }
-    else {
-        $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
-    }
-
 
     if (!dataCorrect) {
         //TODO MAKE THIS notification
@@ -240,6 +230,9 @@ function checkInputField(element) {
         case "countryForm":
             checkCountry(element);
             break;
+        case "emailForm":
+            checkEmail(element);
+            break;
         //TODO OTHERS
 
     }
@@ -335,10 +328,10 @@ function checkSurname(surname){
         $(surname).parent().removeClass('success').addClass("error");
 
         if(value==""){
-            msg = "Surname field cant be empty\n";
+            msg = "Last name field cant be empty\n";
         }
         else if(value.length>40){
-            msg = "Surname must be smaller than 40 characters\n";
+            msg = "Last name must be smaller than 40 characters\n";
         }
         dataCorrect=false;
     }
@@ -378,6 +371,36 @@ function checkCountry(country){
     }
     return msg;
 }
+
+function checkEmail(email){
+    var value=$(email).val();
+    var msg="";
+if (value!="" && isEmailCorrect(value)){
+    $(email).parent().removeClass('error').addClass("success");
+}
+else{
+    $(email).parent().removeClass('success').addClass("error");
+    dataCorrect = false;
+    if(value==""){
+        msg = "Please write your email address in the Email field\n";
+    }
+    else if(!isEmailCorrect(value)){
+        msg="The email address is not valid\n";
+    }
+}
+    return msg;
+}
+/*
+if (email == "" || !isEmailCorrect(email)) {
+    //TODO make email red
+    msg += "Invalid email address\n";
+    $('#emailForm').css('boxShadow', '2px 2px 2px  red');
+    dataCorrect = false;
+}
+else {
+    $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
+}
+*/
 /*
 if (surname == "") {
     //TODO make surname red

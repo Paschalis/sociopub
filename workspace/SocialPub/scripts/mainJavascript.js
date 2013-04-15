@@ -283,10 +283,10 @@ function checkUsername(username) {
             $(username).parent().removeClass('success').addClass("error");
 
             if (value.length > 15) {
-                msg = "Username cant be more than 15 characters<br>";
+                msg = "Username cant be more than 15 characters\n";
             }
             else {
-                msg = "Username cant be empty<br>";
+                msg = "Username cant be empty\n";
             }
 
     }
@@ -308,10 +308,10 @@ function checkPassword(password, confPassword)
         $(password).parent().removeClass('success').addClass("error");
         $(confPassword).parent().removeClass('success').addClass("error");
         if(value=="" || valueConf==""){
-            msg="Please fill the Password and Password Confirmation fields<br>";
+            msg="Please fill the Password and Password Confirmation fields\n";
         }
         else if(value!=valueConf){
-            msg="Wrong confirmation of Password<br>";
+            msg="Wrong confirmation of Password\n";
         }
     }
 return msg;
@@ -328,10 +328,10 @@ function checkName(name){
         $(name).parent().removeClass('success').addClass("error");
 
         if(value==""){
-            msg = "First name field cant be empty<br>";
+            msg = "First name field cant be empty \n";
         }
         else if(value.length>40){
-            msg = "First name must be smaller than 40 characters<br>";
+            msg = "First name must be smaller than 40 characters\n";
         }
     }
 return msg;
@@ -348,10 +348,10 @@ function checkSurname(surname){
         $(surname).parent().removeClass('success').addClass("error");
 
         if(value==""){
-            msg = "Surname field cant be empty<br>";
+            msg = "Surname field cant be empty\n";
         }
         else if(value.length>40){
-            msg = "Surname must be smaller than 40 characters<br>";
+            msg = "Surname must be smaller than 40 characters\n";
         }
     }
     return msg;

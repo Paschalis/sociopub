@@ -9,7 +9,7 @@
 /**
  * When the document is ready (fully loaded)
  */
-
+var dataCorrect = true;
 $(document).ready(function () {
 
     //When register button is clicked
@@ -65,7 +65,8 @@ function checkRegisterForm() {
     var country = $("#countryForm").val();
 
     //assume data will be correct
-    var dataCorrect = true;
+   //ekama tin global touti
+    //var dataCorrect = true;
 
     // TODO PAMPOS IMPLEMENT THIS!
     // NA KAMES OLA TA LA8OS INPUT DATA KOKKINA!
@@ -123,7 +124,7 @@ function checkRegisterForm() {
     }
 
 
-    if (!dataCorrect || msg.val().length>1) {
+    if (!dataCorrect) {
         //TODO MAKE THIS notification
         alert("Input is wrong!\n" + msg);
 
@@ -288,7 +289,7 @@ function checkUsername(username) {
             else {
                 msg = "Username cant be empty\n";
             }
-
+        dataCorrect=false;
     }
 
     return msg;
@@ -313,6 +314,7 @@ function checkPassword(password, confPassword)
         else if(value!=valueConf){
             msg="Wrong confirmation of Password\n";
         }
+        dataCorrect=false;
     }
 return msg;
 
@@ -333,6 +335,7 @@ function checkName(name){
         else if(value.length>40){
             msg = "First name must be smaller than 40 characters\n";
         }
+        dataCorrect=false;
     }
 return msg;
 }
@@ -353,6 +356,7 @@ function checkSurname(surname){
         else if(value.length>40){
             msg = "Surname must be smaller than 40 characters\n";
         }
+        dataCorrect=false;
     }
     return msg;
 }

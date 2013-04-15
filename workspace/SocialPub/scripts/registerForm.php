@@ -33,7 +33,7 @@
         </div>
         <label>Gender</label>
         <select id="genderForm">
-            <option value="Select Gender">Select Gender</option>
+            <option value="">Select Gender</option>
             }
             <option value="m">Male</option>
             <option value="f">Female</option>

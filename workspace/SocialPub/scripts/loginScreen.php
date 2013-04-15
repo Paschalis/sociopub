@@ -44,6 +44,7 @@
             checkInputField(this);
         });
 /**
+ *
  * Touta nomizw prepei na ta kamoume j gia mouse alla en ime siouros
         $("#usernameForm, #nameForm, #surnameForm, #emailForm, #genderForm, #countryForm").mouseKATI
 

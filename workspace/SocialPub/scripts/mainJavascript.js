@@ -82,47 +82,12 @@ function checkRegisterForm() {
     // (analoga me ta sizes tis vasis)
     msg += checkUsername(username);
     msg += checkPassword(password,confPassword);
-
+    msg += checkName(name);
 
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
-  /*  if (password == "") {
-        //TODO MAKE password RED
-        msg += "Please fill the Passwors field \n";
-        $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
-        dataCorrect = false;
-    }
-    else {
-        $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
-    }
-    if (confPassword == "") {
-        //TODO MAKE confpassword RED
-        msg += "Please confirm your password\n";
-        $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-        dataCorrect = false;
-    }
 
-    if (confPassword != password) {
-        //TODO Passwords dont match
-        msg += "Wrong confirmation of password!\n";
-        $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-        dataCorrect = false;
-    }
-    else if (confPassword == password && password != "" && confPassword != "") {
-        $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
-    }
-*/
-
-    if (name == "") {
-        //TODO make name red
-        msg += "You must fill in the name field. \n";
-        $('#nameForm').css('boxShadow', '3px 3px 3px red');
-        dataCorrect = false;
-    }
-    else {
-        $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
-    }
 
     if (surname == "") {
         //TODO make surname red
@@ -284,6 +249,9 @@ function checkInputField(element) {
             //checkPassword(element);
             //problem here
             break;
+        case "nameForm":
+        checkName(element);
+            break;
         //TODO OTHERS
 
     }
@@ -343,9 +311,38 @@ function checkPassword(password, confPassword)
             msg="Wrong confirmation of Password<br>";
         }
     }
-
+return msg;
 
 }
+function checkName(name){
+    var value=$(name).val();
+    var msg="";
+
+    if(value!="" && value.length<=40){
+        $(name).parent().removeClass('error').addClass("success");
+    }
+    else{
+        $(name).parent().removeClass('success').addClass("error");
+
+        if(value==""){
+            msg = "First name field cant be empty<br>";
+        }
+        else if(value.length>40){
+            msg = "First name must be smaller than 40 characters<br>";
+        }
+    }
+return msg;
+}
+/*
+if (name == "") {
+    //TODO make name red
+    msg += "You must fill in the name field. \n";
+    $('#nameForm').css('boxShadow', '3px 3px 3px red');
+    dataCorrect = false;
+}
+else {
+    $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
+}*/
 /*
 if (password == "") {
     //TODO MAKE password RED

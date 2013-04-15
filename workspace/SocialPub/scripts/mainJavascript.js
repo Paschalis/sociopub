@@ -86,6 +86,7 @@ function checkRegisterForm() {
     msg += checkName(name);
     msg += checkSurname(surname);
     msg += checkGender(gender);
+    msg += checkCountry(country);
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
@@ -99,13 +100,13 @@ function checkRegisterForm() {
     else {
         $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
     }
-
+/*
     if (country == "") {
         //TODO make email red
         msg += "Country \n";
         dataCorrect = false;
     }
-
+*/
 
     if (!dataCorrect) {
         //TODO MAKE THIS notification
@@ -242,6 +243,9 @@ function checkInputField(element) {
         case "genderForm":
             checkGender(element);
             break;
+        case "countryForm":
+            checkCountry(element);
+            break;
         //TODO OTHERS
 
     }
@@ -364,6 +368,21 @@ function checkGender(gender){
 
     return msg;
 
+}
+
+function checkCountry(country){
+    var value=$(country).val();
+    var msg="";
+
+    if (value!=""){
+        $(country).parent().removeClass('error').addClass("success");
+    }
+    else{
+        $(country).parent().removeClass('success').addClass("error");
+        msg = "Please choose your country \n";
+        dataCorrect = false;
+    }
+    return msg;
 }
 /*
 if (surname == "") {

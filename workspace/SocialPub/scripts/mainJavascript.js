@@ -56,13 +56,13 @@ $(document).ready(function () {
 function checkRegisterForm() {
 
     var username = $("#usernameForm"); //TODO PAMPOS ALLA3A TO GIA NA PIASW TO ELEMENT! de an ine swsto! aN INE ALLA3E KAI TA KATW ELEMENTSS (fie to .val() kai kame ta methodous)
-    var password = $("#passwordForm").val();
-    var confPassword = $("#confPasswordForm").val();
-    var name = $("#nameForm").val();
-    var surname = $("#surnameForm").val();
-    var gender = $("#genderForm").val();
-    var email = $("#emailForm").val();
-    var country = $("#countryForm").val();
+    var password = $("#passwordForm");//.val();
+    var confPassword = $("#confPasswordForm");//.val();
+    var name = $("#nameForm");//.val();
+    var surname = $("#surnameForm");//.val();
+    var gender = $("#genderForm");//.val();
+    var email = $("#emailForm");//.val();
+    var country = $("#countryForm");//.val();
 
     //assume data will be correct
    //ekama tin global touti
@@ -89,26 +89,7 @@ function checkRegisterForm() {
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
-/*
 
-    if (surname == "") {
-        //TODO make surname red
-        msg += "You must fill in the surname field. \n";
-        $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
-        dataCorrect = false;
-    }
-    else {
-        $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
-    }
-*/
-    /*
-    if (gender != "m" && gender != "f") {
-        //TODO make gender red
-        msg += "gender \n";
-
-        dataCorrect = false;
-    }
-*/
     if (email == "" || !isEmailCorrect(email)) {
         //TODO make email red
         msg += "Invalid email address\n";

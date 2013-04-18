@@ -88,6 +88,8 @@ function checkRegisterForm() {
     msg += checkGender(gender);
     msg += checkCountry(country);
     msg += checkEmail(email);
+
+
 //TODO KAME KAI TA IPOLOIPA ETSI!
     // alla3e to panw na pianei to element(an ine swsto)
     // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!

@@ -8,29 +8,29 @@
         <input type="text" value="" class="input-xlarge" id="usernameForm">
     </div>
 
-    <div class="control-group success">
+    <div class="control-group">
         <label>First Name</label>
         <input type="text" value="" class="input-xlarge" id="nameForm">
     </div>
-    <div class="control-group success">
+    <div class="control-group">
         <label>Last Name</label>
         <input type="text" value="" class="input-xlarge" id="surnameForm">
     </div>
-    <div class="control-group success">
+    <div class="control-group">
         <label>Email</label>
         <input value="" class="input-xlarge" id="emailForm" type="email"">
     </div>
-        <div class="control-group success">
+        <div class="control-group">
 
         <label>Password</label>
         <input type="password" value="" class="input-xlarge" id="passwordForm">
     </div>
-        <div class="control-group success">
+        <div class="control-group">
 
         <label>Password Confirmation</label>
         <input type="password" value="" class="input-xlarge" id="confPasswordForm">
     </div>
-        <div class="control-group success">
+        <div class="control-group">
 
         <label>Gender</label>
         <select id="genderForm">
@@ -40,7 +40,7 @@
             <option value="f">Female</option>
         </select>
     </div>
-    <div class="control-group success">
+    <div class="control-group">
         <label>Country</label>
         <!-- <input type="text" value="" class="input-xlarge" id="countryForm">-->
         <select id="countryForm">

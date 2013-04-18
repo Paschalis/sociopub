@@ -94,18 +94,18 @@ include("scripts/initializeSession.php");
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!--<script src="js/jquery.js"></script>-->
-<script src="scripts/demetris/js/mainJavascript.js"></script>
-<script src="scripts/demetris/js/bootstrap-transition.js"></script>
-<script src="scripts/demetris/js/bootstrap-alert.js"></script>
-<script src="scripts/demetris/js/bootstrap-modal.js"></script>
-<script src="scripts/demetris/js/bootstrap-dropdown.js"></script>
-<script src="scripts/demetris/js/bootstrap-scrollspy.js"></script>
-<script src="scripts/demetris/js/bootstrap-tab.js"></script>
-<script src="scripts/demetris/js/bootstrap-tooltip.js"></script>
-<script src="scripts/demetris/js/bootstrap-popover.js"></script>
-<script src="scripts/demetris/js/bootstrap-button.js"></script>
-<script src="scripts/demetris/js/bootstrap-collapse.js"></script>
-<script src="scripts/demetris/js/bootstrap-carousel.js"></script>
-<script src="scripts/demetris/js/bootstrap-typeahead.js"></script>
+<script src="js/mainJavascript.js"></script>
+<script src="js/bootstrap-transition.js"></script>
+<script src="js/bootstrap-alert.js"></script>
+<script src="js/bootstrap-modal.js"></script>
+<script src="js/bootstrap-dropdown.js"></script>
+<script src="js/bootstrap-scrollspy.js"></script>
+<script src="js/bootstrap-tab.js"></script>
+<script src="js/bootstrap-tooltip.js"></script>
+<script src="js/bootstrap-popover.js"></script>
+<script src="js/bootstrap-button.js"></script>
+<script src="js/bootstrap-collapse.js"></script>
+<script src="js/bootstrap-carousel.js"></script>
+<script src="js/bootstrap-typeahead.js"></script>
 </body>
 </html>

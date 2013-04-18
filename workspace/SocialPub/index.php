@@ -67,6 +67,7 @@ include("scripts/initializeSession.php");
 </div>
 
 
+
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3" id="leftContent">LEFT

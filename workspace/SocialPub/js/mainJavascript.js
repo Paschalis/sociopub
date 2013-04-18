@@ -193,7 +193,7 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 
     var jqxhr = $.post(url, formData)
         .done(function (data) {
-            ajaxRegisterSuccess(data);
+            successCallback(data);
 
         })
         .fail(failCallback);

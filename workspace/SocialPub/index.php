@@ -80,7 +80,6 @@ include("scripts/initializeSession.php");
             <?php
             include('html/mainContent.php');
             ?>
-
         </div>
         <div class="span3" id="rightContent">RIGHT</div>
         <button type="button" id="jimtest">put url</button>

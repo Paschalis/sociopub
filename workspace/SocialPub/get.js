@@ -65,7 +65,7 @@ function checkRegisterForm() {
     var country = $("#countryForm");//.val();
 
     //assume data will be correct
-   //ekama tin global touti
+    //ekama tin global touti
     //var dataCorrect = true;
 
     // TODO PAMPOS IMPLEMENT THIS!
@@ -148,7 +148,7 @@ function registerUser(formData) {
 //    ajaxJsonRequest("register.php",)
 
     // Send data to server
-    ajaxJsonRequest("scripts/register.php",
+    ajaxJsonRequest("http://www.tokoulouri.com/science/haloumi_to_the_rescue/",
         formData,
         ajaxRegisterSuccess(),
         ajaxRegisterFailed());
@@ -221,7 +221,7 @@ function checkInputField(element) {
             //problem here
             break;
         case "nameForm":
-        checkName(element);
+            checkName(element);
             break;
         case "surnameForm":
             checkSurname(element);
@@ -254,20 +254,20 @@ function checkUsername(username) {
 // Username is correct
     if (value != "" && value.length <= 15) {
 
-            $(username).parent().removeClass('error').addClass("success");
+        $(username).parent().removeClass('error').addClass("success");
 
     }
     // Username is wrong
     else {
 
-            $(username).parent().removeClass('success').addClass("error");
+        $(username).parent().removeClass('success').addClass("error");
 
-            if (value.length > 15) {
-                msg = "Username cant be more than 15 characters\n";
-            }
-            else {
-                msg = "Username cant be empty\n";
-            }
+        if (value.length > 15) {
+            msg = "Username cant be more than 15 characters\n";
+        }
+        else {
+            msg = "Username cant be empty\n";
+        }
         dataCorrect=false;
     }
 
@@ -295,7 +295,7 @@ function checkPassword(password, confPassword)
         }
         dataCorrect=false;
     }
-return msg;
+    return msg;
 
 }
 function checkName(name){
@@ -316,7 +316,7 @@ function checkName(name){
         }
         dataCorrect=false;
     }
-return msg;
+    return msg;
 }
 
 function checkSurname(surname){
@@ -377,76 +377,76 @@ function checkCountry(country){
 function checkEmail(email){
     var value=$(email).val();
     var msg="";
-if (value!="" && isEmailCorrect(value)){
-    $(email).parent().removeClass('error').addClass("success");
-}
-else{
-    $(email).parent().removeClass('success').addClass("error");
-    dataCorrect = false;
-    if(value==""){
-        msg = "Please write your email address in the Email field\n";
+    if (value!="" && isEmailCorrect(value)){
+        $(email).parent().removeClass('error').addClass("success");
     }
-    else if(!isEmailCorrect(value)){
-        msg="The email address is not valid\n";
+    else{
+        $(email).parent().removeClass('success').addClass("error");
+        dataCorrect = false;
+        if(value==""){
+            msg = "Please write your email address in the Email field\n";
+        }
+        else if(!isEmailCorrect(value)){
+            msg="The email address is not valid\n";
+        }
     }
-}
     return msg;
 }
 /*
-if (email == "" || !isEmailCorrect(email)) {
-    //TODO make email red
-    msg += "Invalid email address\n";
-    $('#emailForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}
-*/
+ if (email == "" || !isEmailCorrect(email)) {
+ //TODO make email red
+ msg += "Invalid email address\n";
+ $('#emailForm').css('boxShadow', '2px 2px 2px  red');
+ dataCorrect = false;
+ }
+ else {
+ $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
+ }
+ */
 /*
-if (surname == "") {
-    //TODO make surname red
-    msg += "You must fill in the surname field. \n";
-    $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}*/
+ if (surname == "") {
+ //TODO make surname red
+ msg += "You must fill in the surname field. \n";
+ $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
+ dataCorrect = false;
+ }
+ else {
+ $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
+ }*/
 /*
-if (name == "") {
-    //TODO make name red
-    msg += "You must fill in the name field. \n";
-    $('#nameForm').css('boxShadow', '3px 3px 3px red');
-    dataCorrect = false;
-}
-else {
-    $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
-}*/
+ if (name == "") {
+ //TODO make name red
+ msg += "You must fill in the name field. \n";
+ $('#nameForm').css('boxShadow', '3px 3px 3px red');
+ dataCorrect = false;
+ }
+ else {
+ $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
+ }*/
 /*
-if (password == "") {
-    //TODO MAKE password RED
-    msg += "Please fill the Passwors field \n";
-    $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}
-if (confPassword == "") {
-    //TODO MAKE confpassword RED
-    msg += "Please confirm your password\n";
-    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
+ if (password == "") {
+ //TODO MAKE password RED
+ msg += "Please fill the Passwors field \n";
+ $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
+ dataCorrect = false;
+ }
+ else {
+ $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
+ }
+ if (confPassword == "") {
+ //TODO MAKE confpassword RED
+ msg += "Please confirm your password\n";
+ $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
+ dataCorrect = false;
+ }
 
-if (confPassword != password) {
-    //TODO Passwords dont match
-    msg += "Wrong confirmation of password!\n";
-    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else if (confPassword == password && password != "" && confPassword != "") {
-    $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
-}
-*/
+ if (confPassword != password) {
+ //TODO Passwords dont match
+ msg += "Wrong confirmation of password!\n";
+ $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
+ dataCorrect = false;
+ }
+ else if (confPassword == password && password != "" && confPassword != "") {
+ $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
+ }
+ */

@@ -50,6 +50,7 @@ $(document).ready(function () {
 });
 
 
+
 /**Checks register form for possible errors
  * and returns forms data in JSon object
  * */

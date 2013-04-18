@@ -1,29 +1,28 @@
-<form id="loginForm" class="form-horizontal" method="post">
+<form id="loginForm">
     <fieldset>
         <div id="legend">
             <legend class="">Login</legend>
         </div>
         <div class="control-group">
             <!-- Username -->
-            <label class="control-label" for="username">Username</label>
+            <label class="control-label" for="usernameLogin">Username</label>
             <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                <input type="text" id="usernameLogin" placeholder="" class="input-xlarge">
             </div>
         </div>
 
         <div class="control-group">
             <!-- Password-->
-            <label class="control-label" for="password">Password</label>
+            <label class="control-label" for="passwordLogin">Password</label>
             <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                <input type="password" id="passwordLogin" placeholder="" class="input-xlarge">
             </div>
         </div>
-
 
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button type="submit" class="btn btn-success">Login</button>
+                <button id="loginButton" class="btn btn-success">Login</button>
             </div>
         </div>
     </fieldset>

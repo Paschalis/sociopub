@@ -9,7 +9,6 @@
 /**
  * When the document is ready (fully loaded)
  */
-var dataCorrect = true;
 $(document).ready(function () {
 
     //When register button is clicked
@@ -33,19 +32,25 @@ $(document).ready(function () {
 
 
     });
-    //p.x. username.ontextChange
-    //
 
-    //When login button is clicked TODO
+    //When register button is clicked
+    $("#loginButton").click(function () {
+
+//        var loginData = checkLoginForm();
+
+//        showNotification(loginData, 3000);
+
+        return false;
+    });
 
 
     //When notification closebutton is clicked
-    $("#notificationClose").click(function () {
+    $("#notificationClose").live().click(function () {
         //Hide notification
         // TODO MAKE THIS WITH FADE EFFECT!
         $("#notification").hide(500);
-        $("#notification").css({class:"hidden"});
-
+        $("#notification").css({class: "hidden"});
+//
     });
 });
 
@@ -53,20 +58,54 @@ $(document).ready(function () {
 /**Checks register form for possible errors
  * and returns forms data in JSon object
  * */
+function checkLoginForm() {
+    var username = $("#usernameLogin");
+
+    var password = $("#passwordLogin");
+
+    var msg = "";
+
+    var result = new Object();
+
+    // Check user and pass
+    var m1 = checkUsername(username);
+    var m2 = checkPassword(password);
+
+    alert(m1 + m2);
+
+    if (m1 != "" || m2 != "")
+        msg = "Username or password cant be empty";
+
+    if (msg != "") {
+
+        result['code'] = 0;
+        result['message'] = msg;
+
+    }
+    else {
+        result['code'] = 1;
+        result['username'] = username;
+        result['password'] = password;
+        result['message'] = "Welcome!";
+    }
+
+    return result;
+}
+
+
+/**Checks register form for possible errors
+ * and returns forms data in JSon object
+ * */
 function checkRegisterForm() {
 
-    var username = $("#usernameForm"); //TODO PAMPOS ALLA3A TO GIA NA PIASW TO ELEMENT! de an ine swsto! aN INE ALLA3E KAI TA KATW ELEMENTSS (fie to .val() kai kame ta methodous)
-    var password = $("#passwordForm");//.val();
-    var confPassword = $("#confPasswordForm");//.val();
-    var name = $("#nameForm");//.val();
-    var surname = $("#surnameForm");//.val();
-    var gender = $("#genderForm");//.val();
-    var email = $("#emailForm");//.val();
-    var country = $("#countryForm");//.val();
-
-    //assume data will be correct
-   //ekama tin global touti
-    //var dataCorrect = true;
+    var username = $("#usernameForm");
+    var password = $("#passwordForm");
+    var confPassword = $("#confPasswordForm");
+    var name = $("#nameForm");
+    var surname = $("#surnameForm");
+    var gender = $("#genderForm");
+    var email = $("#emailForm");
+    var country = $("#countryForm");
 
     // TODO PAMPOS IMPLEMENT THIS!
     // NA KAMES OLA TA LA8OS INPUT DATA KOKKINA!
@@ -78,11 +117,8 @@ function checkRegisterForm() {
     var msg = "";
     var result = "";
 
-    // Check username TODO KAME TES IPOLOIPES METHODOUS OPWS TOUTIN!
-    // PWS? kame nea methodo, kai copy paste ta IF pukatw gia ka8e input + vale tous extra elegxous
-    // (analoga me ta sizes tis vasis)
     msg += checkUsername(username);
-    msg += checkPassword(password,confPassword);
+    msg += checkPasswords(password, confPassword);
     msg += checkName(name);
     msg += checkSurname(surname);
     msg += checkGender(gender);
@@ -121,22 +157,6 @@ function checkRegisterForm() {
 
 
 /**
- * Checks if an email address is correct
- */
-function isEmailCorrect(email) {
-    //TODO PAMPOS COPY EMAIL FUNCTION FROM MY SMARTLIB GITHUB PROJECT HERE!
-//COPY-paste pou kwdika github
-    // return true;
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-    return (reg.test(email));
-    //this copied from paschalis code OK
-}
-
-
-
-
-/**
  * Register user to database with asynchronous request
  *
  */
@@ -156,50 +176,43 @@ function registerUser(formData) {
     return true; // form submitted
 
 }
+
+
 /**
  * Called when failed to contact register PHP script
  *
  */
-
 function ajaxRegisterFailed() {
-//TODO REMOVE ALERT MAKE NICE BOOTSTRAP NOTIFICATION
+
+    var data = new Object();
+
+    data['code'] = 0;
+    data['message'] = "Registration failed.";
+
+
+    showNotification(data);
 
 }
+
+
 /**
  * Called when successfully contact register PHP script.
  * That doesnt mean registration was successfull
  *
  */
-
 function ajaxRegisterSuccess(result) {
-    //TODO REMOVE ALERT MAKE NICE BOOTSTRAP NOTIFICATION
+
+    //TODO USE SHOW  NOTIFICATION FUNCTION
+
+
     //Show notification alert
     $("#notification").show(200);
-    $("#notification").css({class:"alert-success"});
+    $("#notification").css({class: "alert-success"});
     //-success,-info,-waning, alla3e xrwma
     //TODO parse this json object and show results
     $("#notificationMessage").text('server: ' + result);
 
     //TODO if result <=0, then class = alert-error
-    //else alert-success
-}
-
-
-/*
- * Send AJAX request with json data, using
- * */
-function ajaxJsonRequest(url, formData, successCallback, failCallback) {
-
-
-    var jqxhr = $.post(url, formData)
-        .done(function (data) {
-            successCallback(data);
-
-        })
-        .fail(failCallback);
-    // .always(); -- Not used
-
-
 }
 
 
@@ -221,7 +234,7 @@ function checkInputField(element) {
             //problem here
             break;
         case "nameForm":
-        checkName(element);
+            checkName(element);
             break;
         case "surnameForm":
             checkSurname(element);
@@ -242,7 +255,9 @@ function checkInputField(element) {
 
 }
 
+
 /*
+ *
  * Checks if the username is correct
  * */
 function checkUsername(username) {
@@ -254,199 +269,276 @@ function checkUsername(username) {
 // Username is correct
     if (value != "" && value.length <= 15) {
 
-            $(username).parent().removeClass('error').addClass("success");
+        $(username).parent().removeClass('error');
 
     }
     // Username is wrong
     else {
 
-            $(username).parent().removeClass('success').addClass("error");
+        $(username).parent().removeClass('success').addClass("error");
 
-            if (value.length > 15) {
-                msg = "Username cant be more than 15 characters\n";
-            }
-            else {
-                msg = "Username cant be empty\n";
-            }
-        dataCorrect=false;
+        if (value.length > 15) {
+            msg = "Username cant be more than 15 characters\n";
+        }
+        else {
+            msg = "Username cant be empty\n";
+        }
     }
 
     return msg;
 }
 
-function checkPassword(password, confPassword)
-{
-    var value= $(password).val();
-    var valueConf=$(confPassword).val();
-    var msg="";
-    if(value==valueConf && value!="" && valueConf!=""){
-        $(password).parent().removeClass('error').addClass("success");
+
+/*
+ * Checks if password or confirmation password is correct
+ * */
+function checkPassword(password) {
+
+    var value = $(password).val();
+    var msg = "";
+
+
+// Username is correct
+    if (value != "" && value.length <= 40) {
+
+        $(password).parent().removeClass('error');
+
+    }
+    // Username is wrong
+    else {
+
+        $(password).parent().removeClass('success').addClass("error");
+
+        if (value.length > 40) {
+            msg = "Password cant be more than 40 characters\n";
+        }
+        else {
+            msg = "Passswordcant be empty\n";
+        }
+    }
+
+    return msg;
+}
+
+
+//TODO FIX THIS!
+
+/**
+ *
+ *
+ * */
+function checkPasswords(password, confPassword) {
+
+
+    var pass = $(password).val();
+    var conf = $(confPassword).val();
+
+
+    var msg = "";
+
+    if (pass == "" || conf == "") {
+        msg = "Please fill the Password and Password Confirmation fields\n";
+    }
+    else if (pass == conf) {
+        $(password).parent().removeClass('error');
         $(confPassword).parent().removeClass('error').addClass("success");
     }
     // password and confirmPassword are not equal or their fields ar empty
-    else{
+    else {
         $(password).parent().removeClass('success').addClass("error");
         $(confPassword).parent().removeClass('success').addClass("error");
-        if(value=="" || valueConf==""){
-            msg="Please fill the Password and Password Confirmation fields\n";
-        }
-        else if(value!=valueConf){
-            msg="Wrong confirmation of Password\n";
-        }
-        dataCorrect=false;
+
+
+        msg = "Wrong password confirmation\n";
+
     }
-return msg;
+
+
+    return msg;
 
 }
-function checkName(name){
-    var value=$(name).val();
-    var msg="";
 
-    if(value!="" && value.length<=40){
-        $(name).parent().removeClass('error').addClass("success");
+
+/**
+ *
+ *
+ * */
+function checkName(name) {
+    var value = $(name).val();
+    var msg = "";
+
+    if (value != "" && value.length <= 40) {
+        $(name).parent().removeClass('error');
     }
-    else{
+    else {
         $(name).parent().removeClass('success').addClass("error");
 
-        if(value==""){
-            msg = "First name field cant be empty \n";
+        if (value == "") {
+            msg = "First name field cant be empty\n";
         }
-        else if(value.length>40){
+        else if (value.length > 40) {
             msg = "First name must be smaller than 40 characters\n";
         }
-        dataCorrect=false;
-    }
-return msg;
-}
-
-function checkSurname(surname){
-    var value=$(surname).val();
-    var msg="";
-
-    if(value!="" && value.length<=40){
-        $(surname).parent().removeClass('error').addClass("success");
-    }
-    else{
-        $(surname).parent().removeClass('success').addClass("error");
-
-        if(value==""){
-            msg = "Last name field cant be empty\n";
-        }
-        else if(value.length>40){
-            msg = "Last name must be smaller than 40 characters\n";
-        }
-        dataCorrect=false;
     }
     return msg;
 }
 
-function checkGender(gender){
-    var value=$(gender).val();
-    var msg="";
+
+/**
+ *
+ *
+ * */
+function checkSurname(surname) {
+    var value = $(surname).val();
+    var msg = "";
+
+    if (value != "" && value.length <= 40) {
+        $(surname).parent().removeClass('error');
+    }
+    else {
+        $(surname).parent().removeClass('success').addClass("error");
+
+        if (value == "") {
+            msg = "Last name field cant be empty\n";
+        }
+        else if (value.length > 40) {
+            msg = "Last name must be smaller than 40 characters\n";
+        }
+    }
+    return msg;
+}
+
+
+/**
+ *
+ *
+ * */
+function checkGender(gender) {
+    var value = $(gender).val();
+    var msg = "";
 
     if (value == "m" || value == "f") {
         //TODO make gender red
-        $(gender).parent().removeClass('error').addClass("success");
+        $(gender).parent().removeClass('error');
 
     }
-    else{
+    else {
         $(gender).parent().removeClass('success').addClass("error");
         msg = "Specify your gender \n";
-        dataCorrect = false;
     }
 
     return msg;
 
 }
 
-function checkCountry(country){
-    var value=$(country).val();
-    var msg="";
 
-    if (value!=""){
-        $(country).parent().removeClass('error').addClass("success");
+/**
+ *
+ *
+ * */
+function checkCountry(country) {
+    var value = $(country).val();
+    var msg = "";
+
+    if (value != "" && value.length <= 40) {
+        $(country).parent().removeClass('error');
     }
-    else{
+    else {
+
+        if (value.length > 40) {
+            msg = "Country length cant be more than 60 characters.\n";
+        }
+        else {
+            msg = "Please choose your country.\n";
+        }
+
         $(country).parent().removeClass('success').addClass("error");
-        msg = "Please choose your country \n";
-        dataCorrect = false;
+
     }
     return msg;
 }
 
-function checkEmail(email){
-    var value=$(email).val();
-    var msg="";
-if (value!="" && isEmailCorrect(value)){
-    $(email).parent().removeClass('error').addClass("success");
-}
-else{
-    $(email).parent().removeClass('success').addClass("error");
-    dataCorrect = false;
-    if(value==""){
-        msg = "Please write your email address in the Email field\n";
+
+/**
+ *
+ *
+ * */
+function checkEmail(email) {
+    var value = $(email).val();
+    var msg = "";
+    if (value != "" && isEmailCorrect(value)) {
+        $(email).parent().removeClass('error');
     }
-    else if(!isEmailCorrect(value)){
-        msg="The email address is not valid\n";
+    else {
+        $(email).parent().removeClass('success').addClass("error");
+        if (value == "") {
+            msg = "Please write your email address in the Email field\n";
+        }
+        else if (!isEmailCorrect(value)) {
+            msg = "The email address is not valid\n";
+        }
     }
-}
     return msg;
 }
-/*
-if (email == "" || !isEmailCorrect(email)) {
-    //TODO make email red
-    msg += "Invalid email address\n";
-    $('#emailForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#emailForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}
-*/
-/*
-if (surname == "") {
-    //TODO make surname red
-    msg += "You must fill in the surname field. \n";
-    $('#surnameForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#surnameForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}*/
-/*
-if (name == "") {
-    //TODO make name red
-    msg += "You must fill in the name field. \n";
-    $('#nameForm').css('boxShadow', '3px 3px 3px red');
-    dataCorrect = false;
-}
-else {
-    $('#nameForm').css('boxShadow', '3px 3px 3px lightgreen');
-}*/
-/*
-if (password == "") {
-    //TODO MAKE password RED
-    msg += "Please fill the Passwors field \n";
-    $('#passwordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
-}
-else {
-    $('#passwordForm').css('boxShadow', '2px 2px 2px  lightgreen');
-}
-if (confPassword == "") {
-    //TODO MAKE confpassword RED
-    msg += "Please confirm your password\n";
-    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
+
+
+/**
+ *
+ * Checks if an email address is correct
+ */
+function isEmailCorrect(email) {
+    // Regexp
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    return (reg.test(email));
+    //this copied from paschalis code OK
 }
 
-if (confPassword != password) {
-    //TODO Passwords dont match
-    msg += "Wrong confirmation of password!\n";
-    $('#confPasswordForm').css('boxShadow', '2px 2px 2px  red');
-    dataCorrect = false;
+
+/*
+ *   Show a notification alert according the object received
+ *
+ * */
+function showNotification(data, duration) {
+
+    //Show error message
+    if (data['code'] == 0) {
+        $("#notification").css({class: "alert-success"});
+    }
+    //Show success message
+    else if (data['code'] == 1) {
+        $("#notification").css({class: "alert-error"});
+    }
+    //Show info
+    else if (data['code'] == 2) {
+        $("#notification").css({class: "alert-info"});
+    }
+
+
+    $("#notification").show(200);
+
+    // Show success message
+    $("#notificationMessage").text(data['message']);
+
+    $("#notification").delay(duration).fadeOut(500);
+
+    //TODO AUTOHIDE NOTIFICATION
 }
-else if (confPassword == password && password != "" && confPassword != "") {
-    $('#confPasswordForm').css('boxShadow', '3px 3px 3px lightgreen');
+
+
+/*
+ * Send AJAX request with json data, using
+ * */
+function ajaxJsonRequest(url, formData, successCallback, failCallback) {
+
+
+    var jqxhr = $.post(url, formData)
+        .done(function (data) {
+            successCallback(data);
+
+        })
+        .fail(failCallback);
+    // .always(); -- Not used
+
+
 }
-*/

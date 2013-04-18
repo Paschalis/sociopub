@@ -35,7 +35,7 @@ include("scripts/initializeSession.php");
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="scripts/demetris/js/html5shiv.js"></script>
+    <script src="js/html5shiv.js"></script>
     <![endif]-->
 
     <!-- TODO CHECK Fav and touch icons -->
@@ -50,8 +50,6 @@ include("scripts/initializeSession.php");
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#">SocioPub</a>
-
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li>
@@ -67,17 +65,20 @@ include("scripts/initializeSession.php");
 </div>
 
 
-
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3" id="leftContent">LEFT
         </div>
         <div class="span5" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
-            <div id="notification" class="alert alert-info" style="display: none">
-                <span id="notificationMessage">No notifications</span>
-                <button id="notificationClose" class="close">&times;</button>
+
+            <div id="notification" class="alert fade">
+                    <span id="notificationMessage">No notifications</span>
+                    <button id="notificationClose" class="close">&times;</button>
             </div>
+
+
+
             <?php
             include('html/mainContent.php');
             ?>
@@ -90,10 +91,7 @@ include("scripts/initializeSession.php");
 </div>
 <!-- /container -->
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<!--<script src="js/jquery.js"></script>-->
+<!--Javascripts-->
 <script src="js/mainJavascript.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-alert.js"></script>

@@ -20,6 +20,8 @@ include("scripts/initializeSession.php");
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -67,7 +69,8 @@ include("scripts/initializeSession.php");
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3" id="leftContent">LEFTdcfsdcs</div>
+        <div class="span3" id="leftContent">LEFT
+        </div>
         <div class="span5" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
             <div id="notification" class="alert alert-info" style="display: none">
@@ -75,7 +78,7 @@ include("scripts/initializeSession.php");
                 <button id="notificationClose" class="close">&times;</button>
             </div>
             <?php
-            include('scripts/mainContent.php');
+            include('html/mainContent.php');
             ?>
 
         </div>
@@ -89,8 +92,8 @@ include("scripts/initializeSession.php");
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
-<script src="scripts/mainJavascript.js"></script>
+<!--<script src="js/jquery.js"></script>-->
+<script src="js/mainJavascript.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-alert.js"></script>
 <script src="js/bootstrap-modal.js"></script>

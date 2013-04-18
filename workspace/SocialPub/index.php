@@ -83,7 +83,7 @@ include("scripts/initializeSession.php");
 
         </div>
         <div class="span3" id="rightContent">RIGHT</div>
-        <button type="button"  onclick="registerUser(1)">put url</button>
+        <button type="button" id="jimtest">put url</button>
 
 
     </div>

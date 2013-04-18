@@ -67,7 +67,7 @@ include("scripts/initializeSession.php");
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3" id="leftContent">LEFT</div>
+        <div class="span3" id="leftContent">LEFTdcfsdcs</div>
         <div class="span5" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
             <div id="notification" class="alert alert-info" style="display: none">

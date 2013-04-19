@@ -6,7 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
 // Global variables
 var DELAY_ALERT_ERROR = 4000;
 
@@ -251,12 +250,17 @@ function ajaxSuccessRegister(result) {
  * */
 function checkInputField(element) {
 
-
 // Get elements id
     switch ($(element).attr("id")) {
+        //Handle usernames
+        case "usernameLogin":
+            return checkUsername(element);
+            break;
         case "usernameRegister":
             checkUsername(element);
             break;
+        case "passwordLogin":
+            checkPassword(element);
         case "passwordRegister":
             //TODO
             //checkPassword(element);
@@ -296,7 +300,7 @@ function checkUsername(username) {
 
 
 // Username is correct
-    if (value != "" && value.length <= 15) {
+    if (value != "" && value.length <= 30) {
 
         $(username).parent().removeClass('error');
 
@@ -306,7 +310,7 @@ function checkUsername(username) {
 
         $(username).parent().removeClass('success').addClass("error");
 
-        if (value.length > 15) {
+        if (value.length > 30) {
             msg = "Username cant be more than 15 characters\n";
         }
         else {
@@ -342,7 +346,7 @@ function checkPassword(password) {
             msg = "Password cant be more than 40 characters\n";
         }
         else {
-            msg = "Passswordcant be empty\n";
+            msg = "Password cant be empty\n";
         }
     }
 

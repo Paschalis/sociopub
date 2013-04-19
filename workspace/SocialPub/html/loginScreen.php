@@ -27,14 +27,27 @@
     // Live feedback on forms
     $(document).ready(function () {
 
-        $("#usernameRegister, #usernameRegister, " +
-            "#passwordRegister, #confPasswordRegister" +
-            "#nameRegister, #surnameRegister, #emailRegister, " +
-            "#genderRegister, #countryRegister" +
-            "#usernameLogin #passwordLogin").keyup(function () {
+        $("#usernameRegister, #passwordRegister, #confPasswordRegister, #nameRegister, " +
+            "#surnameRegister, #emailRegister, #genderRegister, #countryRegister, " +
+            "#usernameLogin, #passwordLogin").keyup(function () {
 
-            checkInputField(this); // TODO ilopoiise tin methodo sto mainJavascript . Arkepsa tin egw!
-        });
+                var result = checkInputField(this);
+
+//                // Something went wrong
+//                if (result != "") {
+//
+//                    $(this).tooltip('show',{
+//                        'title': result,
+//                        'placement': 'bottom'
+//                    });
+//
+//
+//                }
+//                else {
+//                    $(this).tooltip('hide');
+//                }
+
+            });
 
 
     });

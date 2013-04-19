@@ -14,7 +14,7 @@ class OpenCalaisException extends Exception {}
 
 class OpenCalais {
 
-    private $api_url = 'http://api.opencalais.com/enlighten/rest/';
+    private $api_url = 'http://www.bbc.co.uk/news/world-us-canada-22212946';
     private $api_key = '5';
 
     public $contentType = 'text/html';

@@ -4,20 +4,14 @@
             <legend class="">Login</legend>
         </div>
         <div class="control-group">
-            <!-- Username -->
-            <label class="control-label" for="usernameLogin">Username</label>
-            <div class="controls">
-                <input type="text" id="usernameLogin" placeholder="" class="input-xlarge">
-            </div>
+            <label for="usernameLogin">Username</label>
+            <input type="text" value="" class="input-xlarge" id="usernameLogin"  title="first tooltip">
+        </div>
+        <div class="control-group">
+            <label for="passwordLogin">Username</label>
+            <input type="text" value="" class="input-xlarge" id="passwordLogin">
         </div>
 
-        <div class="control-group">
-            <!-- Password-->
-            <label class="control-label" for="passwordLogin">Password</label>
-            <div class="controls">
-                <input type="password" id="passwordLogin" placeholder="" class="input-xlarge">
-            </div>
-        </div>
 
         <div class="control-group">
             <!-- Button -->

@@ -4,36 +4,36 @@
 <body>
 <form id="registerForm">
     <div class="control-group">
-        <label for="usernameForm">Username</label>
-        <input type="text" value="" class="input-xlarge" id="usernameForm">
+        <label for="usernameRegister">Username</label>
+        <input type="text" value="" class="input-xlarge" id="usernameRegister">
     </div>
 
     <div class="control-group">
         <label>First Name</label>
-        <input type="text" value="" class="input-xlarge" id="nameForm">
+        <input type="text" value="" class="input-xlarge" id="nameRegister">
     </div>
     <div class="control-group">
         <label>Last Name</label>
-        <input type="text" value="" class="input-xlarge" id="surnameForm">
+        <input type="text" value="" class="input-xlarge" id="surnameRegister">
     </div>
     <div class="control-group">
         <label>Email</label>
-        <input value="" class="input-xlarge" id="emailForm" type="email"">
+        <input value="" class="input-xlarge" id="emailRegister" type="email"">
     </div>
         <div class="control-group">
 
         <label>Password</label>
-        <input type="password" value="" class="input-xlarge" id="passwordForm">
+        <input type="password" value="" class="input-xlarge" id="passwordRegister">
     </div>
         <div class="control-group">
 
         <label>Password Confirmation</label>
-        <input type="password" value="" class="input-xlarge" id="confPasswordForm">
+        <input type="password" value="" class="input-xlarge" id="confPasswordRegister">
     </div>
         <div class="control-group">
 
         <label>Gender</label>
-        <select id="genderForm">
+        <select id="genderRegister">
             <option value="">Select Gender</option>
             }
             <option value="m">Male</option>
@@ -42,8 +42,7 @@
     </div>
     <div class="control-group">
         <label>Country</label>
-        <!-- <input type="text" value="" class="input-xlarge" id="countryForm">-->
-        <select id="countryForm">
+        <select id="countryRegister">
             <option value="">Select Country</option>
             <option value="Cyprus">Cyprus</option>
             <option value="Other">Other</option>

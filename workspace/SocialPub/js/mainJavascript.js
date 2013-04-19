@@ -6,6 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+// Global variables
+var DELAY_ALERT_ERROR = 4000;
+
 /**
  * When the document is ready (fully loaded)
  */
@@ -41,9 +45,7 @@ $(document).ready(function () {
         //Something went wrong
         if (loginData['code'] != 1) {
 
-            alert("ert");
-
-            showNotification(loginData, 3000);
+            showNotification(loginData, DELAY_ALERT_ERROR);
         }
         else {
             //Login user
@@ -59,17 +61,11 @@ $(document).ready(function () {
     });
 
 
-    //When notification closebutton is clicked
-    $("#notificationClose").click(function () {
+    //When notification is clicked
+    $("#notification").click(function () {
 
+        $(this).removeClass('in').addClass("out");
 
-//        $('#notification').modal('hide');
-
-        //Hide notification
-        // TODO MAKE THIS WITH FADE EFFECT!
-        $("#notification").fadeOut(200);
-        $("#notification").css({display: "none"});
-//
     });
 });
 
@@ -205,7 +201,7 @@ function ajaxFailed() {
     data['code'] = 0;
     data['message'] = "Something went wrong!";
 
-    showNotification(data);
+    showNotification(data,DELAY_ALERT_ERROR);
 
 }
 
@@ -258,27 +254,27 @@ function checkInputField(element) {
 
 // Get elements id
     switch ($(element).attr("id")) {
-        case "usernameForm":
+        case "usernameRegister":
             checkUsername(element);
             break;
-        case "passwordForm":
+        case "passwordRegister":
             //TODO
             //checkPassword(element);
             //problem here
             break;
-        case "nameForm":
+        case "nameRegister":
             checkName(element);
             break;
-        case "surnameForm":
+        case "surnameRegister":
             checkSurname(element);
             break;
-        case "genderForm":
+        case "genderRegister":
             checkGender(element);
             break;
-        case "countryForm":
+        case "countryRegister":
             checkCountry(element);
             break;
-        case "emailForm":
+        case "emailRegister":
             checkEmail(element);
             break;
         //TODO OTHERS
@@ -534,30 +530,33 @@ function isEmailCorrect(email) {
  * */
 function showNotification(data, duration) {
 
+    var notification = $("#notification");
+
     //Show error message
     if (data['code'] == 0) {
-        $("#notification").css({class: "alert-success"});
+        notification.removeClass('alert-success alert-info').addClass('alert-error');
+
     }
     //Show success message
     else if (data['code'] == 1) {
-        $("#notification").css({class: "alert-error"});
+        notification.removeClass('alert-error alert-info').addClass('alert-success');
     }
     //Show info
     else if (data['code'] == 2) {
-        $("#notification").css({class: "alert-info"});
+        notification.removeClass('alert-success alert-error').addClass('alert-info');
     }
 
-// Show success message
-    $("#notificationMessage").text(data['message']);
-//    $("#notification").show(200);
+    // Show success message
+    notification.text(data['message']);
 
-    $('#notification').show(200);
+    //Show notification
+    notification.removeClass('out').addClass("in");
 
+    // Set notification timeout delay
+    window.setTimeout(function(){
+           notification.removeClass('in').addClass("out");
+    },duration);
 
-
-    $("#notification").delay(duration).fade(500);
-
-    //TODO AUTOHIDE NOTIFICATION
 }
 
 

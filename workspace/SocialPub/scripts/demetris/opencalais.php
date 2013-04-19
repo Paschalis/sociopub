@@ -14,7 +14,7 @@ class OpenCalaisException extends Exception {}
 
 class OpenCalais {
 
-    private $api_url = 'http://www.tokoulouri.com/sports/cheer-up-murray/';
+    private $api_url = 'http://www.wired.com/dangerroom/2013/04/boston-manhunt/';
     private $api_key = '5';
 
     public $contentType = 'text/html';

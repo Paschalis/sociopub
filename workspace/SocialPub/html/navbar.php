@@ -29,20 +29,24 @@
                     </li>
                 </ul>
 
+
                 <!-- Right navigation-->
-                <ul class="nav pull-right">
+                <ul class="nav pull-center">
                     <form class="navbar-search pull-left" action="">
                         <input type="text" class="search-query span2" placeholder="Search">
                     </form>
-                    <li><a href="#">Link 3</a></li>
+                </ul>
+
+                <!-- Right in navbar-->
+                <ul class="nav pull-right">
                     <li class="divider-vertical"></li>
-                    <li <?php
+                    <li class="dropdown"  <?php
                         //If user is logged in, make visible account tab
                         if($_SESSION['loggedin']==1){
-                            echo 'class=" dropdown fade in"';
+                            echo 'style="display: inline"';
                         }
                     else{
-                        echo 'class="dropdown fade out"';
+                        echo 'style="display: none"';
                     }
                         ?> >
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>

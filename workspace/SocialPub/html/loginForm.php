@@ -9,7 +9,7 @@
         </div>
         <div class="control-group">
             <label for="passwordLogin">Password</label>
-            <input type="text" value="" class="input-xlarge" id="passwordLogin">
+            <input type="password" value="" class="input-xlarge" id="passwordLogin">
         </div>
 
 

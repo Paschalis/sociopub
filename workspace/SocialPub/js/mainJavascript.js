@@ -8,7 +8,7 @@
 
 
 // Global variables
-var DELAY_MEDIUM= 4000;
+var DELAY_MEDIUM = 4000;
 var DELAY_LOGIN_FORM_ERROR = 4000;
 var DELAY_AJAX_ERROR = 4000;
 var DELAY_REGISTER_FORM_ERROR = 6000;
@@ -65,11 +65,6 @@ $(document).ready(function () {
                 formData,
                 ajaxSuccessLogin,
                 ajaxFailed);
-
-//            return true;
-
-//            ajaxJsonRequest("scripts/login.php", formData, ajaxSuccessLogin, ajaxFailed);
-
         }
         return false;
     });
@@ -82,6 +77,19 @@ $(document).ready(function () {
 
     });
 });
+
+
+/*
+ *
+ * Logouts a user from webpage
+ *
+ * */
+function logout() {
+    ajaxJsonRequest("scripts/logout.php",
+        "",
+        ajaxSuccessLogout,
+        ajaxFailed);
+}
 
 
 /**Checks register form for possible errors
@@ -175,7 +183,7 @@ function checkRegisterForm() {
 function registerUser(formData) {
 
     // Send data to server
-    ajaxJsonRequest("../scripts/register.php",
+    ajaxJsonRequest("scripts/register.php",
         formData,
         ajaxSuccessRegister,
         ajaxFailed);
@@ -208,8 +216,49 @@ function ajaxSuccessLogin(result) {
 
     var jsonObj = eval('(' + result + ')');
 
-    //Show notification alert
-    showNotification(jsonObj,DELAY_MEDIUM);
+    // Login was successfull
+    if(jsonObj['code']==1){
+        window.location.reload();
+    }
+    //Something is wrong: user/pass or user banned/not activated yet
+    else{
+        //Show notification alert
+        showNotification(jsonObj, DELAY_MEDIUM);
+    }
+
+
+
+
+
+}
+
+
+/**
+ * Called when successfully contact register PHP script.
+ * That doesnt mean registration was successfull
+ *
+ */
+function ajaxSuccessLogout(result) {
+
+    var jsonObj = eval('(' + result + ')');
+
+
+    //Successfully logged out -- Reload webpage
+    if (jsonObj['code'] == 1) {
+        window.location.reload();
+    }
+    else {
+        // something went wrong
+        var msg = new Object();
+        msg['code']==0;
+
+        msg['message']="Failed to log out. Something went wrong";
+
+        //Show notification alert
+        showNotification(msg, DELAY_MEDIUM);
+    }
+
+
 
 }
 
@@ -224,7 +273,7 @@ function ajaxSuccessRegister(result) {
     var jsonObj = eval('(' + result + ')');
 
     //Show message according to registration status
-        showNotification(jsonObj,DELAY_MEDIUM);
+    showNotification(jsonObj, DELAY_MEDIUM);
 
 }
 

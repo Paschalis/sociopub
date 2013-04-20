@@ -78,7 +78,7 @@ if ($RESpassword == $password) {
         $_SESSION['status'] = $RESstatus;
 
 
-        printMessage(1, "WELCOME!");
+        printMessage(1, "");
         //TODO RELOAD!
 
     } else {

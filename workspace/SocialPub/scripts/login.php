@@ -20,7 +20,7 @@ $password = $_POST['password'];
 if ($username == "" || $password == ""
 ) {
 
-    printMessage("0", "Username and password cant be empty");
+    printMessage("0", "Username or password cant be empty");
 
 }
 

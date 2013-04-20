@@ -15,7 +15,7 @@
 function printMessage($code, $msg)
 {
     $result = array(
-        "result" => $code,
+        "code" => $code,
         "message" => $msg
     );
     //Hide other info
@@ -35,7 +35,7 @@ function dbError($pError)
 {
 
     $result = array(
-        "result" => "0",
+        "code" => "0",
         "message" => "Database Error :("
     );
     //Hide other info

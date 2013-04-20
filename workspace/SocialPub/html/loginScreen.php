@@ -33,20 +33,6 @@
 
                 var result = checkInputField(this);
 
-//                // Something went wrong
-//                if (result != "") {
-//
-//                    $(this).tooltip('show',{
-//                        'title': result,
-//                        'placement': 'bottom'
-//                    });
-//
-//
-//                }
-//                else {
-//                    $(this).tooltip('hide');
-//                }
-
             });
 
 

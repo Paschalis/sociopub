@@ -7,7 +7,8 @@
  */
 
 // Global variables
-var DELAY_ALERT_ERROR = 4000;
+var DELAY_LOGIN_FORM_ERROR = 4000;
+var DELAY_REGISTER_FORM_ERROR = 6000;
 
 /**
  * When the document is ready (fully loaded)
@@ -17,19 +18,23 @@ $(document).ready(function () {
     //When register button is clicked
     $("#registerButton").click(function () {
 
-        var registerData = checkRegisterForm();
 
-        if (registerData == "") {
+        var formData = checkRegisterForm();
+
+        // Form data are wrong
+        if (formData['code'] == 0) {
             //TODO Data are wrong. SHow notificaiton
 
-            return false; //form didnt submitted
+            showNotification(formData, DELAY_REGISTER_FORM_ERROR);
+
+            return false;
         }
         else {
 
             // Try to register user and return the success of failure value
             // success here mean that form data where correct and an attemp to
             // save them was made
-            return registerUser(registerData);
+            return registerUser(formData);
 
         }
 
@@ -41,10 +46,10 @@ $(document).ready(function () {
 
         var loginData = checkLoginForm();
 
+
         //Something went wrong
         if (loginData['code'] != 1) {
-
-            showNotification(loginData, DELAY_ALERT_ERROR);
+            showNotification(loginData, DELAY_LOGIN_FORM_ERROR);
         }
         else {
             //Login user
@@ -53,7 +58,14 @@ $(document).ready(function () {
             formData['password'] = loginData['password'];
 
 
-            ajaxJsonRequest("scripts/login.php", formData, ajaxSuccessLogin, ajaxFailed);
+            ajaxJsonRequest("scripts/login.php",
+                formData,
+                ajaxSuccessRegister(),
+                ajaxFailed());
+
+//            return true;
+
+//            ajaxJsonRequest("scripts/login.php", formData, ajaxSuccessLogin, ajaxFailed);
 
         }
         return false;
@@ -82,11 +94,8 @@ function checkLoginForm() {
     var result = new Object();
 
     // Check user and pass
-    var m1 = checkUsername(username);
-    var m2 = checkPassword(password);
-
-    if (m1 != "" || m2 != "")
-        msg = "Username or password cant be empty";
+    msg += checkUsername(username);
+    msg += checkPassword(password);
 
     if (msg != "") {
 
@@ -109,24 +118,18 @@ function checkLoginForm() {
  * */
 function checkRegisterForm() {
 
-    var username = $("#usernameForm");
-    var password = $("#passwordForm");
-    var confPassword = $("#confPasswordForm");
-    var name = $("#nameForm");
-    var surname = $("#surnameForm");
-    var gender = $("#genderForm");
-    var email = $("#emailForm");
-    var country = $("#countryForm");
-
-    // TODO PAMPOS IMPLEMENT THIS!
-    // NA KAMES OLA TA LA8OS INPUT DATA KOKKINA!
-    // GIREPSE EDW PROS TO TELOS TOU FORMS: http://twitter.github.io/bootstrap/base-css.html?#forms
-
-    // Google search and implement:
-    // update bootstrap form with wrong fields (eg turn red the outline of input boxes)
+    var username = $("#usernameRegister");
+    var password = $("#passwordRegister");
+    var confPassword = $("#confPasswordRegister");
+    var name = $("#nameRegister");
+    var surname = $("#surnameRegister");
+    var gender = $("#genderRegister");
+    var email = $("#emailRegister");
+    var country = $("#countryRegister");
 
     var msg = "";
     var result = "";
+
 
     msg += checkUsername(username);
     msg += checkPasswords(password, confPassword);
@@ -137,19 +140,15 @@ function checkRegisterForm() {
     msg += checkEmail(email);
 
 
-//TODO KAME KAI TA IPOLOIPA ETSI!
-    // alla3e to panw na pianei to element(an ine swsto)
-    // kai kalese tes methodous! pou 8a valeis copy paste ta pramata tous mesa!
+    // Check result
+    var result = new Object();
 
-    if (!dataCorrect) {
-        //TODO MAKE THIS notification
-        alert("Input is wrong!\n" + msg);
-
-        return "";
+    if (msg != "") {
+        result['code'] = 0;
+        result['message'] = msg;
     }
     else {
-        var result = new Object();
-
+        result['code'] = 1;
         result['username'] = username;
         result['password'] = password;
         result['confPassword'] = confPassword;
@@ -158,12 +157,9 @@ function checkRegisterForm() {
         result['gender'] = gender;
         result['email'] = email;
         result['country'] = country;
-
-        return result;
-
     }
 
-
+    return result;
 }
 
 
@@ -172,11 +168,6 @@ function checkRegisterForm() {
  *
  */
 function registerUser(formData) {
-
-    //TODO CHECK FORM DATA!
-
-
-//    ajaxJsonRequest("register.php",)
 
     // Send data to server
     ajaxJsonRequest("scripts/register.php",
@@ -200,7 +191,7 @@ function ajaxFailed() {
     data['code'] = 0;
     data['message'] = "Something went wrong!";
 
-    showNotification(data,DELAY_ALERT_ERROR);
+    showNotification(data, DELAY_ALERT_ERROR);
 
 }
 
@@ -212,12 +203,19 @@ function ajaxFailed() {
  */
 function ajaxSuccessLogin(result) {
 
+//    var data = new Object();
+//    data['code'] = 1;
+//    data['message'] = "ajax success.MAY NOT LOGGED IN!";
+
     //Show notification alert
-    $("#notification").show(200);
-    $("#notification").css({class: "alert-success"});
-    //-success,-info,-waning, alla3e xrwma
-    //TODO parse this json object and show results
-    $("#notificationMessage").text('server: ' + result);
+    showNotification(result);
+//
+//    $("#notification").show(200);
+//    $("#notification").css({class: "alert-success"});
+//
+//    //-success,-info,-waning, alla3e xrwma
+//    //TODO parse this json object and show results
+//    $("#notificationMessage").text('server: ' + result);
 
     //TODO if result <=0, then class = alert-error
 }
@@ -233,12 +231,14 @@ function ajaxSuccessRegister(result) {
     //TODO USE SHOW  NOTIFICATION FUNCTION
 
 
-    //Show notification alert
-    $("#notification").show(200);
-    $("#notification").css({class: "alert-success"});
+    showNotification(result);
+
+//    //Show notification alert
+//    $("#notification").show(200);
+//    $("#notification").css({class: "alert-success"});
     //-success,-info,-waning, alla3e xrwma
     //TODO parse this json object and show results
-    $("#notificationMessage").text('server: ' + result);
+//    $("#notificationMessage").text('server: ' + result);
 
     //TODO if result <=0, then class = alert-error
 }
@@ -252,6 +252,8 @@ function checkInputField(element) {
 
 // Get elements id
     switch ($(element).attr("id")) {
+
+        //TODO MAKE ALL THOSE WITH RETUNR !
         //Handle usernames
         case "usernameLogin":
             return checkUsername(element);
@@ -260,7 +262,7 @@ function checkInputField(element) {
             checkUsername(element);
             break;
         case "passwordLogin":
-            checkPassword(element);
+            return checkPassword(element);
         case "passwordRegister":
             //TODO
             //checkPassword(element);
@@ -311,10 +313,10 @@ function checkUsername(username) {
         $(username).parent().removeClass('success').addClass("error");
 
         if (value.length > 30) {
-            msg = "Username cant be more than 15 characters\n";
+            msg = "Username cant be more than 30 characters.<br/>";
         }
         else {
-            msg = "Username cant be empty\n";
+            msg = "Username cant be empty.<br/>";
         }
     }
 
@@ -343,10 +345,10 @@ function checkPassword(password) {
         $(password).parent().removeClass('success').addClass("error");
 
         if (value.length > 40) {
-            msg = "Password cant be more than 40 characters\n";
+            msg = "<div>Password cant be more than 40 characters.</div>";
         }
         else {
-            msg = "Password cant be empty\n";
+            msg = "<div>Password cant be empty.</div>";
         }
     }
 
@@ -370,7 +372,7 @@ function checkPasswords(password, confPassword) {
     var msg = "";
 
     if (pass == "" || conf == "") {
-        msg = "Please fill the Password and Password Confirmation fields\n";
+        msg = "Please fill the Password and Password Confirmation fields<br>";
     }
     else if (pass == conf) {
         $(password).parent().removeClass('error');
@@ -382,7 +384,7 @@ function checkPasswords(password, confPassword) {
         $(confPassword).parent().removeClass('success').addClass("error");
 
 
-        msg = "Wrong password confirmation\n";
+        msg = "Wrong password confirmation<br>";
 
     }
 
@@ -407,10 +409,10 @@ function checkName(name) {
         $(name).parent().removeClass('success').addClass("error");
 
         if (value == "") {
-            msg = "First name field cant be empty\n";
+            msg = "First name field cant be empty<br>";
         }
         else if (value.length > 40) {
-            msg = "First name must be smaller than 40 characters\n";
+            msg = "First name must be smaller than 40 characters<br>";
         }
     }
     return msg;
@@ -432,10 +434,10 @@ function checkSurname(surname) {
         $(surname).parent().removeClass('success').addClass("error");
 
         if (value == "") {
-            msg = "Last name field cant be empty\n";
+            msg = "Last name field cant be empty<br>";
         }
         else if (value.length > 40) {
-            msg = "Last name must be smaller than 40 characters\n";
+            msg = "Last name must be smaller than 40 characters<br>";
         }
     }
     return msg;
@@ -457,7 +459,7 @@ function checkGender(gender) {
     }
     else {
         $(gender).parent().removeClass('success').addClass("error");
-        msg = "Specify your gender \n";
+        msg = "Specify your gender.<br>";
     }
 
     return msg;
@@ -479,10 +481,10 @@ function checkCountry(country) {
     else {
 
         if (value.length > 40) {
-            msg = "Country length cant be more than 60 characters.\n";
+            msg = "Country length cant be more than 60 characters.<br>";
         }
         else {
-            msg = "Please choose your country.\n";
+            msg = "Please choose your country.<br>";
         }
 
         $(country).parent().removeClass('success').addClass("error");
@@ -505,10 +507,10 @@ function checkEmail(email) {
     else {
         $(email).parent().removeClass('success').addClass("error");
         if (value == "") {
-            msg = "Please write your email address in the Email field\n";
+            msg = "Please write your email address in the Email field<br>";
         }
         else if (!isEmailCorrect(value)) {
-            msg = "The email address is not valid\n";
+            msg = "The email address is not valid<br>";
         }
     }
     return msg;
@@ -551,15 +553,15 @@ function showNotification(data, duration) {
     }
 
     // Show success message
-    notification.text(data['message']);
+    notification.html(data['message']);
 
     //Show notification
     notification.removeClass('out').addClass("in");
 
     // Set notification timeout delay
-    window.setTimeout(function(){
-           notification.removeClass('in').addClass("out");
-    },duration);
+    window.setTimeout(function () {
+        notification.removeClass('in').addClass("out");
+    }, duration);
 
 }
 

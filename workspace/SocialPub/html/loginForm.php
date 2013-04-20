@@ -5,10 +5,10 @@
         </div>
         <div class="control-group">
             <label for="usernameLogin">Username</label>
-            <input type="text" value="" class="input-xlarge" id="usernameLogin"  title="first tooltip">
+            <input type="text" value="" class="input-xlarge" id="usernameLogin">
         </div>
         <div class="control-group">
-            <label for="passwordLogin">Username</label>
+            <label for="passwordLogin">Password</label>
             <input type="text" value="" class="input-xlarge" id="passwordLogin">
         </div>
 

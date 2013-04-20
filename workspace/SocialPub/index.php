@@ -71,10 +71,11 @@ include("scripts/initializeSession.php");
         </div>
         <div class="span5" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
-
-            <div id="notification" class="alert fade">
+            <div id="notification" class="alert fade" style="position: fixed">
                     <span id="notificationMessage">No notifications</span>
-                    <button id="notificationClose" class="close">&times;</button>
+            </div>
+<!--            A space element. TODO future change this-->
+            <div><br><br><br>
             </div>
 
 
@@ -89,8 +90,6 @@ include("scripts/initializeSession.php");
 
     </div>
 </div>
-<!-- /container -->
-
 <!--Javascripts-->
 <script src="js/mainJavascript.js"></script>
 <script src="js/bootstrap-transition.js"></script>

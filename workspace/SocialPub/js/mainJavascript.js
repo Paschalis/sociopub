@@ -26,13 +26,9 @@ $(document).ready(function () {
 
         // Form data are wrong
         if (formData['code'] == 0) {
-            //TODO Data are wrong. SHow notificaiton
-
             showNotification(formData, DELAY_REGISTER_FORM_ERROR);
-
         }
         else {
-
             // Try to register user and return the success of failure value
             // success here mean that form data where correct and an attemp to
             // save them was made
@@ -217,17 +213,14 @@ function ajaxSuccessLogin(result) {
     var jsonObj = eval('(' + result + ')');
 
     // Login was successfull
-    if(jsonObj['code']==1){
+    if (jsonObj['code'] == 1) {
         window.location.reload();
     }
     //Something is wrong: user/pass or user banned/not activated yet
-    else{
+    else {
         //Show notification alert
         showNotification(jsonObj, DELAY_MEDIUM);
     }
-
-
-
 
 
 }
@@ -250,14 +243,13 @@ function ajaxSuccessLogout(result) {
     else {
         // something went wrong
         var msg = new Object();
-        msg['code']==0;
+        msg['code'] == 0;
 
-        msg['message']="Failed to log out. Something went wrong";
+        msg['message'] = "Failed to log out. Something went wrong";
 
         //Show notification alert
         showNotification(msg, DELAY_MEDIUM);
     }
-
 
 
 }
@@ -614,5 +606,74 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
         .fail(failCallback);
     // .always(); -- Not used
 
+
+}
+
+/** TODO DIMITRI CHECK!
+ * Downloads an article
+ * */
+function getArticle(articleURL, successCallback, failCallback) {
+
+
+    //TODO IMPLEMENT THIS!
+
+    $.ajax({
+        url: articleURL,
+        dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
+        jsonpCallback: successCallback,
+        jsonp: 'callback'
+
+    });
+
+}
+
+
+/**
+ * TODO DIMITRI INFO
+ *
+ * */
+function getArticleSuccess(data) {
+    //TODO DIMITRI: handle the data! parse them?
+
+
+    // TODO replace this alert
+    alert(data);
+
+}
+
+
+/**
+ * TODO DIMITRI INFO
+ *
+ * */
+function getArticleFail() {
+
+    var obj = new Object();
+
+    obj['code'] = 0;
+    obj['message'] = "Article's URL doesn't exist!";
+
+    showNotification(obj, DELAY_MEDIUM);
+
+}
+
+
+/**
+ * TODO DIMITRI INFO: HELP FUNCTION BY PASCHALIS
+ *
+ *
+ * */
+
+function jimFunction() {
+
+
+    var articleUrl = "http://edition.cnn.com/2013/04/19/us/boston-area-violence/index.html?hpt=hp_t1";
+    var test2 = "http://cnn.com/";
+    //Download a CNN article!
+    //TODO DIMITRI INFO:
+    // Parametroi: to url, ti 8a ginei se periptwsi pou katevi to article, kai ti se periptwsi pou den katafere na katevei
+    getArticle(test2, getArticleSuccess, getArticleFail);
+
+    //Get the article
 
 }

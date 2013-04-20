@@ -6,8 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
 // Global variables
+var DELAY_MEDIUM= 4000;
 var DELAY_LOGIN_FORM_ERROR = 4000;
+var DELAY_AJAX_ERROR = 4000;
 var DELAY_REGISTER_FORM_ERROR = 6000;
 
 /**
@@ -27,17 +30,18 @@ $(document).ready(function () {
 
             showNotification(formData, DELAY_REGISTER_FORM_ERROR);
 
-            return false;
         }
         else {
 
             // Try to register user and return the success of failure value
             // success here mean that form data where correct and an attemp to
             // save them was made
-            return registerUser(formData);
+            registerUser(formData);
 
         }
 
+
+        return false;
 
     });
 
@@ -57,11 +61,10 @@ $(document).ready(function () {
             formData['username'] = loginData['username'];
             formData['password'] = loginData['password'];
 
-
             ajaxJsonRequest("scripts/login.php",
                 formData,
-                ajaxSuccessRegister(),
-                ajaxFailed());
+                ajaxSuccessLogin,
+                ajaxFailed);
 
 //            return true;
 
@@ -105,8 +108,8 @@ function checkLoginForm() {
     }
     else {
         result['code'] = 1;
-        result['username'] = username;
-        result['password'] = password;
+        result['username'] = username.val();
+        result['password'] = password.val();
     }
 
     return result;
@@ -149,15 +152,17 @@ function checkRegisterForm() {
     }
     else {
         result['code'] = 1;
-        result['username'] = username;
-        result['password'] = password;
-        result['confPassword'] = confPassword;
-        result['name'] = name;
-        result['surname'] = surname;
-        result['gender'] = gender;
-        result['email'] = email;
-        result['country'] = country;
+        result['username'] = username.val();
+        result['password'] = password.val();
+        result['confPassword'] = confPassword.val();
+        result['name'] = name.val();
+        result['surname'] = surname.val();
+        result['gender'] = gender.val();
+        result['email'] = email.val();
+        result['country'] = country.val();
+
     }
+
 
     return result;
 }
@@ -170,12 +175,10 @@ function checkRegisterForm() {
 function registerUser(formData) {
 
     // Send data to server
-    ajaxJsonRequest("scripts/register.php",
+    ajaxJsonRequest("../scripts/register.php",
         formData,
-        ajaxSuccessRegister(),
-        ajaxFailed());
-
-    return true; // form submitted
+        ajaxSuccessRegister,
+        ajaxFailed);
 
 }
 
@@ -191,7 +194,7 @@ function ajaxFailed() {
     data['code'] = 0;
     data['message'] = "Something went wrong!";
 
-    showNotification(data, DELAY_ALERT_ERROR);
+    showNotification(data, DELAY_AJAX_ERROR);
 
 }
 
@@ -203,21 +206,11 @@ function ajaxFailed() {
  */
 function ajaxSuccessLogin(result) {
 
-//    var data = new Object();
-//    data['code'] = 1;
-//    data['message'] = "ajax success.MAY NOT LOGGED IN!";
+    var jsonObj = eval('(' + result + ')');
 
     //Show notification alert
-    showNotification(result);
-//
-//    $("#notification").show(200);
-//    $("#notification").css({class: "alert-success"});
-//
-//    //-success,-info,-waning, alla3e xrwma
-//    //TODO parse this json object and show results
-//    $("#notificationMessage").text('server: ' + result);
+    showNotification(jsonObj,DELAY_MEDIUM);
 
-    //TODO if result <=0, then class = alert-error
 }
 
 
@@ -228,19 +221,11 @@ function ajaxSuccessLogin(result) {
  */
 function ajaxSuccessRegister(result) {
 
-    //TODO USE SHOW  NOTIFICATION FUNCTION
+    var jsonObj = eval('(' + result + ')');
 
+    //Show message according to registration status
+        showNotification(jsonObj,DELAY_MEDIUM);
 
-    showNotification(result);
-
-//    //Show notification alert
-//    $("#notification").show(200);
-//    $("#notification").css({class: "alert-success"});
-    //-success,-info,-waning, alla3e xrwma
-    //TODO parse this json object and show results
-//    $("#notificationMessage").text('server: ' + result);
-
-    //TODO if result <=0, then class = alert-error
 }
 
 

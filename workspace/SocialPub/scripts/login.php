@@ -33,6 +33,7 @@ $password = $salt . $password . $pepper;
 // Password Encryption
 $password = md5($password);
 
+
 // just to be sure.
 $username = mysql_real_escape_string($username);
 
@@ -47,43 +48,53 @@ $result = mysql_query($query) or dbError(mysql_error());
 //Username is correct
 
 while ($row = mysql_fetch_array($result)) {
-    $resusername = $row['username']; // username from DB
-    $respassword = $row['password']; // password from DB
-    $resname = $row['name']; // users name from DB
-    $ressurname = $row['surname']; // users surname from DB
-    $resemail = $row['email']; // email from DB
-    $restelephone = $row['telephone']; // telephone from DB
-    $resallowRequests = $row['allowRequests']; // allowRequests from DB
-    $reslevel = $row['level']; // level from DB
-
+    $RESusername = $row['USERNAME'];
+    $RESname = $row['NAME'];
+    $RESsurname = $row['SURNAME'];
+    $REScountry = $row['COUNTRY'];
+    $RESemail = $row['EMAIL'];
+    $RESpassword = $row['PASSWORD'];
+    $REgender = $row['GENDER'];
+    $RESstatus = $row['STATUS'];
 }
 
 
+
 // Found User in Database
-if ($respassword == $password) {
+if ($RESpassword == $password) {
 
 
 // Save dta in session
-    if (!$_SESSION['isMobileDevice']) {
-        if ($reslevel >= 1) {
-            $_SESSION['loggedin'] = "1";
+    if ($RESstatus >= 1) {
+        $_SESSION['loggedin'] = "1";
 
-            //Store user data on session
-            $_SESSION['email'] = $resemail;
-            $_SESSION['username'] = $resusername;
-            $_SESSION['name'] = $resname;
-            $_SESSION['surname'] = $ressurname;
-            $_SESSION['telephone'] = $restelephone;
-            $_SESSION['allowRequests'] = $resallowRequests;
-            $_SESSION['level'] = $reslevel;
-        } else {
-            $_SESSION['loggedin'] = "0";
+        //Store user data on session
+        $_SESSION['username'] = $RESusername;
+        $_SESSION['name'] = $RESname;
+        $_SESSION['surname'] = $RESsurname;
+        $_SESSION['country'] = $REScountry;
+        $_SESSION['email'] = $RESemail;
+        $_SESSION['gender'] = $REgender;
+        $_SESSION['status'] = $RESstatus;
+
+
+        printMessage(1, "WELCOME!");
+        //TODO RELOAD!
+
+    } else {
+
+        $_SESSION['loggedin'] = "0";
+
+        if ($RESstatus == 0) {
+            printMessage(2, "Your account hasn't yet activated. Please activate it using your email.");
         }
-
+        else if ($RESstatus == -1) {
+            printMessage(2, "Your account is banned.");
+        }
     }
 
     //
-    printMessage(1, "");
+
 
 } //Users credencials are wrong
 else {
@@ -94,7 +105,7 @@ else {
     }
 
     //
-    printMessage(0, "Failed to login into ");
+    printMessage(0, "Failed to login into " . _NAME);
 
 }
 

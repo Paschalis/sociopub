@@ -118,7 +118,7 @@ if ($_SESSION['registerErrors'] == 0) {
 
 
             $msg = "You have successfully registered.<br>" .
-                "Please activate your account using your email address";
+                "Please activate your account using your email: ".$_SESSION['email'];
 
             printMessage(1,$msg);
 

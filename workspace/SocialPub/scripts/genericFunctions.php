@@ -18,9 +18,6 @@ function printMessage($code, $msg)
         "code" => $code,
         "message" => $msg
     );
-    //Hide other info
-
-    $_SESSION['registerErrors'] = 0;
 
     echo json_encode($result);
     die();

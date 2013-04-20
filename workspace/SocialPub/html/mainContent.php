@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-if ($_SESSION["loggedIn"] == 1) {
+if ($_SESSION["loggedin"] == 1) {
     echo "Hooray! User is logged in!<br>";
 } else {
     include("loginScreen.php");

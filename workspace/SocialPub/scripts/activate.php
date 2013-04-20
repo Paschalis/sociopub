@@ -70,14 +70,12 @@ function getActivationCode()
     $status = $strQueryActivate['STATUS'];
 
 
-
-
     // SHow messages according to statuses
-    if ($status != "0") {
-        if ($status == "-1") {
-            printMessage(0, "You are banned from " + _NAME);
-        } else if ($status == "1") {
-            printMessage(0, "Account already activated");
+    if ($status != 0) {
+        if ($status == -1) {
+            printMessage(2, "You are banned from " . _NAME);
+        } else if ($status == 1) {
+            printMessage(2, "Account already activated");
         }
         //
         die();

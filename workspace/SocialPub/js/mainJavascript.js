@@ -597,7 +597,6 @@ function showNotification(data, duration) {
  * */
 function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 
-
     var jqxhr = $.post(url, formData)
         .done(function (data) {
             successCallback(data);
@@ -612,18 +611,19 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 /** TODO DIMITRI CHECK!
  * Downloads an article
  * */
-function getArticle(articleURL, successCallback, failCallback) {
+function saveArticle(articleURL, successCallback, failCallback) {
 
+    //Get the url for the article
+    var articleUrl = $("#newActicle").val();
 
-    //TODO IMPLEMENT THIS!
+    var formData = new Object();
 
-    $.ajax({
-        url: articleURL,
-        dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
-        jsonpCallback: successCallback,
-        jsonp: 'callback'
+    formData['url']=articleUrl;
 
-    });
+    ajaxJsonRequest("scripts/getArticle.php",
+        formData,
+        getArticleSuccess,
+        ajaxFailed);
 
 }
 
@@ -633,47 +633,67 @@ function getArticle(articleURL, successCallback, failCallback) {
  *
  * */
 function getArticleSuccess(data) {
-    //TODO DIMITRI: handle the data! parse them?
+
+    // TODO HANDLE CASE WHEN ARTICLE DOESNT EXISTS IN HERE !
+
+    var jsonObj;
+
+    try {
+        jsonObj = eval('(' + data + ')');
+
+    }
+    // Failed to fetch article
+    catch (e) {
+        if (e instanceof SyntaxError) {
+
+            makeShowNotification(0, "Failed to fetch article!", DELAY_MEDIUM);
+
+            return;
+        }
+    }
 
 
-    // TODO replace this alert
-    alert(data);
+
+
+    var code = jsonObj['code'];
+
+
+
+    //Failed to fetch data
+    if(code==0){
+        makeShowNotification(0, jsonObj['message'], DELAY_MEDIUM);
+        return;
+    }
+
+
+
+    var title = jsonObj['title'];
+    var description = jsonObj['description'];
+    var image = jsonObj['image'];
+    var siteName = jsonObj['siteName'];
+
+
+
+
+    $("#articleResult").html("Code " +
+    code + "<br>Title " + title + "<br>Desc: " +description+
+    "<br>img: " + image + "<br> sitename: " + siteName);
+
 
 }
 
 
 /**
- * TODO DIMITRI INFO
+ * TODO CHANGE
  *
  * */
-function getArticleFail() {
+function makeShowNotification(code, msg, delay) {
 
     var obj = new Object();
 
     obj['code'] = 0;
-    obj['message'] = "Article's URL doesn't exist!";
+    obj['message'] = msg;
 
-    showNotification(obj, DELAY_MEDIUM);
-
-}
-
-
-/**
- * TODO DIMITRI INFO: HELP FUNCTION BY PASCHALIS
- *
- *
- * */
-
-function jimFunction() {
-
-
-    var articleUrl = "http://edition.cnn.com/2013/04/19/us/boston-area-violence/index.html?hpt=hp_t1";
-    var test2 = "http://cnn.com/";
-    //Download a CNN article!
-    //TODO DIMITRI INFO:
-    // Parametroi: to url, ti 8a ginei se periptwsi pou katevi to article, kai ti se periptwsi pou den katafere na katevei
-    getArticle(test2, getArticleSuccess, getArticleFail);
-
-    //Get the article
+    showNotification(obj, delay);
 
 }

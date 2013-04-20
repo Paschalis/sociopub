@@ -50,9 +50,6 @@ include("scripts/initializeSession.php");
             ?>
         </div>
         <div class="span3" id="rightContent">RIGHT</div>
-        <button type="button" id="jimtest" onclick="jimFunction()">put url</button>
-
-
     </div>
 </div>
 <!--Javascripts-->

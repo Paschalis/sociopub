@@ -484,7 +484,7 @@ function checkGender(gender) {
 
     if (value == "m" || value == "f") {
         //TODO make gender red
-        $(gender).parent().removeClass('error');
+        $(gender).parent().removeClass('error').addClass("success");
 
     }
     else {
@@ -506,7 +506,7 @@ function checkCountry(country) {
     var msg = "";
 
     if (value != "" && value.length <= 40) {
-        $(country).parent().removeClass('error');
+        $(country).parent().removeClass('error').addClass("success");
     }
     else {
 

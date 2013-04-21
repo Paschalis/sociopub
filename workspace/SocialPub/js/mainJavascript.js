@@ -405,7 +405,7 @@ function checkPasswords(password, confPassword) {
         msg = "Please fill the Password and Password Confirmation fields<br>";
     }
     else if (pass == conf) {
-        $(password).parent().removeClass('error');
+        $(password).parent().removeClass('error').addClass("success");
         $(confPassword).parent().removeClass('error').addClass("success");
     }
     // password and confirmPassword are not equal or their fields ar empty

@@ -291,7 +291,7 @@ function checkInputField(element) {
             return checkPassword(element);
         case "passwordRegister":
             //TODO
-            checkPasswords("password","confPassword");
+            checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
             //checkPassword(element);
             //problem here
             break;

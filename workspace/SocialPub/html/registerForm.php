@@ -44,8 +44,7 @@
         <label>Country</label>
         <select id="countryRegister">
             <option value="">Select Country</option>
-            <option value="Cyprus">Cyprus</option>
-            <option value="Other">Other</option>
+           <!-- <option value="Cyprus">Cyprus</option>-->
 
             <option value = AF> Afghanistan
 
@@ -372,6 +371,8 @@
             <option value = ZM> Zambia
 
             <option value = ZW> Zimbabwe
+
+            <option value="Other">Other</option>
         </select>
     </div>
 

@@ -11,22 +11,67 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
     <div>
-        <label for="newActicle">Enter new article: </label>
-        <input type="text" id="newActicle">
-        <button id="newActicleButton" onclick="saveArticle()">Submit</button>
-        <div id="articleResult"></div>
-
-        <div class="row-fluid">
-            <div class="span6">
-                Fluid 6
-                <div class="row-fluid">
-                    <div class="span6">Fluid 6</div>
-                    <div class="span6">Fluid 6</div>
-                </div>
-            </div>
+        <div class="input-append span12">
+            <label for="newActicle">Enter new article: </label>
+            <input class="span10" id="newActicle" type="text">
+            <button class="btn" type="button" onclick="saveArticle()">Submit</button>
         </div>
 
+        <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
+        <div id="articleResult"></div>
     </div>
+    <div class="row-fluid">
+        <div class="span6">
+            Fluid 6
+            <div class="row-fluid">
+                <div class="span6">Fluid 6</div>
+                <div class="span6">Fluid 6</div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <br>
+    <!--     A row of 4 thumbnails-->
+    <ul class="thumbnails">
+        <li class="span4">
+            <div class="thumbnail">
+                <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+
+                <h3>Thumbnail label</h3>
+
+                <p>Thumbnail caption...</p>
+            </div>
+        </li>
+        <li class="span4">
+            <div class="thumbnail">
+                <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+
+                <h3>Thumbnail label</h3>
+
+                <p>Thumbnail caption...</p>
+            </div>
+        </li>
+        <li class="span4">
+            <div class="thumbnail">
+                <img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg" alt="">
+
+                <h3>Thumbnail label</h3>
+
+                <p>Thumbnail caption...</p>
+            </div>
+        </li>
+    </ul>
+    <ul class="thumbnails">
+        <li class="span4">
+            <div class="thumbnail">
+                <img data-src="js/holder/holder.js/300x200" alt="">
+
+                <h3>Thumbnail label</h3>
+
+                <p>Thumbnail caption...</p>
+            </div>
+        </li>
+    </ul>
 
 
 <?php

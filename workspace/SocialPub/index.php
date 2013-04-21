@@ -24,7 +24,7 @@ include("scripts/initializeSession.php");
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -35,9 +35,10 @@ include("scripts/initializeSession.php");
 <?php include('html/navbar.php'); ?>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3" id="leftContent">LEFT
+        <div class="span2 hidden-phone" id="leftContent">
+            <?php include('html/leftContent.php'); ?>
         </div>
-        <div class="span5" id="mainContent">
+        <div class="span8" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
             <div id="notification" class="alert fade" style="position: fixed">
                 <span id="notificationMessage">No notifications</span>
@@ -49,7 +50,9 @@ include("scripts/initializeSession.php");
             include('html/mainContent.php');
             ?>
         </div>
-        <div class="span3" id="rightContent">RIGHT</div>
+        <div class="span2 hidden-phone" id="rightContent">
+            <?php include('html/rightContent.php'); ?>
+        </div>
     </div>
 </div>
 <!--Javascripts-->

@@ -15,16 +15,14 @@ if ($_SESSION["loggedin"] == 1) {
     <div>
 
         <div class="input-append span12">
-                <label for="newArticleInput">Enter article: </label>
-                <input class="span10" id="newArticleInput" type="text">
-                <button class="btn" type="button" onclick="saveArticle()">Submit</button>
+            <label for="newArticleInput">Enter article: </label>
+            <input class="span10" id="newArticleInput" type="text">
+            <button class="btn" type="button" onclick="saveArticle()">Submit</button>
         </div>
 
         <div id="newArticle" class="thumbnail fade out">
-            <img class="articleimg" />
-
-            <h5 class="articletitle" ></h5>
-
+            <img class="articleimg"/>
+            <h5 class="articletitle"></h5>
             <p class="articledesc"></p>
         </div>
     </div>

@@ -12,10 +12,10 @@
 
 session_start();
 
-include("genericFunctions.php");
+include("demetrisgenericfunctions.php");
 
 // Include database class
-require("database.php");
+require("demetrisdatabase.php");
 
 $database = new Database();
 

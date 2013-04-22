@@ -675,13 +675,12 @@ function getArticleSuccess(data) {
     var siteName = jsonObj['siteName'];
 
 
-
     // Set the image
-    $("#newArticle img").attr({src: image});
+    $("#newArticle .articleimg").attr({src: image});
 
-    $("#newArticle h3").html(title + " - " + siteName);
+    $("#newArticle .articletitle").html(title + " - " + siteName);
 
-    $("#newArticle p").html(description);
+    $("#newArticle .articledesc").html(description);
 
     $("#newArticle").removeClass('out').addClass('in');
 

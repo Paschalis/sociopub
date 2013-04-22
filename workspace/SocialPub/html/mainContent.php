@@ -21,11 +21,11 @@ if ($_SESSION["loggedin"] == 1) {
         </div>
 
         <div id="newArticle" class="thumbnail fade out">
-            <img src/>
+            <img class="articleimg" />
 
-            <h5></h5>
+            <h5 class="articletitle" ></h5>
 
-            <p></p>
+            <p class="articledesc"></p>
         </div>
     </div>
     <br><br><br>

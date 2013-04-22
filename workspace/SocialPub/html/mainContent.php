@@ -28,6 +28,9 @@ if ($_SESSION["loggedin"] == 1) {
             <div class="btn-group">
                 <button class="btn-danger">POUKATW</button>
             </div>
+                <div class="btn-group">
+                    <button class="btn-inverse">ALLO</button>
+                </div>
         </div>
 
         </div>

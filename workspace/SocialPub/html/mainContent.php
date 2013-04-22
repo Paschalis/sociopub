@@ -18,14 +18,53 @@ if ($_SESSION["loggedin"] == 1) {
             <input class="span10" id="newArticleInput" type="text">
             <button class="btn" type="button" onclick="saveArticle()">Preview</button>
             <button id="postNewArticle" class="btn success  fade out" type="button" onclick="postArticle()">Post</button>
+
+            <div class="badge-success">7</div>
+          <!--  <div class="btn-toolbar">
+            <div class="btn-group">
+                <button class="btn-info">Left</button>
+                <button class="btn-success">Middle</button>
+                <button class="btn-warning">Right</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn-danger">POUKATW</button>
+            </div>
+                <div class="btn-group">
+                    <button class="btn-inverse">ALLO</button>
+                </div>
+        </div>-->
+
         </div>
         <div class="thumbnail fade out">
             <img class="articleimg"/>
             <h5 class="articletitle"></h5>
             <p class="articledesc"></p>
+
+        </div>
+        <!--2nd time-->
+        <div class="btn-toolbar fade out" id="buttonsToolbar">
+            <div class="btn-group">
+                <button class="btn-info">Left</button>
+                <button class="btn-success">Middle</button>
+                <button class="btn-warning">Right</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn-danger">POUKATW</button>
+            </div>
+            <div class="btn-group"><button class="btn-inverse">CINEMA</button></div>
+            <div class="btn-group"><button class="btn-inverse">SPORTS</button></div>
+            <div class="btn-group"><button class="btn-inverse">SCIENCE</button></div>
+            <div class="btn-group"><button class="btn-inverse">ECONOMY</button></div>
+            <div class="btn-group"><button class="btn-inverse">HEALTH</button></div>
+            <div class="btn-group"><button class="btn-inverse">NEWS</button></div>
+            <div class="btn-group"><button class="btn-inverse">HISTORY</button></div>
+            <div class="btn-group"><button class="btn-inverse">MUSIC</button></div>
         </div>
 
+
     </div>
+
+
     <br><br><br>
     <!--     A row of 4 thumbnails-->
     <ul class="thumbnails">

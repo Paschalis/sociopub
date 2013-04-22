@@ -99,8 +99,7 @@ if ($siteName == "") {
     $pSiteName = str_replace("http://", "", $URL);
     $pSiteName = str_replace("www.", "", $pSiteName);
     $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
-    // $pSiteName = preg_replace('~\s+\S+$~', '', $pSiteName);
-
+    // $pSiteName = preg_replace('~\s+\S+$~', '', $pSiteName)
 
     $siteName = $pSiteName;
 }

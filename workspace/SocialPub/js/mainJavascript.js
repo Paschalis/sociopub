@@ -291,8 +291,12 @@ function checkInputField(element) {
             return checkPassword(element);
         case "passwordRegister":
             //TODO
+            checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
             //checkPassword(element);
             //problem here
+            break;
+        case "confPasswordRegister":
+            checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
             break;
         case "nameRegister":
             checkName(element);
@@ -401,7 +405,7 @@ function checkPasswords(password, confPassword) {
         msg = "Please fill the Password and Password Confirmation fields<br>";
     }
     else if (pass == conf) {
-        $(password).parent().removeClass('error');
+        $(password).parent().removeClass('error').addClass("success");
         $(confPassword).parent().removeClass('error').addClass("success");
     }
     // password and confirmPassword are not equal or their fields ar empty
@@ -480,7 +484,7 @@ function checkGender(gender) {
 
     if (value == "m" || value == "f") {
         //TODO make gender red
-        $(gender).parent().removeClass('error');
+        $(gender).parent().removeClass('error').addClass("success");
 
     }
     else {
@@ -502,7 +506,7 @@ function checkCountry(country) {
     var msg = "";
 
     if (value != "" && value.length <= 40) {
-        $(country).parent().removeClass('error');
+        $(country).parent().removeClass('error').addClass("success");
     }
     else {
 

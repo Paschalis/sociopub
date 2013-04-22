@@ -10,16 +10,18 @@
 //If user is logged in
 if ($_SESSION["loggedin"] == 1) {
     ?>
+
     <div>
         <div class="input-append span12">
-            <label for="newActicle">Enter new article: </label>
-            <input class="span10" id="newActicle" type="text">
+            <label for="newArticle">Enter new article: </label>
+            <input class="span10" id="newArticle" type="text">
             <button class="btn" type="button" onclick="saveArticle()">Submit</button>
         </div>
 
         <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
         <div id="articleResult"></div>
-    </div>
+
+            </div>
     <div class="row-fluid">
         <div class="span6">
             Fluid 6

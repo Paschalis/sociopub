@@ -19,7 +19,6 @@ if ($URL == "") {
 $html = file_get_html($URL);
 
 
-
 // Get all meta data with property og:*
 
 //$ret = $html->find('meta[property^=og:]');
@@ -53,9 +52,6 @@ foreach ($ret as $element) {
     }
 
 }
-
-
-
 
 
 // Make another try to fetch results
@@ -92,6 +88,7 @@ unset($html);
 if ($title == "" && $description == "") {
     printMessage(0, "Webpage not supported.");
 }
+
 
 //Find site name if dont exists
 if ($siteName == "") {

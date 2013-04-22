@@ -21,7 +21,7 @@ if ($_SESSION["loggedin"] == 1) {
         <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
         <div id="articleResult"></div>
 
-            </div>
+    </div>
     <div class="row-fluid">
         <div class="span6">
             Fluid 6

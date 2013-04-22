@@ -612,13 +612,14 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 
 }
 
-/** TODO DIMITRI CHECK!
+/**
  * Downloads an article
  * */
-function saveArticle(articleURL, successCallback, failCallback) {
+function saveArticle() {
 
     //Get the url for the article
-    var articleUrl = $("#newActicle").val();
+    var articleUrl = $("#newArticle").val();
+
 
     var formData = new Object();
 

@@ -290,10 +290,8 @@ function checkInputField(element) {
         case "passwordLogin":
             return checkPassword(element);
         case "passwordRegister":
-            //TODO
+            //DONE
             checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
-            //checkPassword(element);
-            //problem here
             break;
         case "confPasswordRegister":
             checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
@@ -612,13 +610,14 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 
 }
 
-/** TODO DIMITRI CHECK!
+/**
  * Downloads an article
  * */
-function saveArticle(articleURL, successCallback, failCallback) {
+function saveArticle() {
 
     //Get the url for the article
-    var articleUrl = $("#newActicle").val();
+    var articleUrl = $("#newArticle").val();
+
 
     var formData = new Object();
 

@@ -9,13 +9,51 @@
 
 include('initializeSession.php');
 
+$categories = $_POST['categories'];
+
+//REMOVE WHEN DONE!
+$categories = "news:sports";
+
+// Get data from session
+$title = $_SESSION['article_title'];
+$description = $_SESSION['article_description'];
+$image = $_SESSION['article_image'];
+$siteName = $_SESSION['article_siteName'];
+$url = $_SESSION['article_url'];
 
 
-$result = mysql_query("CALL get_posts(12345)") or handlePostArticleError(mysql_error());
 
+$title = "title";
+$description = "desc";
+$image = "url";
+$siteName ="books" ;
+$url = "face.www.twit";
+$username = "demetris";
+
+//Escape arguments
+$title = mysql_real_escape_string($title);
+$description = mysql_real_escape_string($description);
+$image = mysql_real_escape_string($image);
+$siteName = mysql_real_escape_string($siteName);
+$url = mysql_real_escape_string($url);
+$username = mysql_real_escape_string($username);
+
+
+$postArticleSrt = "SELECT post_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
+
+$result = mysql_query($postArticleSrt) or handlePostArticleError(mysql_error());
+
+//Query runned successfully
 if ($result) {
-    // fetch in a while loop like you would any normal SELECT query...
+
+    // Get result code
+    $resultCode = mysql_result($result,0,0);
+
+     // Print result code
+    printMessage($resultCode,"");
+
 }
+
 
 
 
@@ -29,7 +67,7 @@ die(); // TODO RE ENABLE
  * */
 
 function handlePostArticleError($errorMsg){
-    echo "Error: " + $php_errormsg;
+    echo "Error: " . $errorMsg.'<br>';
     die();
 }
 
@@ -40,22 +78,10 @@ if ($_SESSION['article_valid'] != 1) {
 }
 
 // Get articles categories
-$categoriesStr = $_POST['categories'];
+
 
 //Set article invalid
 $_SESSION['article_valid'] =0; // TODO CHECK
-
-// Get data from session
-$title = $_SESSION['article_title'];
-$description = $_SESSION['article_description'];
-$image = $_SESSION['article_image'];
-$siteName = $_SESSION['article_siteName'];
-$url = $_SESSION['article_url'];
-
-$username = $_SESSION['username'];
-
-// Get categories
-$categories = explode(":", $categoriesStr);
 
 
 

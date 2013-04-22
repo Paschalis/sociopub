@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>Isotope</title>
   
-  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endi`f]-->
   
   <link rel="stylesheet" href="css/style.css" />
   
@@ -242,7 +242,7 @@
     
       
           
-    <div class="element metalloid   " data-symbol="B" data-category="metalloid">
+    <div class="thumbnails" data-symbol="B" data-category="metalloid">
       <p class="number">5</p>
       <h3 class="symbol">B</h3>
       <h2 class="name">Boron</h2>
@@ -404,7 +404,21 @@
     </footer>
     
   </section> <!-- #content -->
-  
+
+  <!--Javascripts-->
+  <script src="js/mainJavascript.js"></script>
+  <script src="js/bootstrap-transition.js"></script>
+  <script src="js/bootstrap-alert.js"></script>
+  <script src="js/bootstrap-modal.js"></script>
+  <script src="js/bootstrap-dropdown.js"></script>
+  <script src="js/bootstrap-scrollspy.js"></script>
+  <script src="js/bootstrap-tab.js"></script>
+  <script src="js/bootstrap-tooltip.js"></script>
+  <script src="js/bootstrap-popover.js"></script>
+  <script src="js/bootstrap-button.js"></script>
+  <script src="js/bootstrap-collapse.js"></script>
+  <script src="js/bootstrap-carousel.js"></script>
+  <script src="js/bootstrap-typeahead.js"></script>
 
 </body>
 </html>

@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-include("initializeSession.php");
+include("demetrisinitializesession.php");
 ?>
 
 
@@ -47,7 +47,7 @@ include("initializeSession.php");
             <div><br><br><br>
             </div>
             <?php
-            include('mainContent.php');
+            include('demetriscontent.php');
             ?>
         </div>
         <div class="span2 hidden-phone" id="rightContent">

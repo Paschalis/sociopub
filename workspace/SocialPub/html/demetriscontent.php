@@ -79,7 +79,7 @@ if ($_SESSION["loggedin"] == 1) {
 <?php
 } // if user is not logged in
 else {
-    include("loginScreen.php");
+    include("demetrislogin.php");
 
 }
 

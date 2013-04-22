@@ -19,6 +19,7 @@ if ($_SESSION["loggedin"] == 1) {
             <button class="btn" type="button" onclick="saveArticle()">Preview</button>
             <button id="postNewArticle" class="btn success  fade out" type="button" onclick="postArticle()">Post</button>
 
+            <div class="badge-success">7</div>
           <!--  <div class="btn-toolbar">
             <div class="btn-group">
                 <button class="btn-info">Left</button>

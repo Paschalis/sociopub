@@ -18,14 +18,18 @@ if ($_SESSION["loggedin"] == 1) {
             <input class="span10" id="newArticleInput" type="text">
             <button class="btn" type="button" onclick="saveArticle()">Preview</button>
             <button id="postNewArticle" class="btn success  fade out" type="button" onclick="postArticle()">Post</button>
+            <div class="badge-success ">77</div>
+
         </div>
         <div class="thumbnail fade out">
             <img class="articleimg"/>
             <h5 class="articletitle"></h5>
             <p class="articledesc"></p>
-        </div>
 
+        </div>
     </div>
+
+
     <br><br><br>
     <!--     A row of 4 thumbnails-->
     <ul class="thumbnails">

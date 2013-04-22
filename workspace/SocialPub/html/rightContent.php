@@ -9,13 +9,13 @@
 
 
 ?>
-<h3>Trends</h3>
+<h5>Trends</h5>
 <ul class="thumbnails">
     <li class="span8">
         <div class="thumbnail">
             <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-            <h3>Thumbnail label</h3>
+            <h5>Thumbnail label</h5>
 
             <p>Thumbnail caption...</p>
         </div>
@@ -26,7 +26,7 @@
         <div class="thumbnail">
             <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-            <h3>Thumbnail label</h3>
+            <h5>Thumbnail label</h5>
 
             <p>Thumbnail caption...</p>
         </div>
@@ -37,7 +37,7 @@
         <div class="thumbnail">
             <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-            <h3>Thumbnail label</h3>
+            <h5>Thumbnail label</h5>
 
             <p>Thumbnail caption...</p>
         </div>

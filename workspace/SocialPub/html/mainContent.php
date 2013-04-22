@@ -11,35 +11,31 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
 
+    <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
     <div>
+
         <div class="input-append span12">
-            <label for="newArticle">Enter new article: </label>
-            <input class="span10" id="newArticle" type="text">
-            <button class="btn" type="button" onclick="saveArticle()">Submit</button>
+                <label for="newArticleInput">Enter article: </label>
+                <input class="span10" id="newArticleInput" type="text">
+                <button class="btn" type="button" onclick="saveArticle()">Submit</button>
         </div>
 
-        <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
-        <div id="articleResult"></div>
+        <div id="newArticle" class="thumbnail fade out">
+            <img src/>
 
-    </div>
-    <div class="row-fluid">
-        <div class="span6">
-            Fluid 6
-            <div class="row-fluid">
-                <div class="span6">Fluid 6</div>
-                <div class="span6">Fluid 6</div>
-            </div>
+            <h5></h5>
+
+            <p></p>
         </div>
     </div>
-    <br><br>
-    <br>
+    <br><br><br>
     <!--     A row of 4 thumbnails-->
     <ul class="thumbnails">
         <li class="span4">
             <div class="thumbnail">
                 <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-                <h3>Thumbnail label</h3>
+                <h5>Thumbnail label</h5>
 
                 <p>Thumbnail caption...</p>
             </div>
@@ -48,7 +44,7 @@ if ($_SESSION["loggedin"] == 1) {
             <div class="thumbnail">
                 <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-                <h3>Thumbnail label</h3>
+                <h5>Thumbnail label</h5>
 
                 <p>Thumbnail caption...</p>
             </div>
@@ -57,7 +53,7 @@ if ($_SESSION["loggedin"] == 1) {
             <div class="thumbnail">
                 <img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg" alt="">
 
-                <h3>Thumbnail label</h3>
+                <h5>Thumbnail label</h5>
 
                 <p>Thumbnail caption...</p>
             </div>
@@ -68,7 +64,7 @@ if ($_SESSION["loggedin"] == 1) {
             <div class="thumbnail">
                 <img data-src="js/holder/holder.js/300x200" alt="">
 
-                <h3>Thumbnail label</h3>
+                <h5>Thumbnail label</h5>
 
                 <p>Thumbnail caption...</p>
             </div>

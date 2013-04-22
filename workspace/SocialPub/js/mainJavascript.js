@@ -616,8 +616,7 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 function saveArticle() {
 
     //Get the url for the article
-    var articleUrl = $("#newArticle").val();
-
+    var articleUrl = $("#newArticleInput").val();
 
     var formData = new Object();
 
@@ -676,11 +675,20 @@ function getArticleSuccess(data) {
     var siteName = jsonObj['siteName'];
 
 
+    // Set the image
+    $("#newArticle .articleimg").attr({src: image});
+
+    $("#newArticle .articletitle").html(title + " - " + siteName);
+
+    $("#newArticle .articledesc").html(description);
+
+    $("#newArticle").removeClass('out').addClass('in');
 
 
-    $("#articleResult").html("Code " +
-    code + "<br>Title " + title + "<br>Desc: " +description+
-    "<br>img: " + image + "<br> sitename: " + siteName);
+
+//        html("Code " +
+//    code + "<br>Title " + title + "<br>Desc: " +description+
+//    "<br>img: " + image + "<br> sitename: " + siteName);
 
 
 }

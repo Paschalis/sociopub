@@ -18,6 +18,8 @@ if ($URL == "") {
 
 $html = file_get_html($URL);
 
+
+
 // Get all meta data with property og:*
 
 //$ret = $html->find('meta[property^=og:]');

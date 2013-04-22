@@ -617,7 +617,6 @@ function saveArticle() {
 
     //Get the url for the article
     var articleUrl = $("#newArticleInput").val();
-
     var formData = new Object();
 
     formData['url']=articleUrl;
@@ -628,7 +627,7 @@ function saveArticle() {
         ajaxFailed);
 
 
-
+    $("#buttonsToolbar").removeClass('fade out').addClass("fade in");
 
 
 }

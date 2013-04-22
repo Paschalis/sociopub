@@ -40,6 +40,22 @@ if ($_SESSION["loggedin"] == 1) {
             <p class="articledesc"></p>
 
         </div>
+        <!--2nd time-->
+        <div class="btn-toolbar fade out" id="buttonsToolbar">
+            <div class="btn-group">
+                <button class="btn-info">Left</button>
+                <button class="btn-success">Middle</button>
+                <button class="btn-warning">Right</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn-danger">POUKATW</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn-inverse">ALLO</button>
+            </div>
+        </div>
+
+
     </div>
 
 

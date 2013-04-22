@@ -627,6 +627,10 @@ function saveArticle() {
         getArticleSuccess,
         ajaxFailed);
 
+
+
+
+
 }
 
 

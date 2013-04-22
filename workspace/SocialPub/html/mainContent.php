@@ -12,19 +12,19 @@ if ($_SESSION["loggedin"] == 1) {
     ?>
 
     <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
-    <div>
-
+    <div id="newArticle">
         <div class="input-append span12">
             <label for="newArticleInput">Enter article: </label>
             <input class="span10" id="newArticleInput" type="text">
-            <button class="btn" type="button" onclick="saveArticle()">Submit</button>
+            <button class="btn" type="button" onclick="saveArticle()">Preview</button>
+            <button id="postNewArticle" class="btn success  fade out" type="button" onclick="postArticle()">Post</button>
         </div>
-
-        <div id="newArticle" class="thumbnail fade out">
+        <div class="thumbnail fade out">
             <img class="articleimg"/>
             <h5 class="articletitle"></h5>
             <p class="articledesc"></p>
         </div>
+
     </div>
     <br><br><br>
     <!--     A row of 4 thumbnails-->

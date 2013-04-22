@@ -1,7 +1,9 @@
 <?php
 
-
 header('Content-type: text/html; charset=UTF-8');
+
+// Assume that article is not valid
+$_SESSION['valid_article']=0;
 
 
 include("initializeSession.php");
@@ -102,8 +104,17 @@ if ($siteName == "") {
 }
 
 
-// Print results
+//Save article results
 
+// Article is valid
+$_SESSION['article_valid']=1;
+$_SESSION['article_title']=$title;
+$_SESSION['article_description']=$description;
+$_SESSION['article_image']=$image;
+$_SESSION['article_siteName']=$siteName;
+$_SESSION['article_url']=$URL;
+
+// Print results
 $result = array(
     "code" => 1,
     "title" => $title,

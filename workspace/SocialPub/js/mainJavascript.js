@@ -676,19 +676,22 @@ function getArticleSuccess(data) {
 
 
     // Set the image
-    $("#newArticle .articleimg").attr({src: image});
+    $("#newArticle .thumbnail .articleimg").attr({src: image});
 
-    $("#newArticle .articletitle").html(title + " - " + siteName);
+    $("#newArticle .thumbnail .articletitle").html(title + " - " + siteName);
 
-    $("#newArticle .articledesc").html(description);
+    $("#newArticle .thumbnail .articledesc").html(description);
 
-    $("#newArticle").removeClass('out').addClass('in');
+    $("#newArticle .thumbnail").removeClass('out').addClass('in');
+    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
 
 
 
-//        html("Code " +
-//    code + "<br>Title " + title + "<br>Desc: " +description+
-//    "<br>img: " + image + "<br> sitename: " + siteName);
+    // When user posts new article
+    $("#postNewArticle").click(function(){
+
+    });
+
 
 
 }

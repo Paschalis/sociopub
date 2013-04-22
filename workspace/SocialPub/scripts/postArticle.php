@@ -10,6 +10,30 @@
 include('initializeSession.php');
 
 
+
+$result = mysql_query("CALL get_posts(12345)") or handlePostArticleError(mysql_error());
+
+if ($result) {
+    // fetch in a while loop like you would any normal SELECT query...
+}
+
+
+
+die(); // TODO RE ENABLE
+
+
+
+/*
+ * Handle postArticle error from mySQL database
+ *
+ * */
+
+function handlePostArticleError($errorMsg){
+    echo "Error: " + $php_errormsg;
+    die();
+}
+
+
 // Article is valid
 if ($_SESSION['article_valid'] != 1) {
     printMessage(0, 'Something went wrong. Article isn\'t saved');

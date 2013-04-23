@@ -218,6 +218,46 @@ function ajaxFailed() {
 }
 
 
+
+
+/**
+ * Post Ajax request was made
+ *
+ */
+function ajaxSuccessPost(result) {
+
+    var jsonObj = eval('(' + result + ')');
+
+
+
+    // Login was successfull
+    if (jsonObj['code'] == 1) {
+        jsonObj['message'] = "Post was successfully made";
+
+    }
+    else if(jsonObj['code'] == 2){
+        jsonObj['code']=1;
+        jsonObj['message'] = "Somebody else posted this article too! :)";
+    }
+    else if(jsonObj['code'] == -1){
+        jsonObj['code']=0;
+        jsonObj['message'] = "Username is wrong. Please report this!";
+    }
+    else if(jsonObj['code'] == -2){
+        jsonObj['code']=2;
+        jsonObj['message'] = "You have already posted this article!";
+    }
+    else {
+        jsonObj['code']=0;
+        jsonObj['message'] = "Something went wrong.";
+    }
+    showNotification(jsonObj, DELAY_MEDIUM);
+
+}
+
+
+
+
 /**
  * Called when successfully contact register PHP script.
  * That doesnt mean registration was successfull
@@ -719,13 +759,18 @@ function postArticle() {
         }
     });
 
+    categories = categories.substring(0, categories.length - 1);
+
+
+    var formData = new Object();
+
+    formData['categories']=categories;
 
     //Post article
-
-
-    debugger;
-
-
+    ajaxJsonRequest("scripts/getArticle.php",
+        formData,
+        ajaxSuccessPost,
+        ajaxFailed);
 
 }
 

@@ -11,102 +11,102 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
 
-    <!--        TODO CHANGE WHERE THE ARTICLE TEMPORARILY LOADS-->
-    <div id="newArticle">
-        <div class="input-append span12">
-            <label for="newArticleInput">Enter article: </label>
-            <input class="span10" id="newArticleInput" type="text">
-            <button class="btn" type="button" onclick="saveArticle()">Preview</button>
-            <button id="postNewArticle" class="btn success  fade out" type="button" onclick="postArticle()">Post</button>
+    <!--        New Post row-->
+    <div class="row">
 
-            <div class="badge-success">7</div>
-          <!--  <div class="btn-toolbar">
-            <div class="btn-group">
-                <button class="btn-info">Left</button>
-                <button class="btn-success">Middle</button>
-                <button class="btn-warning">Right</button>
-            </div>
-            <div class="btn-group">
-                <button class="btn-danger">POUKATW</button>
-            </div>
-                <div class="btn-group">
-                    <button class="btn-inverse">ALLO</button>
+        <div class="span12">
+            <div id="newArticle" class="span12">
+                <div class="thumbnail">
+                    <div class="input-append">
+                        <label for="newArticleInput">Enter article: </label>
+                        <input class="span12" id="newArticleInput" name="n" type="text">
+                        <button class="btn" type="button" onclick="saveArticle()">Preview</button>
+                        <button id="postNewArticle" class="btn success fade out" type="button" onclick="postArticle()">
+                            Post
+                        </button>
+                    </div>
+                    <div class="fade out" id="buttonsToolbar">
+                        <img class="articleimg"/>
+                        <h5 class="articletitle"></h5>
+                        <p class="articledesc"></p>
+
+                        <br>
+                        <div class="badge badge-success">2</div>
+                        <button class="label">Cinema</button>
+                        <button class="label">Economy</button>
+                        <button class="label">Entertainment</button>
+                        <button class="label">Health</button>
+                        <button class="label">History</button>
+                        <button class="label">Lifestyle</button>
+                        <button class="label">Music</button>
+                        <button class="label">News</button>
+                        <button class="label">Science</button>
+                        <button class="label">Sports</button>
+                        <button class="label">Technology</button>
+                        <button class="label">Travel</button>
+                        <button class="label">Other</button>
+                    </div>
                 </div>
-        </div>-->
 
-        </div>
-        <div class="thumbnail fade out">
-            <img class="articleimg"/>
-            <h5 class="articletitle"></h5>
-            <p class="articledesc"></p>
-
-        </div>
-        <!--2nd time-->
-        <div class="btn-toolbar fade out" id="buttonsToolbar">
-            <div class="btn-group">
-                <button class="btn-info">Left</button>
-                <button class="btn-success">Middle</button>
-                <button class="btn-warning">Right</button>
             </div>
-            <div class="btn-group">
-                <button class="btn-danger">POUKATW</button>
-            </div>
-            <div class="btn-group"><button class="btn-inverse">CINEMA</button></div>
-            <div class="btn-group"><button class="btn-inverse">SPORTS</button></div>
-            <div class="btn-group"><button class="btn-inverse">SCIENCE</button></div>
-            <div class="btn-group"><button class="btn-inverse">ECONOMY</button></div>
-            <div class="btn-group"><button class="btn-inverse">HEALTH</button></div>
-            <div class="btn-group"><button class="btn-inverse">NEWS</button></div>
-            <div class="btn-group"><button class="btn-inverse">HISTORY</button></div>
-            <div class="btn-group"><button class="btn-inverse">MUSIC</button></div>
+            <!-- End of new post-->
         </div>
 
+    </div>
+    <!--        Rest of the posts -->
+    <div class="row">
 
+        <div class="span12">
+            <!--     A row of 4 thumbnails-->
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg"
+                             alt="">
+
+                        <h5>Thumbnail label</h5>
+
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+
+                        <h5>Thumbnail label</h5>
+
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+
+                        <h5>Thumbnail label</h5>
+
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="thumbnails">
+                <li class="span4">
+                    <div class="thumbnail">
+                        <img data-src="js/holder/holder.js/300x200" alt="">
+
+                        <h5>Thumbnail label</h5>
+
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
 
-    <br><br><br>
-    <!--     A row of 4 thumbnails-->
-    <ul class="thumbnails">
-        <li class="span4">
-            <div class="thumbnail">
-                <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-                <h5>Thumbnail label</h5>
 
-                <p>Thumbnail caption...</p>
-            </div>
-        </li>
-        <li class="span4">
-            <div class="thumbnail">
-                <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-                <h5>Thumbnail label</h5>
 
-                <p>Thumbnail caption...</p>
-            </div>
-        </li>
-        <li class="span4">
-            <div class="thumbnail">
-                <img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg" alt="">
-
-                <h5>Thumbnail label</h5>
-
-                <p>Thumbnail caption...</p>
-            </div>
-        </li>
-    </ul>
-    <ul class="thumbnails">
-        <li class="span4">
-            <div class="thumbnail">
-                <img data-src="js/holder/holder.js/300x200" alt="">
-
-                <h5>Thumbnail label</h5>
-
-                <p>Thumbnail caption...</p>
-            </div>
-        </li>
-    </ul>
 
 
 <?php

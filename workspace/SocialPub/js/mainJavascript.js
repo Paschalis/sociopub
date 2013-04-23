@@ -291,10 +291,10 @@ function checkInputField(element) {
             return checkPassword(element);
         case "passwordRegister":
             //DONE
-            checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
+            checkPasswords($("#passwordRegister"), $("#confPasswordRegister"));
             break;
         case "confPasswordRegister":
-            checkPasswords($("#passwordRegister"),$("#confPasswordRegister"));
+            checkPasswords($("#passwordRegister"), $("#confPasswordRegister"));
             break;
         case "nameRegister":
             checkName(element);
@@ -619,15 +619,12 @@ function saveArticle() {
     var articleUrl = $("#newArticleInput").val();
     var formData = new Object();
 
-    formData['url']=articleUrl;
+    formData['url'] = articleUrl;
 
     ajaxJsonRequest("scripts/getArticle.php",
         formData,
         getArticleSuccess,
         ajaxFailed);
-
-
-    $("#buttonsToolbar").removeClass('fade out').addClass("fade in");
 
 
 }
@@ -647,7 +644,7 @@ function getArticleSuccess(data) {
         jsonObj = eval('(' + data + ')');
 
     }
-    // Failed to fetch article
+        // Failed to fetch article
     catch (e) {
         if (e instanceof SyntaxError) {
 
@@ -658,18 +655,14 @@ function getArticleSuccess(data) {
     }
 
 
-
-
     var code = jsonObj['code'];
 
 
-
     //Failed to fetch data
-    if(code==0){
+    if (code == 0) {
         makeShowNotification(0, jsonObj['message'], DELAY_MEDIUM);
         return;
     }
-
 
 
     var title = jsonObj['title'];
@@ -679,22 +672,22 @@ function getArticleSuccess(data) {
 
 
     // Set the image
-    $("#newArticle .thumbnail .articleimg").attr({src: image});
+    $("#newArticle .thumbnail #buttonsToolbar .articleimg").attr({src: image});
 
-    $("#newArticle .thumbnail .articletitle").html(title + " - " + siteName);
+    $("#newArticle .thumbnail #buttonsToolbar .articletitle").html(title + " - " + siteName);
 
-    $("#newArticle .thumbnail .articledesc").html(description);
+    $("#newArticle .thumbnail #buttonsToolbar .articledesc").html(description);
 
-    $("#newArticle .thumbnail").removeClass('out').addClass('in');
-    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
+//    $("#newArticle .thumbnail").removeClass('out').addClass('in');
+//    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
 
+    $("#buttonsToolbar").removeClass('out').addClass("in");
 
 
     // When user posts new article
-    $("#postNewArticle").click(function(){
+    $("#postNewArticle").click(function () {
 
     });
-
 
 
 }

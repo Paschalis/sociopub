@@ -28,23 +28,24 @@ if ($_SESSION["loggedin"] == 1) {
                     <div class="fade out" id="buttonsToolbar">
                         <img class="articleimg"/>
                         <h5 class="articletitle"></h5>
-                        <p class="articledesc"></p>
 
+                        <p class="articledesc"></p>
                         <br>
+
                         <div class="badge badge-success">2</div>
-                        <button class="label">Cinema</button>
-                        <button class="label">Economy</button>
-                        <button class="label">Entertainment</button>
-                        <button class="label">Health</button>
-                        <button class="label">History</button>
-                        <button class="label">Lifestyle</button>
-                        <button class="label">Music</button>
-                        <button class="label">News</button>
-                        <button class="label">Science</button>
-                        <button class="label">Sports</button>
-                        <button class="label">Technology</button>
-                        <button class="label">Travel</button>
-                        <button class="label">Other</button>
+                        <button class="label" id="acinema">Cinema</button>
+                        <button class="label" id="aeconomy">Economy</button>
+                        <button class="label" id="aentertainment">Entertainment</button>
+                        <button class="label" id="ahealth">Health</button>
+                        <button class="label" id="ahistory">History</button>
+                        <button class="label" id="alifestyle">Lifestyle</button>
+                        <button class="label" id="amusic">Music</button>
+                        <button class="label" id="anews">News</button>
+                        <button class="label" id="ascience">Science</button>
+                        <button class="label" id="asports">Sports</button>
+                        <button class="label" id="atechnology">Technology</button>
+                        <button class="label" id="atravel">Travel</button>
+                        <button class="label" id="aother">Other</button>
                     </div>
                 </div>
 
@@ -55,7 +56,6 @@ if ($_SESSION["loggedin"] == 1) {
     </div>
     <!--        Rest of the posts -->
     <div class="row">
-
         <div class="span12">
             <!--     A row of 4 thumbnails-->
             <ul class="thumbnails">

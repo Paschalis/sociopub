@@ -5,3 +5,8 @@
     padding: 5px;
 
 }
+
+.label:hover{
+    background-color: rgba(68, 161, 202, 0.61);
+
+}

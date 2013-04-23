@@ -72,6 +72,21 @@ $(document).ready(function () {
         $(this).removeClass('in').addClass("out");
 
     });
+
+    //When categories are clicked
+    $("#buttonsToolbar button").click(function () {
+
+        // Disable category
+        if ($(this).hasClass("label-info")) {
+            $(this).removeClass("label-info");
+        }
+        // Enable category
+        else {
+            $(this).addClass("label-info");
+        }
+    });
+
+
 });
 
 
@@ -678,16 +693,38 @@ function getArticleSuccess(data) {
 
     $("#newArticle .thumbnail #buttonsToolbar .articledesc").html(description);
 
-//    $("#newArticle .thumbnail").removeClass('out').addClass('in');
-//    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
+    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
 
     $("#buttonsToolbar").removeClass('out').addClass("in");
 
 
-    // When user posts new article
-    $("#postNewArticle").click(function () {
+}
 
+
+/**
+ *
+ *
+ * */
+function postArticle() {
+    var categories = "";
+
+    //When categories are clicked
+    $("#buttonsToolbar button ").each(function () {
+        // Get categories
+        if ($(this).hasClass("label-info")) {
+            $(this).each(function () {
+                categories += $(this).attr('id').substring(1) + ":";
+            });
+
+        }
     });
+
+
+    //Post article
+
+
+    debugger;
+
 
 
 }

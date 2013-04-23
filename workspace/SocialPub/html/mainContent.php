@@ -51,10 +51,10 @@ if ($_SESSION["loggedin"] == 1) {
             <div class="btn-group">
                 <button class="btn-danger">POUKATW</button>
             </div>
-            <div class="btn-group"><button class="btn-inverse">CINEMA</button></div>
-            <div class="btn-group"><button class="btn-inverse">SPORTS</button></div>
-            <div class="btn-group"><button class="btn-inverse">SCIENCE</button></div>
-            <div class="btn-group"><button class="btn-inverse">ECONOMY</button></div>
+            <div class="btn-group" id="cinemaB"><button class="btn-inverse">CINEMA</button></div>
+            <div class="btn-group" id="sportsB"><button class="btn-inverse">SPORTS</button></div>
+            <div class="btn-group" id="scienceB"><button class="btn-inverse">SCIENCE</button></div>
+            <div class="btn-group" id="economyB"><button class="btn-inverse">ECONOMY</button></div>
             <div class="btn-group"><button class="btn-inverse">HEALTH</button></div>
             <div class="btn-group"><button class="btn-inverse">NEWS</button></div>
             <div class="btn-group"><button class="btn-inverse">HISTORY</button></div>

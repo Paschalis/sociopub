@@ -9,10 +9,16 @@
 
 include('initializeSession.php');
 
-$categories = $_POST['categories'];
 
-//REMOVE WHEN DONE!
-$categories = "news:sports";
+// Article is valid
+if ($_SESSION['article_valid'] != 1) {
+    printMessage(0, 'Something went wrong. Article isn\'t saved');
+}
+
+// Get articles categories
+
+
+$categories = $_POST['categories'];
 
 // Get data from session
 $title = $_SESSION['article_title'];
@@ -20,15 +26,15 @@ $description = $_SESSION['article_description'];
 $image = $_SESSION['article_image'];
 $siteName = $_SESSION['article_siteName'];
 $url = $_SESSION['article_url'];
+$username = $_SESSION['username'];
 
 
-
-$title = "title";
-$description = "desc";
-$image = "url";
-$siteName ="books" ;
-$url = "face.www.twit";
-$username = "demetris";
+//$title = "title";
+//$description = "desc";
+//$image = "url";
+//$siteName ="books" ;
+//$url = "face.www.twit";
+//$username = "demetris";
 
 //Escape arguments
 $title = mysql_real_escape_string($title);
@@ -57,9 +63,6 @@ if ($result) {
 
 
 
-die(); // TODO RE ENABLE
-
-
 
 /*
  * Handle postArticle error from mySQL database
@@ -71,13 +74,6 @@ function handlePostArticleError($errorMsg){
     die();
 }
 
-
-// Article is valid
-if ($_SESSION['article_valid'] != 1) {
-    printMessage(0, 'Something went wrong. Article isn\'t saved');
-}
-
-// Get articles categories
 
 
 //Set article invalid

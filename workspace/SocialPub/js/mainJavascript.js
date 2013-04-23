@@ -244,7 +244,7 @@ function ajaxSuccessPost(result) {
         jsonObj['message'] = "Username is wrong. Please report this!";
     }
     else if(jsonObj['code'] == -2){
-        jsonObj['code']=2;
+        jsonObj['code']=0;
         jsonObj['message'] = "You have already posted this article!";
     }
     else {
@@ -759,6 +759,11 @@ function postArticle() {
         }
     });
 
+    if(categories==""){
+        makeShowNotification(0,"Please select at least one category", DELAY_MEDIUM);
+        return;
+    }
+
     categories = categories.substring(0, categories.length - 1);
 
 
@@ -767,7 +772,7 @@ function postArticle() {
     formData['categories']=categories;
 
     //Post article
-    ajaxJsonRequest("scripts/getArticle.php",
+    ajaxJsonRequest("scripts/postArticle.php",
         formData,
         ajaxSuccessPost,
         ajaxFailed);

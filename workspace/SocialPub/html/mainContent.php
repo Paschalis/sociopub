@@ -45,7 +45,7 @@ if ($_SESSION["loggedin"] == 1) {
                         <button class="label" id="asports">Sports</button>
                         <button class="label" id="atechnology">Technology</button>
                         <button class="label" id="atravel">Travel</button>
-                        <button class="label" id="aother">Other</button>
+                        <button class="label label-info" id="aother">Other</button>
                     </div>
                 </div>
 

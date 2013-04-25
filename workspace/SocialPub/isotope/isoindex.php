@@ -211,9 +211,7 @@
       };
 
       // dynamically load sites using Isotope from Zootool
-      $.getJSON('http://zootool.com/api/users/items/?username=desandro' +
-          '&apikey=8b604e5d4841c2cd976241dd90d319d7' +
-          '&tag=bestofisotope&callback=?')
+      $.getJSON('http://zootool.com/api/users/items/?username=desandro&apikey=8b604e5d4841c2cd976241dd90d319d7&tag=bestofisotope&callback=?')
         .error( ajaxError )
         .success(function( data ){
 

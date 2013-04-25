@@ -332,9 +332,9 @@
   $.Isotope.settings = {
     resizable: true,
     layoutMode : 'masonry',
-    containerClass : 'isotope',
-    itemClass : 'isotope-item',
-    hiddenClass : 'isotope-hidden',
+    containerClass : 'isotopeJim',
+    itemClass : 'isotopeJim-item',
+    hiddenClass : 'isotopeJim-hidden',
     hiddenStyle: { opacity: 0, scale: 0.001 },
     visibleStyle: { opacity: 1, scale: 1 },
     containerStyle: {
@@ -403,7 +403,7 @@
         top: parseInt( ( this.element.css('padding-top') || 0 ), 10 )
       };
 
-      // add isotope class first time around
+      // add isotopeJim class first time around
       var instance = this;
       setTimeout( function() {
         instance.element.addClass( instance.options.containerClass );
@@ -411,7 +411,7 @@
 
       // bind resize method
       if ( this.options.resizable ) {
-        $window.bind( 'smartresize.isotope', function() {
+        $window.bind( 'smartresize.isotopeJim', function() {
           instance.resize();
         });
       }
@@ -555,13 +555,13 @@
         for ( var key in getSortData ) {
           if ( !isIncrementingElemCount && key === 'original-order' ) {
             // keep original order original
-            sortData[ key ] = $.data( this, 'isotope-sort-data' )[ key ];
+            sortData[ key ] = $.data( this, 'isotopeJim-sort-data' )[ key ];
           } else {
             sortData[ key ] = getSortData[ key ]( $this, instance );
           }
         }
         // apply sort data to element
-        $.data( this, 'isotope-sort-data', sortData );
+        $.data( this, 'isotopeJim-sort-data', sortData );
       });
     },
 
@@ -586,7 +586,7 @@
     },
 
     _getSorter : function( elem, sortBy ) {
-      return $.data( elem, 'isotope-sort-data' )[ sortBy ];
+      return $.data( elem, 'isotopeJim-sort-data' )[ sortBy ];
     },
 
     // ====================== Layout Helpers ======================
@@ -605,7 +605,7 @@
       var position = this.getPositionStyles( x, y );
       this.styleQueue.push({ $el: $elem, style: position });
       if ( this.options.itemPositionDataEnabled ) {
-        $elem.data('isotope-item-position', {x: x, y: y} );
+        $elem.data('isotopeJim-item-position', {x: x, y: y} );
       }
     },
 
@@ -742,7 +742,7 @@
 
     // ====================== Adding items ======================
 
-    // adds a jQuery object of items to a isotope container
+    // adds a jQuery object of items to a isotopeJim container
     addItems : function( $content, callback ) {
       var $newAtoms = this._getAtoms( $content );
       // add new atoms to atoms pools
@@ -869,12 +869,12 @@
       }
 
       this.element
-        .unbind('.isotope')
+        .unbind('.isotopeJim')
         .undelegate( '.' + options.hiddenClass, 'click' )
         .removeClass( options.containerClass )
-        .removeData('isotope');
+        .removeData('isotopeJim');
 
-      $window.unbind('.isotope');
+      $window.unbind('.isotopeJim');
 
     },
 
@@ -1377,12 +1377,12 @@
       this.each(function(){
         var instance = $.data( this, 'isotope' );
         if ( !instance ) {
-          logError( "cannot call methods on isotope prior to initialization; " +
+          logError( "cannot call methods on isotopeJim prior to initialization; " +
               "attempted to call method '" + options + "'" );
           return;
         }
         if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
-          logError( "no such method '" + options + "' for isotope instance" );
+          logError( "no such method '" + options + "' for isotopeJim instance" );
           return;
         }
         // apply method

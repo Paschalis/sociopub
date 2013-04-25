@@ -79,7 +79,6 @@ if ($RESpassword == $password) {
 
 
         printMessage(1, "");
-        //TODO RELOAD!
 
     } else {
 

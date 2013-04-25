@@ -28,14 +28,6 @@ $siteName = $_SESSION['article_siteName'];
 $url = $_SESSION['article_url'];
 $username = $_SESSION['username'];
 
-
-//$title = "title";
-//$description = "desc";
-//$image = "url";
-//$siteName ="books" ;
-//$url = "face.www.twit";
-//$username = "demetris";
-
 //Escape arguments
 $title = mysql_real_escape_string($title);
 $description = mysql_real_escape_string($description);

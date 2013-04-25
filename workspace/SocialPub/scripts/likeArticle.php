@@ -18,19 +18,20 @@ $articleID = $_POST['articleID'];
 
 // TODO CHANGE THIS LATER
 $username = "pampos";
-$articleID = "10";
+$articleID = "20";
+$like = "0";
 
 
 
 
 
 
-$postArticleSrt = "SELECT post_article('".$title."','".$description."')";
+$likeArticleSrt = "SELECT like_article('".$articleID."','".$username."','".$like."')";
 
 
 echo $postArticleSrt;
 
-$result = mysql_query($postArticleSrt) or handleLikeArticleError(mysql_error());
+$result = mysql_query($likeArticleSrt) or handleLikeArticleError(mysql_error());
 
 //Query runned successfully
 if ($result) {
@@ -40,15 +41,14 @@ if ($result) {
 
     // Print result code
     printMessage($resultCode,"");
-
+    // -2: Article NOT exists
+    // -1: User NOT exissts
+    //  0: User_Article NOT exists
+    //  1: OK
 }
 
-
-
-
-
 /*
- * Handle postArticle error from mySQL database
+ * Handle likeArticle error from mySQL database
  *
  * */
 

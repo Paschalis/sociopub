@@ -15,13 +15,13 @@ $username = $_SESSION['username'];
 
 // Get articles categories
 $articleID = $_POST['articleID'];
+// Get like article value
+$like="SELECT get_like_article_val('".$articleID."','".$username."')";
 
-// TODO CHANGE THIS LATER
+// TODO CHANGE THIS LATER (proxirotites tou paschali)
 $username = "pampos";
 $articleID = "20";
 $like = "0";
-
-
 
 
 

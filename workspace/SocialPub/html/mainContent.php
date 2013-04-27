@@ -60,7 +60,7 @@ if ($_SESSION["loggedin"] == 1) {
             <!--     A row of 4 thumbnails-->
             <ul class="thumbnails">
                 <li class="span4">
-                    <div class="thumbnail">
+                    <div class="box">
                         <img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg"
                              alt="">
 

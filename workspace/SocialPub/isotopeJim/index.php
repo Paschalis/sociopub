@@ -31,7 +31,7 @@
     <div class="option-combo">
         <h2>Sort:</h2>
         <ul id="sort" class="option-set clearfix" data-option-key="sortBy">
-            <li><a href="#mixed" data-option-value="number" class="selected">mixed</a></li>
+            <li><a href="#mixed" data-option-value="number" class="selected">mix</a></li>
             <li><a href="#original" data-option-value="original-order">original</a></li>
             <li><a href="#alphabetical" data-option-value="alphabetical">alphabetical</a></li>
         </ul>
@@ -72,13 +72,18 @@
     </div>
 
 
-    <div class="sports">
-        <div class="thumbnail">
-            <img src="http://imageshack.us/a/img198/8008/sports5newt.jpg" alt="">
+    <div class="sports" style="background-color:#d3d3d3;">
 
-            <h5>Thumbnail label</h5>
+        <div  id="buttonsToolbar">
+            <img  src="images/sports.jpg">
+            <h2>TITLE GOES HERE</h2>
 
-            <p>Thumbnail caption...</p>
+            <h5>DESCRIPTION GOES HERE<br>and here</h5>
+
+           <div id="other" style="background-color:#f08080">
+            <button class="label" id="acinema">view</button>
+               <button class="label" id="acinema">like</button>
+            <div/>
         </div>
     </div>
 

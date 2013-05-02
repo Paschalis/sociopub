@@ -22,6 +22,8 @@ include("scripts/initializeSession.php");
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+
+
     <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -38,22 +40,23 @@ include("scripts/initializeSession.php");
 <?php include('html/navbar.php'); ?>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span2 hidden-phone" id="leftContent">
+        <div class="span1 hidden-phone" id="leftContent">
             <?php include('html/leftContent.php'); ?>
         </div>
-        <div class="span8" id="mainContent">
+        <div class="span10" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
             <div id="notification" class="alert fade" style="position: fixed">
                 <span id="notificationMessage">No notifications</span>
             </div>
             <!--            A space element. TODO future change this-->
-            <div><br><br><br>
+            <div>
+<!--                <br><br><br>-->
             </div>
             <?php
             include('html/mainContent.php');
             ?>
         </div>
-        <div class="span2 hidden-phone" id="rightContent">
+        <div class="span1 hidden-phone" id="rightContent">
             <?php include('html/rightContent.php'); ?>
         </div>
     </div>
@@ -72,11 +75,14 @@ include("scripts/initializeSession.php");
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery("abbr.timeago").timeago();
-    });
+<script src="isotope/jquery.isotope.min.js"></script>
 
-</script>
+<!-- TODO CHECK THIS! human friendly date-->
+<!--<script>-->
+<!--    jQuery(document).ready(function() {-->
+<!--        jQuery("abbr.timeago").timeago();-->
+<!--    });-->
+<!---->
+<!--</script>-->
 </body>
 </html>

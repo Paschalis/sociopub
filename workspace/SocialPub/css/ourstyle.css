@@ -1,3 +1,24 @@
+/*
+Body
+*/
+body{
+    background-color: white;
+    background-color: #f7f7f7;
+}
+
+/*
+Isotopes body
+*/
+#container{
+    border: none;
+    position: relative;
+    margin: 0 auto;
+    background-color: white;
+}
+
+/*
+Labels: used as tags!
+*/
 .label{
     margin-left: 3px;
     margin-right: 3px;
@@ -8,8 +29,9 @@
 
 .label:hover{
     background-color: rgba(68, 161, 202, 0.61);
-
 }
+
+
 
 /**
  Main Box
@@ -21,6 +43,9 @@
     border-radius: 6px;
 }
 
+/*
+The whole box of an article
+*/
 .box {
     display: block;
 
@@ -30,14 +55,64 @@
     -moz-border-radius: 6px;
     border-radius: 6px;
 
+    background-color: #ebebeb;
+    width: 270px;
 
-    width: 300px;
 
-    padding: 4px;
-    margin: 0px;
+    margin: 5px 10px 10px 10px;
 
     font-family: sans-serif;
 
+}
+
+
+
+/*
+The image-place for an article
+*/
+.box .box-img{
+    background-color: #aaaaaa;
+    border-bottom: 6px solid #aaaaaa;
+
+}
+
+
+/*
+The  actual image of an article
+*/
+.box .box-img img{
+
+    display: block;
+    margin: 0 auto;
+
+    max-width: 270px;
+    max-height: 300px;
+
+
+    /*vertical-align: middle;*/
+    /*position: relative;*/
+    /*top: 50%;*/
+    /*margin-top: -20px;*/
+    /*left: 50%;*/
+    /*margin-left: -20px;*/
+
+   /*margin: 0 auto;*/
+
+}
+/*
+ Image on hover
+*/
+.box .box-img:hover{
+    border-bottom: 6px solid #0088cc;
+    /*background-color: #0088cc;*/
+}
+
+
+/*
+ The body of the box(=box w/o the image)
+*/
+.box .box-body{
+    padding: 5px;
 }
 
 a.box:hover,
@@ -75,12 +150,13 @@ Box properties
 .box .views{
 
 }
-
-.box h3{
-    font-size: 20px;
-}
-
-
+/*
+Title of article
+*/
 .box h4{
     font-size: 17px;
+    /*position: absolute;*/
+    /*top: 200px;*/
+    /*left: 0;*/
+    /*width: 100%;*/
 }

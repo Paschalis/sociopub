@@ -57,39 +57,27 @@ if ($_SESSION["loggedin"] == 1) {
         <div id="container">
         </div>
     </div>
-    <script src="isotope/jquery.isotope.min.js"></script>
+
     <script src="js/jquery.timeago.js"></script>
 
 
     <script>
+    $(document).ready(function () {
 
 
         $(function () {
 
-
-
-
             var $container = $('#container');
 
             $container.isotope({
-                containerClass: 'isotope',
-                animationOptions: 'best-available',
-//                animationOptions: {
-//                    duration: 750,
-//                    easing: 'linear',
-//                    queue: false
-//                },
-                masonry: {
-                    columnWidth: 120
-                },
-                sortBy: 'number',
+                sortBy: 'date',
+                sortAscending : false,
                 getSortData: {
-                    number: function ($elem) {
-                        var number = $elem.hasClass('element') ?
-                            $elem.find('.number').text() :
-                            $elem.attr('data-number');
-                        return parseInt(number, 10);
+                    date: function ($elem) {
+                        return new Date($elem.find('.date').text()*1000);
+
                     },
+
                     alphabetical: function ($elem) {
                         var name = $elem.find('.name'),
                             itemText = name.length ? name : $elem;
@@ -138,13 +126,13 @@ if ($_SESSION["loggedin"] == 1) {
 
             $sites.append($sitesTitle).append($sitesList);
 
-            $sitesList.isotope({
-                layoutMode: 'cellsByRow',
-                cellsByRow: {
-                    columnWidth: 290,
-                    rowHeight: 400
-                }
-            });
+//            $sitesList.isotope({
+//                layoutMode: 'cellsByRow',
+//                cellsByRow: {
+//                    columnWidth: 270,
+//                    rowHeight: 400
+//                }
+//            });
 
             var ajaxError = function () {
                 $sitesTitle.removeClass('loading').addClass('error')
@@ -152,76 +140,75 @@ if ($_SESSION["loggedin"] == 1) {
             };
 
 
+
+            // dynamically load sites using Isotope from Zootool
             $.getJSON('../scripts/getUserArticles.php')
-                .error(ajaxError)
-                .success(function (data) {
+                .error( ajaxError )
+                .success(function( data ){
+
+                    // proceed only if we have data
+                    if ( !data || !data.length ) {
+                        ajaxError();
+                        return;
+                    }
+                    var items = [],
+                        item, datum;
+
+                    for ( var i=0, len = data.length; i < len; i++ ) {
+                        datum = data[i];
 
 
-                    var boxes = [],
-                        box, datai;
-
-
-                    // Save fetched elements
-                    for (var i = 0; i < data.length; i++) {
-
-                        datai = data[i];
-
-
-                        var filterClasses = "";
+                                                var filterClasses = "";
 
                         //Create classes for the filtering
-                        for (var j = 0; j < datai.tags.length; j++) {
-                            filterClasses += datai.tags[j] + " ";
+                        for (var j = 0; j < datum.tags.length; j++) {
+                            filterClasses += datum.tags[j] + " ";
                         }
 
-                        box =
-                            $('<div class="box  '  + filterClasses + ' " >' +
-                                '<img src="' + datai.image.replace('/l.', '/m.') + '" />'
-                                + '<div style="display: none">' + datai.uid + '</div>'
-                                + '<h4>' + datai.title + '</h4>'
-                                + '<p class="timeago">' + datai.added + '</p>'
-                                + '<p>' + datai.description + '</p>'
-                                + '<a href="'+datai.url +'" target="_blank">more...</a>'
 
-                                + '<span class="badge badge-info likes">+' + datai.likes + '</span>'
-                                + '<span class="badge shares" >Shares: ' + datai.shares + '</span>'
-                                + '<span class="badge views" >Views: ' + datai.views + '</span>'
-                                + '<abbr class="timeago" title="'+ datai.added +'"></abbr>'
-                                + '</div>');
+                                 item = '<div class="box  ' + filterClasses + ' " >'
+                                + '<div class="box-img">'
+                                + '<img src="' + datum.image.replace('/l.', '/m.') + '" />'
+                                + '</div>'
+                                + '<div class="box-body">'
+                                + '<h4>' + datum.title + '</h4>'
+                                + '<div style="display: none">' + datum.uid + '</div>'
 
-                        //Save box in boxes
-                        boxes[i] = box;
+                                + '<p class="date timeago">' + datum.added + '</p>'
+                                + '<p>' + datum.description + '</p>'
+                                + '<a href="' + datum.url + '" target="_blank">more...</a>'
+
+                                + '<span class="badge badge-info likes">+' + datum.likes + '</span>'
+                                + '<span class="badge shares" >Shares: ' + datum.shares + '</span>'
+                                + '<span class="badge views" >Views: ' + datum.views + '</span>'
+                                + '<abbr class="timeago" title="' + datum.added + '"></abbr>'
+                                + '</div>'
+                                + '</div>';
 
 
+                        items.push( item );
                     }
 
+                    var $items = $( items.join('') );
 
-                    $(boxes).imagesLoaded(function () {
-                        $(boxes).each(function () {
 
-                            //TODO AVOE ADD DATA-NUMBER
-                            ////                    $(this).attr('data-number', ~~( Math.random() * 100 + 15 ));
-
-                            $container.isotope('insert', this);
-                        });
+                    $items.imagesLoaded(function(){
+                        $container.append( $items );
+//                        $items.each(function(){
+//                            var $this = $(this),
+//                                itemHeight = Math.ceil( $this.height() / 120 ) * 120 - 10;
+//                            $this.height( itemHeight );
+//                        });
+                        $container.isotope( 'insert', $items );
                     });
-
 
                 });
 
 
-        });
-    </script>
 
-    <!--       Example box-->
-    <!--    <div class="span4 box">-->
-    <!--        <img data-src="js/holder/holder.js/300x200" alt="">-->
-    <!---->
-    <!--        <h5>Thumbnail label</h5>-->
-    <!--        <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">-->
-    <!---->
-    <!--        <p>Thumbnail caption...</p>-->
-    <!--    </div>-->
+        });
+    });
+    </script>
 
 <?php
 } // if user is not logged in

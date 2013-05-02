@@ -109,6 +109,16 @@ The  actual image of an article
 
 
 /*
+Time of box
+*/
+.box time{
+    font-size: 10px;
+    font-weight: bold;
+    color: #797979;
+}
+
+
+/*
  The body of the box(=box w/o the image)
 */
 .box .box-body{
@@ -155,6 +165,8 @@ Title of article
 */
 .box h4{
     font-size: 17px;
+    margin: 0;
+    padding: 0;
     /*position: absolute;*/
     /*top: 200px;*/
     /*left: 0;*/

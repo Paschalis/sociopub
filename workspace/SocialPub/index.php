@@ -77,12 +77,8 @@ include("scripts/initializeSession.php");
 <script src="js/bootstrap-typeahead.js"></script>
 <script src="isotope/jquery.isotope.min.js"></script>
 
-<!-- TODO CHECK THIS! human friendly date-->
-<!--<script>-->
-<!--    jQuery(document).ready(function() {-->
-<!--        jQuery("abbr.timeago").timeago();-->
-<!--    });-->
-<!---->
-<!--</script>-->
+<script src="js/jquery.timeago.js" type="text/javascript"></script>
+
+
 </body>
 </html>

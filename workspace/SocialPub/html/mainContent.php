@@ -58,73 +58,73 @@ if ($_SESSION["loggedin"] == 1) {
         </div>
     </div>
 
-    <script src="js/jquery.timeago.js"></script>
+
 
 
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
 
 
-        $(function () {
+            $(function () {
 
-            var $container = $('#container');
+                var $container = $('#container');
 
-            $container.isotope({
-                sortBy: 'date',
-                sortAscending : false,
-                getSortData: {
-                    date: function ($elem) {
-                        return new Date($elem.find('.date').text()*1000);
+                $container.isotope({
+                    sortBy: 'date',
+                    sortAscending: false,
+                    getSortData: {
+                        date: function ($elem) {
+                            return new Date($elem.find('.date').attr('datetime') * 1000);
 
-                    },
+                        },
 
-                    alphabetical: function ($elem) {
-                        var name = $elem.find('.name'),
-                            itemText = name.length ? name : $elem;
-                        return itemText.text();
+                        alphabetical: function ($elem) {
+                            var name = $elem.find('.name'),
+                                itemText = name.length ? name : $elem;
+                            return itemText.text();
+                        }
                     }
-                }
-            });
+                });
 
 
-            var $optionSets = $('#options .option-set'),
-                $optionLinks = $optionSets.find('a');
+                var $optionSets = $('#options .option-set'),
+                    $optionLinks = $optionSets.find('a');
 
-            $optionLinks.click(function () {
-                var $this = $(this);
-                // don't proceed if already selected
-                if ($this.hasClass('selected')) {
+                $optionLinks.click(function () {
+                    var $this = $(this);
+                    // don't proceed if already selected
+                    if ($this.hasClass('selected')) {
+                        return false;
+                    }
+                    var $optionSet = $this.parents('.option-set');
+                    $optionSet.find('.selected').removeClass('selected');
+                    $this.addClass('selected');
+
+                    // make option object dynamically, i.e. { filter: '.my-filter-class' }
+                    var options = {},
+                        key = $optionSet.attr('data-option-key'),
+                        value = $this.attr('data-option-value');
+                    // parse 'false' as false boolean
+                    value = value === 'false' ? false : value;
+                    options[ key ] = value;
+                    if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
+                        // changes in layout modes need extra logic
+                        changeLayoutMode($this, options)
+                    } else {
+                        // otherwise, apply new options
+                        $container.isotope(options);
+                    }
+
                     return false;
-                }
-                var $optionSet = $this.parents('.option-set');
-                $optionSet.find('.selected').removeClass('selected');
-                $this.addClass('selected');
-
-                // make option object dynamically, i.e. { filter: '.my-filter-class' }
-                var options = {},
-                    key = $optionSet.attr('data-option-key'),
-                    value = $this.attr('data-option-value');
-                // parse 'false' as false boolean
-                value = value === 'false' ? false : value;
-                options[ key ] = value;
-                if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
-                    // changes in layout modes need extra logic
-                    changeLayoutMode($this, options)
-                } else {
-                    // otherwise, apply new options
-                    $container.isotope(options);
-                }
-
-                return false;
-            });
+                });
 
 
-            // Sites using Isotope markup
-            var $sites = $('#sites'),
-                $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
-                $sitesList = $('<ul class="clearfix"></ul>');
+                // Sites using Isotope markup
+                var $sites = $('#sites'),
+                    $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
+                    $sitesList = $('<ul class="clearfix"></ul>');
 
-            $sites.append($sitesTitle).append($sitesList);
+                $sites.append($sitesTitle).append($sitesList);
 
 //            $sitesList.isotope({
 //                layoutMode: 'cellsByRow',
@@ -134,80 +134,81 @@ if ($_SESSION["loggedin"] == 1) {
 //                }
 //            });
 
-            var ajaxError = function () {
-                $sitesTitle.removeClass('loading').addClass('error')
-                    .text('Could not load sites using Isotope :(');
-            };
+                var ajaxError = function () {
+                    $sitesTitle.removeClass('loading').addClass('error')
+                        .text('Could not load sites using Isotope :(');
+                };
 
 
+                // dynamically load sites using Isotope from Zootool
+                $.getJSON('../scripts/getUserArticles.php')
+                    .error(ajaxError)
+                    .success(function (data) {
 
-            // dynamically load sites using Isotope from Zootool
-            $.getJSON('../scripts/getUserArticles.php')
-                .error( ajaxError )
-                .success(function( data ){
-
-                    // proceed only if we have data
-                    if ( !data || !data.length ) {
-                        ajaxError();
-                        return;
-                    }
-                    var items = [],
-                        item, datum;
-
-                    for ( var i=0, len = data.length; i < len; i++ ) {
-                        datum = data[i];
-
-
-                                                var filterClasses = "";
-
-                        //Create classes for the filtering
-                        for (var j = 0; j < datum.tags.length; j++) {
-                            filterClasses += datum.tags[j] + " ";
+                        // proceed only if we have data
+                        if (!data || !data.length) {
+                            ajaxError();
+                            return;
                         }
+                        var items = [],
+                            item, datum;
+
+                        for (var i = 0, len = data.length; i < len; i++) {
+                            datum = data[i];
 
 
-                                 item = '<div class="box  ' + filterClasses + ' " >'
+                            var filterClasses = "";
+
+                            //Create classes for the filtering
+                            for (var j = 0; j < datum.tags.length; j++) {
+                                filterClasses += datum.tags[j] + " ";
+                            }
+
+
+                            item = '<div class="box  ' + filterClasses + ' " >'
                                 + '<div class="box-img">'
                                 + '<img src="' + datum.image.replace('/l.', '/m.') + '" />'
                                 + '</div>'
                                 + '<div class="box-body">'
                                 + '<h4>' + datum.title + '</h4>'
-                                + '<div style="display: none">' + datum.uid + '</div>'
+                                + '<div class="articleID" style="display: none">' + datum.uid + '</div>'
 
-                                + '<p class="date timeago">' + datum.added + '</p>'
+                                + '<time class="date timeago" datetime="' + datum.added + '" >' + jQuery.timeago(new Date(datum.added * 1000)) + '</time>'
                                 + '<p>' + datum.description + '</p>'
-                                + '<a href="' + datum.url + '" target="_blank">more...</a>'
 
-                                + '<span class="badge badge-info likes">+' + datum.likes + '</span>'
+
+                                + '<div class="readMore"><a href="' + datum.url + '" target="_blank">more...</a></div>'
+                            + '<span class="badge badge-info likes">+' + datum.likes + '</span>'
                                 + '<span class="badge shares" >Shares: ' + datum.shares + '</span>'
                                 + '<span class="badge views" >Views: ' + datum.views + '</span>'
-                                + '<abbr class="timeago" title="' + datum.added + '"></abbr>'
+
                                 + '</div>'
                                 + '</div>';
 
 
-                        items.push( item );
-                    }
+                            items.push(item);
+                        }
 
-                    var $items = $( items.join('') );
+                        var $items = $(items.join(''));
 
 
-                    $items.imagesLoaded(function(){
-                        $container.append( $items );
+                        $items.imagesLoaded(function () {
+                            $container.append($items);
 //                        $items.each(function(){
 //                            var $this = $(this),
 //                                itemHeight = Math.ceil( $this.height() / 120 ) * 120 - 10;
 //                            $this.height( itemHeight );
 //                        });
-                        $container.isotope( 'insert', $items );
+                            $container.isotope('insert', $items);
+                        });
+
                     });
 
-                });
 
-
-
+            });
         });
-    });
+
+
     </script>
 
 <?php

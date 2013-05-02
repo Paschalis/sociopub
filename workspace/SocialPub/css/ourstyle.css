@@ -162,17 +162,38 @@ a.box:focus {
     margin-right: 5px;
 }
 
+
+
+
 /*
 Box properties
 */
 
 .box .likes {
-
+    border: 0px;
 }
 
 .box .views {
 
 }
+
+
+/*
+user likes an article
+*/
+.box .badge.likes.liked {
+    background-color: #1885cd;
+}
+
+
+/*
+user likes an article
+*/
+.box .badge.favorite.favorited{
+    background-color: #cdb22c;
+}
+
+
 
 /*
 Title of article

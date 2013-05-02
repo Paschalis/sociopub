@@ -165,6 +165,18 @@ if ($_SESSION["loggedin"] == 1) {
                             }
 
 
+                            var likedClass = "";
+                            var favedClass = "";
+
+
+                            if (datum.like == 1) {
+                                likedClass = " liked";
+                                debugger;
+                            }
+                            if (datum.favorite == 1) favedClass = " favorited";
+
+                            //TODO ADD SITE NAME
+
                             item = '<div class="box  ' + filterClasses + ' " >'
                                 + '<div class="box-img">'
                                 + '<img src="' + datum.image.replace('/l.', '/m.') + '" />'
@@ -174,7 +186,7 @@ if ($_SESSION["loggedin"] == 1) {
                                 + '<p class="date timeago" datetime="' + datum.added + '" >' + jQuery.timeago(new Date(datum.added * 1000)) + '</p>'
                                 + '<p>' + datum.description + '</p>'
                                 + '<div class="readMore"><a href="' + datum.url + '" target="_blank">more...</a></div>'
-                                + '<span class="badge badge-info likes">+' + datum.likes + '</span>'
+                                + '<button class="badge likes' + likedClass + '">+' + datum.likes + '</button>'
                                 + '<span class="badge shares" >Shares: ' + datum.shares + '</span>'
                                 + '<span class="badge views" >Views: ' + datum.views + '</span>'
                                 + '<span class="articleID" style="display: none">' + datum.uid + '</span>'

@@ -666,9 +666,9 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback) {
 }
 
 /**
- * Downloads an article
+ * Previews an article
  * */
-function saveArticle() {
+function previewArticle() {
 
     //Get the url for the article
     var articleUrl = $("#newArticleInput").val();
@@ -676,7 +676,7 @@ function saveArticle() {
 
     formData['url'] = articleUrl;
 
-    ajaxJsonRequest("scripts/getArticle.php",
+    ajaxJsonRequest("scripts/previewArticle.php",
         formData,
         getArticleSuccess,
         ajaxFailed);

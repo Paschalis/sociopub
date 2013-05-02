@@ -137,18 +137,22 @@ die();
 function doImageHack($imgUrl){
 
     // XS stands for extra small
-    if (strpos($imgUrl, "_XS") == true){
-        $result = str_replace("_M", "_XS", $imgUrl);
+    if (strpos($imgUrl, "XS") !== false){
+
+
+        $result= str_replace("XS","M",$imgUrl);
 
         //If Medium image exists, return it
         if(checkRemoteFile($result))
                 return $result;
+
+
     }
 
 
     //Try with small image
-    if (strpos($imgUrl, "_S") == true){
-        $result = str_replace("_M", "_S", $imgUrl);
+    if (strpos($imgUrl, "S") !== false){
+        $result= str_replace("S","M",$imgUrl);
 
         //If Medium image exists, return it
         if(checkRemoteFile($result))

@@ -49,6 +49,8 @@ function dbError($pError)
  * */
 function checkRemoteFile($url)
 {
+
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,$url);
     // don't download content

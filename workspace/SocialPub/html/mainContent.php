@@ -19,7 +19,7 @@ if ($_SESSION["loggedin"] == 1) {
                     <div class="input-append">
                         <label for="newArticleInput">Enter article: </label>
                         <input class="span12" id="newArticleInput" name="n" type="text">
-                        <button class="btn" type="button" onclick="saveArticle()">Preview</button>
+                        <button class="btn" type="button" onclick="previewArticle()">Preview</button>
                         <button id="postNewArticle" class="btn success fade out" type="button" onclick="postArticle()">
                             Post
                         </button>

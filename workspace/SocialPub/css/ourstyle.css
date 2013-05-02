@@ -1,7 +1,7 @@
 /*
 Body
 */
-body{
+body {
     background-color: white;
     background-color: #f7f7f7;
 }
@@ -9,7 +9,7 @@ body{
 /*
 Isotopes body
 */
-#container{
+#container {
     border: none;
     position: relative;
     margin: 0 auto;
@@ -19,7 +19,7 @@ Isotopes body
 /*
 Labels: used as tags!
 */
-.label{
+.label {
     margin-left: 3px;
     margin-right: 3px;
     border: 0px;
@@ -27,16 +27,14 @@ Labels: used as tags!
 
 }
 
-.label:hover{
+.label:hover {
     background-color: rgba(68, 161, 202, 0.61);
 }
-
-
 
 /**
  Main Box
 */
-.mainbox{
+.mainbox {
     border: 2px solid #000000;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -58,36 +56,32 @@ The whole box of an article
     background-color: #ebebeb;
     width: 270px;
 
-
     margin: 5px 10px 10px 10px;
 
     font-family: sans-serif;
 
 }
 
-
-
 /*
 The image-place for an article
 */
-.box .box-img{
+.box .box-img {
     background-color: #aaaaaa;
     border-bottom: 6px solid #aaaaaa;
+    min-height: 50px;
 
 }
-
 
 /*
 The  actual image of an article
 */
-.box .box-img img{
+.box .box-img img {
 
     display: block;
     margin: 0 auto;
 
     max-width: 270px;
     max-height: 300px;
-
 
     /*vertical-align: middle;*/
     /*position: relative;*/
@@ -96,33 +90,51 @@ The  actual image of an article
     /*left: 50%;*/
     /*margin-left: -20px;*/
 
-   /*margin: 0 auto;*/
+    /*margin: 0 auto;*/
 
 }
+
 /*
  Image on hover
 */
-.box .box-img:hover{
+.box .box-img:hover {
     border-bottom: 6px solid #0088cc;
-    /*background-color: #0088cc;*/
 }
-
 
 /*
 Time of box
 */
-.box time{
+.box .date {
+    margin: 0px;
+    padding: 0px;
+    line-height: 10px;
+    /*text-align: right;*/
+    position: absolute;
+    top: -1px;
+    right: 0px;
+
+    border: 2px solid #000000;
+    -webkit-bottom-left-border-radius: 4px;
+    -moz-bottom-left-border-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-left: 2px;
+
+    /*bottom:10px;*/
     font-size: 10px;
     font-weight: bold;
-    color: #797979;
-}
+    /*color: #797979;*/
+    color: white;
+    background-color: #000000;
 
+    text-shadow: 0px 0px 16px rgba(215, 215, 215, 1);
+
+}
 
 /*
  The body of the box(=box w/o the image)
 */
-.box .box-body{
-    padding: 5px;
+.box .box-body {
+    padding: 0px 5px 5px 5px;
 }
 
 a.box:hover,
@@ -145,30 +157,33 @@ a.box:focus {
     color: #555555;
 }
 
-.badge{
+.badge {
     margin-left: 5px;
     margin-right: 5px;
 }
+
 /*
 Box properties
 */
 
-.box .likes{
+.box .likes {
 
 }
 
-.box .views{
+.box .views {
 
 }
+
 /*
 Title of article
 */
-.box h4{
+.box h4 {
+    color: #000000;
     font-size: 17px;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     /*position: absolute;*/
-    /*top: 200px;*/
-    /*left: 0;*/
-    /*width: 100%;*/
+    /*bottom: 0px;*/
+    text-align: center;
+    text-shadow: -1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd, -1px 1px 0 #cdcdcd, 1px 1px 0 #cdcdcd;
 }

@@ -6,10 +6,19 @@
     <title>Isotope</title>
 
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
 
     <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/ourstyle.css"/>
+
+
 
     <!-- scripts at bottom of page -->
 
@@ -176,40 +185,7 @@
     </div>
 </section>
 
-<div id="container"> <!-- class="super-list variable-sizes clearfix" -->
-
-
-    <!--<div class="box">-->
-    <!--<img src="http://www.sigmalive.com/application/cache/default/images/news/615x340/proedr.jpg"-->
-    <!--alt="">-->
-
-    <!--<h5>Thumbnail label</h5>-->
-
-    <!--<p>Thumbnail caption...</p>-->
-    <!--</div>-->
-    <!--<div class="box">-->
-    <!--<img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">-->
-
-    <!--<h5>Thumbnail label</h5>-->
-
-    <!--<p>Thumbnail caption...</p>-->
-    <!--</div>-->
-    <!--<div class="box">-->
-    <!--<img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">-->
-
-    <!--<h5>Thumbnail label</h5>-->
-
-    <!--<p>Thumbnail caption...</p>-->
-    <!--</div>-->
-    <!--<div class="box">-->
-    <!--<img data-src="js/holder/holder.js/300x200" alt="">-->
-
-    <!--<h5>Thumbnail label</h5>-->
-
-    <!--<p>Thumbnail caption...</p>-->
-    <!--</div>-->
-
-
+<div id="container">
 </div>
 
 <!--<div id="sites"></div>-->
@@ -330,19 +306,19 @@ $(function () {
      */
 
 
-    $.getJSON('../scripts/getArticles.php')
+    $.getJSON('../scripts/getUserArticles.php')
             .error(ajaxError)
             .success(function (data) {
 
 
-                var cnt = 0;
+                var boxes = [],
+                        box, datai;
 
-                // Add fetched elements
+
+                // Save fetched elements
                 for (var i = 0; i < data.length; i++) {
 
-                    debugger;
-
-                    var datai = data[i];
+                    datai = data[i];
 
 
                     var filterClasses = "";
@@ -352,9 +328,8 @@ $(function () {
                         filterClasses += datai.tags[j] + " ";
                     }
 
-
-                    var $newItems =
-                            $('<div class="box ' + filterClasses + ' " >' +
+                    box =
+                            $('<div class="box span4 ' + filterClasses + ' " >' +
                                     '<img src="' + datai.image.replace('/l.', '/m.') + '" />'
                                     + '<div style="display: none">' + datai.uid + '</div>'
                                     + '<h3>' + datai.title + '</h3>'
@@ -365,18 +340,44 @@ $(function () {
                                     + '<span class="likes">' + datai.likes + '</span>'
                                     + '</div>');
 
-
-                    //Insert item to isotope
-                    $('#container').isotope( 'insert', $newItems );
-
-                    cnt++;
+                    //Save box in boxes
+                    boxes[i] = box;
 
 
                 }
 
                 debugger;
 
+
+                $(boxes).imagesLoaded(function () {
+                    //test
+                    $(boxes).each(function () {
+                        debugger;
+
+                        //TODO AVOE ADD DATA-NUMBER
+                        ////                    $(this).attr('data-number', ~~( Math.random() * 100 + 15 ));
+
+                        $container.isotope('insert', this);
+                    });
+                });
+
+
+                //TODO REMOVED FALLBACK!!
+//                $boxes.imagesLoaded(function () {
+
+//                    $boxes.each(function () {
+//                        var $this = $(this),
+//                                itemHeight = Math.ceil($this.height() / 120) * 120 - 10;
+//                        $this.height(itemHeight);
+//                    });
+
+
+//                $container.isotope('insert', boxes);
+//                });
+
+
                 /*
+
                  // proceed only if we have data
                  if (!data || !data.length) {
                  ajaxError();
@@ -408,7 +409,7 @@ $(function () {
 
 
                  //TODO REMOVED FALLBACK!!
-                 //                    $items.imagesLoaded(function () {
+                 $items.imagesLoaded(function () {
                  $sitesTitle.removeClass('loading').text('Sites using Isotope');
                  $container.append($items);
                  $items.each(function () {
@@ -417,9 +418,10 @@ $(function () {
                  $this.height(itemHeight);
                  });
                  $container.isotope('insert', $items);
-                 //                    });
+                 });
 
                  */
+
 
             });
 

@@ -110,6 +110,7 @@ if ($siteName == "") {
 $_SESSION['article_valid']=1;
 $_SESSION['article_title']=$title;
 $_SESSION['article_description']=$description;
+$image = doImageHack($image);
 $_SESSION['article_image']=$image;
 $_SESSION['article_siteName']=$siteName;
 $_SESSION['article_url']=$URL;
@@ -128,6 +129,35 @@ echo json_encode($result);
 
 
 die();
+
+
+/*
+ * Tries to fetch bigger image, if the deaulf is small!
+ * */
+function doImageHack($imgUrl){
+
+    // XS stands for extra small
+    if (strpos($imgUrl, "_XS") == true){
+        $result = str_replace("_M", "_XS", $imgUrl);
+
+        //If Medium image exists, return it
+        if(checkRemoteFile($result))
+                return $result;
+    }
+
+
+    //Try with small image
+    if (strpos($imgUrl, "_S") == true){
+        $result = str_replace("_M", "_S", $imgUrl);
+
+        //If Medium image exists, return it
+        if(checkRemoteFile($result))
+            return $result;
+    }
+
+    //nothing happened. return image as was
+    return $imgUrl;
+}
 
 
 ?>

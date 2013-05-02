@@ -22,13 +22,15 @@ include("scripts/initializeSession.php");
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-    <!-- Le styles -->
+    <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <link href="css/isotope.css" rel="stylesheet">
+    <link href="css/ourstyle.css" rel="stylesheet">
+
+    <!-- Obsolete web browsers -->
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 
@@ -70,5 +72,11 @@ include("scripts/initializeSession.php");
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery("abbr.timeago").timeago();
+    });
+
+</script>
 </body>
 </html>

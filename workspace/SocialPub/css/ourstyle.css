@@ -1,0 +1,86 @@
+.label{
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 0px;
+    padding: 5px;
+
+}
+
+.label:hover{
+    background-color: rgba(68, 161, 202, 0.61);
+
+}
+
+/**
+ Main Box
+*/
+.mainbox{
+    border: 2px solid #000000;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.box {
+    display: block;
+
+    line-height: 20px;
+    border: 2px solid #000000;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+
+
+    width: 300px;
+
+    padding: 4px;
+    margin: 0px;
+
+    font-family: sans-serif;
+
+}
+
+a.box:hover,
+a.box:focus {
+    border-color: #0088cc;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+.box > img {
+    display: block;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.box .caption {
+    padding: 9px;
+    color: #555555;
+}
+
+.badge{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+/*
+Box properties
+*/
+
+.box .likes{
+
+}
+
+.box .views{
+
+}
+
+.box h3{
+    font-size: 20px;
+}
+
+
+.box h4{
+    font-size: 17px;
+}

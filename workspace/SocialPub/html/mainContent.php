@@ -398,8 +398,27 @@ if ($_SESSION["loggedin"] == 1) {
 
 
         });
-// TODO sadsd
-$(".box .badge.likes").click(function(){$(this).parent().find('articleID').addClass("liked")});
+
+  //$(this).parent().find('articleID').addClass("liked")
+
+        /**
+         * TODO PASCHALI SINEXISE (KANONISTIN)
+         */
+$(".box .badge.likes").click(function(){
+
+    //Get the url for the article
+    var articleUrl = $(this).parent().find(articleUrl).val();
+    var formData = new Object();
+
+    formData['url'] = articleUrl;
+
+    ajaxJsonRequest("scripts/likeArticle.php",
+        formData,
+        getLikeSuccess,
+        ajaxFailed);
+
+
+});
 
 
     });

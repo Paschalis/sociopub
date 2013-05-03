@@ -673,7 +673,7 @@ function previewArticle() {
     //Get the url for the article
     var articleUrl = $("#newArticleInput").val();
     var formData = new Object();
-
+    ajaxFailed
     formData['url'] = articleUrl;
 
     ajaxJsonRequest("scripts/previewArticle.php",

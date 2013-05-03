@@ -727,15 +727,15 @@ function getArticleSuccess(data) {
 
 
     // Set the image
-    $("#newArticle .thumbnail #buttonsToolbar .articleimg").attr({src: image});
+    $("#newArticle .box.newpost #buttonsToolbar .articleimg").attr({src: image});
 
-    $("#newArticle .thumbnail #buttonsToolbar .articletitle").html(title + " - " + siteName);
+    $("#newArticle .box.newpost #buttonsToolbar .articletitle").html(title + " - " + siteName);
 
-    $("#newArticle .thumbnail #buttonsToolbar .articledesc").html(description);
+    $("#newArticle .box.newpost #buttonsToolbar .articledesc").html(description);
 
-    $("#newArticle #postNewArticle").removeClass('out').addClass('in');
+    $("#newArticle .box.newpost #postNewArticle").removeClass('out').addClass('in');
 
-    $("#buttonsToolbar").removeClass('out').addClass("in");
+    $("#newArticle .box.newpost #buttonsToolbar").removeClass('out').addClass("in");
 
 
 }

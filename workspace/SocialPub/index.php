@@ -38,10 +38,12 @@ include("scripts/initializeSession.php");
 
 <body>
 <?php include('html/navbar.php'); ?>
+<p id="dsize">SIZE:</p>
 <div class="container-fluid">
     <div class="row-fluid">
+
         <div class="span1 hidden-phone" id="leftContent">
-            <?php include('html/leftContent.php'); ?>
+<!--            --><?php //include('html/leftContent.php'); ?>
         </div>
         <div class="span10" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
@@ -57,7 +59,7 @@ include("scripts/initializeSession.php");
             ?>
         </div>
         <div class="span1 hidden-phone" id="rightContent">
-            <?php include('html/rightContent.php'); ?>
+<!--            --><?php //include('html/rightContent.php'); ?>
         </div>
     </div>
 </div>

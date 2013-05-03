@@ -426,6 +426,10 @@ if ($_SESSION["loggedin"] == 1) {
 
 
         });
+// TODO sadsd
+$(".box .badge.likes").click(function(){$(this).parent().find('articleID').addClass("liked")});
+
+
     });
 
 

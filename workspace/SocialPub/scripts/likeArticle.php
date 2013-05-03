@@ -19,9 +19,9 @@ $articleID = $_POST['articleID'];
 $like="SELECT get_like_article_val('".$articleID."','".$username."')";
 
 // TODO CHANGE THIS LATER (proxirotites tou paschali)
-$username = "pampos";
-$articleID = "20";
-$like = "0";
+//$username = "pampos";
+//$articleID = "20";
+//$like = "0";
 
 
 

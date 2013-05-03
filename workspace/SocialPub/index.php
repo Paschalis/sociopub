@@ -22,8 +22,6 @@ include("scripts/initializeSession.php");
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-
-
     <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -43,23 +41,19 @@ include("scripts/initializeSession.php");
     <div class="row-fluid">
 
         <div class="span1 hidden-phone" id="leftContent">
-<!--            --><?php //include('html/leftContent.php'); ?>
+            <?php include('html/leftContent.php'); ?>
         </div>
         <div class="span10" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
             <div id="notification" class="alert fade" style="position: fixed">
                 <span id="notificationMessage">No notifications</span>
             </div>
-            <!--            A space element. TODO future change this-->
-            <div>
-<!--                <br><br><br>-->
-            </div>
             <?php
             include('html/mainContent.php');
             ?>
         </div>
         <div class="span1 hidden-phone" id="rightContent">
-<!--            --><?php //include('html/rightContent.php'); ?>
+            <?php include('html/rightContent.php'); ?>
         </div>
     </div>
 </div>

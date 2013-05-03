@@ -11,9 +11,11 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
 
-    <!--        New Post row-->
+
+
     <div class="row">
-        <div class="span12">
+        <div id="container">
+            <!--        New Post Box-->
             <div id="newArticle" class="span12">
 
                 <div class="box newpost">
@@ -67,20 +69,14 @@ if ($_SESSION["loggedin"] == 1) {
             </div>
             <!-- End of new post-->
         </div>
-
-    </div>
-    <div class="row">
-        <div id="container">
-        </div>
     </div>
 
 
 
 
     <script>
+
     $(document).ready(function () {
-
-
 
         $.Isotope.prototype._getCenteredMasonryColumns = function () {
             this.width = this.element.width();
@@ -116,17 +112,9 @@ if ($_SESSION["loggedin"] == 1) {
         };
 
         $.Isotope.prototype._masonryResizeChanged = function () {
-
-
-
             var boxWidth;
             //Get width
             var curwidth = $('#newArticle').width();
-
-
-            //Rm
-            makeShowNotification(1,"CurW:" + curwidth,1000);
-
             //Calculate new width
             //Smartphone size: full size!
             if (curwidth < 400) {
@@ -166,18 +154,11 @@ if ($_SESSION["loggedin"] == 1) {
 
             }
 
-
-
-
             //Change the width
             $(".box.article").width(boxWidth);
                 $(".box img").width(boxWidth);
 
-
-
-            $('#container').isotope( 'reLayout');
-
-
+            $('#container').isotope( 'reLayout'); //Force reLayout
 
             var prevColCount = this.masonry.cols;
             // get updated colCount
@@ -259,18 +240,9 @@ if ($_SESSION["loggedin"] == 1) {
 
 
             $("#dsize").text("Size: " + curwidth); //TODO RM
-
-
             //When window is resized TODO RM
             $(window).resize(function () {
-
-
-
                 $("#dsize").text("Size: " + curwidth); //TODO RM
-
-
-
-
             });
 
 

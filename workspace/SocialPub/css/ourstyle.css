@@ -14,10 +14,8 @@ Isotopes body
 #container {
     border: none;
     position: relative;
-    /*margin: 0 auto;*/
+    margin-right: 0px !important;
     background-color: white;
-    width: 100%;
-    overflow: visible !important;
 
     /*height: 10px;*/
     /*max-height: 10%;*/
@@ -49,7 +47,7 @@ The whole box of an article
     /*width: 270px;*/
 
 
-    margin: 5px 10px 10px 10px;
+    margin: 5px 15px 10px 0px;
 
     font-family: sans-serif;
 
@@ -60,7 +58,8 @@ Box of a new post
 */
 .box.newpost {
     border-color: #737373;
-    width: 100%;
+    width: 70%;
+    min-width: 270px;
     margin: 0 auto;
 }
 
@@ -167,15 +166,17 @@ Time of box
 Categories of box
 */
 .box .categories {
-    /*margin: 0px;*/
+    /*margin-top: 0px;*/
     /*padding: 0px;*/
 
-    /*padding: 4px 0px 1px 0px;*/
+
+
+    padding: 4px 0px 0px 0px;
     background-color: #aaaaaa;
     color: #000000;
 
     text-align: center;
-    line-height: 20px;
+    line-height: 0px;
 
 
     border-bottom-left-radius: 6px;
@@ -199,8 +200,22 @@ Categories of box
     line-height: 10px;
     font-size: 10px;
     background-color: inherit;
-    border: 1px solid #797979;
-    border-radius: 3px;
+
+    border-top: 2px solid #4c4c4c;
+    border-right: 2px solid #4c4c4c;
+    border-left: 2px solid #4c4c4c;
+    border-bottom: 0px;
+
+
+
+    border-top-left-radius:3px;
+    -webkit-border-top-left-radius:3px;
+    -moz-border-top-left-radius:3px;
+
+    border-top-right-radius:3px;
+    -webkit-border-top-right-radius:3px;
+    -moz-border-top-right-radius:3px;
+
 
 }
 

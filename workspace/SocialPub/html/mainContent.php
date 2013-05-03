@@ -117,7 +117,7 @@ if ($_SESSION["loggedin"] == 1) {
 
         $.Isotope.prototype._masonryResizeChanged = function () {
 
-            // TODO RESIZE ELEMENTS!
+
 
             var boxWidth;
             //Get width
@@ -131,8 +131,8 @@ if ($_SESSION["loggedin"] == 1) {
             //Smartphone size: full size!
             if (curwidth < 400) {
                 //New hack
-                boxWidth = $('.box.newpost').width() + "px";
-                // ORIG SIZE:  boxWidth = ($(window).width() * 80) / 100 + "px";
+                //boxWidth = $('.box.newpost').width() + "px";
+               boxWidth = ($(window).width() * 80) / 100 + "px";
 
             }
             //Phablet size, or portait big smartphones
@@ -152,7 +152,7 @@ if ($_SESSION["loggedin"] == 1) {
             }
             //Desktop size
             else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = (curwidth / 5) - 30 + "px";
+                boxWidth = (curwidth / 5) - 20 + "px";
 
             }
             //Large size
@@ -176,6 +176,7 @@ if ($_SESSION["loggedin"] == 1) {
 
 
             $('#container').isotope( 'reLayout');
+
 
 
             var prevColCount = this.masonry.cols;
@@ -204,8 +205,6 @@ if ($_SESSION["loggedin"] == 1) {
 
 
         $(function () {
-
-
 
 
             var $container = $('#container');
@@ -244,7 +243,7 @@ if ($_SESSION["loggedin"] == 1) {
             }
             //Desktop size
             else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = (curwidth / 5) - 30 + "px";
+                boxWidth = (curwidth / 5) - 20 + "px";
 
             }
             //Large size
@@ -376,10 +375,15 @@ if ($_SESSION["loggedin"] == 1) {
                         }
                         if (datum.favorite == 1) favedClass = " favorited";
 
+                        var imgCode="";
+                        if(datum.image!=""){
+                            imgCode= '<img  class="articleimg" src="' + datum.image.replace('/l.', '/m.') + '" />';
+                        }
+
                         //TODO ADD SITE NAME
                         item = '<div class="box article  ' + filterClasses + ' ">'
                             + '<div class="box-img">'
-                            + '<img  class="articleimg" src="' + datum.image.replace('/l.', '/m.') + '" />'
+                            + imgCode
                             + '</div>'
                             + '<div class="box-body">'
                             + '<h4 class="articletitle">' + datum.title + '</h4>'

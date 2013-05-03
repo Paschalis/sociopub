@@ -398,10 +398,12 @@ if ($_SESSION["loggedin"] == 1) {
 
 
         });
-/*
- *  TODO sadsd
- *  //$(this).parent().find('articleID').addClass("liked")
- */
+
+  //$(this).parent().find('articleID').addClass("liked")
+
+        /**
+         * TODO PASCHALI SINEXISE (KANONISTIN)
+         */
 $(".box .badge.likes").click(function(){
 
     //Get the url for the article

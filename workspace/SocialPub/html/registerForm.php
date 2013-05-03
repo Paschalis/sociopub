@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang=en>
-
-<body>
-<form id="registerForm">
+ <form id="registerForm">
     <div class="control-group">
         <label for="usernameRegister">Username</label>
         <input type="text" value="" class="input-xlarge" id="usernameRegister">
@@ -42,9 +38,6 @@
     </div>
     <div class="control-group">
         <label>Country</label>
-        <select id="countryRegister">
-            <option value="">Select Country</option>
-           <!-- <option value="Cyprus">Cyprus</option>-->
 
             <option value = AF> Afghanistan
 
@@ -380,5 +373,3 @@
         <button class="btn btn-primary" id="registerButton">Create Account</button>
     </div>
 </form>
-</body>
-</html>

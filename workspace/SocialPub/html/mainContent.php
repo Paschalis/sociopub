@@ -11,63 +11,64 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
 
+    <!--        New Post Box-->
+    <div id="newArticle" class="span12">
+
+        <div class="box newpost">
+            <div class="box-img">
+                <img/>
+            </div>
+            <div class="box-body">
+                <div class="input-append">
+                    <label for="newArticleInput">Enter article: </label>
+                    <input id="newArticleInput" type="text">
+                    <button class="btn" type="button" onclick="previewArticle()">Preview</button>
+                    <button id="postNewArticle" class="btn fade out" type="button"
+                            onclick="postArticle()">
+                        Post
+                    </button>
+                </div>
+                <h4></h4>
+
+                <p class="date" datetime="' + datum.added + '"></p>
+
+                <p></p>
+                <span class="articleID" style="display: none"></span>
+
+                <!-- Prev box data!-->
+                <div class="fade out" id="buttonsToolbar">
+                    <img class="articleimg"/>
+                    <h5 class="articletitle"></h5>
+
+                    <p class="articledesc"></p>
+                    <br>
+
+                    <div class="badge badge-success">2</div>
+                    <button class="label" id="acinema">Cinema</button>
+                    <button class="label" id="aeconomy">Economy</button>
+                    <button class="label" id="aentertainment">Entertainment</button>
+                    <button class="label" id="ahealth">Health</button>
+                    <button class="label" id="ahistory">History</button>
+                    <button class="label" id="alifestyle">Lifestyle</button>
+                    <button class="label" id="amusic">Music</button>
+                    <button class="label" id="anews">News</button>
+                    <button class="label" id="ascience">Science</button>
+                    <button class="label" id="asports">Sports</button>
+                    <button class="label" id="atechnology">Technology</button>
+                    <button class="label" id="atravel">Travel</button>
+                    <button class="label label-info" id="aother">Other</button>
+                </div>
 
 
+            </div>
+        </div>
+    </div>
+    <!-- End of new post-->
+
+<!--    Isotope-->
     <div class="row">
         <div id="container">
-            <!--        New Post Box-->
-            <div id="newArticle" class="span12">
 
-                <div class="box newpost">
-                    <div class="box-img">
-                        <img/>
-                    </div>
-                    <div class="box-body">
-                        <div class="input-append">
-                            <label for="newArticleInput">Enter article: </label>
-                            <input id="newArticleInput" type="text">
-                            <button class="btn" type="button" onclick="previewArticle()">Preview</button>
-                            <button id="postNewArticle" class="btn fade out" type="button"
-                                    onclick="postArticle()">
-                                Post
-                            </button>
-                        </div>
-                        <h4></h4>
-
-                        <p class="date" datetime="' + datum.added + '"></p>
-
-                        <p></p>
-                        <span class="articleID" style="display: none"></span>
-
-                        <!-- Prev box data!-->
-                        <div class="fade out" id="buttonsToolbar">
-                            <img class="articleimg"/>
-                            <h5 class="articletitle"></h5>
-
-                            <p class="articledesc"></p>
-                            <br>
-
-                            <div class="badge badge-success">2</div>
-                            <button class="label" id="acinema">Cinema</button>
-                            <button class="label" id="aeconomy">Economy</button>
-                            <button class="label" id="aentertainment">Entertainment</button>
-                            <button class="label" id="ahealth">Health</button>
-                            <button class="label" id="ahistory">History</button>
-                            <button class="label" id="alifestyle">Lifestyle</button>
-                            <button class="label" id="amusic">Music</button>
-                            <button class="label" id="anews">News</button>
-                            <button class="label" id="ascience">Science</button>
-                            <button class="label" id="asports">Sports</button>
-                            <button class="label" id="atechnology">Technology</button>
-                            <button class="label" id="atravel">Travel</button>
-                            <button class="label label-info" id="aother">Other</button>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- End of new post-->
         </div>
     </div>
 
@@ -77,6 +78,32 @@ if ($_SESSION["loggedin"] == 1) {
     <script>
 
     $(document).ready(function () {
+
+
+
+        //When user presses like button
+        //$(this).parent().find('articleID').addClass("liked")
+
+        /**
+         * TODO PASCHALI SINEXISE (KANONISTIN)
+         */
+        $(".box .badge.likes").click(function(){
+
+            alert('test');
+
+//    //Get the url for the article
+//    var articleUrl = $(this).parent().find(articleUrl).val();
+//    var formData = new Object();
+//
+//    formData['url'] = articleUrl;
+//
+//    ajaxJsonRequest("scripts/likeArticle.php",
+//        formData,
+//        getLikeSuccess,
+//        ajaxFailed);
+
+
+        });
 
         $.Isotope.prototype._getCenteredMasonryColumns = function () {
             this.width = this.element.width();
@@ -125,32 +152,32 @@ if ($_SESSION["loggedin"] == 1) {
             }
             //Phablet size, or portait big smartphones
             else if (curwidth >= 400 && curwidth < 650) {
-                boxWidth = (curwidth / 2) - 40 + "px";
+                boxWidth = Math.round((curwidth / 2)) - 40 + "px";
 
             }
             //Tablet size
             else if (curwidth >= 650 && curwidth < 900) {
-                boxWidth = (curwidth / 3) - 30 + "px";
+                boxWidth = Math.round((curwidth / 3)) - 30 + "px";
 
             }
             //Laptop size TODO ???????????
             else if (curwidth >= 900 && curwidth < 1300) {
-                boxWidth = (curwidth / 4) - 30 + "px";
+                boxWidth = Math.round((curwidth / 4)) - 30 + "px";
 
             }
             //Desktop size
             else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = (curwidth / 5) - 20 + "px";
+                boxWidth = Math.round((curwidth / 5)) - 20 + "px";
 
             }
             //Large size
             else if (curwidth >= 1600 && curwidth < 2000) {
-                boxWidth = (curwidth / 6) - 30 + "px";
+                boxWidth = Math.round((curwidth / 6)) - 30 + "px";
 
             }
             // Extra large screen size
             else {
-                boxWidth = (curwidth / 8) - 30 + "px";
+                boxWidth = Math.round((curwidth / 8)) - 30 + "px";
 
             }
 
@@ -204,37 +231,37 @@ if ($_SESSION["loggedin"] == 1) {
             //Smartphone size: full size!
             if (curwidth < 400) {
                 //boxWidth =  $('.box.newpost').width() + "px";
-                boxWidth = ($(window).width() * 80) / 100 + "px";
+                boxWidth = Math.round(($(window).width() * 80) / 100) + "px";
 
             }
             //Phablet size, or portait big smartphones
             else if (curwidth >= 400 && curwidth < 650) {
-                boxWidth = (curwidth / 2) - 40 + "px";
+                boxWidth = Math.round((curwidth / 2)) - 40 + "px";
 
             }
             //Tablet size
             else if (curwidth >= 650 && curwidth < 900) {
-                boxWidth = (curwidth / 3) - 30 + "px";
+                boxWidth = Math.round((curwidth / 3)) - 30 + "px";
 
             }
             //Laptop size TODO ???????????
             else if (curwidth >= 900 && curwidth < 1300) {
-                boxWidth = (curwidth / 4) - 30 + "px";
+                boxWidth = Math.round((curwidth / 4)) - 30 + "px";
 
             }
             //Desktop size
             else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = (curwidth / 5) - 20 + "px";
+                boxWidth = Math.round((curwidth / 5)) - 20 + "px";
 
             }
             //Large size
             else if (curwidth >= 1600 && curwidth < 2000) {
-                boxWidth = (curwidth / 6) - 30 + "px";
+                boxWidth = Math.round((curwidth / 6)) - 30 + "px";
 
             }
             // Extra large screen size
             else {
-                boxWidth = (curwidth / 8) - 30 + "px";
+                boxWidth = Math.round((curwidth / 8)) - 30 + "px";
 
             }
 
@@ -247,7 +274,6 @@ if ($_SESSION["loggedin"] == 1) {
 
 
             $container.isotope({
-
                 sortBy: 'date',
                 sortAscending: false,
                 getSortData: {
@@ -255,7 +281,6 @@ if ($_SESSION["loggedin"] == 1) {
                         return new Date($elem.find('.date').attr('datetime') * 1000);
 
                     },
-
                     alphabetical: function ($elem) {
                         var name = $elem.find('.name'),
                             itemText = name.length ? name : $elem;
@@ -399,26 +424,7 @@ if ($_SESSION["loggedin"] == 1) {
 
         });
 
-  //$(this).parent().find('articleID').addClass("liked")
 
-        /**
-         * TODO PASCHALI SINEXISE (KANONISTIN)
-         */
-$(".box .badge.likes").click(function(){
-
-    //Get the url for the article
-    var articleUrl = $(this).parent().find(articleUrl).val();
-    var formData = new Object();
-
-    formData['url'] = articleUrl;
-
-    ajaxJsonRequest("scripts/likeArticle.php",
-        formData,
-        getLikeSuccess,
-        ajaxFailed);
-
-
-});
 
 
     });

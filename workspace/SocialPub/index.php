@@ -20,7 +20,8 @@ include("scripts/initializeSession.php");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>
 
     <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">

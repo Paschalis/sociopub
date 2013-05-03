@@ -11,6 +11,8 @@
 if ($_SESSION["loggedin"] == 1) {
     ?>
 
+
+
     <!--        New Post Box-->
     <div id="newArticle" class="span12">
 
@@ -75,10 +77,10 @@ if ($_SESSION["loggedin"] == 1) {
 
 
 
+    <script src="../js/hirestext.js"></script>
     <script>
 
     $(document).ready(function () {
-
 
 
         //When user presses like button

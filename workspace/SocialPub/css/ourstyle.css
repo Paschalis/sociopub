@@ -54,19 +54,31 @@ The whole box of an article
 
 
 }
-/*
+/* ##########################
 Box of a new post
-*/
+   ########################## */
 .box.newpost {
     border-color: #737373;
-    /*width: 70%;*/
-    /*min-width: 270px;*/
-    /*margin: 0 auto;*/
+}
+.box.newpost #newArticleInput{
+    width: 90%;
+    height: 25px;
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+
+}
+.box.newpost .input .buttons { /* Buttons Div */
+    margin: 0px 5px 0px 5px;
+}
+.box.newpost .input button { /* A Button */
+    margin: 0;
+    padding: 0;
+    height: 25px;
+    width: 30%;
 }
 
-.box .input-append{
-    width: 80%;
-}
+
+
 
 /*
 The image-place for an article
@@ -259,8 +271,7 @@ Categories of box
 Labels: used as tags!
 */
 .label {
-    margin-left: 3px;
-    margin-right: 3px;
+    margin: 0px 3px 3px 3px;
     border: 0px;
     padding: 5px;
 
@@ -355,3 +366,18 @@ Descripton of article
 
 }
 
+/**
+Notification
+*/
+.notifications{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    margin: 0px 5px 5px 5px;
+}
+#notification{
+    z-index: 3;
+    display: inline-block;
+    position:relative;
+    margin: 0 auto;
+}

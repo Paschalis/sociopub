@@ -36,17 +36,19 @@ if ($_SESSION["loggedin"] == 1) {
 
         var newpost = '<div class="box newpost article" style="width: '+ window.boxWidth +'">'
             + '<div class="box-img">'
-                + '<img  class="articleimg" />'
+                + '<img  class="articleimg" style="width: '+ window.boxWidth +'"  />'
             + '</div>'
             + '<div class="box-body">'
-                + '<div class="inputData input-append">'
-                    + '<label for="newArticleInput">Post an article: </label>'
+                + '<div class="input">'
+                    + '<label for="newArticleInput">Post an article:</label>'
                     + '<input id="newArticleInput" type="text">'
-                    + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
-                    + '<button id="postNewArticleButton" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
+                    + '<div class="buttons">'
+                        + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
+                        + '<button id="postNewArticleButton" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
+                        + '<button id="clearNewArticleButton" class="btn fade out" type="button" onclick="clearArticle()">Clear</button>'
+                    + '</div>'
                 + '</div>'
                 + '<div class="fade out" id="buttonsToolbar">'
-                    + '<img class="articleimg"/>'
                     + '<h4 class="articletitle"></h4>'
                     + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime()/1000) + '" ></p>'
                     + '<p class="articledesc" ></p>'
@@ -73,8 +75,6 @@ if ($_SESSION["loggedin"] == 1) {
                 + '</div>'
             + '</div>'
             + '</div>';
-
-        debugger;
 
         $container.append(newpost);
 

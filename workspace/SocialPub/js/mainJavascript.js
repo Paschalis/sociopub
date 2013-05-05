@@ -69,8 +69,7 @@ $(document).ready(function () {
     //When notification is clicked
     $("#notification").click(function () {
 
-        $(this).removeClass('in').addClass("out");
-
+        clearNotification();
     });
 
     //When categories are clicked
@@ -621,6 +620,11 @@ function showNotification(data, duration) {
 
     var notification = $("#notification");
 
+//    //Clear notification first
+//    if(window.isNotificationShowing){
+//        clearNotification();
+//    }
+
     //Show error message
     if (data['code'] == 0) {
         notification.removeClass('alert-success alert-info').addClass('alert-error');
@@ -641,11 +645,28 @@ function showNotification(data, duration) {
     //Show notification
     notification.removeClass('out').addClass("in");
 
+
+
+
     // Set notification timeout delay
     window.setTimeout(function () {
-        notification.removeClass('in').addClass("out");
+        clearNotification();
     }, duration);
 
+//    window.isNotificationShowing=1;
+
+
+}
+
+/*
+* Clears the notification
+* */
+function clearNotification(){
+    var notification = $("#notification");
+
+    notification.removeClass('in').addClass("out");
+    notification.html('');
+//    window.isNotificationShowing=0;
 }
 
 
@@ -693,8 +714,6 @@ function getArticleSuccess(data) {
 
     var jsonObj;
 
-    debugger;
-
     try {
         jsonObj = eval('(' + data + ')');
 
@@ -727,13 +746,13 @@ function getArticleSuccess(data) {
 
 
     // Set the image
-    $(".box.newpost.article #buttonsToolbar .articleimg").attr({src: image});
+    $(".box.newpost.article .articleimg").attr({src: image});
 
     $(".box.newpost.article #buttonsToolbar .articletitle").html(title + " - " + siteName);
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
-    $(".box.newpost.article #postNewArticleButton").removeClass('out').addClass('in');
+    $(".box.newpost.article .input .buttons ").removeClass('out').addClass('in');
 
     $(".box.newpost.article #buttonsToolbar").removeClass('out').addClass("in");
 

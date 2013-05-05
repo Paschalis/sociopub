@@ -47,8 +47,10 @@ include("scripts/initializeSession.php");
         </div>
         <div class="span10" id="mainContent">
             <!--Notifications - If no notifications this is disappeared -->
-            <div id="notification" class="alert fade" style="position: fixed">
+            <div class="notifications" >
+                <div  class="alert fade" id="notification">
                 <span id="notificationMessage">No notifications</span>
+                </div>
             </div>
             <?php
             include('html/mainContent.php');

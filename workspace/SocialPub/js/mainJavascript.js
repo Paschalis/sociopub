@@ -796,6 +796,59 @@ function makeShowNotification(code, msg, delay) {
 }
 
 
+/*
+ * Calculates the width of a box
+ * */
+function calculateBoxWidth(){
+
+    var $container = $('#container');
+    //Init width
+    var curwidth = $container.width();
+
+
+    //Set width according to sizes
+    // SMARTPHONE STATS:
+    // NEXUS4: P 344, L 558
+
+
+    //Smartphone size: full size!
+    if (curwidth < 400) {
+        //window.boxWidth =  $('.box.newpost').width() + "px";
+        window.boxWidth = Math.round(($(window).width() * 80) / 100) + "px";
+
+    }
+    //Phablet size, or portait big smartphones
+    else if (curwidth >= 400 && curwidth < 650) {
+        window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
+
+    }
+    //Tablet size
+    else if (curwidth >= 650 && curwidth < 900) {
+        window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
+
+    }
+    //Laptop size TODO ???????????
+    else if (curwidth >= 900 && curwidth < 1300) {
+        window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
+
+    }
+    //Desktop size
+    else if (curwidth >= 1300 && curwidth < 1600) {
+        window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
+
+    }
+    //Large size
+    else if (curwidth >= 1600 && curwidth < 2000) {
+        window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
+
+    }
+    // Extra large screen size
+    else {
+        window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
+    }
+
+
+}
 
 
 

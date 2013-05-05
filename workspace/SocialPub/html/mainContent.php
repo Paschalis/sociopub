@@ -13,71 +13,80 @@ if ($_SESSION["loggedin"] == 1) {
 
 
 
+
     <!--        New Post Box-->
-    <div id="newArticle" class="span12">
-
-        <div class="box newpost">
-            <div class="box-img">
-                <img/>
-            </div>
-            <div class="box-body">
-                <div class="input-append">
-                    <label for="newArticleInput">Enter article: </label>
-                    <input id="newArticleInput" type="text">
-                    <button class="btn" type="button" onclick="previewArticle()">Preview</button>
-                    <button id="postNewArticle" class="btn fade out" type="button"
-                            onclick="postArticle()">
-                        Post
-                    </button>
-                </div>
-                <h4></h4>
-
-                <p class="date" datetime="' + datum.added + '"></p>
-
-                <p></p>
-                <span class="articleID" style="display: none"></span>
-
-                <!-- Prev box data!-->
-                <div class="fade out" id="buttonsToolbar">
-                    <img class="articleimg"/>
-                    <h5 class="articletitle"></h5>
-
-                    <p class="articledesc"></p>
-                    <br>
-
-                    <div class="badge badge-success">2</div>
-                    <button class="label" id="acinema">Cinema</button>
-                    <button class="label" id="aeconomy">Economy</button>
-                    <button class="label" id="aentertainment">Entertainment</button>
-                    <button class="label" id="ahealth">Health</button>
-                    <button class="label" id="ahistory">History</button>
-                    <button class="label" id="alifestyle">Lifestyle</button>
-                    <button class="label" id="amusic">Music</button>
-                    <button class="label" id="anews">News</button>
-                    <button class="label" id="ascience">Science</button>
-                    <button class="label" id="asports">Sports</button>
-                    <button class="label" id="atechnology">Technology</button>
-                    <button class="label" id="atravel">Travel</button>
-                    <button class="label label-info" id="aother">Other</button>
-                </div>
+    <!--    <div id="newArticle" class="span12">-->
+    <!--    Isotope-->
+    <!--    <div class="row">-->
 
 
-            </div>
-        </div>
-    </div>
+    <!--    </div>-->
     <!-- End of new post-->
 
-<!--    Isotope-->
-    <div class="row">
-        <div id="container">
 
-        </div>
+    <div id="container">
     </div>
+    <script>
+
+        //Calculate box width
+        calculateBoxWidth();
+
+
+
+        var $container = $('#container');
+
+        var newpost = '<div class="box newpost article" style="width: '+ window.boxWidth +'">'
+            + '<div class="box-img">'
+                + '<img  class="articleimg" />'
+            + '</div>'
+            + '<div class="box-body">'
+            + '<div class="inputData input-append">'
+                + '<label for="newArticleInput">Enter article: </label>'
+                + '<input id="newArticleInput" type="text">'
+                + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
+                + '<button id="postNewArticle" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
+            + '</div>'
+            + '<div class="fade out" id="buttonsToolbar">'
+            + '<img class="articleimg"/>'
+            + '<h4 class="articletitle"></h4>'
+            + '<p class="date" datetime="' + Math.round((new Date()).getTime()/1000) + '" ></p>'
+            + '<p class="articledesc" ></p>'
+            + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
+            + '<button class="badge likes"></button>'
+            + '<span class="badge shares" ></span>'
+            + '<span class="badge views" ></span>'
+            + '<span class="articleID" style="display: none"></span>'
+            + '</div>'
+            + '<div class="categories" >'
+                    + '<button class="label" id="acinema">Cinema</button>'
+                    + '<button class="label" id="aeconomy">Economy</button>'
+                    + '<button class="label" id="aentertainment">Entertainment</button>'
+                    + '<button class="label" id="ahealth">Health</button>'
+                    + '<button class="label" id="ahistory">History</button>'
+                    + '<button class="label" id="alifestyle">Lifestyle</button>'
+                    + '<button class="label" id="amusic">Music</button>'
+                    + '<button class="label" id="anews">News</button>'
+                    + '<button class="label" id="ascience">Science</button>'
+                    + '<button class="label" id="asports">Sports</button>'
+                    + '<button class="label" id="atechnology">Technology</button>'
+                    + '<button class="label" id="atravel">Travel</button>'
+                    + '<button class="label label-info" id="aother">Other</button>'
+                + '</div>'
+            + '</div>'
+            + '</div>';
+
+        debugger;
+
+        $container.append(newpost);
+
+
+    </script>
 
 
 
 
-    <script src="../js/hirestext.js"></script>
+
+    <!--    <script src="../js/hirestext.js"></script>-->
     <script>
 
     $(document).ready(function () {
@@ -89,7 +98,7 @@ if ($_SESSION["loggedin"] == 1) {
         /**
          * TODO PASCHALI SINEXISE (KANONISTIN)
          */
-        $(".box .badge.likes").click(function(){
+        $(".box .badge.likes").click(function () {
 
             alert('test');
 
@@ -141,53 +150,59 @@ if ($_SESSION["loggedin"] == 1) {
         };
 
         $.Isotope.prototype._masonryResizeChanged = function () {
-            var boxWidth;
-            //Get width
-            var curwidth = $('#newArticle').width();
-            //Calculate new width
-            //Smartphone size: full size!
-            if (curwidth < 400) {
-                //New hack
-                //boxWidth = $('.box.newpost').width() + "px";
-               boxWidth = ($(window).width() * 80) / 100 + "px";
 
-            }
-            //Phablet size, or portait big smartphones
-            else if (curwidth >= 400 && curwidth < 650) {
-                boxWidth = Math.round((curwidth / 2)) - 40 + "px";
+            /*
 
-            }
-            //Tablet size
-            else if (curwidth >= 650 && curwidth < 900) {
-                boxWidth = Math.round((curwidth / 3)) - 30 + "px";
+             TODO : CHECK ELEMENT AUTOMATIC RESIZE
 
-            }
-            //Laptop size TODO ???????????
-            else if (curwidth >= 900 && curwidth < 1300) {
-                boxWidth = Math.round((curwidth / 4)) - 30 + "px";
+             //Get width
+             var curwidth = $('#newArticle').width();
+             //Calculate new width
+             //Smartphone size: full size!
+             if (curwidth < 400) {
+             //New hack
+             //window.boxWidth = $('.box.newpost').width() + "px";
+             boxWidth = ($(window).width() * 80) / 100 + "px";
 
-            }
-            //Desktop size
-            else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = Math.round((curwidth / 5)) - 20 + "px";
+             }
+             //Phablet size, or portait big smartphones
+             else if (curwidth >= 400 && curwidth < 650) {
+             window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
 
-            }
-            //Large size
-            else if (curwidth >= 1600 && curwidth < 2000) {
-                boxWidth = Math.round((curwidth / 6)) - 30 + "px";
+             }
+             //Tablet size
+             else if (curwidth >= 650 && curwidth < 900) {
+             window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
 
-            }
-            // Extra large screen size
-            else {
-                boxWidth = Math.round((curwidth / 8)) - 30 + "px";
+             }
+             //Laptop size TODO ???????????
+             else if (curwidth >= 900 && curwidth < 1300) {
+             window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
 
-            }
+             }
+             //Desktop size
+             else if (curwidth >= 1300 && curwidth < 1600) {
+             window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
 
-            //Change the width
-            $(".box.article").width(boxWidth);
-                $(".box img").width(boxWidth);
+             }
+             //Large size
+             else if (curwidth >= 1600 && curwidth < 2000) {
+             window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
 
-            $('#container').isotope( 'reLayout'); //Force reLayout
+             }
+             // Extra large screen size
+             else {
+             window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
+
+             }
+
+             //Change the width
+             $(".box.article").width(window.boxWidth);
+             $(".box img").width(window.boxWidth);
+
+             $('#container').isotope( 'reLayout'); //Force reLayout
+
+             */
 
             var prevColCount = this.masonry.cols;
             // get updated colCount
@@ -216,57 +231,9 @@ if ($_SESSION["loggedin"] == 1) {
 
         $(function () {
 
-
             var $container = $('#container');
 
-            //Init width
             var curwidth = $container.width();
-
-            var boxWidth = "";
-
-
-            //Set width according to sizes
-            // SMARTPHONE STATS:
-            // NEXUS4: P 344, L 558
-
-
-            //Smartphone size: full size!
-            if (curwidth < 400) {
-                //boxWidth =  $('.box.newpost').width() + "px";
-                boxWidth = Math.round(($(window).width() * 80) / 100) + "px";
-
-            }
-            //Phablet size, or portait big smartphones
-            else if (curwidth >= 400 && curwidth < 650) {
-                boxWidth = Math.round((curwidth / 2)) - 40 + "px";
-
-            }
-            //Tablet size
-            else if (curwidth >= 650 && curwidth < 900) {
-                boxWidth = Math.round((curwidth / 3)) - 30 + "px";
-
-            }
-            //Laptop size TODO ???????????
-            else if (curwidth >= 900 && curwidth < 1300) {
-                boxWidth = Math.round((curwidth / 4)) - 30 + "px";
-
-            }
-            //Desktop size
-            else if (curwidth >= 1300 && curwidth < 1600) {
-                boxWidth = Math.round((curwidth / 5)) - 20 + "px";
-
-            }
-            //Large size
-            else if (curwidth >= 1600 && curwidth < 2000) {
-                boxWidth = Math.round((curwidth / 6)) - 30 + "px";
-
-            }
-            // Extra large screen size
-            else {
-                boxWidth = Math.round((curwidth / 8)) - 30 + "px";
-
-            }
-
 
             $("#dsize").text("Size: " + curwidth); //TODO RM
             //When window is resized TODO RM
@@ -374,9 +341,9 @@ if ($_SESSION["loggedin"] == 1) {
                         }
                         if (datum.favorite == 1) favedClass = " favorited";
 
-                        var imgCode="";
-                        if(datum.image!=""){
-                            imgCode= '<img  class="articleimg" src="' + datum.image.replace('/l.', '/m.') + '" />';
+                        var imgCode = "";
+                        if (datum.image != "") {
+                            imgCode = '<img  class="articleimg" src="' + datum.image.replace('/l.', '/m.') + '" />';
                         }
 
                         //TODO ADD SITE NAME
@@ -413,9 +380,9 @@ if ($_SESSION["loggedin"] == 1) {
                             var $this = $(this);
 
                             //Save box width
-                            $this.width(boxWidth);
+                            $this.width(window.boxWidth);
                             //Save box's image width
-                            $this.find('img').width(boxWidth);
+                            $this.find('img').width(window.boxWidth);
                         });
 
                         $container.isotope('insert', $items);
@@ -427,10 +394,7 @@ if ($_SESSION["loggedin"] == 1) {
         });
 
 
-
-
     });
-
 
     </script>
 
@@ -440,7 +404,3 @@ else {
     include("loginScreen.php");
 
 }
-
-
-
-/**  */

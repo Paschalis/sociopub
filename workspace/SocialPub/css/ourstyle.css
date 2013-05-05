@@ -59,9 +59,9 @@ Box of a new post
 */
 .box.newpost {
     border-color: #737373;
-    width: 70%;
-    min-width: 270px;
-    margin: 0 auto;
+    /*width: 70%;*/
+    /*min-width: 270px;*/
+    /*margin: 0 auto;*/
 }
 
 .box .input-append{

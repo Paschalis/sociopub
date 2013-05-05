@@ -21,7 +21,8 @@ include("scripts/initializeSession.php");
     <meta name="author" content="">
 
     <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>
+<!--    <script src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>-->
+    <script src="js/mainJavascript.js"></script>
 
     <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -59,7 +60,6 @@ include("scripts/initializeSession.php");
     </div>
 </div>
 <!--Javascripts-->
-<script src="js/mainJavascript.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-alert.js"></script>
 <script src="js/bootstrap-modal.js"></script>

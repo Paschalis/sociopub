@@ -691,9 +691,9 @@ function previewArticle() {
  * */
 function getArticleSuccess(data) {
 
-    // TODO HANDLE CASE WHEN ARTICLE DOESNT EXISTS IN HERE !
-
     var jsonObj;
+
+    debugger;
 
     try {
         jsonObj = eval('(' + data + ')');
@@ -727,17 +727,18 @@ function getArticleSuccess(data) {
 
 
     // Set the image
-    $("#newArticle .box.newpost #buttonsToolbar .articleimg").attr({src: image});
+    $(".box.newpost.article #buttonsToolbar .articleimg").attr({src: image});
 
-    $("#newArticle .box.newpost #buttonsToolbar .articletitle").html(title + " - " + siteName);
+    $(".box.newpost.article #buttonsToolbar .articletitle").html(title + " - " + siteName);
 
-    $("#newArticle .box.newpost #buttonsToolbar .articledesc").html(description);
+    $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
-    $("#newArticle .box.newpost #postNewArticle").removeClass('out').addClass('in');
+    $(".box.newpost.article #postNewArticleButton").removeClass('out').addClass('in');
 
-    $("#newArticle .box.newpost #buttonsToolbar").removeClass('out').addClass("in");
+    $(".box.newpost.article #buttonsToolbar").removeClass('out').addClass("in");
 
-
+    //Relayout isotope
+    window.container.isotope( 'reLayout'); //Force reLayout
 }
 
 
@@ -804,7 +805,6 @@ function calculateBoxWidth(){
     var $container = $('#container');
     //Init width
     var curwidth = $container.width();
-
 
     //Set width according to sizes
     // SMARTPHONE STATS:

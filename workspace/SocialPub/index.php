@@ -28,6 +28,7 @@ include("scripts/initializeSession.php");
     <link href="css/isotope.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
     <link href="css/ourstyle.css" rel="stylesheet">
 
     <!-- Obsolete web browsers -->
@@ -42,7 +43,7 @@ include("scripts/initializeSession.php");
 <div class="container-fluid">
     <div class="row-fluid">
 
-        <div class="span1" id="leftContent">
+        <div class="span1 hidden-phone" id="leftContent">
             <?php include('html/leftContent.php'); ?>
         </div>
         <div class="span10" id="mainContent">
@@ -56,7 +57,7 @@ include("scripts/initializeSession.php");
             include('html/mainContent.php');
             ?>
         </div>
-        <div class="span1 hidden-phone" id="rightContent">
+        <div class="span1" id="rightContent">
             <?php include('html/rightContent.php'); ?>
         </div>
     </div>

@@ -263,6 +263,21 @@ Categories of box
 
 
 /*
+ReadMore link on box
+*/
+.box .readMore{
+    text-align: right;
+    margin: 0;
+    padding: 0px 0px 10px 0px;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: sans-serif;
+    line-height: 10px;
+}
+
+
+
+/*
  Category in an article
 */
 .box .categories .category{
@@ -420,7 +435,8 @@ Descripton of article
 */
 .box p.articledesc {
     font-size: 14px;
-    /*text-align: match-parent;*/
+    margin: 0;
+    padding: 0;
 
 }
 

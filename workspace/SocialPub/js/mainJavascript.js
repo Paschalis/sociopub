@@ -270,6 +270,7 @@ function addArticleToIsotope(article){
             filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
         }
 
+        filterClasses += article.site + " ";
 
         var likedClass = "";
         var favedClass = "";
@@ -293,9 +294,8 @@ function addArticleToIsotope(article){
             + '<h4 class="articletitle">' + article.title + '</h4>'
             + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
             + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
-            + '<p class="articlesite" >' + article.site + '</p>'
             + '<p class="articledesc" >' + article.description + '</p>'
-            + '<div class="readMore"><a href="' + article.url + '" target="_blank">more...</a></div>'
+            + '<div class="readMore"><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
             + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
             + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
             + '<span class="badge views" >Views: ' + article.views + '</span>'

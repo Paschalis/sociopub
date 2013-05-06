@@ -235,21 +235,108 @@ function ajaxSuccessPost(result) {
         jsonObj['code'] = 1;
         jsonObj['message'] = "Somebody else posted this article too! :)";
     }
-    else if (jsonObj['code'] == -1) {
-        jsonObj['code'] = 0;
-        jsonObj['message'] = "Username is wrong. Please report this!";
-    }
-    else if (jsonObj['code'] == -2) {
-        jsonObj['code'] = 0;
-        jsonObj['message'] = "You have already posted this article!";
-    }
-    else {
+    else if (jsonObj['code'] != 0) {
         jsonObj['code'] = 0;
         jsonObj['message'] = "Something went wrong.";
     }
+
+    // Add article to isotope
+    if(jsonObj['code'] == 1 || jsonObj['code'] == 2){
+        addArticleToIsotope(jsonObj);
+    }
+
     showNotification(jsonObj, DELAY_MEDIUM);
 
 }
+
+
+/*
+* Adds an article to the isotope
+* */
+function addArticleToIsotope(article){
+
+
+    var items = [],
+        item;
+
+
+
+        var filterClasses = "", filterTags = "";
+
+
+        //Create classes for the filtering
+        for (var j = 0; j < article.tags.length; j++) {
+            filterClasses += article.tags[j] + " ";
+            filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
+        }
+
+
+        var likedClass = "";
+        var favedClass = "";
+
+
+        if (article.like == 1) {
+            likedClass = " liked";
+        }
+        if (article.favorite == 1) favedClass = " favorited";
+
+        var imgCode = "";
+        if (article.image != "") {
+            imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
+        }
+
+        item = '<div class="box article  ' + filterClasses + ' ">'
+            + '<div class="box-img">'
+            + imgCode
+            + '</div>'
+            + '<div class="box-body">'
+            + '<h4 class="articletitle">' + article.title + '</h4>'
+            + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
+            + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
+            + '<p class="articlesite" >' + article.site + '</p>'
+            + '<p class="articledesc" >' + article.description + '</p>'
+            + '<div class="readMore"><a href="' + article.url + '" target="_blank">more...</a></div>'
+            + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
+            + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
+            + '<span class="badge views" >Views: ' + article.views + '</span>'
+            + '<span class="articleID" style="display: none">' + article.uid + '</span>'
+            + '</div>'
+            + '<div class="categories" >' + filterTags + '</div>'
+            + '</div>';
+
+
+    var $items = $(item);
+
+
+
+
+    //When image is loaded, add the article
+    $items.imagesLoaded(function () {
+
+        //Clear  new post box
+        clearUsersNewPost(1);
+
+        // add the box to the isotope
+        window.container.append($items);
+
+        $items.each(function () {
+            var $this = $(this);
+
+            //Save box width
+            $this.width(window.boxWidth);
+            //Save box's image width
+            $this.find('img').width(window.boxWidth);
+        });
+
+        window.container.isotope('insert', $items);
+
+
+
+    });
+
+
+}
+
 
 
 /**
@@ -709,13 +796,13 @@ function previewArticle() {
 /**
  * Clears an article's (from session and isotope)
  * */
-function clearUsersNewPost() {
+function clearUsersNewPost(param) {
 
 
     ajaxJsonRequest("scripts/clearArticlePreview.php",
         "",
         clearArticleSuccess,
-        ajaxFailed);
+        ajaxFailed, param);
 
 
 }
@@ -744,8 +831,6 @@ function deleteUsersArticle(element) {
  * */
 function deletedArticleSuccess(data, element) {
 
-    debugger;
-
     var jsonObj;
 
 
@@ -758,9 +843,10 @@ function deletedArticleSuccess(data, element) {
 
         element.remove();
 
-        //Relayout isotope
-        window.container.isotope('reLayout'); //Force reLayout
     }
+
+    //Relayout isotope
+    window.container.isotope('reLayout'); //Force reLayout
 
     makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
 
@@ -770,22 +856,26 @@ function deletedArticleSuccess(data, element) {
 /**
  * Successfully cleared an article's session data
  * */
-function clearArticleSuccess(data) {
+function clearArticleSuccess(data, param) {
 
     var jsonObj;
 
 
     jsonObj = eval('(' + data + ')');
 
-    makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
-
 
     var $newPost = $('.box.newpost.article');
     $newPost.html(getNewPostHtml());
 
 
+    //Relayout and show notification
+    if(param!=1){
+        makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
+
+    }
     //Relayout isotope
     window.container.isotope('reLayout'); //Force reLayout
+
 
 }
 
@@ -837,10 +927,10 @@ function getArticleSuccess(data) {
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
     $(".box.newpost.article .input .buttons button").addClass('fade in half');
-    $(".box.newpost.article .input .buttons button").css("display", "block");
+    $(".box.newpost.article .input .buttons button").css("display", "inline");
 
     $(".box.newpost.article #buttonsToolbar").addClass("fade in");
-    $(".box.newpost.article #buttonsToolbar").css("display", "block");
+    $(".box.newpost.article #buttonsToolbar").css("display", "inline");
 
     //Relayout isotope
     window.container.isotope('reLayout'); //Force reLayout
@@ -926,7 +1016,7 @@ function getNewPostHtml() {
         + '<div style="display: none" id="buttonsToolbar">'
         + '<h4 class="articletitle"></h4>'
         + '<button class="btn closebox newpost" onclick="deleteArticle(this)">x</button>'
-        + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime() / 1000) + '" ></p>'
+        + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime() / 100) + '" ></p>'
         + '<p class="articledesc" ></p>'
         + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
         + '<button class="badge likes"></button>'

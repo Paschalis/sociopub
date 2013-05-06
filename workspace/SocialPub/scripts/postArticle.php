@@ -37,34 +37,96 @@ $url = mysql_real_escape_string($url);
 $username = mysql_real_escape_string($username);
 
 
-$postArticleSrt = "SELECT post_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
+$postArticleSrt = "CALL post_users_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
 
-$result = mysql_query($postArticleSrt) or handlePostArticleError(mysql_error());
 
-//Query runned successfully
-if ($result) {
+$result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
 
-    // Get result code
-    $resultCode = mysql_result($result,0,0);
 
-     // Print result code
-    printMessage($resultCode,"");
+$row = mysql_fetch_assoc($result); // get the results
+
+$resultCode = $row['RESULT'];
+
+
+//  RESULT:  1: Successfully added
+//  RESULT:  2: article already exists, but dont exists for current user
+
+    switch($resultCode){
+        case 2:
+            printArticleData($resultCode, $row);
+
+        case 1:
+            printArticleData($resultCode, $row);
+            break;
+        case -1:
+            // Print result code
+            printMessage(0,"Something went wrong. User doesnt exists!");
+            break;
+        case -2:
+            // Print result code
+            printMessage(0,"Article already exists");
+            break;
+    }
+
+/*
+ * Print result code + article data
+ * code: 1 article added
+ * code: 2 article existed for other users and just added for current user
+ *
+ * */
+function printArticleData($resultCode, $row){
+    $renamedRow['code'] = $resultCode;
+    $renamedRow['uid'] = $row['idARTICLE'];
+    $renamedRow['title'] = $row['TITLE'];
+    $renamedRow['url'] = $row['URL'];
+    $renamedRow['added'] = strtotime($row['TIME']);
+    $renamedRow['views'] = $row['WATCHES'];
+    $renamedRow['shares'] = $row['SHARES'];
+    $renamedRow['site'] = $row['SITE_NAME'];
+
+    //Save like
+    $renamedRow['likes'] = $row['LIKES'];
+
+    $renamedRow['like'] = $row['LIKED'];
+    $renamedRow['favorite'] = $row['FAVORITED'];
+
+
+    if($row['IMG_URL']!=""){
+        $renamedRow['image'] = $row['IMG_URL'];
+    }
+    else{
+        $renamedRow['image'] = "";
+    }
+
+    $renamedRow['description'] = $row['DESCRIPTION'];
+
+    $categoriesTables = explode(',', $row['CATEGORY']);
+
+    $renamedRow['tags'] = $categoriesTables;
+
+
+    echo json_encode($renamedRow);
+
+    die();
 
 }
-
-
-
-
 
 /*
  * Handle postArticle error from mySQL database
  *
  * */
 
-function handlePostArticleError($errorMsg){
-    echo "Error: " . $errorMsg.'<br>';
+function handleGetArticlesError($errorMsg)
+{
+    echo "Error: " . $errorMsg . '<br>';
     die();
 }
+
+
+
+
+
+
 
 
 

@@ -279,19 +279,19 @@ if ($_SESSION["loggedin"] == 1) {
                         return;
                     }
                     var items = [],
-                        item, datum;
+                        item, article;
 
                     for (var i = 0, len = data.length; i < len; i++) {
-                        datum = data[i];
+                        article = data[i];
 
 
                         var filterClasses = "", filterTags = "";
 
 
                         //Create classes for the filtering
-                        for (var j = 0; j < datum.tags.length; j++) {
-                            filterClasses += datum.tags[j] + " ";
-                            filterTags += '<button class="category ' + datum.tags[j] + '">#' + datum.tags[j] + '</button>';
+                        for (var j = 0; j < article.tags.length; j++) {
+                            filterClasses += article.tags[j] + " ";
+                            filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
                         }
 
 
@@ -299,14 +299,14 @@ if ($_SESSION["loggedin"] == 1) {
                         var favedClass = "";
 
 
-                        if (datum.like == 1) {
+                        if (article.like == 1) {
                             likedClass = " liked";
                         }
-                        if (datum.favorite == 1) favedClass = " favorited";
+                        if (article.favorite == 1) favedClass = " favorited";
 
                         var imgCode = "";
-                        if (datum.image != "") {
-                            imgCode = '<img  class="articleimg" src="' + datum.image.replace('/l.', '/m.') + '" />';
+                        if (article.image != "") {
+                            imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
                         }
 
                         //TODO ADD SITE NAME
@@ -315,15 +315,16 @@ if ($_SESSION["loggedin"] == 1) {
                             + imgCode
                             + '</div>'
                             + '<div class="box-body">'
-                            + '<h4 class="articletitle">' + datum.title + '</h4>'
+                            + '<h4 class="articletitle">' + article.title + '</h4>'
                             + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
-                            + '<p class="date" datetime="' + datum.added + '" >' + jQuery.timeago(new Date(datum.added * 1000)) + '</p>'
-                            + '<p class="articledesc" >' + datum.description + '</p>'
-                            + '<div class="readMore"><a href="' + datum.url + '" target="_blank">more...</a></div>'
-                            + '<button class="badge likes' + likedClass + '">+' + datum.likes + '</button>'
-                            + '<span class="badge shares" >Shares: ' + datum.shares + '</span>'
-                            + '<span class="badge views" >Views: ' + datum.views + '</span>'
-                            + '<span class="articleID" style="display: none">' + datum.uid + '</span>'
+                            + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
+                            + '<p class="articlesite" >' + article.site + '</p>'
+                            + '<p class="articledesc" >' + article.description + '</p>'
+                            + '<div class="readMore"><a href="' + article.url + '" target="_blank">more...</a></div>'
+                            + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
+                            + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
+                            + '<span class="badge views" >Views: ' + article.views + '</span>'
+                            + '<span class="articleID" style="display: none">' + article.uid + '</span>'
                             + '</div>'
                             + '<div class="categories" >' + filterTags + '</div>'
                             + '</div>';

@@ -217,8 +217,6 @@ function ajaxFailed() {
 }
 
 
-
-
 /**
  * Post Ajax request was made
  *
@@ -228,33 +226,30 @@ function ajaxSuccessPost(result) {
     var jsonObj = eval('(' + result + ')');
 
 
-
     // Login was successfull
     if (jsonObj['code'] == 1) {
         jsonObj['message'] = "Post was successfully made";
 
     }
-    else if(jsonObj['code'] == 2){
-        jsonObj['code']=1;
+    else if (jsonObj['code'] == 2) {
+        jsonObj['code'] = 1;
         jsonObj['message'] = "Somebody else posted this article too! :)";
     }
-    else if(jsonObj['code'] == -1){
-        jsonObj['code']=0;
+    else if (jsonObj['code'] == -1) {
+        jsonObj['code'] = 0;
         jsonObj['message'] = "Username is wrong. Please report this!";
     }
-    else if(jsonObj['code'] == -2){
-        jsonObj['code']=0;
+    else if (jsonObj['code'] == -2) {
+        jsonObj['code'] = 0;
         jsonObj['message'] = "You have already posted this article!";
     }
     else {
-        jsonObj['code']=0;
+        jsonObj['code'] = 0;
         jsonObj['message'] = "Something went wrong.";
     }
     showNotification(jsonObj, DELAY_MEDIUM);
 
 }
-
-
 
 
 /**
@@ -646,8 +641,6 @@ function showNotification(data, duration) {
     notification.removeClass('out').addClass("in");
 
 
-
-
     // Set notification timeout delay
     window.setTimeout(function () {
         clearNotification();
@@ -659,9 +652,9 @@ function showNotification(data, duration) {
 }
 
 /*
-* Clears the notification
-* */
-function clearNotification(){
+ * Clears the notification
+ * */
+function clearNotification() {
     var notification = $("#notification");
 
     notification.removeClass('in').addClass("out");
@@ -673,15 +666,23 @@ function clearNotification(){
 /*
  * Send AJAX request with json data, using
  * */
-function ajaxJsonRequest(url, formData, successCallback, failCallback) {
+function ajaxJsonRequest(url, formData, successCallback, failCallback, successParams) {
 
     var jqxhr = $.post(url, formData)
         .done(function (data) {
-            successCallback(data);
 
-        })
-        .fail(failCallback);
-    // .always(); -- Not used
+            if (successParams != "") {
+                successCallback(data, successParams);
+            }
+            else {
+                successCallback(data);
+
+            }
+        }
+    )
+        .
+        fail(failCallback);
+// .always(); -- Not used
 
 
 }
@@ -694,7 +695,6 @@ function previewArticle() {
     //Get the url for the article
     var articleUrl = $("#newArticleInput").val();
     var formData = new Object();
-    ajaxFailed
     formData['url'] = articleUrl;
 
     ajaxJsonRequest("scripts/previewArticle.php",
@@ -702,6 +702,90 @@ function previewArticle() {
         getArticleSuccess,
         ajaxFailed);
 
+
+}
+
+
+/**
+ * Clears an article's (from session and isotope)
+ * */
+function clearUsersNewPost() {
+
+
+    ajaxJsonRequest("scripts/clearArticlePreview.php",
+        "",
+        clearArticleSuccess,
+        ajaxFailed);
+
+
+}
+
+/**
+ * Deletes users article from database
+ * */
+function deleteUsersArticle(element) {
+
+    var articleID = element.find('.articleID').html();
+    //Create new object w/ article ID
+    var formData = new Object();
+    formData['articleID'] = articleID;
+
+
+    ajaxJsonRequest("scripts/deleteUserArticle.php",
+        formData,
+        deletedArticleSuccess,
+        ajaxFailed, element);
+
+}
+
+
+/**
+ * Successfully deleted an article of a user
+ * */
+function deletedArticleSuccess(data, element) {
+
+    debugger;
+
+    var jsonObj;
+
+
+    jsonObj = eval('(' + data + ')');
+
+
+
+    //if deletion was okay, remove element from isotope too
+    if (jsonObj['code'] == 1) {
+
+        element.remove();
+
+        //Relayout isotope
+        window.container.isotope('reLayout'); //Force reLayout
+    }
+
+    makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
+
+}
+
+
+/**
+ * Successfully cleared an article's session data
+ * */
+function clearArticleSuccess(data) {
+
+    var jsonObj;
+
+
+    jsonObj = eval('(' + data + ')');
+
+    makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
+
+
+    var $newPost = $('.box.newpost.article');
+    $newPost.html(getNewPostHtml());
+
+
+    //Relayout isotope
+    window.container.isotope('reLayout'); //Force reLayout
 
 }
 
@@ -752,12 +836,14 @@ function getArticleSuccess(data) {
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
-    $(".box.newpost.article .input .buttons button").removeClass('out').addClass('in half');
+    $(".box.newpost.article .input .buttons button").addClass('fade in half');
+    $(".box.newpost.article .input .buttons button").css("display", "block");
 
-    $(".box.newpost.article #buttonsToolbar").removeClass('out').addClass("in");
+    $(".box.newpost.article #buttonsToolbar").addClass("fade in");
+    $(".box.newpost.article #buttonsToolbar").css("display", "block");
 
     //Relayout isotope
-    window.container.isotope( 'reLayout'); //Force reLayout
+    window.container.isotope('reLayout'); //Force reLayout
 }
 
 
@@ -779,8 +865,8 @@ function postArticle() {
         }
     });
 
-    if(categories==""){
-        makeShowNotification(0,"Please select at least one category", DELAY_MEDIUM);
+    if (categories == "") {
+        makeShowNotification(0, "Please select at least one category", DELAY_MEDIUM);
         return;
     }
 
@@ -789,7 +875,7 @@ function postArticle() {
 
     var formData = new Object();
 
-    formData['categories']=categories;
+    formData['categories'] = categories;
 
     //Post article
     ajaxJsonRequest("scripts/postArticle.php",
@@ -804,40 +890,29 @@ function postArticle() {
  * Delets an article from DB
  *
  * */
-function deleteArticle(element){
+function deleteArticle(element) {
 
 
     // its the new post. Just clear it, dont remove it
-    if($(element).hasClass('newpost')){
-        clearNewPost();
+    if ($(element).hasClass('newpost')) {
+        clearUsersNewPost();
     }
-    else{
-        alert('del');
+    else {
+        //Delete users article
+        deleteUsersArticle(element)
     }
-
-    //Relayout isotope
-    window.container.isotope( 'reLayout'); //Force reLayout
-}
-/**
- * Clears the new post. user decided to discard his post
- * */
-function clearNewPost(){
-    var $newPost = $('.box.newpost.article');
-
-    $newPost.html(getNewPostHtml());
-
-
 
 
 }
+
 
 /**
  * Returns the HTML code for a new post
  * */
-function getNewPostHtml(){
+function getNewPostHtml() {
 
     return '<div class="box-img">'
-        + '<img  class="articleimg" style="width: '+ window.boxWidth +'"  />'
+        + '<img  class="articleimg" style="width: ' + window.boxWidth + '"  />'
         + '</div>'
         + '<div class="box-body">'
         + '<div class="input">'
@@ -845,13 +920,13 @@ function getNewPostHtml(){
         + '<input id="newArticleInput" type="text">'
         + '<div class="buttons">'
         + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
-        + '<button id="postNewArticleButton" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
+        + '<button id="postNewArticleButton" class="btn half" style="display: none" type="button" onclick="postArticle()">Post</button>'
         + '</div>'
         + '</div>'
-        + '<div class="fade out" id="buttonsToolbar">'
+        + '<div style="display: none" id="buttonsToolbar">'
         + '<h4 class="articletitle"></h4>'
         + '<button class="btn closebox newpost" onclick="deleteArticle(this)">x</button>'
-        + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime()/1000) + '" ></p>'
+        + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime() / 1000) + '" ></p>'
         + '<p class="articledesc" ></p>'
         + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
         + '<button class="badge likes"></button>'
@@ -879,7 +954,6 @@ function getNewPostHtml(){
 }
 
 
-
 /**
  * TODO CHANGE
  *
@@ -899,7 +973,7 @@ function makeShowNotification(code, msg, delay) {
 /*
  * Calculates the width of a box
  * */
-function calculateBoxWidth(){
+function calculateBoxWidth() {
 
     var $container = $('#container');
     //Init width

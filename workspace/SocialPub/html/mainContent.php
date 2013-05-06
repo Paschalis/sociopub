@@ -316,7 +316,7 @@ if ($_SESSION["loggedin"] == 1) {
                             + '</div>'
                             + '<div class="box-body">'
                             + '<h4 class="articletitle">' + datum.title + '</h4>'
-                            + '<button class="btn closebox" onclick="deleteArticle(this)">x</button>'
+                            + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
                             + '<p class="date" datetime="' + datum.added + '" >' + jQuery.timeago(new Date(datum.added * 1000)) + '</p>'
                             + '<p class="articledesc" >' + datum.description + '</p>'
                             + '<div class="readMore"><a href="' + datum.url + '" target="_blank">more...</a></div>'

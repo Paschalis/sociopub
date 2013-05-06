@@ -26,10 +26,31 @@ if ($result) {
     // Get result code
     $resultCode = mysql_result($result,0,0);
 
-     // Print result code
-    printMessage($resultCode,"");
-
+    switch($resultCode){
+        case 1:
+            // Print result code
+            printMessage(1,"Article successfully deleted");
+            break;
+        case -1:
+            // Print result code
+            printMessage(0,"Something went wrong. User doesnt exist!");
+            break;
+        case -2:
+            // Print result code
+            printMessage(0,"Article doesnt exists");
+            break;
+        case -3:
+            // Print result code
+            printMessage(0,"Article already deleted");
+            break;
+    }
 }
+ else{
+        // Print result code
+        printMessage(0,"Something went wrong!");
+        }
+
+
 
 
 

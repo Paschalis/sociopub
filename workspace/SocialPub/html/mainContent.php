@@ -57,31 +57,6 @@ if ($_SESSION["loggedin"] == 1) {
         window.container = $('#container');
 
 
-        //When user presses like button
-        //$(this).parent().find('articleID').addClass("liked")
-
-        /**
-         * TODO PASCHALI SINEXISE (KANONISTIN)
-         */
-        $(".box .badge.likes").click(function () {
-
-            alert('test');
-
-//    //Get the url for the article
-//    var articleUrl = $(this).parent().find(articleUrl).val();
-//    var formData = new Object();
-//
-//    formData['url'] = articleUrl;
-//
-//    ajaxJsonRequest("scripts/likeArticle.php",
-//        formData,
-//        getLikeSuccess,
-//        ajaxFailed);
-
-
-        });
-
-
         /*
          $.Isotope.prototype._getCenteredMasonryColumns = function () {
          this.width = this.element.width();
@@ -322,6 +297,7 @@ if ($_SESSION["loggedin"] == 1) {
                                 break;
                             }
                         }
+
                         //if sitename is unique, add it
                         if (isUnique == 1) {
                             siteFilters.push(newSiteFilter);
@@ -352,7 +328,7 @@ if ($_SESSION["loggedin"] == 1) {
 
                         //Show site filters on right content bar
                         for (var i = 0; i < siteFiltersDivs.length; i++) {
-                            $('#filter2').append(siteFiltersDivs[i]);
+                            $('#filter ul').append(siteFiltersDivs[i]);
 
                         }
 

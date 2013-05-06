@@ -86,7 +86,93 @@ $(document).ready(function () {
     });
 
 
+
+
+
+    //When user presses like button
+    //$(this).parent().find('articleID').addClass("liked")
+
+    /**
+     * TODO PASCHALI SINEXISE (KANONISTIN)
+     */
+    $("body").on("click", ".box button.likes", function() {
+
+
+
+
+    //Get the article ID
+    var articleID = $($(this).siblings(".articleID")[0]).html(); //.val()
+
+    //Get the current like value
+    var likeValue = $(this).hasClass('liked');
+    if(likeValue) likeValue=1;
+        else likeValue=0;
+
+    var formData = new Object();
+
+    formData['articleID'] = articleID;
+    formData['likeValue'] = likeValue;
+
+        debugger;
+
+
+        ajaxJsonRequest("scripts/likeArticle.php",
+        formData,
+        getLikeSuccess,
+        ajaxFailed,this);
+    });
+
+
 });
+
+/*
+* Article was liked
+* */
+function getLikeSuccess(data, element){
+
+    debugger;
+
+    var jsonObj = eval('(' + data + ')');
+
+
+    // Login was successfull
+    if (jsonObj['code'] == -1) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User dont exists";
+
+    }
+    else if (jsonObj['code'] == -2) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. Article dont exists";
+    }
+    else if (jsonObj['code'] == -3) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User's article dont exists";
+    }
+
+    // Successfully liked or unliked
+    if(jsonObj['code'] != -1){
+        //Successfully unliked
+        if(jsonObj['code']==0){
+            $(element).removeClass('liked');
+
+        }
+        //Successfully liked
+        else{
+            $(element).addClass('liked');
+        }
+
+        $(element).html('+'+jsonObj['likes']);
+    }
+    //Show notification
+    else{
+        jsonObj['code']=0;
+        showNotification(jsonObj, DELAY_MEDIUM);
+    }
+
+
+
+}
 
 
 /*
@@ -467,8 +553,8 @@ function checkUsername(username) {
 
 // Username is correct
     if (value != "" && value.length <= 30) {
-
         $(username).parent().removeClass('error');
+
 
     }
     // Username is wrong

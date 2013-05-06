@@ -39,7 +39,6 @@ $username = mysql_real_escape_string($username);
 
 $postArticleSrt = "CALL post_users_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
 
-
 $result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
 
 

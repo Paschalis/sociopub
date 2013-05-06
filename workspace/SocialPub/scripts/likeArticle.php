@@ -15,37 +15,57 @@ $username = $_SESSION['username'];
 
 // Get articles categories
 $articleID = $_POST['articleID'];
-// Get like article value
-$like="SELECT get_like_article_val('".$articleID."','".$username."')";
-
-// TODO CHANGE THIS LATER (proxirotites tou paschali)
-//$username = "pampos";
-//$articleID = "20";
-//$like = "0";
 
 
-
-
-$likeArticleSrt = "SELECT like_article('".$articleID."','".$username."','".$like."')";
-
-
-echo $postArticleSrt;
+$likeArticleSrt = "CALL toggle_like_article('".$articleID."','".$username."')";
 
 $result = mysql_query($likeArticleSrt) or handleLikeArticleError(mysql_error());
 
-//Query runned successfully
-if ($result) {
 
-    // Get result code
-    $resultCode = mysql_result($result,0,0);
 
-    // Print result code
-    printMessage($resultCode,"");
-    // -2: Article NOT exists
-    // -1: User NOT exissts
-    //  0: User_Article NOT exists
-    //  1: OK
+$row = mysql_fetch_assoc($result); // get the results
+
+$resultCode = $row['RESULT'];
+
+
+//  RESULT:  1: Successfully added
+//  RESULT:  2: article already exists, but dont exists for current user
+
+switch($resultCode){
+    // Successfully liked
+    case 1:
+    case 0:
+        printLikedData($resultCode, $row);
+        break;
+    //Something went wrong
+    case -1:
+    case -2:
+    case -3:
+        printMessage($resultCode,"");
+        break;
 }
+
+/*
+ * Print result code + article data
+ * code: 1 article added
+ * code: 2 article existed for other users and just added for current user
+ *
+ * */
+function printLikedData($resultCode, $row){
+
+    $renamedRow['code'] = $resultCode;
+    $renamedRow['likes'] = $row['LIKES'];
+
+    echo json_encode($renamedRow);
+
+    die();
+
+}
+
+
+
+
+
 
 /*
  * Handle likeArticle error from mySQL database

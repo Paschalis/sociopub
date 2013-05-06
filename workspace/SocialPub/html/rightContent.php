@@ -21,10 +21,11 @@ if ($_SESSION['loggedin'] == 1) {
 
         <div id="filters" class="container">
 
-            <div class="nav-collapse collapse navbar-responsive-collapse rightbar">
-                <h5>Categories</h5>
-                <ul id="filter1" class="option-set" data-option-key="filter">
-                    <li><a href="#" data-option-value="*" class="selected">Everything</a></li>
+            <div id="filter" class="nav-collapse collapse navbar-responsive-collapse rightbar">
+                <ul class="filterclass option-set" data-option-key="filter">
+                    <li><a href="#" data-option-value="*" class="selected">No Filters</a></li>
+                    <li></li>
+                    <li><h4>Categories</h4></li>
                     <li><a href="#" data-option-value=".cinema">Cinema</a></li>
                     <li><a href="#" data-option-value=".economy">Economy</a></li>
                     <li><a href="#" data-option-value=".entertainment">Entertainment</a></li>
@@ -38,12 +39,8 @@ if ($_SESSION['loggedin'] == 1) {
                     <li><a href="#" data-option-value=".technology">Technology</a></li>
                     <li><a href="#" data-option-value=".travel">Travel</a></li>
                     <li><a href="#" data-option-value=".other">Other</a></li>
+                    <li><h4>Sites</h4></li>
                 </ul>
-                <h5>Sites</h5>
-                <ul id="filter2" class="option-set" data-option-key="filter">
-                </ul>
-
-
             </div>
         </div>
     </div>

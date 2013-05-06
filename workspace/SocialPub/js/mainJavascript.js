@@ -752,7 +752,7 @@ function getArticleSuccess(data) {
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
-    $(".box.newpost.article .input .buttons ").removeClass('out').addClass('in');
+    $(".box.newpost.article .input .buttons button").removeClass('out').addClass('in half');
 
     $(".box.newpost.article #buttonsToolbar").removeClass('out').addClass("in");
 
@@ -762,7 +762,7 @@ function getArticleSuccess(data) {
 
 
 /**
- *
+ * Post an article to DB
  *
  * */
 function postArticle() {
@@ -798,6 +798,86 @@ function postArticle() {
         ajaxFailed);
 
 }
+
+
+/**
+ * Delets an article from DB
+ *
+ * */
+function deleteArticle(element){
+
+
+    // its the new post. Just clear it, dont remove it
+    if($(element).hasClass('newpost')){
+        clearNewPost();
+    }
+    else{
+        alert('del');
+    }
+
+    //Relayout isotope
+    window.container.isotope( 'reLayout'); //Force reLayout
+}
+/**
+ * Clears the new post. user decided to discard his post
+ * */
+function clearNewPost(){
+    var $newPost = $('.box.newpost.article');
+
+    $newPost.html(getNewPostHtml());
+
+
+
+
+}
+
+/**
+ * Returns the HTML code for a new post
+ * */
+function getNewPostHtml(){
+
+    return '<div class="box-img">'
+        + '<img  class="articleimg" style="width: '+ window.boxWidth +'"  />'
+        + '</div>'
+        + '<div class="box-body">'
+        + '<div class="input">'
+        + '<label for="newArticleInput">Post an article:</label>'
+        + '<input id="newArticleInput" type="text">'
+        + '<div class="buttons">'
+        + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
+        + '<button id="postNewArticleButton" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
+        + '</div>'
+        + '</div>'
+        + '<div class="fade out" id="buttonsToolbar">'
+        + '<h4 class="articletitle"></h4>'
+        + '<button class="btn closebox newpost" onclick="deleteArticle(this)">x</button>'
+        + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime()/1000) + '" ></p>'
+        + '<p class="articledesc" ></p>'
+        + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
+        + '<button class="badge likes"></button>'
+        + '<span class="badge shares" ></span>'
+        + '<span class="badge views" ></span>'
+        + '<span class="articleID" style="display: none"></span>'
+        + '<div class="categories" >'
+        + '<button class="label" id="acinema">Cinema</button>'
+        + '<button class="label" id="aeconomy">Economy</button>'
+        + '<button class="label" id="aentertainment">Entertainment</button>'
+        + '<button class="label" id="ahealth">Health</button>'
+        + '<button class="label" id="ahistory">History</button>'
+        + '<button class="label" id="alifestyle">Lifestyle</button>'
+        + '<button class="label" id="amusic">Music</button>'
+        + '<button class="label" id="anews">News</button>'
+        + '<button class="label" id="ascience">Science</button>'
+        + '<button class="label" id="asports">Sports</button>'
+        + '<button class="label" id="atechnology">Technology</button>'
+        + '<button class="label" id="atravel">Travel</button>'
+        + '<button class="label label-info" id="aother">Other</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
+
+}
+
 
 
 /**

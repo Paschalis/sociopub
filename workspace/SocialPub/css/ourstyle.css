@@ -60,22 +60,44 @@ Box of a new post
 .box.newpost {
     border-color: #737373;
 }
-.box.newpost #newArticleInput{
-    width: 90%;
-    height: 25px;
-    margin: 0px 5px 0px 5px;
-    padding: 0px 5px 0px 5px;
-
-}
 .box.newpost .input .buttons { /* Buttons Div */
-    margin: 0px 5px 0px 5px;
+    margin: 0;
+    padding: 0;
 }
+.box.newpost .input input  { /* Input url */
+    display:block;
+    padding:0;
+    margin: 0;
+    width: 100%;
+    height: 25px;
+
+    border-bottom-left-radius: 0px;
+    -moz-border-bottom-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+
+    border-bottom-right-radius: 0px;
+    -moz-border-bottom-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+}
+
 .box.newpost .input button { /* A Button */
+    border-top-left-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    -webkit-border-top-left-radius: 0px;
+
+    border-top-right-radius: 0px;
+    -moz-border-top-right-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
     margin: 0;
     padding: 0;
     height: 25px;
-    width: 30%;
+    width: 100%;
 }
+
+.box.newpost .input button.half { /* A Button */
+    width: 50%;
+}
+
 
 
 
@@ -151,7 +173,7 @@ Time of box
     line-height: 10px;
     position: absolute;
     top: -1px;
-    right: 0px;
+    left: 0px;
 
     border: 2px solid #000000;
     -webkit-bottom-left-border-radius: 4px;
@@ -173,6 +195,42 @@ Time of box
     -o-user-select: none;
     user-select: none;
 
+}
+
+/*
+Close Button of box
+*/
+.box button.btn.closebox {
+    color: white;
+    background: #4c4c4c;
+    line-height: 10px;
+    margin: 0px;
+    padding: 4px 5px 4px 5px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: 1px solid #737373;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-bottom-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+
+    /*Unselectable date*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+
+}
+/*
+Close Button of box on Hover
+*/
+.box button.btn.closebox:hover {
+    padding: 3px 4px 3px 4px;
+    border: 2px solid #ce4613;
 }
 
 /*

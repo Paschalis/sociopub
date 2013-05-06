@@ -34,47 +34,9 @@ if ($_SESSION["loggedin"] == 1) {
         var $container = $('#container');
 
 
-        var newpost = '<div class="box newpost article" style="width: '+ window.boxWidth +'">'
-            + '<div class="box-img">'
-                + '<img  class="articleimg" style="width: '+ window.boxWidth +'"  />'
-            + '</div>'
-            + '<div class="box-body">'
-                + '<div class="input">'
-                    + '<label for="newArticleInput">Post an article:</label>'
-                    + '<input id="newArticleInput" type="text">'
-                    + '<div class="buttons">'
-                        + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
-                        + '<button id="postNewArticleButton" class="btn fade out" type="button" onclick="postArticle()">Post</button>'
-                        + '<button id="clearNewArticleButton" class="btn fade out" type="button" onclick="clearArticle()">Clear</button>'
-                    + '</div>'
-                + '</div>'
-                + '<div class="fade out" id="buttonsToolbar">'
-                    + '<h4 class="articletitle"></h4>'
-                    + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime()/1000) + '" ></p>'
-                    + '<p class="articledesc" ></p>'
-                    + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
-                    + '<button class="badge likes"></button>'
-                    + '<span class="badge shares" ></span>'
-                    + '<span class="badge views" ></span>'
-                    + '<span class="articleID" style="display: none"></span>'
-                    + '<div class="categories" >'
-                            + '<button class="label" id="acinema">Cinema</button>'
-                            + '<button class="label" id="aeconomy">Economy</button>'
-                            + '<button class="label" id="aentertainment">Entertainment</button>'
-                            + '<button class="label" id="ahealth">Health</button>'
-                            + '<button class="label" id="ahistory">History</button>'
-                            + '<button class="label" id="alifestyle">Lifestyle</button>'
-                            + '<button class="label" id="amusic">Music</button>'
-                            + '<button class="label" id="anews">News</button>'
-                            + '<button class="label" id="ascience">Science</button>'
-                            + '<button class="label" id="asports">Sports</button>'
-                            + '<button class="label" id="atechnology">Technology</button>'
-                            + '<button class="label" id="atravel">Travel</button>'
-                            + '<button class="label label-info" id="aother">Other</button>'
-                    + '</div>'
-                + '</div>'
-            + '</div>'
-            + '</div>';
+        var newpost ='<div class="box newpost article" style="width: '+ window.boxWidth +'">'
+                + getNewPostHtml()
+                + '</div>';
 
         $container.append(newpost);
 
@@ -354,6 +316,7 @@ if ($_SESSION["loggedin"] == 1) {
                             + '</div>'
                             + '<div class="box-body">'
                             + '<h4 class="articletitle">' + datum.title + '</h4>'
+                            + '<button class="btn closebox" onclick="deleteArticle(this)">x</button>'
                             + '<p class="date" datetime="' + datum.added + '" >' + jQuery.timeago(new Date(datum.added * 1000)) + '</p>'
                             + '<p class="articledesc" >' + datum.description + '</p>'
                             + '<div class="readMore"><a href="' + datum.url + '" target="_blank">more...</a></div>'

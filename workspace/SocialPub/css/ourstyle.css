@@ -13,9 +13,12 @@ body {
 Isotopes body
 */
 #container {
-    border: none;
-    position: relative;
-    margin-right: 0px !important;
+    /*border: none;*/
+    /*position: relative;*/
+    margin: 0 auto;
+    /*padding: 0 !important;*/
+    /*margin: 0 !important;*/
+    width: 10%;
     background-color: white;
 
     /*height: 10px;*/
@@ -454,4 +457,25 @@ Notification
     display: inline-block;
     position:relative;
     margin: 0 auto;
+}
+#rightContent {
+    margin-left: 0px;
+}
+#rightContent .btn-navbar{
+    background: #bfbfbf;
+
+    width: 100%;
+
+}
+
+#rightContent .btn-navbar .icon-bar{
+    background-color: #000000;
+    margin: 3px auto;
+
+}
+
+#rightContent ul li a{
+    padding-left: 0px;
+    margin-left: 0px;
+
 }

@@ -8,24 +8,21 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" <?php echo 'href="' . _URL . '"'; ?>><?php echo _NAME; ?></a>
+
             <div class="nav-collapse collapse navbar-responsive-collapse">
                 <ul class="nav">
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">Link 2</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Sports</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li class="nav-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
                 </ul>
-
+                <!--                    DropDown Comment out-->
+                <!--                    <li class="dropdown">-->
+                <!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>-->
+                <!--                        <ul class="dropdown-menu">-->
+                <!--                            <li><a href="#">Sports</a></li>-->
+                <!--                            <li class="divider"></li>-->
+                <!--                            <li class="nav-header">Nav header</li>-->
+                <!--                        </ul>-->
+                <!--                    </li>-->
 
                 <!-- Right navigation-->
                 <ul class="nav pull-center">
@@ -57,26 +54,3 @@
             <!-- /.nav-collapse -->
         </div>
     </div>
-    <!-- /navbar-inner -->
-    <!--Filter for categories TODO ENABLE-->
-<!--    <li>-->
-<!--        <div id="options" class="clearfix" class="option-combo">-->
-<!---->
-<!--            <ul id="filter" class="option-set clearfix" data-option-key="filter">-->
-<!--                <li><a href="#" data-option-value="*" class="selected">Everything</a></li>-->
-<!--                <li><a href="#" data-option-value=".cinema">Cinema</a></li>-->
-<!--                <li><a href="#" data-option-value=".economy">Economy</a></li>-->
-<!--                <li><a href="#" data-option-value=".entertainment">Entertainment</a></li>-->
-<!--                <li><a href="#" data-option-value=".health">Health</a></li>-->
-<!--                <li><a href="#" data-option-value=".history">History</a></li>-->
-<!--                <li><a href="#" data-option-value=".lifestyle">Lifestyle</a></li>-->
-<!--                <li><a href="#" data-option-value=".music">Music</a></li>-->
-<!--                <li><a href="#" data-option-value=".news">News</a></li>-->
-<!--                <li><a href="#" data-option-value=".science">Science</a></li>-->
-<!--                <li><a href="#" data-option-value=".sports">Sports</a></li>-->
-<!--                <li><a href="#" data-option-value=".technology">Technology</a></li>-->
-<!--                <li><a href="#" data-option-value=".travel">Travel</a></li>-->
-<!--                <li><a href="#" data-option-value=".other">Other</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </li>-->

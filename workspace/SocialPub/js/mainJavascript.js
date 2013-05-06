@@ -932,8 +932,20 @@ function getArticleSuccess(data) {
     $(".box.newpost.article #buttonsToolbar").addClass("fade in");
     $(".box.newpost.article #buttonsToolbar").css("display", "inline");
 
-    //Relayout isotope
-    window.container.isotope('reLayout'); //Force reLayout
+
+
+
+    //When image is loaded, relayout the isotope
+    $(".box.newpost.article .articleimg").imagesLoaded(function () {
+
+
+        //Relayout isotope
+        window.container.isotope('reLayout'); //Force reLayout
+
+    });
+
+
+
 }
 
 

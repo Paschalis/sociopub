@@ -82,7 +82,7 @@ function printArticleData($resultCode, $row){
     $renamedRow['added'] = strtotime($row['TIME']);
     $renamedRow['views'] = $row['WATCHES'];
     $renamedRow['shares'] = $row['SHARES'];
-    $renamedRow['site'] = $row['SITE_NAME'];
+    $renamedRow['site'] =  substr($row['SITE_NAME'], 0, 10 );
 
     //Save like
     $renamedRow['likes'] = $row['LIKES'];

@@ -270,7 +270,7 @@ function addArticleToIsotope(article){
             filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
         }
 
-        filterClasses += article.site + " ";
+        filterClasses += article.site.replace(/[ .//]/ig,'').toLowerCase()   + " ";
 
         var likedClass = "";
         var favedClass = "";
@@ -1089,7 +1089,7 @@ function calculateBoxWidth() {
     //Smartphone size: full size!
     if (curwidth < 400) {
         //window.boxWidth =  $('.box.newpost').width() + "px";
-        window.boxWidth = Math.round(($(window).width() * 80) / 100) + "px";
+        window.boxWidth = Math.round($(window).width())-10 + "px";
 
     }
     //Phablet size, or portait big smartphones

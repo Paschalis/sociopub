@@ -13,16 +13,16 @@ body {
 Isotopes body
 */
 #container {
-    /*border: none;*/
+    border: none;
+
     /*position: relative;*/
     margin: 0 auto;
+    padding: 0;
     /*padding: 0 !important;*/
     /*margin: 0 !important;*/
-    width: 10%;
+
     background-color: white;
 
-    /*height: 10px;*/
-    /*max-height: 10%;*/
 }
 
 /**
@@ -51,7 +51,7 @@ The whole box of an article
     /*width: 270px;*/
 
 
-    margin: 5px 15px 10px 0px;
+    margin: 5px 5px 10px 5px;
 
     font-family: sans-serif;
 
@@ -474,8 +474,11 @@ Notification
 
 }
 
+#rightContent ul li {
+    margin: 10px 0px 10px 0px;
+    list-style:none;
+}
 #rightContent ul li a{
-    padding-left: 0px;
-    margin-left: 0px;
-
+    font-size:17px;
+    text-decoration: none;
 }

@@ -34,9 +34,10 @@ if ($_SESSION["loggedin"] == 1) {
         var $container = $('#container');
 
 
-        var newpost ='<div class="box newpost article" style="width: '+ window.boxWidth +'">'
-                + getNewPostHtml()
-                + '</div>';
+        var newpost = '<div class="box newpost article cinema economy entertainment history health ' +
+            'lifestyle music news science sports technology travel other " style="width: ' + window.boxWidth + '">'
+            + getNewPostHtml()
+            + '</div>';
 
         $container.append(newpost);
 
@@ -51,7 +52,6 @@ if ($_SESSION["loggedin"] == 1) {
     <script>
 
     $(document).ready(function () {
-
 
 
         window.container = $('#container');
@@ -81,118 +81,121 @@ if ($_SESSION["loggedin"] == 1) {
 
         });
 
-        $.Isotope.prototype._getCenteredMasonryColumns = function () {
-            this.width = this.element.width();
 
-            var parentWidth = this.element.parent().width();
+        /*
+         $.Isotope.prototype._getCenteredMasonryColumns = function () {
+         this.width = this.element.width();
 
-            // i.e. options.masonry && options.masonry.columnWidth
-            var colW = this.options.masonry && this.options.masonry.columnWidth ||
-                // or use the size of the first item
-                this.$filteredAtoms.outerWidth(true) ||
-                // if there's no items, use size of container
-                parentWidth;
+         var parentWidth = this.element.parent().width();
 
-            var cols = Math.floor(parentWidth / colW);
-            cols = Math.max(cols, 1);
+         // i.e. options.masonry && options.masonry.columnWidth
+         var colW = this.options.masonry && this.options.masonry.columnWidth ||
+         // or use the size of the first item
+         this.$filteredAtoms.outerWidth(true) ||
+         // if there's no items, use size of container
+         parentWidth;
 
-            // i.e. this.masonry.cols = ....
-            this.masonry.cols = cols;
-            // i.e. this.masonry.columnWidth = ...
-            this.masonry.columnWidth = colW;
-        };
+         var cols = Math.floor(parentWidth / colW);
+         cols = Math.max(cols, 1);
 
-        $.Isotope.prototype._masonryReset = function () {
-            // layout-specific props
-            this.masonry = {};
-            // FIXME shouldn't have to call this again
-            this._getCenteredMasonryColumns();
-            var i = this.masonry.cols;
-            this.masonry.colYs = [];
-            while (i--) {
-                this.masonry.colYs.push(0);
-            }
-        };
+         // i.e. this.masonry.cols = ....
+         this.masonry.cols = cols;
+         // i.e. this.masonry.columnWidth = ...
+         this.masonry.columnWidth = colW;
+         };
 
-        $.Isotope.prototype._masonryResizeChanged = function () {
+         $.Isotope.prototype._masonryReset = function () {
+         // layout-specific props
+         this.masonry = {};
+         // FIXME shouldn't have to call this again
+         this._getCenteredMasonryColumns();
+         var i = this.masonry.cols;
+         this.masonry.colYs = [];
+         while (i--) {
+         this.masonry.colYs.push(0);
+         }
+         };
 
-            /*
+         $.Isotope.prototype._masonryResizeChanged = function () {
 
-             TODO : CHECK ELEMENT AUTOMATIC RESIZE w/ function
+         /*
 
-             //Get width
-             var curwidth = $('#newArticle').width();
-             //Calculate new width
-             //Smartphone size: full size!
-             if (curwidth < 400) {
-             //New hack
-             //window.boxWidth = $('.box.newpost').width() + "px";
-             boxWidth = ($(window).width() * 80) / 100 + "px";
+         TODO : CHECK ELEMENT AUTOMATIC RESIZE w/ function
 
-             }
-             //Phablet size, or portait big smartphones
-             else if (curwidth >= 400 && curwidth < 650) {
-             window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
+         //Get width
+         var curwidth = $('#newArticle').width();
+         //Calculate new width
+         //Smartphone size: full size!
+         if (curwidth < 400) {
+         //New hack
+         //window.boxWidth = $('.box.newpost').width() + "px";
+         boxWidth = ($(window).width() * 80) / 100 + "px";
 
-             }
-             //Tablet size
-             else if (curwidth >= 650 && curwidth < 900) {
-             window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
+         }
+         //Phablet size, or portait big smartphones
+         else if (curwidth >= 400 && curwidth < 650) {
+         window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
 
-             }
-             //Laptop size TODO ???????????
-             else if (curwidth >= 900 && curwidth < 1300) {
-             window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
+         }
+         //Tablet size
+         else if (curwidth >= 650 && curwidth < 900) {
+         window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
 
-             }
-             //Desktop size
-             else if (curwidth >= 1300 && curwidth < 1600) {
-             window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
+         }
+         //Laptop size TODO ???????????
+         else if (curwidth >= 900 && curwidth < 1300) {
+         window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
 
-             }
-             //Large size
-             else if (curwidth >= 1600 && curwidth < 2000) {
-             window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
+         }
+         //Desktop size
+         else if (curwidth >= 1300 && curwidth < 1600) {
+         window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
 
-             }
-             // Extra large screen size
-             else {
-             window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
+         }
+         //Large size
+         else if (curwidth >= 1600 && curwidth < 2000) {
+         window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
 
-             }
+         }
+         // Extra large screen size
+         else {
+         window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
 
-             //Change the width
-             $(".box.article").width(window.boxWidth);
-             $(".box img").width(window.boxWidth);
+         }
 
-             $('#container').isotope( 'reLayout'); //Force reLayout
+         //Change the width
+         $(".box.article").width(window.boxWidth);
+         $(".box img").width(window.boxWidth);
 
-             */
+         $('#container').isotope( 'reLayout'); //Force reLayout
 
-            var prevColCount = this.masonry.cols;
-            // get updated colCount
-            this._getCenteredMasonryColumns();
-            return ( this.masonry.cols !== prevColCount );
-        };
+         */
+        /*
 
-        $.Isotope.prototype._masonryGetContainerSize = function () {
-            var unusedCols = 0,
-                i = this.masonry.cols;
-            // count unused columns
-            while (--i) {
-                if (this.masonry.colYs[i] !== 0) {
-                    break;
-                }
-                unusedCols++;
-            }
+         var prevColCount = this.masonry.cols;
+         // get updated colCount
+         this._getCenteredMasonryColumns();
+         return ( this.masonry.cols !== prevColCount );
+         };
 
-            return {
-                height: Math.max.apply(Math, this.masonry.colYs),
-                // fit container to columns that have been used;
-                width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth
-            };
-        };
+         $.Isotope.prototype._masonryGetContainerSize = function () {
+         var unusedCols = 0,
+         i = this.masonry.cols;
+         // count unused columns
+         while (--i) {
+         if (this.masonry.colYs[i] !== 0) {
+         break;
+         }
+         unusedCols++;
+         }
 
+         return {
+         height: Math.max.apply(Math, this.masonry.colYs),
+         // fit container to columns that have been used;
+         width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth
+         };
+         };
+         */
 
         $(function () {
 
@@ -222,36 +225,6 @@ if ($_SESSION["loggedin"] == 1) {
             });
 
 
-            var $optionSets = $('#options .option-set'),
-                $optionLinks = $optionSets.find('a');
-
-            $optionLinks.click(function () {
-                var $this = $(this);
-                // don't proceed if already selected
-                if ($this.hasClass('selected')) {
-                    return false;
-                }
-                var $optionSet = $this.parents('.option-set');
-                $optionSet.find('.selected').removeClass('selected');
-                $this.addClass('selected');
-
-                // make option object dynamically, i.e. { filter: '.my-filter-class' }
-                var options = {},
-                    key = $optionSet.attr('data-option-key'),
-                    value = $this.attr('data-option-value');
-                // parse 'false' as false boolean
-                value = value === 'false' ? false : value;
-                options[ key ] = value;
-                if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
-                    // changes in layout modes need extra logic
-                    changeLayoutMode($this, options)
-                } else {
-                    // otherwise, apply new options
-                    window.container.isotope(options);
-                }
-
-                return false;
-            });
 
 
             // Sites using Isotope markup
@@ -278,7 +251,7 @@ if ($_SESSION["loggedin"] == 1) {
                         ajaxError();
                         return;
                     }
-                    var items = [],
+                    var items = [], siteFiltersDivs = [], siteFilters = [],
                         item, article;
 
                     for (var i = 0, len = data.length; i < len; i++) {
@@ -294,7 +267,9 @@ if ($_SESSION["loggedin"] == 1) {
                             filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
                         }
 
-                        filterClasses += article.site + " ";
+                        var newSiteFilter = article.site.replace(/[ .//]/ig,'').toLowerCase();
+
+                        filterClasses += newSiteFilter;
 
 
                         var likedClass = "";
@@ -321,7 +296,7 @@ if ($_SESSION["loggedin"] == 1) {
                             + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
                             + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
                             + '<p class="articledesc" >' + article.description + '</p>'
-                            + '<div class="readMore"><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
+                            + '<div class="readMore" ><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
                             + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
                             + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
                             + '<span class="badge views" >Views: ' + article.views + '</span>'
@@ -332,6 +307,27 @@ if ($_SESSION["loggedin"] == 1) {
 
 
                         items.push(item);
+
+
+                        // Find out if sitename is unique
+                        var isUnique = 1;
+
+
+
+
+                        for (var sf = 0; sf < siteFilters.length; sf++) {
+
+                            if (siteFilters[sf] == newSiteFilter) {
+                                isUnique = 0;
+                                break;
+                            }
+                        }
+                        //if sitename is unique, add it
+                        if (isUnique == 1) {
+                            siteFilters.push(newSiteFilter);
+                            siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site + '</a></li>');
+                        }
+
                     }
 
                     var $items = $(items.join(''));
@@ -352,6 +348,15 @@ if ($_SESSION["loggedin"] == 1) {
                         });
 
                         window.container.isotope('insert', $items);
+
+
+                        //Show site filters on right content bar
+                        for (var i = 0; i < siteFiltersDivs.length; i++) {
+                            $('#filter2').append(siteFiltersDivs[i]);
+
+                        }
+
+                        setFilterFunctionality();
                     });
 
                 });
@@ -361,6 +366,40 @@ if ($_SESSION["loggedin"] == 1) {
 
 
     });
+
+    function setFilterFunctionality(){
+        var $optionSets = $('#filters .option-set'),
+            $optionLinks = $optionSets.find('a');
+
+        $optionLinks.click(function () {
+            var $this = $(this);
+            // don't proceed if already selected
+            if ($this.hasClass('selected')) {
+                return false;
+            }
+            var $optionSet = $this.parents('.option-set');
+            $optionSet.find('.selected').removeClass('selected');
+            $this.addClass('selected');
+
+            // make option object dynamically, i.e. { filter: '.my-filter-class' }
+            var options = {},
+                key = $optionSet.attr('data-option-key'),
+                value = $this.attr('data-option-value');
+            // parse 'false' as false boolean
+            value = value === 'false' ? false : value;
+            options[ key ] = value;
+            if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
+                // changes in layout modes need extra logic
+                changeLayoutMode($this, options)
+            } else {
+                // otherwise, apply new options
+                window.container.isotope(options);
+            }
+
+            return false;
+        });
+
+    }
 
     </script>
 

@@ -10,28 +10,19 @@
 //If user is logged in
 if ($_SESSION["loggedin"] == 1) {
     ?>
-
-
-
-
-    <!--        New Post Box-->
-    <!--    <div id="newArticle" class="span12">-->
-    <!--    Isotope-->
-    <!--    <div class="row">-->
-
-
-    <!--    </div>-->
-    <!-- End of new post-->
-
-
     <div id="container">
     </div>
+
     <script>
+
+    $(document).ready(function () {
+
+        debugger;
 
         //Calculate box width
         calculateBoxWidth();
 
-        var $container = $('#container');
+        window.container = $('#container');
 
 
         var newpost = '<div class="box newpost article cinema economy entertainment history health ' +
@@ -39,22 +30,7 @@ if ($_SESSION["loggedin"] == 1) {
             + getNewPostHtml()
             + '</div>';
 
-        $container.append(newpost);
-
-
-    </script>
-
-
-
-
-
-    <!--  TODO RM if not needed:  <script src="../js/hirestext.js"></script>-->
-    <script>
-
-    $(document).ready(function () {
-
-
-        window.container = $('#container');
+        window.container.append(newpost);
 
 
         /*
@@ -91,68 +67,31 @@ if ($_SESSION["loggedin"] == 1) {
          }
          };
 
-         $.Isotope.prototype._masonryResizeChanged = function () {
-
-         /*
-
-         TODO : CHECK ELEMENT AUTOMATIC RESIZE w/ function
-
-         //Get width
-         var curwidth = $('#newArticle').width();
-         //Calculate new width
-         //Smartphone size: full size!
-         if (curwidth < 400) {
-         //New hack
-         //window.boxWidth = $('.box.newpost').width() + "px";
-         boxWidth = ($(window).width() * 80) / 100 + "px";
-
-         }
-         //Phablet size, or portait big smartphones
-         else if (curwidth >= 400 && curwidth < 650) {
-         window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
-
-         }
-         //Tablet size
-         else if (curwidth >= 650 && curwidth < 900) {
-         window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
-
-         }
-         //Laptop size TODO ???????????
-         else if (curwidth >= 900 && curwidth < 1300) {
-         window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
-
-         }
-         //Desktop size
-         else if (curwidth >= 1300 && curwidth < 1600) {
-         window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
-
-         }
-         //Large size
-         else if (curwidth >= 1600 && curwidth < 2000) {
-         window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
-
-         }
-         // Extra large screen size
-         else {
-         window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
-
-         }
-
-         //Change the width
-         $(".box.article").width(window.boxWidth);
-         $(".box img").width(window.boxWidth);
-
-         $('#container').isotope( 'reLayout'); //Force reLayout
-
          */
+        $.Isotope.prototype._masonryResizeChanged = function () {
+
+
+            //re-Calculate box width
+            calculateBoxWidth();
+
+
+            //Update width
+            $(".box.article").width(window.boxWidth);
+            $(".box img").width(window.boxWidth);
+
+            $('#container').isotope('reLayout'); //Force reLayout
+
+
+            /*
+             var prevColCount = this.masonry.cols;
+             // get updated colCount
+             this._getCenteredMasonryColumns();
+             return ( this.masonry.cols !== prevColCount );
+             */
+        };
+
+
         /*
-
-         var prevColCount = this.masonry.cols;
-         // get updated colCount
-         this._getCenteredMasonryColumns();
-         return ( this.masonry.cols !== prevColCount );
-         };
-
          $.Isotope.prototype._masonryGetContainerSize = function () {
          var unusedCols = 0,
          i = this.masonry.cols;
@@ -169,10 +108,18 @@ if ($_SESSION["loggedin"] == 1) {
          // fit container to columns that have been used;
          width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth
          };
+
          };
          */
 
+
+        var ajaxError = function () {
+            makeShowNotification(0, "Failed to load articles", DELAY_MEDIUM);
+        };
+
         $(function () {
+
+            debugger;
 
             var curwidth = window.container.width();
 
@@ -199,21 +146,16 @@ if ($_SESSION["loggedin"] == 1) {
                 }
             });
 
+// TODO CHECK AND FULL REMOVE
+//            // Sites using Isotope markup
+//            var $sites = $('#sites'),
+//                $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
+//                $sitesList = $('<ul class="clearfix"></ul>');
+//
+//            $sites.append($sitesTitle).append($sitesList);
+//
+//
 
-
-
-            // Sites using Isotope markup
-            var $sites = $('#sites'),
-                $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
-                $sitesList = $('<ul class="clearfix"></ul>');
-
-            $sites.append($sitesTitle).append($sitesList);
-
-
-            var ajaxError = function () {
-                $sitesTitle.removeClass('loading').addClass('error')
-                    .text('Could not load sites using Isotope :(');
-            };
 
 
             // dynamically load sites using Isotope from Zootool
@@ -221,9 +163,12 @@ if ($_SESSION["loggedin"] == 1) {
                 .error(ajaxError)
                 .success(function (data) {
 
+                    debugger;
+
                     // proceed only if we have data
                     if (!data || !data.length) {
                         ajaxError();
+
                         return;
                     }
                     var items = [], siteFiltersDivs = [], siteFilters = [],
@@ -242,7 +187,7 @@ if ($_SESSION["loggedin"] == 1) {
                             filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
                         }
 
-                        var newSiteFilter = article.site.replace(/[ .//]/ig,'').toLowerCase();
+                        var newSiteFilter = article.site.replace(/[ .//]/ig, '').toLowerCase();
 
                         filterClasses += newSiteFilter;
 
@@ -288,8 +233,6 @@ if ($_SESSION["loggedin"] == 1) {
                         var isUnique = 1;
 
 
-
-
                         for (var sf = 0; sf < siteFilters.length; sf++) {
 
                             if (siteFilters[sf] == newSiteFilter) {
@@ -313,15 +256,25 @@ if ($_SESSION["loggedin"] == 1) {
                     $items.imagesLoaded(function () {
                         window.container.append($items);
 
+                        debugger;
+
 
                         $items.each(function () {
                             var $this = $(this);
 
                             //Save box width
                             $this.width(window.boxWidth);
-                            //Save box's image width
-                            $this.find('img').width(window.boxWidth);
+
+                            if (window.boxWidth.indexOf("px") !== -1) {
+
+                                //Save box's image width
+                                $this.find('img').width(window.boxWidth);
+                            }
+                            else {
+                                $this.find('img').width("100%");
+                            }
                         });
+
 
                         window.container.isotope('insert', $items);
 
@@ -331,6 +284,8 @@ if ($_SESSION["loggedin"] == 1) {
                             $('#filter ul').append(siteFiltersDivs[i]);
 
                         }
+                        debugger;
+
 
                         setFilterFunctionality();
                     });
@@ -343,7 +298,7 @@ if ($_SESSION["loggedin"] == 1) {
 
     });
 
-    function setFilterFunctionality(){
+    function setFilterFunctionality() {
         var $optionSets = $('#filters .option-set'),
             $optionLinks = $optionSets.find('a');
 

@@ -86,51 +86,44 @@ $(document).ready(function () {
     });
 
 
-
-
-
     //When user presses like button
     //$(this).parent().find('articleID').addClass("liked")
 
     /**
      * TODO PASCHALI SINEXISE (KANONISTIN)
      */
-    $("body").on("click", ".box button.likes", function() {
+    $("body").on("click", ".box button.likes", function () {
 
 
 
 
-    //Get the article ID
-    var articleID = $($(this).siblings(".articleID")[0]).html(); //.val()
+        //Get the article ID
+        var articleID = $($(this).siblings(".articleID")[0]).html(); //.val()
 
-    //Get the current like value
-    var likeValue = $(this).hasClass('liked');
-    if(likeValue) likeValue=1;
-        else likeValue=0;
+        //Get the current like value
+        var likeValue = $(this).hasClass('liked');
+        if (likeValue) likeValue = 1;
+        else likeValue = 0;
 
-    var formData = new Object();
+        var formData = new Object();
 
-    formData['articleID'] = articleID;
-    formData['likeValue'] = likeValue;
-
-        debugger;
-
+        formData['articleID'] = articleID;
+        formData['likeValue'] = likeValue;
 
         ajaxJsonRequest("scripts/likeArticle.php",
-        formData,
-        getLikeSuccess,
-        ajaxFailed,this);
+            formData,
+            getLikeSuccess,
+            ajaxFailed, this);
     });
 
 
 });
 
 /*
-* Article was liked
-* */
-function getLikeSuccess(data, element){
+ * Article was liked
+ * */
+function getLikeSuccess(data, element) {
 
-    debugger;
 
     var jsonObj = eval('(' + data + ')');
 
@@ -151,25 +144,24 @@ function getLikeSuccess(data, element){
     }
 
     // Successfully liked or unliked
-    if(jsonObj['code'] != -1){
+    if (jsonObj['code'] != -1) {
         //Successfully unliked
-        if(jsonObj['code']==0){
+        if (jsonObj['code'] == 0) {
             $(element).removeClass('liked');
 
         }
         //Successfully liked
-        else{
+        else {
             $(element).addClass('liked');
         }
 
-        $(element).html('+'+jsonObj['likes']);
+        $(element).html('+' + jsonObj['likes']);
     }
     //Show notification
-    else{
-        jsonObj['code']=0;
+    else {
+        jsonObj['code'] = 0;
         showNotification(jsonObj, DELAY_MEDIUM);
     }
-
 
 
 }
@@ -327,7 +319,7 @@ function ajaxSuccessPost(result) {
     }
 
     // Add article to isotope
-    if(jsonObj['code'] == 1 || jsonObj['code'] == 2){
+    if (jsonObj['code'] == 1 || jsonObj['code'] == 2) {
         addArticleToIsotope(jsonObj);
     }
 
@@ -337,63 +329,60 @@ function ajaxSuccessPost(result) {
 
 
 /*
-* Adds an article to the isotope
-* */
-function addArticleToIsotope(article){
+ * Adds an article to the isotope
+ * */
+function addArticleToIsotope(article) {
 
 
     var items = [],
         item;
 
 
-
-        var filterClasses = "", filterTags = "";
-
-
-        //Create classes for the filtering
-        for (var j = 0; j < article.tags.length; j++) {
-            filterClasses += article.tags[j] + " ";
-            filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
-        }
-
-        filterClasses += article.site.replace(/[ .//]/ig,'').toLowerCase()   + " ";
-
-        var likedClass = "";
-        var favedClass = "";
+    var filterClasses = "", filterTags = "";
 
 
-        if (article.like == 1) {
-            likedClass = " liked";
-        }
-        if (article.favorite == 1) favedClass = " favorited";
+    //Create classes for the filtering
+    for (var j = 0; j < article.tags.length; j++) {
+        filterClasses += article.tags[j] + " ";
+        filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
+    }
 
-        var imgCode = "";
-        if (article.image != "") {
-            imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
-        }
+    filterClasses += article.site.replace(/[ .//]/ig, '').toLowerCase() + " ";
 
-        item = '<div class="box article  ' + filterClasses + ' ">'
-            + '<div class="box-img">'
-            + imgCode
-            + '</div>'
-            + '<div class="box-body">'
-            + '<h4 class="articletitle">' + article.title + '</h4>'
-            + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
-            + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
-            + '<p class="articledesc" >' + article.description + '</p>'
-            + '<div class="readMore"><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
-            + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
-            + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
-            + '<span class="badge views" >Views: ' + article.views + '</span>'
-            + '<span class="articleID" style="display: none">' + article.uid + '</span>'
-            + '</div>'
-            + '<div class="categories" >' + filterTags + '</div>'
-            + '</div>';
+    var likedClass = "";
+    var favedClass = "";
+
+
+    if (article.like == 1) {
+        likedClass = " liked";
+    }
+    if (article.favorite == 1) favedClass = " favorited";
+
+    var imgCode = "";
+    if (article.image != "") {
+        imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
+    }
+
+    item = '<div class="box article  ' + filterClasses + ' ">'
+        + '<div class="box-img">'
+        + imgCode
+        + '</div>'
+        + '<div class="box-body">'
+        + '<h4 class="articletitle">' + article.title + '</h4>'
+        + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
+        + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
+        + '<p class="articledesc" >' + article.description + '</p>'
+        + '<div class="readMore"><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
+        + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
+        + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
+        + '<span class="badge views" >Views: ' + article.views + '</span>'
+        + '<span class="articleID" style="display: none">' + article.uid + '</span>'
+        + '</div>'
+        + '<div class="categories" >' + filterTags + '</div>'
+        + '</div>';
 
 
     var $items = $(item);
-
-
 
 
     //When image is loaded, add the article
@@ -417,12 +406,10 @@ function addArticleToIsotope(article){
         window.container.isotope('insert', $items);
 
 
-
     });
 
 
 }
-
 
 
 /**
@@ -923,7 +910,6 @@ function deletedArticleSuccess(data, element) {
     jsonObj = eval('(' + data + ')');
 
 
-
     //if deletion was okay, remove element from isotope too
     if (jsonObj['code'] == 1) {
 
@@ -955,7 +941,7 @@ function clearArticleSuccess(data, param) {
 
 
     //Relayout and show notification
-    if(param!=1){
+    if (param != 1) {
         makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
 
     }
@@ -1019,8 +1005,6 @@ function getArticleSuccess(data) {
     $(".box.newpost.article #buttonsToolbar").css("display", "inline");
 
 
-
-
     //When image is loaded, relayout the isotope
     $(".box.newpost.article .articleimg").imagesLoaded(function () {
 
@@ -1029,7 +1013,6 @@ function getArticleSuccess(data) {
         window.container.isotope('reLayout'); //Force reLayout
 
     });
-
 
 
 }
@@ -1175,7 +1158,7 @@ function calculateBoxWidth() {
     //Smartphone size: full size!
     if (curwidth < 400) {
         //window.boxWidth =  $('.box.newpost').width() + "px";
-        window.boxWidth = Math.round($(window).width())-10 + "px";
+        window.boxWidth = "95%";
 
     }
     //Phablet size, or portait big smartphones

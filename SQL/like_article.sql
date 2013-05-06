@@ -4,7 +4,7 @@
 -- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE DEFINER=`paschal_sp`@`%` FUNCTION `like_article`(
+CREATE DEFINER=`paschal_sp`@`%` FUNCTION `toggle_like_article`(
 article_id INT(10),
 username VARCHAR(30),
 likeValue BIT

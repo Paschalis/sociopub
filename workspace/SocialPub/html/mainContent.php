@@ -10,19 +10,23 @@
 //If user is logged in
 if ($_SESSION["loggedin"] == 1) {
     ?>
+
+    <!--        New Post Box-->
+    <!--    <div id="newArticle" class="span12">-->
+    <!--    Isotope-->
+    <!--    <div class="row">-->
+
+
+    <!--    </div>-->
+    <!-- End of new post-->
     <div id="container">
     </div>
-
     <script>
-
-    $(document).ready(function () {
-
-        debugger;
 
         //Calculate box width
         calculateBoxWidth();
 
-        window.container = $('#container');
+        var $container = $('#container');
 
 
         var newpost = '<div class="box newpost article cinema economy entertainment history health ' +
@@ -30,7 +34,18 @@ if ($_SESSION["loggedin"] == 1) {
             + getNewPostHtml()
             + '</div>';
 
-        window.container.append(newpost);
+        $container.append(newpost);
+
+
+    </script>
+
+    <!--  TODO RM if not needed:  <script src="../js/hirestext.js"></script>-->
+    <script>
+
+    $(document).ready(function () {
+
+
+        window.container = $('#container');
 
 
         /*
@@ -70,10 +85,8 @@ if ($_SESSION["loggedin"] == 1) {
          */
         $.Isotope.prototype._masonryResizeChanged = function () {
 
-
             //re-Calculate box width
             calculateBoxWidth();
-
 
             //Update width
             $(".box.article").width(window.boxWidth);
@@ -113,13 +126,7 @@ if ($_SESSION["loggedin"] == 1) {
          */
 
 
-        var ajaxError = function () {
-            makeShowNotification(0, "Failed to load articles", DELAY_MEDIUM);
-        };
-
         $(function () {
-
-            debugger;
 
             var curwidth = window.container.width();
 
@@ -146,16 +153,19 @@ if ($_SESSION["loggedin"] == 1) {
                 }
             });
 
-// TODO CHECK AND FULL REMOVE
-//            // Sites using Isotope markup
-//            var $sites = $('#sites'),
-//                $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
-//                $sitesList = $('<ul class="clearfix"></ul>');
-//
-//            $sites.append($sitesTitle).append($sitesList);
-//
-//
 
+            // Sites using Isotope markup
+            var $sites = $('#sites'),
+                $sitesTitle = $('<h2 class="loading"><img src="http://i.imgur.com/qkKy8.gif" />Loading sites using Isotope</h2>'),
+                $sitesList = $('<ul class="clearfix"></ul>');
+
+            $sites.append($sitesTitle).append($sitesList);
+
+
+            var ajaxError = function () {
+                $sitesTitle.removeClass('loading').addClass('error')
+                    .text('Could not load sites using Isotope :(');
+            };
 
 
             // dynamically load sites using Isotope from Zootool
@@ -163,16 +173,16 @@ if ($_SESSION["loggedin"] == 1) {
                 .error(ajaxError)
                 .success(function (data) {
 
-                    debugger;
-
                     // proceed only if we have data
                     if (!data || !data.length) {
                         ajaxError();
-
                         return;
                     }
                     var items = [], siteFiltersDivs = [], siteFilters = [],
                         item, article;
+                    //Push header of site filters
+                    siteFiltersDivs.push('<li><h4>Sites</h4></li>');
+
 
                     for (var i = 0, len = data.length; i < len; i++) {
                         article = data[i];
@@ -251,43 +261,30 @@ if ($_SESSION["loggedin"] == 1) {
 
                     var $items = $(items.join(''));
 
-
-                    //When images are loaded
-                    $items.imagesLoaded(function () {
-                        window.container.append($items);
-
-                        debugger;
+                    var boxesShown = false;
 
 
-                        $items.each(function () {
-                            var $this = $(this);
+                    // If there is an img that still loads after 2 secs, show the current boxes
+                    setTimeout(function () {
 
-                            //Save box width
-                            $this.width(window.boxWidth);
-
-                            if (window.boxWidth.indexOf("px") !== -1) {
-
-                                //Save box's image width
-                                $this.find('img').width(window.boxWidth);
-                            }
-                            else {
-                                $this.find('img').width("100%");
-                            }
-                        });
-
-
-                        window.container.isotope('insert', $items);
-
-
-                        //Show site filters on right content bar
-                        for (var i = 0; i < siteFiltersDivs.length; i++) {
-                            $('#filter ul').append(siteFiltersDivs[i]);
-
+                        if (!boxesShown){
+                            showBoxesAndFilters($items,siteFiltersDivs);
                         }
-                        debugger;
+                        boxesShown=true;
+                    }, 2000);
 
 
-                        setFilterFunctionality();
+                    //When images are loaded, relayout webpage
+                    $items.imagesLoaded(function () {
+
+                        if(!boxesShown){
+                            showBoxesAndFilters($items,siteFiltersDivs);
+                            boxesShown=true;
+                        }
+
+
+                        window.container.isotope('reLayout'); //Force reLayout
+
                     });
 
                 });
@@ -297,6 +294,34 @@ if ($_SESSION["loggedin"] == 1) {
 
 
     });
+
+
+    function showBoxesAndFilters($items,siteFiltersDivs) {
+
+        //Show items on webpage
+        window.container.append($items);
+
+        $items.each(function () {
+            var $this = $(this);
+
+            //Save box width
+            $this.width(window.boxWidth);
+            //Save box's image width
+            $this.find('img').width(window.boxWidth);
+        });
+
+        window.container.isotope('insert', $items);
+
+
+        //Show site filters on right content bar
+        for (var i = 0; i < siteFiltersDivs.length; i++) {
+            $('#filter ul').append(siteFiltersDivs[i]);
+
+        }
+
+        setFilterFunctionality();
+    }
+
 
     function setFilterFunctionality() {
         var $optionSets = $('#filters .option-set'),

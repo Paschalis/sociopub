@@ -441,10 +441,12 @@ Notification
 
 #rightContent .btn-navbar {
     background: #bfbfbf;
-
-    width: 90%;
-
+    position: relative;
+    right: 45%;
+    display: inline-block;
 }
+
+
 
 #rightContent .btn-navbar .icon-bar {
     background-color: #000000;

@@ -1163,27 +1163,27 @@ function calculateBoxWidth() {
     }
     //Phablet size, or portait big smartphones
     else if (curwidth >= 400 && curwidth < 650) {
-        window.boxWidth = Math.round((curwidth / 2)) - 40 + "px";
+        window.boxWidth = Math.floor((curwidth / 2)) - (2*7) + "px";
 
     }
     //Tablet size
     else if (curwidth >= 650 && curwidth < 900) {
-        window.boxWidth = Math.round((curwidth / 3)) - 30 + "px";
+        window.boxWidth = Math.floor((curwidth / 3)) - 3*6  + "px";
 
     }
     //Laptop size TODO ???????????
     else if (curwidth >= 900 && curwidth < 1300) {
-        window.boxWidth = Math.round((curwidth / 4)) - 30 + "px";
+        window.boxWidth = Math.floor((curwidth / 4)) - 4*4 + "px";
 
     }
     //Desktop size
     else if (curwidth >= 1300 && curwidth < 1600) {
-        window.boxWidth = Math.round((curwidth / 5)) - 20 + "px";
+        window.boxWidth = Math.floor((curwidth / 5)) - 5*3 + "px";
 
     }
     //Large size
     else if (curwidth >= 1600 && curwidth < 2000) {
-        window.boxWidth = Math.round((curwidth / 6)) - 30 + "px";
+        window.boxWidth = Math.floor((curwidth / 6))  + "px";
 
     }
     // Extra large screen size

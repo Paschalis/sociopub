@@ -19,6 +19,7 @@ include("scripts/initializeSession.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <?php  include('scripts/mobileHeader.php'); ?>
 
     <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
 <!--    <script src="http://code.jquery.com/jquery-migrate-1.2.0.js"></script>-->
@@ -43,7 +44,7 @@ include("scripts/initializeSession.php");
 <div class="container-fluid">
     <div class="row-fluid">
 
-        <div class="span1 hidden-phone" id="leftContent">
+        <div class="span1 visible-desktop" id="leftContent">
             <?php include('html/leftContent.php'); ?>
         </div>
         <div class="span10" id="mainContent">

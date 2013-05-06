@@ -10,7 +10,6 @@
 if ($_SESSION['loggedin'] == 1) {
     ?>
     <h4>Filters</h4>
-
     <div class="container">
         <!-- Menu button when navbar is collapsed-->
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse.rightbar">
@@ -18,9 +17,7 @@ if ($_SESSION['loggedin'] == 1) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-
-        <div id="filters" class="container">
-
+        <div id="filters">
             <div id="filter" class="nav-collapse collapse navbar-responsive-collapse rightbar">
                 <ul class="filterclass option-set" data-option-key="filter">
                     <li><a href="#" data-option-value="*" class="selected">No Filters</a></li>
@@ -39,7 +36,6 @@ if ($_SESSION['loggedin'] == 1) {
                     <li><a href="#" data-option-value=".technology">Technology</a></li>
                     <li><a href="#" data-option-value=".travel">Travel</a></li>
                     <li><a href="#" data-option-value=".other">Other</a></li>
-                    <li><h4>Sites</h4></li>
                 </ul>
             </div>
         </div>

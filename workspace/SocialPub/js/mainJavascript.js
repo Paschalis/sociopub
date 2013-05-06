@@ -1178,17 +1178,17 @@ function calculateBoxWidth() {
     }
     //Desktop size
     else if (curwidth >= 1300 && curwidth < 1600) {
-        window.boxWidth = Math.floor((curwidth / 5)) - 5*3 + "px";
+        window.boxWidth = Math.floor((curwidth / 5)) - 5*4 + "px";
 
     }
     //Large size
     else if (curwidth >= 1600 && curwidth < 2000) {
-        window.boxWidth = Math.floor((curwidth / 6))  + "px";
+        window.boxWidth = Math.floor((curwidth / 6)) - 5*4 + "px";
 
     }
     // Extra large screen size
     else {
-        window.boxWidth = Math.round((curwidth / 8)) - 30 + "px";
+        window.boxWidth = Math.round((curwidth / 8)) - 5*4 + "px";
     }
 
 

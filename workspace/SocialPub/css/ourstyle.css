@@ -441,9 +441,9 @@ Notification
 
 #rightContent .btn-navbar {
     background: #bfbfbf;
-    position: relative;
-    right: 45%;
-    display: inline-block;
+    /*position: relative;*/
+    /*right: 45%;*/
+    /*display: inline-block;*/
 }
 
 

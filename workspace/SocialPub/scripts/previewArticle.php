@@ -13,7 +13,8 @@ include_once('articles/simple_html_dom.php');
 $URL = $_POST['url'];
 
 // TODO DIMITRI REANBLE THIS FOR DEBUG DEBUG
-// $URL = "http://www.ant1iwo.com/oikonomia/2013/05/07/sthn-ep-oikonomikwn-toy-eyrwkoinonoylioy/"; //TODO RM
+//$URL = "http://www.news.gr/kosmos/evroph/article/63078/protomagia-me-epeisodia-synthhmata-kai-ekatommy.html"; //TODO RM
+
 
 if ($URL == "") {
     printMessage(0, "Articles URL cant be emtpy");
@@ -29,7 +30,6 @@ $image = "";
 $siteName = "";
 
 
-
 $ret = $html->find('meta[property$=title], meta[property$=description], meta[property$=image], meta[property$=site_name]');
 
 
@@ -37,26 +37,8 @@ foreach ($ret as $element) {
 
     //Found the title
     if (strpos($element->property, 'title') !== false) {
-        if ($title == ""){
+        if ($title == "") {
             $title = $element->content;
-
-            // Ant1-iWO stupidness patch
-            //ant1wo hack (ant1iwo dont know how to do meta tags!!!!)
-            if (strpos($URL, 'ant1iwo.com') !== false) { //Ant iWO
-
-                $title = explode(' - ', $title);
-                $title = $title[0];
-            }
-            else if (strpos($URL, 'politis-news.com') !== false) { // politis news
-                $title = explode(' - ', $title);
-                $title = $title[1];
-            }
-            else if (strpos($URL, 'sigmalive.com') !== false) { // sigma live
-                $title = explode('|', $title);
-                $title = $title[0];
-            }
-
-            // Sigma live
         }
     } //Found the description
     else if (strpos($element->property, 'description') !== false) {
@@ -72,6 +54,36 @@ foreach ($ret as $element) {
             $siteName = $element->content;
     }
 
+}
+// ############################    CONVERT CHARSETS
+// WORKAROUND: convert charset 1253 to UTF8
+$ret = $html->find('meta[http-equiv=content-type]');
+
+foreach ($ret as $element) {
+
+    if (strpos($element->content, 'windows-1253') !== false) {
+
+        $title = iconv("windows-1253", "UTF-8", $title);
+        $description = iconv("windows-1253", "UTF-8", $description);
+    }
+}
+
+// ########################### Remove bloat from Titles (like Title title - superwebpage.com)
+// Ant1-iWO stupidness patch
+//ant1wo hack (ant1iwo dont know how to do meta tags!!!!)
+if ((strpos($URL, 'ant1iwo.com') !== false) ||(strpos($URL, 'news.gr') !== false) ) { //Ant iWO
+    $title = explode(' - ', $title);
+    $title = $title[0];
+} else if (strpos($URL, 'politis-news.com') !== false) { // politis news
+    $title = explode(' - ', $title);
+    $title = $title[1];
+} else if (strpos($URL, 'sigmalive.com') !== false) { // sigma live
+    $title = explode('|', $title);
+    $title = $title[0];
+}
+else if (strpos($URL, 'sigmalive.com') !== false) { // sigma live
+    $title = explode('|', $title);
+    $title = $title[0];
 }
 
 
@@ -159,7 +171,7 @@ if ($siteName == "") {
 }
 
 // Site name patch
-if (strpos($siteName, 'www.') !== false){
+if (strpos($siteName, 'www.') !== false) {
     $siteName = str_replace("www.", "", $siteName);
     $siteName = preg_replace('/\.[^.]+$/', '', $siteName);
 }
@@ -169,7 +181,6 @@ if (strpos($siteName, 'www.') !== false){
 $title = str_replace("'", "&#039;", $title);
 $description = str_replace("'", "&#039;", $description);
 $siteName = str_replace("'", "&#039;", $siteName);
-
 
 
 //Save article results
@@ -190,7 +201,6 @@ $result = array(
     "image" => $image,
     "siteName" => $siteName
 );
-
 
 
 echo json_encode($result);

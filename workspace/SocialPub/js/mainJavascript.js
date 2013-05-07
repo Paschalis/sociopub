@@ -205,6 +205,9 @@ $(document).ready(function () {
     });
 
 
+
+
+
     // Add clear functionality to all inputs
     $("#boxsearchClear").click(function(){
 
@@ -221,12 +224,30 @@ $(document).ready(function () {
         var q = $("#boxsearch").val();
 
         if (q == "") {
+            if (window.doingQuery) return;
+            window.doingQuery = 1;
             doQuery();
         }
     });
 
 
 });
+
+function submitForm(){
+
+    debugger;
+
+    var q = $("#boxsearch").val();
+
+    if (window.doingQuery) return;
+    window.doingQuery = 1;
+
+    doQuery(q);
+
+
+    return false;
+
+}
 
 /*
  * Performs a query, and re inits isotope

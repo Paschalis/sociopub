@@ -11,10 +11,14 @@
 
 
             <div class="nav-collapse collapse navbar-responsive-collapse">
-                <form  class="navbar-search pull-left" onSubmit="return false;">
+                <form id="searchForm" class="navbar-search pull-left" onsubmit="return false;">
                     <div class="input-prepend">
-                        <button id="boxsearchClear" class="add-on">x</button>
+                        <button id="boxsearchClear" type="button" class="add-on">x</button>
                         <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
+
+                           <input id="boxSubmitButton" type="submit" onclick="submitForm();"  style="opacity:0;" />
+
+
                     </div>
                 </form>
                 <!--                <ul class="nav">-->

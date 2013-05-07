@@ -40,7 +40,6 @@ include("scripts/initializeSession.php");
 
 <body>
 <?php include('html/navbar.php'); ?>
-<p id="dsize">SIZE:</p>
 <div class="container-fluid">
     <div class="row-fluid">
 

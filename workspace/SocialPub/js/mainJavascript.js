@@ -1265,7 +1265,6 @@ function postArticle() {
         formData,
         ajaxSuccessPost,
         ajaxFailed);
-
 }
 
 
@@ -1412,15 +1411,8 @@ function calculateBoxWidth() {
 /*
 * Load articles from Server
 * */
-function loadArticles(){
+function loadArticles(query){
     var curwidth = window.container.width();
-
-    $("#dsize").text("Size: " + curwidth); //TODO RM
-    //When window is resized TODO RM
-    $(window).resize(function () {
-        $("#dsize").text("Size: " + curwidth); //TODO RM
-    });
-
 
     window.container.isotope({
         sortBy: 'date',
@@ -1440,19 +1432,31 @@ function loadArticles(){
 
 
 
-    var ajaxError = function () {
+    var fetchArticlesError = function () {
         makeShowNotification(0,"Couldnt fetch articles! :(",DELAY_MEDIUM);
     };
 
 
-    // dynamically load sites using Isotope from Zootool
-    $.getJSON('../scripts/getUserArticles.php')
-        .error(ajaxError)
-        .success(function (data) {
+    var queryURL='../scripts/getUserArticles.php';
+
+    var formData = new Object();
+
+    //If we have query data
+    if(query!=""){
+        formData['q']= query;
+    }
+
+
+    // Fetch articles
+    ajaxJsonRequest('../scripts/getUserArticles.php',
+        formData,
+        function(dataRaw){
+
+            var data = eval('(' + dataRaw+ ')');
 
             // proceed only if we have data
             if (!data || !data.length) {
-                ajaxError();
+                fetchArticlesError();
                 return;
             }
             var items = [], siteFiltersDivs = [], siteFilters = [],
@@ -1463,7 +1467,6 @@ function loadArticles(){
 
             for (var i = 0, len = data.length; i < len; i++) {
                 article = data[i];
-
 
                 var filterClasses = "", filterTags = "";
 
@@ -1573,7 +1576,9 @@ function loadArticles(){
 
             });
 
-        });
+        },
+        fetchArticlesError);
+
 
 }
 

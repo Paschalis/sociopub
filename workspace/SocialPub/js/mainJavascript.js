@@ -147,7 +147,7 @@ $(document).ready(function () {
                 var curTime = new Date().getTime() / 1000;
                 var diff = curTime - window.boxHoverSeconds;
 
-                if (diff < 3) return; //user has to stay at least 3 seconds
+                if (diff < 4) return; //user has to stay at least 4 seconds
 
                 var articleID = $($($(this).children('.box-body')[0]).children('.articleID')[0]).html();
 

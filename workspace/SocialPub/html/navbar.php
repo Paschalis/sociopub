@@ -10,10 +10,9 @@
             <a class="brand" <?php echo 'href="' . _URL . '"'; ?>><?php echo _NAME; ?></a>
 
             <div class="nav-collapse collapse navbar-responsive-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Link 2</a></li>
-                </ul>
+                <!--                <ul class="nav">-->
+                <!--                    <li class="active"><a href="#">Home</a></li>-->
+                <!--                </ul>-->
                 <!--                    DropDown Comment out-->
                 <!--                    <li class="dropdown">-->
                 <!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>-->
@@ -24,15 +23,13 @@
                 <!--                        </ul>-->
                 <!--                    </li>-->
 
-                <!-- Right navigation-->
-                <ul class="nav pull-center">
-                    <form class="navbar-search pull-left" action="">
-                        <input type="text" class="search-query span2" placeholder="Search">
-                    </form>
-                </ul>
+
 
                 <!-- Right in navbar-->
                 <ul class="nav pull-right">
+                    <form  class="navbar-search pull-left" onSubmit="return false;">
+                        <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
+                    </form>
                     <li class="divider-vertical"></li>
                     <li class="dropdown"  <?php
                     //If user is logged in, make visible account tab

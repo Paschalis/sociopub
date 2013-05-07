@@ -166,7 +166,61 @@ $(document).ready(function () {
         , '.box.article');
 
 
+    //When user performs search
+    var timeoutHnd;
+
+    $("#boxsearch").keypress(function(e) {
+
+
+        //On Enter
+        if (event.keyCode == 13) {
+
+
+            var q = $("#boxsearch").val();
+            debugger;
+
+
+
+        }
+        else {
+            if (timeoutHnd)
+                clearTimeout(timeoutHnd);
+            timeoutHnd = setTimeout(function () {
+
+
+                var q = $("#boxsearch").val();
+
+                makeShowNotification(1,q,1000);
+
+
+            }, 500);
+
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
+
 
 /*
  * Article was liked

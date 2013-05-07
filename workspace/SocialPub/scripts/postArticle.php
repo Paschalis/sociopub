@@ -29,7 +29,7 @@ $url = $_SESSION['article_url'];
 $username = $_SESSION['username'];
 
 //Escape arguments
-// $title = $title;
+$title = mysql_real_escape_string($title);
 $description = mysql_real_escape_string($description);
 $image = mysql_real_escape_string($image);
 $siteName = mysql_real_escape_string($siteName);

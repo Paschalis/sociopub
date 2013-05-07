@@ -44,6 +44,10 @@ foreach ($ret as $element) {
                 $title = explode(' - ', $title);
                 $title = $title[0];
             }
+            else if (strpos($URL, 'politis-news.com') !== false) { // politis news
+                $title = explode(' - ', $title);
+                $title = $title[1];
+            }
         }
     } //Found the description
     else if (strpos($element->property, 'description') !== false) {
@@ -142,18 +146,25 @@ if ($title == "" && $description == "") {
 if ($siteName == "") {
 
     $pSiteName = str_replace("http://", "", $URL);
-    $pSiteName = str_replace("www.", "", $pSiteName);
-    $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
+//    $pSiteName = str_replace("www.", "", $pSiteName);
+//    $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
     // $pSiteName = preg_replace('~\s+\S+$~', '', $pSiteName)
 
+    $pSiteName = preg_replace('/\.[^.]+$/', '', $siteName);
     $siteName = $pSiteName;
 }
 
+// Site name patch
+if (strpos($siteName, 'www.') !== false){
+    $siteName = str_replace("www.", "", $siteName);
+    $siteName = preg_replace('/\.[^.]+$/', '', $siteName);
+}
 
-//Modify data to be more compatible
-$title = str_replace("'", "\"", $title);
-$description = str_replace("'", "\"", $description);
-$siteName = str_replace("'", "\"", $siteName);
+
+//Modify data to be more compatible - DIMITRI CHECK, &#039; is the > ' < character (single quotes)
+$title = str_replace("'", "&#039;", $title);
+$description = str_replace("'", "&#039;", $description);
+$siteName = str_replace("'", "&#039;", $siteName);
 
 
 

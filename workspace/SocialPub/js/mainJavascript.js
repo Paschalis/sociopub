@@ -87,18 +87,10 @@ $(document).ready(function () {
 
 
     //When user presses like button
-    //$(this).parent().find('articleID').addClass("liked")
-
-    /**
-     * TODO PASCHALI SINEXISE (KANONISTIN)
-     */
     $("body").on("click", ".box button.likes", function () {
 
-
-
-
         //Get the article ID
-        var articleID = $($(this).siblings(".articleID")[0]).html(); //.val()
+        var articleID = $($(this).siblings(".articleID")[0]).html();
 
         //Get the current like value
         var likeValue = $(this).hasClass('liked');
@@ -115,6 +107,44 @@ $(document).ready(function () {
             getLikeSuccess,
             ajaxFailed, this);
     });
+
+    //When user reads an article
+    $(document).on(
+        {
+            mouseenter: function () {
+
+                window.boxHoverSeconds = new Date().getTime() / 1000;
+                if ($(this).hasClass('newpost'))
+                    return;
+
+            },
+            mouseleave: function () {
+                if ($(this).hasClass('newpost'))
+                    return;
+
+                //Calculate total seconds on box article
+                var curTime = new Date().getTime() / 1000;
+                var diff = curTime - window.boxHoverSeconds;
+
+                if (diff < 3) return; //user has to stay at least 3 seconds
+
+                var articleID =  $($($(this).children('.box-body')[0]).children('.articleID')[0]).html();
+
+                debugger;
+
+                var formData = new Object();
+
+                formData['articleID'] = articleID;
+
+                    ajaxJsonRequest("scripts/viewedArticle.php",
+                        formData,
+                        getViewSuccess,
+                        ajaxFailed, $($($(this).children('.box-body')[0]).children('.views')[0]));
+
+
+            }
+        }
+        , '.box.article');
 
 
 });
@@ -165,6 +195,46 @@ function getLikeSuccess(data, element) {
 
 
 }
+
+
+
+/*
+ * Article was viewed
+ * */
+function getViewSuccess(data, element) {
+
+
+    var jsonObj = eval('(' + data + ')');
+
+
+    // Login was successfull
+    if (jsonObj['code'] == -1) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User dont exists";
+
+    }
+    else if (jsonObj['code'] == -2) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. Article dont exists";
+    }
+    else if (jsonObj['code'] == -3) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User's article dont exists";
+    }
+
+    // Successfully liked or unliked
+    if (jsonObj['code'] != -1) {
+        $(element).html('Views: ' + jsonObj['views']);
+    }
+    //Show notification
+    else {
+        jsonObj['code'] = 0;
+        showNotification(jsonObj, DELAY_MEDIUM);
+    }
+
+
+}
+
 
 
 /*
@@ -1163,32 +1233,32 @@ function calculateBoxWidth() {
     }
     //Phablet size, or portait big smartphones
     else if (curwidth >= 400 && curwidth < 650) {
-        window.boxWidth = Math.floor((curwidth / 2)) - (2*7) + "px";
+        window.boxWidth = Math.floor((curwidth / 2)) - (2 * 7) + "px";
 
     }
     //Tablet size
     else if (curwidth >= 650 && curwidth < 900) {
-        window.boxWidth = Math.floor((curwidth / 3)) - 3*6  + "px";
+        window.boxWidth = Math.floor((curwidth / 3)) - 3 * 6 + "px";
 
     }
     //Laptop size TODO ???????????
     else if (curwidth >= 900 && curwidth < 1300) {
-        window.boxWidth = Math.floor((curwidth / 4)) - 4*4 + "px";
+        window.boxWidth = Math.floor((curwidth / 4)) - 4 * 4 + "px";
 
     }
     //Desktop size
     else if (curwidth >= 1300 && curwidth < 1600) {
-        window.boxWidth = Math.floor((curwidth / 5)) - 5*4 + "px";
+        window.boxWidth = Math.floor((curwidth / 5)) - 5 * 4 + "px";
 
     }
     //Large size
     else if (curwidth >= 1600 && curwidth < 2000) {
-        window.boxWidth = Math.floor((curwidth / 6)) - 5*4 + "px";
+        window.boxWidth = Math.floor((curwidth / 6)) - 5 * 4 + "px";
 
     }
     // Extra large screen size
     else {
-        window.boxWidth = Math.round((curwidth / 8)) - 5*4 + "px";
+        window.boxWidth = Math.round((curwidth / 8)) - 5 * 4 + "px";
     }
 
 

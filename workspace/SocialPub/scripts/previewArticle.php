@@ -12,6 +12,9 @@ include_once('articles/simple_html_dom.php');
 
 $URL = $_POST['url'];
 
+// TODO DIMITRI REANBLE THIS FOR DEBUG DEBUG
+// $URL = "http://www.ant1iwo.com/oikonomia/2013/05/07/sthn-ep-oikonomikwn-toy-eyrwkoinonoylioy/"; //TODO RM
+
 if ($URL == "") {
     printMessage(0, "Articles URL cant be emtpy");
 }
@@ -144,13 +147,8 @@ if ($title == "" && $description == "") {
 
 //Find site name if dont exists
 if ($siteName == "") {
-
     $pSiteName = str_replace("http://", "", $URL);
-//    $pSiteName = str_replace("www.", "", $pSiteName);
-//    $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
-    // $pSiteName = preg_replace('~\s+\S+$~', '', $pSiteName)
-
-    $pSiteName = preg_replace('/\.[^.]+$/', '', $siteName);
+    $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
     $siteName = $pSiteName;
 }
 

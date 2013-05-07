@@ -1589,7 +1589,6 @@ function loadArticles(query) {
                     imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
                 }
 
-                //TODO ADD SITE NAME
                 item = '<div class="box article  ' + filterClasses + ' ">'
                     + '<div class="box-img">'
                     + imgCode

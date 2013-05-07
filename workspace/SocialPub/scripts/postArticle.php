@@ -40,7 +40,6 @@ $username = mysql_real_escape_string($username);
 $postArticleSrt = "CALL post_users_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
 
 
-
 $result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
 
 $row = mysql_fetch_assoc($result); // get the results
@@ -53,10 +52,8 @@ $resultCode = $row['RESULT'];
 
     switch($resultCode){
         case 2:
-            printArticleData($resultCode, $row, $postArticleSrt); //TODO RM LAST PARAM
-
         case 1:
-            printArticleData($resultCode, $row, $postArticleSrt); //TODO RM LAST PARAM
+            printArticleData($resultCode, $row);
             break;
         case -1:
             // Print result code
@@ -74,7 +71,7 @@ $resultCode = $row['RESULT'];
  * code: 2 article existed for other users and just added for current user
  *
  * */
-function printArticleData($resultCode, $row, $postArticleSrt){ //TODO RM LAST PARAM
+function printArticleData($resultCode, $row){
     $renamedRow['code'] = $resultCode;
     $renamedRow['uid'] = $row['idARTICLE'];
     $renamedRow['title'] = $row['TITLE'];
@@ -82,7 +79,7 @@ function printArticleData($resultCode, $row, $postArticleSrt){ //TODO RM LAST PA
     $renamedRow['added'] = strtotime($row['TIME']);
     $renamedRow['views'] = $row['VIEWS'];
     $renamedRow['shares'] = $row['SHARES'];
-    $renamedRow['site'] =  substr($row['SITE_NAME'], 0, 10 );
+    $renamedRow['site'] =  substr($row['SITE_NAME'], 0, 20);
 
     //Save like
     $renamedRow['likes'] = $row['LIKES'];
@@ -104,10 +101,6 @@ function printArticleData($resultCode, $row, $postArticleSrt){ //TODO RM LAST PA
     $categoriesTables = explode(',', $row['CATEGORY']);
 
     $renamedRow['tags'] = $categoriesTables;
-
-
-    $renamedRow['query'] = $postArticleSrt;
-
 
     echo json_encode($renamedRow);
 

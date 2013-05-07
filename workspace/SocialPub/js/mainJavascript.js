@@ -177,8 +177,8 @@ $(document).ready(function () {
 
 
             var q = $("#boxsearch").val();
-            debugger;
 
+            doQuery(q);
 
 
         }
@@ -190,7 +190,8 @@ $(document).ready(function () {
 
                 var q = $("#boxsearch").val();
 
-                makeShowNotification(1,q,1000);
+                doQuery(q);
+
 
 
             }, 500);
@@ -201,25 +202,16 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
+
+/*
+* Performs a query, and re inits isotope
+* */
+function doQuery(q){
+
+
+
+}
 
 
 /*
@@ -342,7 +334,6 @@ function getReadlaterSuccess(data, element) {
  * */
 function getViewSuccess(data, element) {
 
-
     var jsonObj = eval('(' + data + ')');
 
     // Login was successfull
@@ -362,9 +353,9 @@ function getViewSuccess(data, element) {
 
     // Successfully liked or unliked
     if (jsonObj['code'] != -1) {
-        var s = $($($(this).children('.box-body')[0]).children('.views')[0]);
+        var s = $($($(element).children('.box-body')[0]).children('.badge.views')[0]);
 
-        $($($(this).children('.box-body')[0]).children('.views')[0]).html('Views: ' + jsonObj['views']);
+        $($($(element).children('.box-body')[0]).children('.badge.views')[0]).html('Views: ' + jsonObj['views']);
         $(element).addClass("viewed");
     }
     //Show notification
@@ -1158,7 +1149,6 @@ function deletedArticleSuccess(data, element) {
     //if deletion was okay, remove element from isotope too
     if (jsonObj['code'] == 1) {
 
-
         //remove from isotope
         window.container.isotope('remove', $(element));
 
@@ -1419,8 +1409,173 @@ function calculateBoxWidth() {
 
 
 
+/*
+* Load articles from Server
+* */
+function loadArticles(){
+    var curwidth = window.container.width();
+
+    $("#dsize").text("Size: " + curwidth); //TODO RM
+    //When window is resized TODO RM
+    $(window).resize(function () {
+        $("#dsize").text("Size: " + curwidth); //TODO RM
+    });
 
 
+    window.container.isotope({
+        sortBy: 'date',
+        sortAscending: false,
+        getSortData: {
+            date: function ($elem) {
+                return new Date($elem.find('.date').attr('datetime') * 1000);
+
+            },
+            alphabetical: function ($elem) {
+                var name = $elem.find('.name'),
+                    itemText = name.length ? name : $elem;
+                return itemText.text();
+            }
+        }
+    });
+
+
+
+    var ajaxError = function () {
+        makeShowNotification(0,"Couldnt fetch articles! :(",DELAY_MEDIUM);
+    };
+
+
+    // dynamically load sites using Isotope from Zootool
+    $.getJSON('../scripts/getUserArticles.php')
+        .error(ajaxError)
+        .success(function (data) {
+
+            // proceed only if we have data
+            if (!data || !data.length) {
+                ajaxError();
+                return;
+            }
+            var items = [], siteFiltersDivs = [], siteFilters = [],
+                item, article;
+            //Push header of site filters
+            siteFiltersDivs.push('<li><h4>Sites</h4></li>');
+
+
+            for (var i = 0, len = data.length; i < len; i++) {
+                article = data[i];
+
+
+                var filterClasses = "", filterTags = "";
+
+
+                //Create classes for the filtering
+                for (var j = 0; j < article.tags.length; j++) {
+                    filterClasses += article.tags[j] + " ";
+                    filterTags += '<button class="category ' + article.tags[j] + '">#' + article.tags[j] + '</button>';
+                }
+
+                var newSiteFilter = article.site.replace(/[ .//]/ig, '').toLowerCase();
+
+                filterClasses += newSiteFilter;
+
+
+                var likedClass = "";
+                var readLaterClass = "";
+
+
+                if (article.like == 1) {
+                    likedClass = " liked";
+                    filterClasses+= " liked ";
+                }
+                if (article.readLater == 1){ readLaterClass = " readLater";
+                    filterClasses+= " readLater ";
+                }
+
+                if (article.view == 1){
+                    filterClasses+= " viewed ";
+                }
+
+
+                var imgCode = "";
+                if (article.image != "") {
+                    imgCode = '<img  class="articleimg" src="' + article.image.replace('/l.', '/m.') + '" />';
+                }
+
+                //TODO ADD SITE NAME
+                item = '<div class="box article  ' + filterClasses + ' ">'
+                    + '<div class="box-img">'
+                    + imgCode
+                    + '</div>'
+                    + '<div class="box-body">'
+                    + '<h4 class="articletitle">' + article.title + '</h4>'
+                    + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
+                    + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
+                    + '<p class="articledesc" >' + article.description + '</p>'
+                    + '<div class="readMore" ><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
+                    + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
+                    + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
+                    + '<span class="badge views" >Views: ' + article.views + '</span>'
+                    + '<button class="badge read '+ readLaterClass +'" >Read later</button>'
+                    + '<span class="articleID" style="display: none">' + article.uid + '</span>'
+                    + '</div>'
+                    + '<div class="categories" >' + filterTags + '</div>'
+                    + '</div>';
+
+
+                items.push(item);
+
+
+                // Find out if sitename is unique
+                var isUnique = 1;
+
+
+                for (var sf = 0; sf < siteFilters.length; sf++) {
+
+                    if (siteFilters[sf] == newSiteFilter) {
+                        isUnique = 0;
+                        break;
+                    }
+                }
+
+                //if sitename is unique, add it
+                if (isUnique == 1) {
+                    siteFilters.push(newSiteFilter);
+                    siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site + '</a></li>');
+                }
+
+            }
+
+            var $items = $(items.join(''));
+
+            var boxesShown = false;
+
+
+            // If there is an img that still loads after 2 secs, show the current boxes
+            setTimeout(function () {
+
+                if (!boxesShown){
+                    showBoxesAndFilters($items,siteFiltersDivs);
+                }
+                boxesShown=true;
+            }, 2000);
+
+
+            //When images are loaded, relayout webpage
+            $items.imagesLoaded(function () {
+
+                if(!boxesShown){
+                    showBoxesAndFilters($items,siteFiltersDivs);
+                    boxesShown=true;
+                }
+
+
+                window.container.isotope('reLayout'); //Force reLayout
+
+            });
+
+        });
+
+}
 
 
 

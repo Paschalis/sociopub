@@ -72,6 +72,11 @@ Box of a new post
     margin: 0;
     padding: 0;
 }
+.box.newpost label {
+   text-align: center;
+    font-weight: bold;
+}
+
 
 .box.newpost .input input {
     /* Input url */

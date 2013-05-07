@@ -120,15 +120,10 @@ $(document).ready(function () {
     });
 
 
-
-
-
-
     //When user reads an article
     $(document).on(
         {
             mouseenter: function () {
-
 
 
                 $($(this).children('.box-img')[0]).addClass('hover');
@@ -154,16 +149,16 @@ $(document).ready(function () {
 
                 if (diff < 3) return; //user has to stay at least 3 seconds
 
-                var articleID =  $($($(this).children('.box-body')[0]).children('.articleID')[0]).html();
+                var articleID = $($($(this).children('.box-body')[0]).children('.articleID')[0]).html();
 
                 var formData = new Object();
 
                 formData['articleID'] = articleID;
 
-                    ajaxJsonRequest("scripts/viewedArticle.php",
-                        formData,
-                        getViewSuccess,
-                        ajaxFailed, this);
+                ajaxJsonRequest("scripts/viewedArticle.php",
+                    formData,
+                    getViewSuccess,
+                    ajaxFailed, this);
 
 
             }
@@ -215,8 +210,7 @@ function getLikeSuccess(data, element) {
 
 
         //Re-filter items
-        if(window.currentFilter!=null){
-            debugger;
+        if (window.currentFilter != null) {
             window.currentFilter.click();
         }
 
@@ -274,7 +268,7 @@ function getReadlaterSuccess(data, element) {
 
 
         //Re-filter items
-        if(window.currentFilter!=""){
+        if (window.currentFilter != "") {
             window.currentFilter.click();
         }
 
@@ -297,7 +291,6 @@ function getViewSuccess(data, element) {
 
     var jsonObj = eval('(' + data + ')');
 
-
     // Login was successfull
     if (jsonObj['code'] == -1) {
         jsonObj['code'] = -1;
@@ -315,10 +308,10 @@ function getViewSuccess(data, element) {
 
     // Successfully liked or unliked
     if (jsonObj['code'] != -1) {
+        var s = $($($(this).children('.box-body')[0]).children('.views')[0]);
 
-        $($($(this).children('.box-body')[0]).children('.views')[0]).html('Views: ' + jsonObj['views'])
-
-        $(element).addClass(".viewed");
+        $($($(this).children('.box-body')[0]).children('.views')[0]).html('Views: ' + jsonObj['views']);
+        $(element).addClass("viewed");
     }
     //Show notification
     else {
@@ -328,7 +321,6 @@ function getViewSuccess(data, element) {
 
 
 }
-
 
 
 /*
@@ -452,7 +444,7 @@ function ajaxFailed() {
     var data = new Object();
 
     data['code'] = 0;
-    data['message'] = "Something went wrong!";
+    data['message'] = "Something went wrong! Ajax failed";
 
     showNotification(data, DELAY_AJAX_ERROR);
 
@@ -470,20 +462,21 @@ function ajaxSuccessPost(result) {
 
     // Login was successfull
     if (jsonObj['code'] == 1) {
-        jsonObj['message'] = "Post was successfully made";
+        jsonObj['message'] = "Article shared";
 
     }
     else if (jsonObj['code'] == 2) {
         jsonObj['code'] = 1;
-        jsonObj['message'] = "Somebody else posted this article too! :)";
+        jsonObj['message'] = "Article reshared";
     }
     else if (jsonObj['code'] != 0) {
         jsonObj['code'] = 0;
-        jsonObj['message'] = "Something went wrong.";
+        jsonObj['message'] = "Something went wrong. Post failed";
     }
 
+
     // Add article to isotope
-    if (jsonObj['code'] == 1 || jsonObj['code'] == 2) {
+    if (jsonObj['code'] == 1) {
         addArticleToIsotope(jsonObj);
     }
 
@@ -520,14 +513,15 @@ function addArticleToIsotope(article) {
 
     if (article.like == 1) {
         likedClass = " liked";
-        filterClasses+= " liked ";
+        filterClasses += " liked ";
     }
-    if (article.readLater == 1){ readLaterClass = " readLater";
-        filterClasses+= " readLater ";
+    if (article.readLater == 1) {
+        readLaterClass = " readLater";
+        filterClasses += " readLater ";
     }
 
-    if (article.view == 1){
-        filterClasses+= " viewed ";
+    if (article.view == 1) {
+        filterClasses += " viewed ";
     }
 
     var imgCode = "";
@@ -548,7 +542,7 @@ function addArticleToIsotope(article) {
         + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
         + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
         + '<span class="badge views" >Views: ' + article.views + '</span>'
-        + '<span class="badge read '+ readLaterClass +'" >Read later</span>'
+        + '<span class="badge read ' + readLaterClass + '" >Read later</span>'
         + '<span class="articleID" style="display: none">' + article.uid + '</span>'
         + '</div>'
         + '<div class="categories" >' + filterTags + '</div>'
@@ -562,22 +556,7 @@ function addArticleToIsotope(article) {
     $items.imagesLoaded(function () {
 
         //Clear  new post box
-        clearUsersNewPost(1);
-
-        // add the box to the isotope
-        window.container.append($items);
-
-        $items.each(function () {
-            var $this = $(this);
-
-            //Save box width
-            $this.width(window.boxWidth);
-            //Save box's image width
-            $this.find('img').width(window.boxWidth);
-        });
-
-        window.container.isotope('insert', $items);
-
+        clearUsersNewPostAndAddNewPost(1, this, $items);
 
     });
 
@@ -1042,12 +1021,50 @@ function previewArticle() {
 /**
  * Clears an article's (from session and isotope)
  * */
-function clearUsersNewPost(param) {
+function clearUsersNewPostAndAddNewPost(param, that, items) {
 
 
     ajaxJsonRequest("scripts/clearArticlePreview.php",
         "",
-        clearArticleSuccess,
+        function (data) {
+            //Clear article success
+            var jsonObj;
+
+            jsonObj = eval('(' + data + ')');
+
+            var $newPost = $('.box.newpost.article');
+            $newPost.html(getNewPostHtml());
+
+            // Run clear when inserting new post
+            if (param == 1) {
+
+                //TODO ADD NEW CODE!
+
+                // add the box to the isotope
+                window.container.append($(items));
+
+                $(items).each(function () {
+                    var $this = $(that);
+
+                    //Save box width
+                    $this.width(window.boxWidth);
+                    //Save box's image width
+                    $this.find('img').width(window.boxWidth);
+                });
+
+
+                window.container.isotope('insert', $(items));
+
+                //Relayout isotope
+                window.container.isotope('reLayout'); //Force reLayout
+            }
+            //Run simple cleared
+            else {
+
+            }
+
+
+        },
         ajaxFailed, param);
 
 
@@ -1086,6 +1103,10 @@ function deletedArticleSuccess(data, element) {
     //if deletion was okay, remove element from isotope too
     if (jsonObj['code'] == 1) {
 
+
+        //remove from isotope
+        window.container.isotope('remove', $(element));
+
         element.remove();
 
     }
@@ -1094,33 +1115,6 @@ function deletedArticleSuccess(data, element) {
     window.container.isotope('reLayout'); //Force reLayout
 
     makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
-
-}
-
-
-/**
- * Successfully cleared an article's session data
- * */
-function clearArticleSuccess(data, param) {
-
-    var jsonObj;
-
-
-    jsonObj = eval('(' + data + ')');
-
-
-    var $newPost = $('.box.newpost.article');
-    $newPost.html(getNewPostHtml());
-
-
-    //Relayout and show notification
-    if (param != 1) {
-        makeShowNotification(jsonObj['code'], jsonObj['message'], DELAY_MEDIUM);
-
-    }
-    //Relayout isotope
-    window.container.isotope('reLayout'); //Force reLayout
-
 
 }
 
@@ -1239,7 +1233,7 @@ function deleteArticle(element) {
 
     // its the new post. Just clear it, dont remove it
     if ($(element).hasClass('newpost')) {
-        clearUsersNewPost();
+        clearUsersNewPostAndAddNewPost();
     }
     else {
         //Delete users article

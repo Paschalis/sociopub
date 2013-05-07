@@ -79,7 +79,7 @@ function printArticleData($resultCode, $row){
     $renamedRow['title'] = $row['TITLE'];
     $renamedRow['url'] = $row['URL'];
     $renamedRow['added'] = strtotime($row['TIME']);
-    $renamedRow['views'] = $row['WATCHES'];
+    $renamedRow['views'] = $row['VIEWS'];
     $renamedRow['shares'] = $row['SHARES'];
     $renamedRow['site'] =  substr($row['SITE_NAME'], 0, 10 );
 
@@ -87,7 +87,8 @@ function printArticleData($resultCode, $row){
     $renamedRow['likes'] = $row['LIKES'];
 
     $renamedRow['like'] = $row['LIKED'];
-    $renamedRow['favorite'] = $row['FAVORITED'];
+    $renamedRow['viewed'] = $row['VIEWED'];
+    $renamedRow['readLater'] = $row['READ_LATER'];
 
 
     if($row['IMG_URL']!=""){

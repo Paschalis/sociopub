@@ -133,67 +133,6 @@ if ($_SESSION["loggedin"] == 1) {
     });
 
 
-    function showBoxesAndFilters($items,siteFiltersDivs) {
-
-        //Show items on webpage
-        window.container.append($items);
-
-        $items.each(function () {
-            var $this = $(this);
-
-            //Save box width
-            $this.width(window.boxWidth);
-            //Save box's image width
-            $this.find('img').width(window.boxWidth);
-        });
-
-        window.container.isotope('insert', $items);
-
-
-        //Show site filters on right content bar
-        for (var i = 0; i < siteFiltersDivs.length; i++) {
-            $('#filter ul').append(siteFiltersDivs[i]);
-
-        }
-
-        setFilterFunctionality();
-    }
-
-
-    function setFilterFunctionality() {
-        var $optionSets = $('#filters .option-set'),
-            $optionLinks = $optionSets.find('a');
-
-        $optionLinks.click(function () {
-
-            var $this = $(this);
-
-            window.currentFilter=$this;
-
-
-            var $optionSet = $this.parents('.option-set');
-            $optionSet.find('.selected').removeClass('selected');
-            $this.addClass('selected');
-
-            // make option object dynamically, i.e. { filter: '.my-filter-class' }
-            var options = {},
-                key = $optionSet.attr('data-option-key'),
-                value = $this.attr('data-option-value');
-            // parse 'false' as false boolean
-            value = value === 'false' ? false : value;
-            options[ key ] = value;
-            if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
-                // changes in layout modes need extra logic
-                changeLayoutMode($this, options)
-            } else {
-                // otherwise, apply new options
-                window.container.isotope(options);
-            }
-
-            return false;
-        });
-
-    }
 
     </script>
 

@@ -40,6 +40,7 @@ if ($_SESSION['loggedin'] == 1) {
                     <li><a href="#" data-option-value=".technology">Technology</a></li>
                     <li><a href="#" data-option-value=".travel">Travel</a></li>
                     <li><a href="#" data-option-value=".other">Other</a></li>
+                    <span id="sitefilters"></span>
                 </ul>
             </div>
         </div>

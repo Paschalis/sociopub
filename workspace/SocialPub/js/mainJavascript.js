@@ -168,6 +168,7 @@ $(document).ready(function () {
 
     //When user performs search
     var timeoutHnd;
+    window.doingQuery=0;
 
     $("#boxsearch").keypress(function(e) {
 
@@ -175,11 +176,10 @@ $(document).ready(function () {
         //On Enter
         if (event.keyCode == 13) {
 
-
+            if(window.doingQuery) return;
+            window.doingQuery=1;
             var q = $("#boxsearch").val();
-
             doQuery(q);
-
 
         }
         else {
@@ -187,6 +187,8 @@ $(document).ready(function () {
                 clearTimeout(timeoutHnd);
             timeoutHnd = setTimeout(function () {
 
+                if(window.doingQuery) return;
+                window.doingQuery=1;
 
                 var q = $("#boxsearch").val();
 
@@ -209,6 +211,22 @@ $(document).ready(function () {
 * */
 function doQuery(q){
 
+    debugger;
+
+    // Remove all existing elements
+    $(".box.article").each(function(){
+
+        if($(this).hasClass("newpost")) return;
+        //remove from isotope
+        window.container.isotope('remove', $(this));
+
+        $(this).remove();
+    });
+
+//    debugger;
+
+    // Load new articles based on query
+    loadArticles(q);
 
 
 }
@@ -1412,6 +1430,7 @@ function calculateBoxWidth() {
 * Load articles from Server
 * */
 function loadArticles(query){
+
     var curwidth = window.container.width();
 
     window.container.isotope({
@@ -1454,18 +1473,22 @@ function loadArticles(query){
 
             var data = eval('(' + dataRaw+ ')');
 
+            var code = data[0]['code'];
+
             // proceed only if we have data
-            if (!data || !data.length) {
+            if (!data || !data.length || code==0) {
                 fetchArticlesError();
                 return;
             }
+
+
             var items = [], siteFiltersDivs = [], siteFilters = [],
                 item, article;
             //Push header of site filters
             siteFiltersDivs.push('<li><h4>Sites</h4></li>');
 
 
-            for (var i = 0, len = data.length; i < len; i++) {
+            for (var i = 1, len = data.length; i < len; i++) {
                 article = data[i];
 
                 var filterClasses = "", filterTags = "";
@@ -1571,6 +1594,8 @@ function loadArticles(query){
                     boxesShown=true;
                 }
 
+                window.doingQuery=0;
+
 
                 window.container.isotope('reLayout'); //Force reLayout
 
@@ -1585,6 +1610,70 @@ function loadArticles(query){
 
 
 
+function showBoxesAndFilters($items,siteFiltersDivs) {
+
+    //Show items on webpage
+    window.container.append($items);
+
+    $items.each(function () {
+        var $this = $(this);
+
+        //Save box width
+        $this.width(window.boxWidth);
+        //Save box's image width
+        $this.find('img').width(window.boxWidth);
+    });
+
+    window.container.isotope('insert', $items);
+
+
+
+    $('#filter ul #sitefilters').html("");
+
+    //Show site filters on right content bar
+    for (var i = 0; i < siteFiltersDivs.length; i++) {
+        $('#filter ul #sitefilters').append(siteFiltersDivs[i]);
+
+    }
+
+    setFilterFunctionality();
+}
+
+
+function setFilterFunctionality() {
+    var $optionSets = $('#filters .option-set'),
+        $optionLinks = $optionSets.find('a');
+
+    $optionLinks.click(function () {
+
+        var $this = $(this);
+
+        window.currentFilter=$this;
+
+
+        var $optionSet = $this.parents('.option-set');
+        $optionSet.find('.selected').removeClass('selected');
+        $this.addClass('selected');
+
+        // make option object dynamically, i.e. { filter: '.my-filter-class' }
+        var options = {},
+            key = $optionSet.attr('data-option-key'),
+            value = $this.attr('data-option-value');
+        // parse 'false' as false boolean
+        value = value === 'false' ? false : value;
+        options[ key ] = value;
+        if (key === 'layoutMode' && typeof changeLayoutMode === 'function') {
+            // changes in layout modes need extra logic
+            changeLayoutMode($this, options)
+        } else {
+            // otherwise, apply new options
+            window.container.isotope(options);
+        }
+
+        return false;
+    });
+
+}
 
 
 

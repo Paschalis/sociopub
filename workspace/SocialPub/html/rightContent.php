@@ -22,6 +22,10 @@ if ($_SESSION['loggedin'] == 1) {
                 <ul class="filterclass option-set" data-option-key="filter">
                     <li><a href="#" data-option-value="*" class="selected">No Filters</a></li>
                     <li></li>
+                    <li><h4>Social</h4></li>
+                    <li><a href="#" data-option-value=".liked">Like</a></li>
+                    <li><a href="#" data-option-value=".viewed">View</a></li>
+                    <li><a href="#" data-option-value=".favorited">Favorite</a></li>
                     <li><h4>Categories</h4></li>
                     <li><a href="#" data-option-value=".cinema">Cinema</a></li>
                     <li><a href="#" data-option-value=".economy">Economy</a></li>

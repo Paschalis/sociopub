@@ -208,8 +208,16 @@ if ($_SESSION["loggedin"] == 1) {
 
                         if (article.like == 1) {
                             likedClass = " liked";
+                            filterClasses+= " liked ";
                         }
-                        if (article.favorite == 1) favedClass = " favorited";
+                        if (article.favorite == 1){ favedClass = " favorited";
+                            filterClasses+= " favorited ";
+                        }
+
+                        if (article.view == 1){
+                            filterClasses+= " viewed ";
+                        }
+
 
                         var imgCode = "";
                         if (article.image != "") {
@@ -328,11 +336,12 @@ if ($_SESSION["loggedin"] == 1) {
             $optionLinks = $optionSets.find('a');
 
         $optionLinks.click(function () {
+
             var $this = $(this);
-            // don't proceed if already selected
-            if ($this.hasClass('selected')) {
-                return false;
-            }
+
+            window.currentFilter=$this;
+
+
             var $optionSet = $this.parents('.option-set');
             $optionSet.find('.selected').removeClass('selected');
             $this.addClass('selected');

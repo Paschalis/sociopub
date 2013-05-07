@@ -116,6 +116,7 @@ $(document).ready(function () {
 
 
                 $($(this).children('.box-img')[0]).addClass('hover');
+                $(this).addClass('hover');
 
                 if ($(this).hasClass('newpost'))
                     return;
@@ -126,6 +127,7 @@ $(document).ready(function () {
             mouseleave: function () {
 
                 $($(this).children('.box-img')[0]).removeClass('hover');
+                $(this).removeClass('hover');
 
                 if ($(this).hasClass('newpost'))
                     return;
@@ -145,7 +147,7 @@ $(document).ready(function () {
                     ajaxJsonRequest("scripts/viewedArticle.php",
                         formData,
                         getViewSuccess,
-                        ajaxFailed, $($($(this).children('.box-body')[0]).children('.views')[0]));
+                        ajaxFailed, this);
 
 
             }
@@ -184,14 +186,24 @@ function getLikeSuccess(data, element) {
         //Successfully unliked
         if (jsonObj['code'] == 0) {
             $(element).removeClass('liked');
+            $($($(element).parent()).parent()).removeClass('liked');
 
         }
         //Successfully liked
         else {
             $(element).addClass('liked');
+            $($($(element).parent()).parent()).addClass('liked');
         }
 
         $(element).html('+' + jsonObj['likes']);
+
+        debugger;
+
+        //Re-filter items
+        if(window.currentFilter!=""){
+            window.currentFilter.click();
+        }
+
     }
     //Show notification
     else {
@@ -230,7 +242,10 @@ function getViewSuccess(data, element) {
 
     // Successfully liked or unliked
     if (jsonObj['code'] != -1) {
-        $(element).html('Views: ' + jsonObj['views']);
+
+        $($($(this).children('.box-body')[0]).children('.views')[0]).html('Views: ' + jsonObj['views'])
+
+        $(element).addClass(".viewed");
     }
     //Show notification
     else {

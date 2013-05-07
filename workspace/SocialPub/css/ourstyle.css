@@ -165,27 +165,40 @@ The  actual image of an article of newpost
 }
 
 /*
+ Box on hover
+*/
+.box.hover {
+    border-color: #737373;
+}
+
+/*
 Time of box
 */
 .box .date {
     margin: 0px;
-    padding: 0px;
+    padding:  1px 3px 2px 2px;
     line-height: 10px;
     position: absolute;
-    top: -1px;
+    top: 0px;
     left: 0px;
 
-    border: 2px solid #000000;
+    border-width: 0px;
+
+    /*border: 2px solid #000000;*/
     -webkit-bottom-right-border-radius: 4px;
     -moz-bottom-right-border-radius: 4px;
     border-bottom-right-radius: 4px;
-    padding-left: 2px;
+
+    -webkit-top-left-border-radius: 3px;
+    -moz-top-left-border-radius: 3px;
+    border-top-left-radius: 3px;
+
     font-size: 10px;
     font-weight: bold;
     color: white;
-    background-color: #000000;
-
-    text-shadow: 0px 0px 16px rgba(215, 215, 215, 1);
+    /*background-color: #000000;*/
+    background-color: rgba(76, 76, 76, 0.70);
+    /*text-shadow: 0px 0px 16px rgba(215, 215, 215, 1);*/
 
     /*Unselectable date*/
     -webkit-user-select: none;
@@ -202,7 +215,7 @@ Close Button of box
 */
 .box button.btn.closebox {
     color: white;
-    background: #4c4c4c;
+    background: rgba(76, 76, 76, 0.30);
     line-height: 10px;
     margin: 0px;
     padding: 4px 5px 4px 5px;
@@ -474,6 +487,11 @@ Notification
     text-decoration: none;
     color: #4c4c4c;
     text-shadow: 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 1px -1px 0 #cdcdcd;
+}
+#rightContent ul li a.selected {
+    font-weight: bold;
+    color: #1173ce;
+    text-shadow: none;
 }
 
 #rightContent ul li a:hover {

@@ -7,9 +7,11 @@
  * To change this template use File | Settings | File Templates.
  */
 
+if($_SESSION['loggedin']==1){
 
 ?>
-<h4>Latest Shares</h4>
+
+<h4>Latest</h4>
 <ul class="latestShares">
 
 </ul>
@@ -81,6 +83,6 @@
 
 </script>
 
-
+<?php }  ?>
 
 

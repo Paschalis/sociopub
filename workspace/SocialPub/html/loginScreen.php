@@ -1,8 +1,8 @@
-<div class="" id="loginModal">
+<div class="span6" id="loginModal">
     <div class="modal-header">
         <h3>Have an Account?</h3>
     </div>
-    <div class="">
+    <div >
         <div class="well">
             <div class="tabbable">
                 <ul class="nav nav-tabs" id="loginTabs">

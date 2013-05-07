@@ -593,3 +593,9 @@ Notification
 .navbar-search button.add-on:hover{
     background-color: #bfbfbf;
 }
+/*
+Register screen overrides
+*/
+.modal-header{
+    border-bottom: 0;
+}

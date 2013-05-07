@@ -387,7 +387,7 @@ a.box:focus {
 Box properties
 */
 
-.box .likes {
+.box .likes, .box .read {
     border: 0px;
 }
 
@@ -405,7 +405,7 @@ user likes an article
 /*
 user likes an article
 */
-.box .badge.favorite.favorited {
+.box .badge.read.readLater {
     background-color: #cdb22c;
 }
 

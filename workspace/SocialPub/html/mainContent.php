@@ -203,15 +203,15 @@ if ($_SESSION["loggedin"] == 1) {
 
 
                         var likedClass = "";
-                        var favedClass = "";
+                        var readLaterClass = "";
 
 
                         if (article.like == 1) {
                             likedClass = " liked";
                             filterClasses+= " liked ";
                         }
-                        if (article.favorite == 1){ favedClass = " favorited";
-                            filterClasses+= " favorited ";
+                        if (article.readLater == 1){ readLaterClass = " readLater";
+                            filterClasses+= " readLater ";
                         }
 
                         if (article.view == 1){
@@ -238,6 +238,7 @@ if ($_SESSION["loggedin"] == 1) {
                             + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
                             + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
                             + '<span class="badge views" >Views: ' + article.views + '</span>'
+                            + '<button class="badge read '+ readLaterClass +'" >Read later</button>'
                             + '<span class="articleID" style="display: none">' + article.uid + '</span>'
                             + '</div>'
                             + '<div class="categories" >' + filterTags + '</div>'

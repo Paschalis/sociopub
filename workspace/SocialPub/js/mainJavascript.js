@@ -92,21 +92,37 @@ $(document).ready(function () {
         //Get the article ID
         var articleID = $($(this).siblings(".articleID")[0]).html();
 
-        //Get the current like value
-        var likeValue = $(this).hasClass('liked');
-        if (likeValue) likeValue = 1;
-        else likeValue = 0;
-
         var formData = new Object();
 
         formData['articleID'] = articleID;
-        formData['likeValue'] = likeValue;
 
         ajaxJsonRequest("scripts/likeArticle.php",
             formData,
             getLikeSuccess,
             ajaxFailed, this);
     });
+
+
+    //When user presses read button
+    $("body").on("click", ".box button.read", function () {
+
+        //Get the article ID
+        var articleID = $($(this).siblings(".articleID")[0]).html();
+
+        var formData = new Object();
+
+        formData['articleID'] = articleID;
+
+        ajaxJsonRequest("scripts/readLaterArticle.php",
+            formData,
+            getReadlaterSuccess,
+            ajaxFailed, this);
+    });
+
+
+
+
+
 
     //When user reads an article
     $(document).on(
@@ -197,7 +213,65 @@ function getLikeSuccess(data, element) {
 
         $(element).html('+' + jsonObj['likes']);
 
-        debugger;
+
+        //Re-filter items
+        if(window.currentFilter!=null){
+            debugger;
+            window.currentFilter.click();
+        }
+
+    }
+    //Show notification
+    else {
+        jsonObj['code'] = 0;
+        showNotification(jsonObj, DELAY_MEDIUM);
+    }
+
+
+}
+
+
+/*
+ * Article was readLater-changed
+ * */
+function getReadlaterSuccess(data, element) {
+
+
+    var jsonObj = eval('(' + data + ')');
+
+
+    // Login was successfull
+    if (jsonObj['code'] == -1) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User dont exists";
+
+    }
+    else if (jsonObj['code'] == -2) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. Article dont exists";
+    }
+    else if (jsonObj['code'] == -3) {
+        jsonObj['code'] = -1;
+        jsonObj['message'] = "Something went wrong. User's article dont exists";
+    }
+
+    // Successfully liked or unliked
+    if (jsonObj['code'] != -1) {
+
+        //Successfully removed read later
+        if (jsonObj['code'] == 0) {
+            $(element).removeClass('readLater');
+            $($($(element).parent()).parent()).removeClass('readLater');
+
+        }
+        //Successfully added read later
+        else {
+
+
+            $(element).addClass('readLater');
+            $($($(element).parent()).parent()).addClass('readLater');
+        }
+
 
         //Re-filter items
         if(window.currentFilter!=""){
@@ -213,7 +287,6 @@ function getLikeSuccess(data, element) {
 
 
 }
-
 
 
 /*
@@ -440,14 +513,22 @@ function addArticleToIsotope(article) {
 
     filterClasses += article.site.replace(/[ .//]/ig, '').toLowerCase() + " ";
 
+
     var likedClass = "";
-    var favedClass = "";
+    var readLaterClass = "";
 
 
     if (article.like == 1) {
         likedClass = " liked";
+        filterClasses+= " liked ";
     }
-    if (article.favorite == 1) favedClass = " favorited";
+    if (article.readLater == 1){ readLaterClass = " readLater";
+        filterClasses+= " readLater ";
+    }
+
+    if (article.view == 1){
+        filterClasses+= " viewed ";
+    }
 
     var imgCode = "";
     if (article.image != "") {
@@ -467,6 +548,7 @@ function addArticleToIsotope(article) {
         + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
         + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
         + '<span class="badge views" >Views: ' + article.views + '</span>'
+        + '<span class="badge read '+ readLaterClass +'" >Read later</span>'
         + '<span class="articleID" style="display: none">' + article.uid + '</span>'
         + '</div>'
         + '<div class="categories" >' + filterTags + '</div>'
@@ -1190,7 +1272,7 @@ function getNewPostHtml() {
         + '<button class="btn closebox newpost" onclick="deleteArticle(this)">x</button>'
         + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime() / 100) + '" ></p>'
         + '<p class="articledesc" ></p>'
-        + '<div class="readMore"><a href="" target="_blank">more...</a></div>'
+        + '<div class="readMore"><a href="" target="_blank">Article Link</a></div>'
         + '<button class="badge likes"></button>'
         + '<span class="badge shares" ></span>'
         + '<span class="badge views" ></span>'

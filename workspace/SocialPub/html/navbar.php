@@ -9,7 +9,12 @@
             </a>
             <a class="brand" <?php echo 'href="' . _URL . '"'; ?>><?php echo _NAME; ?></a>
 
+
             <div class="nav-collapse collapse navbar-responsive-collapse">
+                <form  class="navbar-search pull-left" onSubmit="return false;">
+                    <span class="icon-search"></span>
+                    <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
+                </form>
                 <!--                <ul class="nav">-->
                 <!--                    <li class="active"><a href="#">Home</a></li>-->
                 <!--                </ul>-->
@@ -21,15 +26,11 @@
                 <!--                            <li class="divider"></li>-->
                 <!--                            <li class="nav-header">Nav header</li>-->
                 <!--                        </ul>-->
-                <!--                    </li>-->
-
-
+                <!--                    </li>--
 
                 <!-- Right in navbar-->
                 <ul class="nav pull-right">
-                    <form  class="navbar-search pull-left" onSubmit="return false;">
-                        <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
-                    </form>
+
                     <li class="divider-vertical"></li>
                     <li class="dropdown"  <?php
                     //If user is logged in, make visible account tab

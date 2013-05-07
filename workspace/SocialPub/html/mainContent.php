@@ -30,7 +30,7 @@ if ($_SESSION["loggedin"] == 1) {
 
 
         var newpost = '<div class="box newpost article cinema economy entertainment history health ' +
-            'lifestyle music news science sports technology travel other " style="width: ' + window.boxWidth + '">'
+            'lifestyle music news science sports technology travel other liked readLater viewed " style="width: ' + window.boxWidth + '">'
             + getNewPostHtml()
             + '</div>';
 

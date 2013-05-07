@@ -76,9 +76,6 @@ include("scripts/initializeSession.php");
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
 <script src="isotope/jquery.isotope.min.js"></script>
-
-<script src="js/jquery.timeago.js" type="text/javascript"></script>
-
-
+<script src="js/jquery.timeago.js"></script>
 </body>
 </html>

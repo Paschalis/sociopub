@@ -502,3 +502,23 @@ Notification
 #rightContent ul li a:hover {
     color: #1173ce;
 }
+
+
+/* Bootstrap navbar search */
+.navbar-search {
+
+    position: relative;
+}
+
+.navbar-search .search-query {
+    padding-left: 29px !important;
+}
+
+.navbar-search .icon-search {
+    position: relative;
+    left: 20px;
+    /*position: absolute;*/
+    /*top: 7px;*/
+    /*left: 11px;*/
+    background-image: url("../img/glyphicons-halflings.png");
+}

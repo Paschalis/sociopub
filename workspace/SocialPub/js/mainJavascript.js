@@ -18,9 +18,11 @@ var DELAY_REGISTER_FORM_ERROR = 6000;
  */
 $(document).ready(function () {
 
+    // Add clear functionality to all inputs
+    $("#boxsearch").inputClear();
+
     //When register button is clicked
     $("#registerButton").click(function () {
-
 
         var formData = checkRegisterForm();
 
@@ -168,17 +170,19 @@ $(document).ready(function () {
 
     //When user performs search
     var timeoutHnd;
-    window.doingQuery=0;
+    window.doingQuery = 0;
 
-    $("#boxsearch").keypress(function(e) {
 
+
+    $("#boxsearch").keypress(function (e) {
 
         //On Enter
         if (event.keyCode == 13) {
 
-            if(window.doingQuery) return;
-            window.doingQuery=1;
+            if (window.doingQuery) return;
+            window.doingQuery = 1;
             var q = $("#boxsearch").val();
+
             doQuery(q);
 
         }
@@ -187,13 +191,13 @@ $(document).ready(function () {
                 clearTimeout(timeoutHnd);
             timeoutHnd = setTimeout(function () {
 
-                if(window.doingQuery) return;
-                window.doingQuery=1;
+
+                if (window.doingQuery) return;
+                window.doingQuery = 1;
 
                 var q = $("#boxsearch").val();
 
                 doQuery(q);
-
 
 
             }, 500);
@@ -203,27 +207,43 @@ $(document).ready(function () {
     });
 
 
+    //When search loose focus and its empty
+    $('#boxsearch').blur(function () {
+
+
+        var q = $("#boxsearch").val();
+
+        if (q == "") {
+            doQuery();
+        }
+    });
+
 
 });
 
 /*
-* Performs a query, and re inits isotope
-* */
-function doQuery(q){
+ * Performs a query, and re inits isotope
+ * */
+function doQuery(q) {
 
-    debugger;
+
+    // no query & already all articles? dont fetch 'em again
+    if((q==null || q=="") && window.allArticles==1){
+        window.doingQuery = 0;
+        return;
+    }
+
+
 
     // Remove all existing elements
-    $(".box.article").each(function(){
+    $(".box.article").each(function () {
 
-        if($(this).hasClass("newpost")) return;
+        if ($(this).hasClass("newpost")) return;
         //remove from isotope
         window.container.isotope('remove', $(this));
 
         $(this).remove();
     });
-
-//    debugger;
 
     // Load new articles based on query
     loadArticles(q);
@@ -1424,12 +1444,10 @@ function calculateBoxWidth() {
 }
 
 
-
-
 /*
-* Load articles from Server
-* */
-function loadArticles(query){
+ * Load articles from Server
+ * */
+function loadArticles(query) {
 
     var curwidth = window.container.width();
 
@@ -1450,34 +1468,39 @@ function loadArticles(query){
     });
 
 
-
     var fetchArticlesError = function () {
-        makeShowNotification(0,"Couldnt fetch articles! :(",DELAY_MEDIUM);
+        makeShowNotification(0, "Couldnt fetch articles! :(", DELAY_MEDIUM);
     };
 
-
-    var queryURL='../scripts/getUserArticles.php';
+    var queryURL = '../scripts/getUserArticles.php';
 
     var formData = new Object();
 
     //If we have query data
-    if(query!=""){
-        formData['q']= query;
+    if (query != null && query!="") {
+        formData['q'] = query;
+        window.allArticles=0;
+    }
+    else{
+        window.allArticles=1;
     }
 
 
     // Fetch articles
     ajaxJsonRequest('../scripts/getUserArticles.php',
         formData,
-        function(dataRaw){
+        function (dataRaw) {
 
-            var data = eval('(' + dataRaw+ ')');
+            var data = eval('(' + dataRaw + ')');
 
             var code = data[0]['code'];
 
             // proceed only if we have data
-            if (!data || !data.length || code==0) {
+            if (!data || !data.length || code == 0) {
                 fetchArticlesError();
+                window.allArticles=0; // no articles
+                window.doingQuery = 0; //query finished!
+
                 return;
             }
 
@@ -1511,14 +1534,15 @@ function loadArticles(query){
 
                 if (article.like == 1) {
                     likedClass = " liked";
-                    filterClasses+= " liked ";
+                    filterClasses += " liked ";
                 }
-                if (article.readLater == 1){ readLaterClass = " readLater";
-                    filterClasses+= " readLater ";
+                if (article.readLater == 1) {
+                    readLaterClass = " readLater";
+                    filterClasses += " readLater ";
                 }
 
-                if (article.view == 1){
-                    filterClasses+= " viewed ";
+                if (article.view == 1) {
+                    filterClasses += " viewed ";
                 }
 
 
@@ -1541,7 +1565,7 @@ function loadArticles(query){
                     + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
                     + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
                     + '<span class="badge views" >Views: ' + article.views + '</span>'
-                    + '<button class="badge read '+ readLaterClass +'" >Read later</button>'
+                    + '<button class="badge read ' + readLaterClass + '" >Read later</button>'
                     + '<span class="articleID" style="display: none">' + article.uid + '</span>'
                     + '</div>'
                     + '<div class="categories" >' + filterTags + '</div>'
@@ -1579,22 +1603,22 @@ function loadArticles(query){
             // If there is an img that still loads after 2 secs, show the current boxes
             setTimeout(function () {
 
-                if (!boxesShown){
-                    showBoxesAndFilters($items,siteFiltersDivs);
+                if (!boxesShown) {
+                    showBoxesAndFilters($items, siteFiltersDivs);
                 }
-                boxesShown=true;
+                boxesShown = true;
             }, 2000);
 
 
             //When images are loaded, relayout webpage
             $items.imagesLoaded(function () {
 
-                if(!boxesShown){
-                    showBoxesAndFilters($items,siteFiltersDivs);
-                    boxesShown=true;
+                if (!boxesShown) {
+                    showBoxesAndFilters($items, siteFiltersDivs);
+                    boxesShown = true;
                 }
 
-                window.doingQuery=0;
+                window.doingQuery = 0;
 
 
                 window.container.isotope('reLayout'); //Force reLayout
@@ -1608,9 +1632,7 @@ function loadArticles(query){
 }
 
 
-
-
-function showBoxesAndFilters($items,siteFiltersDivs) {
+function showBoxesAndFilters($items, siteFiltersDivs) {
 
     //Show items on webpage
     window.container.append($items);
@@ -1625,7 +1647,6 @@ function showBoxesAndFilters($items,siteFiltersDivs) {
     });
 
     window.container.isotope('insert', $items);
-
 
 
     $('#filter ul #sitefilters').html("");
@@ -1648,7 +1669,7 @@ function setFilterFunctionality() {
 
         var $this = $(this);
 
-        window.currentFilter=$this;
+        window.currentFilter = $this;
 
 
         var $optionSet = $this.parents('.option-set');
@@ -1678,8 +1699,57 @@ function setFilterFunctionality() {
 
 
 
+(function ($) {
+    "use strict";
+    $.fn.inputClear = function(options) {
+        var settings = $.extend({
+            'exclude':'.no-clear'
+        },options);
+        return this.each(function() {
+            // add private event handler to avoid conflict
+            $(this).not(settings.exclude)
+                .unbind("clear-focus")
+                .bind("clear-focus", (
+                    function () {
+                        if ($(this).data("clear-button")) return;
+                        var x = $("<a class='clear-text' style='cursor:pointer;color:#888;'><i class='icon-remove'></i></a>");
+                        $(x).data("text-box", this);
+                        $(x).mouseover(function () { $(this).addClass("over"); }).mouseleave(function () { $(this).removeClass("over"); });
+                        $(this).data("clear-button", x);
+                        $(x).css({ "position": "absolute", "left": ($(this).position().right), "top": $(this).position().top, "margin": "5px 0px 0px -20px" });
+                        $(this).after(x);
+                        //$(this));
+                    }))
+                .unbind("clear-blur").bind("clear-blur", (
+                    function (e){
+                        var x = $(this).data("clear-button");
+                        if (x) {
+                            if ($(x).hasClass("over")) {
+                                $(x).removeClass("over");
+                                $(x).hide().remove();
+                                $(this).val("");
 
+                                doQuery(); //refetch articles
 
-
-
-
+                                $(this).removeData("clear-button");
+                                var txt = this;
+                                e.stopPropagation();
+                                e.stopImmediatePropagation();
+                                setTimeout($.proxy(function () { $(this).trigger("focus"); }, txt), 50);
+                                return false;
+                            }
+                        }
+                        if (x && !$(x).hasClass("over")) {
+                            $(this).removeData("clear-button");
+                            $(x).remove();
+                        }
+                    }));
+            // add private event to the focus/unfocus events as branches
+            $(this).on("focus", function () {
+                $(this).trigger("clear-focus");
+            }).on("blur", function () {
+                    $(this).trigger("clear-blur");
+                });
+        });
+    };
+})(jQuery);

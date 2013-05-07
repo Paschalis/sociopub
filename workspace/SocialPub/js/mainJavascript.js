@@ -652,7 +652,7 @@ function addArticleToIsotope(article) {
         + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
         + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
         + '<span class="badge views" >Views: ' + article.views + '</span>'
-        + '<span class="badge read ' + readLaterClass + '" >Read later</span>'
+        + '<button class="badge read ' + readLaterClass + '" >Read later</button>'
         + '<span class="articleID" style="display: none">' + article.uid + '</span>'
         + '</div>'
         + '<div class="categories" >' + filterTags + '</div>'

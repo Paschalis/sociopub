@@ -1280,11 +1280,12 @@ function getArticleSuccess(data, articleUrl) {
     // Set the image
     $(".box.newpost.article .articleimg").attr({src: image});
 
-    $(".box.newpost.article #buttonsToolbar .articletitle").html(title + " - " + siteName);
+    $(".box.newpost.article #buttonsToolbar .articletitle").html(title);
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
     $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", articleUrl);
+    $(".box.newpost.article #buttonsToolbar .readMore a").html("@" + siteName+"");
 
     $(".box.newpost.article .input .buttons button").addClass('fade in half');
     $(".box.newpost.article .input .buttons button").css("display", "inline");
@@ -1386,7 +1387,7 @@ function getNewPostHtml() {
         + '<button class="btn closebox newpost" onclick="deleteArticle(this)">x</button>'
         + '<p class="date fade out" datetime="' + Math.round((new Date()).getTime() / 100) + '" ></p>'
         + '<p class="articledesc" ></p>'
-        + '<div class="readMore"><a href="" target="_blank">Article Link</a></div>'
+        + '<div class="readMore"><a href="" target="_blank"></a></div>'
         + '<button class="badge likes"></button>'
         + '<span class="badge shares" ></span>'
         + '<span class="badge views" ></span>'
@@ -1598,7 +1599,7 @@ function loadArticles(query) {
                     + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
                     + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
                     + '<p class="articledesc" >' + article.description + '</p>'
-                    + '<div class="readMore" ><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
+                    + '<div class="readMore" ><a href="' + article.url + '" target="_blank">@' + article.site + '</a></div>'
                     + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
                     + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
                     + '<span class="badge views" >Views: ' + article.views + '</span>'

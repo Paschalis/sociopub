@@ -160,7 +160,7 @@ The  actual image of an article of newpost
 /*
  Image on hover
 */
-.box .box-img:hover {
+.box .box-img.hover {
     border-bottom-color: #0088cc;
 }
 

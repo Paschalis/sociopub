@@ -113,12 +113,20 @@ $(document).ready(function () {
         {
             mouseenter: function () {
 
-                window.boxHoverSeconds = new Date().getTime() / 1000;
+
+
+                $($(this).children('.box-img')[0]).addClass('hover');
+
                 if ($(this).hasClass('newpost'))
                     return;
 
+                window.boxHoverSeconds = new Date().getTime() / 1000;
+
             },
             mouseleave: function () {
+
+                $($(this).children('.box-img')[0]).removeClass('hover');
+
                 if ($(this).hasClass('newpost'))
                     return;
 
@@ -129,8 +137,6 @@ $(document).ready(function () {
                 if (diff < 3) return; //user has to stay at least 3 seconds
 
                 var articleID =  $($($(this).children('.box-body')[0]).children('.articleID')[0]).html();
-
-                debugger;
 
                 var formData = new Object();
 

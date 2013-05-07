@@ -9,37 +9,76 @@
 
 
 ?>
-<h5>Latest Additions</h5>
-<ul class="thumbnails">
-    <li class="span8">
-        <div class="thumbnail">
-            <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+<h4>Latest Shares</h4>
+<ul class="latestShares">
 
-            <h5>Thumbnail label</h5>
-
-            <p>Thumbnail caption...</p>
-        </div>
-    </li>
 </ul>
-<ul class="thumbnails">
-    <li class="span8">
-        <div class="thumbnail">
-            <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
+<script>
 
-            <h5>Thumbnail label</h5>
+    $(document).ready(function () {
+    // Get latest additions
+    $('ul.latestShares').html("");//clear previous additions
 
-            <p>Thumbnail caption...</p>
-        </div>
-    </li>
-</ul>
-<ul class="thumbnails">
-    <li class="span8">
-        <div class="thumbnail">
-            <img src="http://www.wired.com/images_blogs/underwire/2013/04/Slide12-300x150.jpg" alt="">
 
-            <h5>Thumbnail label</h5>
+    ajaxJsonRequest("scripts/getLatestAdditions.php",
+        "",
+        gotLatestAdditions,
+        ajaxFailed);
 
-            <p>Thumbnail caption...</p>
-        </div>
-    </li>
-</ul>
+
+
+
+        //When a latest addition is clicked
+        $("body").on("click", "ul.latestShares li a", function () {
+
+            var url = $(this).attr('data-filter-value');
+
+            previewArticle(url);
+        });
+
+
+
+    });
+
+
+    /**Got latest additions result */
+    function gotLatestAdditions(data){
+
+        var obj = eval('('+ data  + ')');
+
+
+        var latestAdditions = [];
+
+
+        // Found latest additions
+        if(obj[0]['code']==1){
+
+            for(var i=1; i<obj.length; i++){
+
+                var title = "";
+                if(obj[i].title.length>47){
+                    title = obj[i].title.substring(0, 50) + '...';
+                }
+                else{
+                title = obj[i].title;
+                }
+
+                $('ul.latestShares').append('<li><a  href="#" data-filter-value="'+  obj[i].url +'">'+ title +'</a>'
+                    + '<span class="badge likes">+' + obj[i].likes + '</span>'
+                    + '<span class="badge shares" >Shares: ' + obj[i].shares + '</span>'
+                    + '<span class="badge views" >Views: ' + obj[i].views + '</span>' +
+                '</li>');
+
+            }
+
+        }
+
+
+    }
+
+
+</script>
+
+
+
+

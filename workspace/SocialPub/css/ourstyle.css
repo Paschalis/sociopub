@@ -457,6 +457,16 @@ Notification
     margin-left: 0px;
 }
 
+#leftContent {
+    padding-left: 10px;
+}
+
+#leftContent {
+    margin-left: 0px;
+}
+
+
+
 #rightContent .btn-navbar {
     background: #bfbfbf;
     /*position: relative;*/
@@ -473,6 +483,12 @@ Notification
 
 }
 
+#leftContent .latestShares {
+    margin: 0;
+    list-style: none;
+}
+
+
 #rightContent ul li {
     margin: 7px 0px 5px 0px;
     list-style: none;
@@ -484,22 +500,33 @@ Notification
     /*text-align: center;*/
     color: #1173ce;
     text-shadow: 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd;
-}
+}getUserArticles.php
 
-#rightContent ul li a {
-    padding: 0px 0px 0px 10px;
-    font-size: 15px;
+#rightContent ul li a, #leftContent  ul li a {
     text-decoration: none;
     color: #4c4c4c;
     text-shadow: 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 1px -1px 0 #cdcdcd;
+    font-size: 15px;
 }
-#rightContent ul li a.selected {
+#leftContent  ul li a {
+    font-size: 13px;
+    line-height: 0px;
+}
+#leftContent  ul li {
+    margin: 10px 0px;
+}
+
+
+#rightContent ul li a{
+    padding: 0px 0px 0px 10px;
+}
+#rightContent ul li a.selected, #leftContent ul li a.selected  {
     font-weight: bold;
     color: #1173ce;
     text-shadow: none;
 }
 
-#rightContent ul li a:hover {
+#rightContent ul li a:hover, #leftContent ul li a:hover{
     color: #1173ce;
 }
 

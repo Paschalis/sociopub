@@ -235,8 +235,6 @@ $(document).ready(function () {
 
 function submitForm(){
 
-    debugger;
-
     var q = $("#boxsearch").val();
 
     if (window.doingQuery) return;
@@ -1113,17 +1111,25 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback, successPa
 /**
  * Previews an article
  * */
-function previewArticle() {
+function previewArticle(pArticleUrl) {
+
+    var articleUrl;
+    if(pArticleUrl==null || pArticleUrl==""){
+         articleUrl = $("#newArticleInput").val();
+    }
+    else{
+        articleUrl=pArticleUrl;
+    }
 
     //Get the url for the article
-    var articleUrl = $("#newArticleInput").val();
+
     var formData = new Object();
     formData['url'] = articleUrl;
 
     ajaxJsonRequest("scripts/previewArticle.php",
         formData,
         getArticleSuccess,
-        ajaxFailed);
+        ajaxFailed, articleUrl);
 
 
 }
@@ -1234,7 +1240,7 @@ function deletedArticleSuccess(data, element) {
  * TODO DIMITRI INFO
  *
  * */
-function getArticleSuccess(data) {
+function getArticleSuccess(data, articleUrl) {
 
     var jsonObj;
 
@@ -1262,6 +1268,8 @@ function getArticleSuccess(data) {
         return;
     }
 
+    debugger;
+
 
     var title = jsonObj['title'];
     var description = jsonObj['description'];
@@ -1275,6 +1283,8 @@ function getArticleSuccess(data) {
     $(".box.newpost.article #buttonsToolbar .articletitle").html(title + " - " + siteName);
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
+
+    $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", articleUrl);
 
     $(".box.newpost.article .input .buttons button").addClass('fade in half');
     $(".box.newpost.article .input .buttons button").css("display", "inline");

@@ -12,8 +12,10 @@
 
             <div class="nav-collapse collapse navbar-responsive-collapse">
                 <form  class="navbar-search pull-left" onSubmit="return false;">
-                    <span class="icon-search"></span>
-                    <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
+                    <div class="input-prepend">
+                        <button id="boxsearchClear" class="add-on">x</button>
+                        <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
+                    </div>
                 </form>
                 <!--                <ul class="nav">-->
                 <!--                    <li class="active"><a href="#">Home</a></li>-->

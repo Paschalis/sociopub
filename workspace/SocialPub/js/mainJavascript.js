@@ -1456,12 +1456,12 @@ function calculateBoxWidth() {
     }
     //Tablet size
     else if (curwidth >= 650 && curwidth < 900) {
-        window.boxWidth = Math.floor((curwidth / 3)) - 3 * 6 + "px";
+        window.boxWidth = Math.floor((curwidth / 3)) - 3 * 7 + "px";
 
     }
     //Laptop size TODO ???????????
     else if (curwidth >= 900 && curwidth < 1300) {
-        window.boxWidth = Math.floor((curwidth / 4)) - 4 * 4 + "px";
+        window.boxWidth = Math.floor((curwidth / 4)) - 4 * 5 + "px";
 
     }
     //Desktop size
@@ -1628,7 +1628,7 @@ function loadArticles(query) {
                 //if sitename is unique, add it
                 if (isUnique == 1) {
                     siteFilters.push(newSiteFilter);
-                    siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site + '</a></li>');
+                    siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site.substring(0,10) + '</a></li>');
                 }
 
             }
@@ -1688,6 +1688,9 @@ function showBoxesAndFilters($items, siteFiltersDivs) {
 
 
     $('#filter ul #sitefilters').html("");
+
+
+
 
     //Show site filters on right content bar
     for (var i = 0; i < siteFiltersDivs.length; i++) {

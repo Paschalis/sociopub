@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <!-- Menu button when navbar is collapsed-->
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse.topnavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -10,7 +10,7 @@
             <a class="brand" <?php echo 'href="' . _URL . '"'; ?>><?php echo _NAME; ?></a>
 
 
-            <div class="nav-collapse collapse navbar-responsive-collapse">
+            <div class="nav-collapse collapse navbar-responsive-collapse topnavbar">
                 <form id="searchForm" class="navbar-search pull-left" onsubmit="return false;">
                     <div class="input-prepend">
                         <button id="boxsearchClear" type="button" class="add-on">x</button>

@@ -3,7 +3,7 @@ Body
 */
 body {
     background-color: white;
-    padding: 0;
+    /*padding: 0;*/
 }
 
 /**
@@ -469,32 +469,36 @@ Notification
 
 #rightContent .btn-navbar {
     background: #bfbfbf;
-    /*position: relative;*/
-    /*right: 45%;*/
-    /*display: inline-block;*/
+
 }
 
 
 
 #rightContent .btn-navbar .icon-bar {
+    height: 2px;
+    display: list-item;
+    list-style: none;
     background-color: #000000;
-    /*margin: 3px auto;*/
     margin: 3px auto;
-
 }
 
 #leftContent .latestShares {
     margin: 0;
     list-style: none;
 }
+#rightContent ul  {
+    margin: 0;
+}
 
 
 #rightContent ul li {
     margin: 7px 0px 5px 0px;
     list-style: none;
+    text-align: center;
 }
 
 #rightContent ul li h4 {
+    font-size: 15px;
     padding: 10px 0px 0px 0px;
     margin: 0;
     /*text-align: center;*/
@@ -515,10 +519,13 @@ Notification
 #leftContent  ul li {
     margin: 10px 0px;
 }
-
-
 #rightContent ul li a{
-    padding: 0px 0px 0px 10px;
+    font-size: 13px;
+    /*padding: 0px 0px 0px 10px;*/
+    /*position: relative;*/
+    /*left:-10px;*/
+
+    /*overflow-wrap: break-word;*/
 }
 #rightContent ul li a.selected, #leftContent ul li a.selected  {
     font-weight: bold;

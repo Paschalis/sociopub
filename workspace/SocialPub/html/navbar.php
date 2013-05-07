@@ -15,10 +15,7 @@
                     <div class="input-prepend">
                         <button id="boxsearchClear" type="button" class="add-on">x</button>
                         <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
-
                            <input id="boxSubmitButton" type="submit" onclick="submitForm();"  style="opacity:0;" />
-
-
                     </div>
                 </form>
                 <!--                <ul class="nav">-->
@@ -38,21 +35,20 @@
                 <ul class="nav pull-right">
 
                     <li class="divider-vertical"></li>
-                    <li class="dropdown"  <?php
-                    //If user is logged in, make visible account tab
-                    if ($_SESSION['loggedin'] == 1) {
-                        echo 'style="display: inline"';
-                    } else {
-                        echo 'style="display: none"';
-                    }
-                    ?> >
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+                    <?php
+                    //If user is logged in, show user panel
+                    if ($_SESSION['loggedin'] == 1) { ?>
+
+
+                    <li class="dropdown" style="display: inline">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['name'];?> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Settings</a></li>
                             <li class="divider"></li>
                             <li><a href="javascript:logout()">Logout</a></li>
                         </ul>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
             <!-- /.nav-collapse -->

@@ -14,8 +14,8 @@
                 <form id="searchForm" class="navbar-search pull-left" onsubmit="return false;">
                     <div class="input-prepend">
                         <button id="boxsearchClear" type="button" class="add-on">x</button>
-                        <input id="boxsearch" type="text" class="search-query span5" placeholder="Search" >
-                           <input id="boxSubmitButton" type="submit" onclick="submitForm();"  style="opacity:0;" />
+                        <input id="boxsearch" type="text" class="search-query span5" placeholder="Search">
+                        <input id="boxSubmitButton" type="submit" onclick="submitForm();" style="opacity:0;"/>
                     </div>
                 </form>
                 <!--                <ul class="nav">-->
@@ -37,20 +37,23 @@
                     <li class="divider-vertical"></li>
                     <?php
                     //If user is logged in, show user panel
-                    if ($_SESSION['loggedin'] == 1) { ?>
+                    if ($_SESSION['loggedin'] == 1) {
+                        ?>
 
 
-                    <li class="dropdown" style="display: inline">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['name'];?> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Settings</a></li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:logout()">Logout</a></li>
-                        </ul>
-                    </li>
+                        <li class="dropdown" style="display: inline">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['name']; ?>
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="javascript:logout()">Logout</a></li>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
             <!-- /.nav-collapse -->
         </div>
     </div>
+</div>

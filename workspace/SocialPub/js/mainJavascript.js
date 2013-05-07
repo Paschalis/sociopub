@@ -73,7 +73,7 @@ $(document).ready(function () {
     });
 
     //When categories are clicked
-    $("#buttonsToolbar button").click(function () {
+    $("body").on("click", "#buttonsToolbar button", function () {
 
         // Disable category
         if ($(this).hasClass("label-info")) {
@@ -1056,11 +1056,12 @@ function clearUsersNewPostAndAddNewPost(param, that, items) {
                 window.container.isotope('insert', $(items));
 
                 //Relayout isotope
-                window.container.isotope('reLayout'); //Force reLayout
+//                window.container.isotope('reLayout'); //Force reLayout
             }
             //Run simple cleared
             else {
-
+                //Relayout isotope
+                window.container.isotope('reLayout'); //Force reLayout
             }
 
 
@@ -1284,7 +1285,7 @@ function getNewPostHtml() {
         + '<button class="label" id="asports">Sports</button>'
         + '<button class="label" id="atechnology">Technology</button>'
         + '<button class="label" id="atravel">Travel</button>'
-        + '<button class="label label-info" id="aother">Other</button>'
+        + '<button class="label" id="aother">Other</button>'
         + '</div>'
         + '</div>'
         + '</div>';

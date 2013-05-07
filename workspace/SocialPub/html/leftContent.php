@@ -16,16 +16,14 @@
 <script>
 
     $(document).ready(function () {
-    // Get latest additions
-    $('ul.latestShares').html("");//clear previous additions
+        // Get latest additions
+        $('ul.latestShares').html("");//clear previous additions
 
 
-    ajaxJsonRequest("scripts/getLatestAdditions.php",
-        "",
-        gotLatestAdditions,
-        ajaxFailed);
-
-
+        ajaxJsonRequest("scripts/getLatestAdditions.php",
+            "",
+            gotLatestAdditions,
+            ajaxFailed);
 
 
         //When a latest addition is clicked
@@ -37,37 +35,41 @@
         });
 
 
-
     });
 
 
     /**Got latest additions result */
-    function gotLatestAdditions(data){
+    function gotLatestAdditions(data) {
 
-        var obj = eval('('+ data  + ')');
+        var obj = eval('(' + data + ')');
 
 
         var latestAdditions = [];
 
 
         // Found latest additions
-        if(obj[0]['code']==1){
+        if (obj[0]['code'] == 1) {
 
-            for(var i=1; i<obj.length; i++){
+            for (var i = 1; i < obj.length; i++) {
+
+
+                // handle cases where title is null
+                if (obj[i].title == null || obj[i].title == "")
+                    continue;
 
                 var title = "";
-                if(obj[i].title.length>47){
+                if (obj[i].title.length > 47) {
                     title = obj[i].title.substring(0, 50) + '...';
                 }
-                else{
-                title = obj[i].title;
+                else {
+                    title = obj[i].title;
                 }
 
-                $('ul.latestShares').append('<li><a  href="#" data-filter-value="'+  obj[i].url +'">'+ title +'</a>'
+                $('ul.latestShares').append('<li><a  href="#" data-filter-value="' + obj[i].url + '">' + title + '</a>'
                     + '<span class="badge likes">+' + obj[i].likes + '</span>'
                     + '<span class="badge shares" >Shares: ' + obj[i].shares + '</span>'
                     + '<span class="badge views" >Views: ' + obj[i].views + '</span>' +
-                '</li>');
+                    '</li>');
 
             }
 

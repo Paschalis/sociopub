@@ -29,7 +29,7 @@ $url = $_SESSION['article_url'];
 $username = $_SESSION['username'];
 
 //Escape arguments
-$title = mysql_real_escape_string($title);
+// $title = $title;
 $description = mysql_real_escape_string($description);
 $image = mysql_real_escape_string($image);
 $siteName = mysql_real_escape_string($siteName);
@@ -39,8 +39,9 @@ $username = mysql_real_escape_string($username);
 
 $postArticleSrt = "CALL post_users_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
 
-$result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
 
+
+$result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
 
 $row = mysql_fetch_assoc($result); // get the results
 
@@ -52,10 +53,10 @@ $resultCode = $row['RESULT'];
 
     switch($resultCode){
         case 2:
-            printArticleData($resultCode, $row);
+            printArticleData($resultCode, $row, $postArticleSrt); //TODO RM LAST PARAM
 
         case 1:
-            printArticleData($resultCode, $row);
+            printArticleData($resultCode, $row, $postArticleSrt); //TODO RM LAST PARAM
             break;
         case -1:
             // Print result code
@@ -73,7 +74,7 @@ $resultCode = $row['RESULT'];
  * code: 2 article existed for other users and just added for current user
  *
  * */
-function printArticleData($resultCode, $row){
+function printArticleData($resultCode, $row, $postArticleSrt){ //TODO RM LAST PARAM
     $renamedRow['code'] = $resultCode;
     $renamedRow['uid'] = $row['idARTICLE'];
     $renamedRow['title'] = $row['TITLE'];
@@ -103,6 +104,9 @@ function printArticleData($resultCode, $row){
     $categoriesTables = explode(',', $row['CATEGORY']);
 
     $renamedRow['tags'] = $categoriesTables;
+
+
+    $renamedRow['query'] = $postArticleSrt;
 
 
     echo json_encode($renamedRow);

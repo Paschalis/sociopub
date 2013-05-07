@@ -566,6 +566,7 @@ function ajaxFailed() {
  */
 function ajaxSuccessPost(result) {
 
+
     var jsonObj = eval('(' + result + ')');
 
 
@@ -1268,7 +1269,6 @@ function getArticleSuccess(data, articleUrl) {
         return;
     }
 
-    debugger;
 
 
     var title = jsonObj['title'];

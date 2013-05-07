@@ -648,7 +648,7 @@ function addArticleToIsotope(article) {
         + '<button class="btn closebox" onclick="deleteArticle(($(event.target).parent()).parent())">x</button>'
         + '<p class="date" datetime="' + article.added + '" >' + jQuery.timeago(new Date(article.added * 1000)) + '</p>'
         + '<p class="articledesc" >' + article.description + '</p>'
-        + '<div class="readMore"><a href="' + article.url + '" target="_blank">continue @' + article.site + '</a></div>'
+        + '<div class="readMore"><a href="' + article.url + '" target="_blank">@' + article.site + '</a></div>'
         + '<button class="badge likes' + likedClass + '">+' + article.likes + '</button>'
         + '<span class="badge shares" >Shares: ' + article.shares + '</span>'
         + '<span class="badge views" >Views: ' + article.views + '</span>'
@@ -1624,7 +1624,7 @@ function loadArticles(query) {
                         break;
                     }
                 }
-
+                http://www.nytimes.com/2013/05/05/opinion/sunday/wheres-my-ghost-money.html?smid=go-share&_r=0
                 //if sitename is unique, add it
                 if (isUnique == 1) {
                     siteFilters.push(newSiteFilter);

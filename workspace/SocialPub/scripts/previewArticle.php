@@ -51,6 +51,12 @@ foreach ($ret as $element) {
                 $title = explode(' - ', $title);
                 $title = $title[1];
             }
+            else if (strpos($URL, 'sigmalive.com') !== false) { // sigma live
+                $title = explode('|', $title);
+                $title = $title[0];
+            }
+
+            // Sigma live
         }
     } //Found the description
     else if (strpos($element->property, 'description') !== false) {

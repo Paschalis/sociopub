@@ -417,9 +417,8 @@ function getViewSuccess(data, element) {
 
     // Successfully liked or unliked
     if (jsonObj['code'] != -1) {
-        var s = $($($(element).children('.box-body')[0]).children('.badge.views')[0]);
 
-        $($($(element).children('.box-body')[0]).children('.badge.views')[0]).html('Views: ' + jsonObj['views']);
+        $($($(element).children('.box-body')[0]).find('.badge.views')[0]).html('Views: ' + jsonObj['views']);
         $(element).addClass("viewed");
     }
     //Show notification

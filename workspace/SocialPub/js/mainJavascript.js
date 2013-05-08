@@ -18,6 +18,8 @@ var DELAY_REGISTER_FORM_ERROR = 6000;
  */
 $(document).ready(function () {
 
+    window.previewing=0;
+
 
     //When register button is clicked
     $("#registerButton").click(function () {
@@ -89,6 +91,10 @@ $(document).ready(function () {
     //When user presses like button
     $("body").on("click", ".box button.likes", function () {
 
+
+        //Disable the button
+        $(this).attr("disabled", true);
+
         //Get the article ID
         var articleID = $($($(this).parent()).siblings(".articleID")[0]).html();
 
@@ -105,6 +111,9 @@ $(document).ready(function () {
 
     //When user presses read button
     $("body").on("click", ".box button.read", function () {
+
+        //Disable the button
+        $(this).attr("disabled", true);
 
         //Get the article ID
         var articleID = $($($(this).parent()).siblings(".articleID")[0]).html();
@@ -171,7 +180,6 @@ $(document).ready(function () {
     window.doingQuery = 0;
 
 
-
     $("#boxsearch").keypress(function (e) {
 
         //On Enter
@@ -205,11 +213,8 @@ $(document).ready(function () {
     });
 
 
-
-
-
     // Add clear functionality to all inputs
-    $("#boxsearchClear").click(function(){
+    $("#boxsearchClear").click(function () {
 
         $('#boxsearch').val("");
 
@@ -233,7 +238,7 @@ $(document).ready(function () {
 
 });
 
-function submitForm(){
+function submitForm() {
 
     var q = $("#boxsearch").val();
 
@@ -254,11 +259,10 @@ function doQuery(q) {
 
 
     // no query & already all articles? dont fetch 'em again
-    if((q==null || q=="") && window.allArticles==1){
+    if ((q == null || q == "") && window.allArticles == 1) {
         window.doingQuery = 0;
         return;
     }
-
 
 
     // Remove all existing elements
@@ -307,20 +311,21 @@ function getLikeSuccess(data, element) {
         //Successfully unliked
         if (jsonObj['code'] == 0) {
             $(element).removeClass('liked');
-            $($($(element).parent()).parent()).removeClass('liked');
+            $($($($(element).parent()).parent()).parent()).removeClass('liked');
 
         }
         //Successfully liked
         else {
             $(element).addClass('liked');
-            $($($(element).parent()).parent()).addClass('liked');
+            $($($($(element).parent()).parent()).parent()).addClass('liked');
         }
 
         $(element).html('+' + jsonObj['likes']);
 
 
         //Re-filter items
-        if (window.currentFilter != null) {
+        //Re-filter items
+        if (window.currentFilter != null && window.currentFilter != "") {
             window.currentFilter.click();
         }
 
@@ -330,6 +335,9 @@ function getLikeSuccess(data, element) {
         jsonObj['code'] = 0;
         showNotification(jsonObj, DELAY_MEDIUM);
     }
+
+    //Re enable button
+    $(element).attr("disabled", false);
 
 
 }
@@ -365,7 +373,7 @@ function getReadlaterSuccess(data, element) {
         //Successfully removed read later
         if (jsonObj['code'] == 0) {
             $(element).removeClass('readLater');
-            $($($(element).parent()).parent()).removeClass('readLater');
+            $($($($(element).parent()).parent()).parent()).removeClass('readLater');
 
         }
         //Successfully added read later
@@ -373,12 +381,12 @@ function getReadlaterSuccess(data, element) {
 
 
             $(element).addClass('readLater');
-            $($($(element).parent()).parent()).addClass('readLater');
+            $($($($(element).parent()).parent()).parent()).addClass('readLater');
         }
 
 
         //Re-filter items
-        if (window.currentFilter != "") {
+        if (window.currentFilter != null && window.currentFilter != "") {
             window.currentFilter.click();
         }
 
@@ -389,6 +397,9 @@ function getReadlaterSuccess(data, element) {
         showNotification(jsonObj, DELAY_MEDIUM);
     }
 
+
+    //Re enable button
+    $(element).attr("disabled", false);
 
 }
 
@@ -543,11 +554,23 @@ function registerUser(formData) {
 }
 
 
+function ajaxPreviewArticleFailed(params) {
+
+
+    window.previewing=0;
+    $("#previewNewArticleButton").attr("disabled", false);
+
+    //Re enable button
+    $(params[0]).attr("disabled", false);
+    //call ajax failed
+    ajaxFailed();
+}
+
 /**
  * Called when failed to contact register PHP script
  *
  */
-function ajaxFailed() {
+function ajaxFailed(elem) {
 
     var data = new Object();
 
@@ -555,6 +578,10 @@ function ajaxFailed() {
     data['message'] = "Something went wrong! Ajax failed";
 
     showNotification(data, DELAY_AJAX_ERROR);
+
+    if (elem != null)
+    //Re enable button
+        $(elem).attr("disabled", false);
 
 }
 
@@ -1106,7 +1133,15 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback, successPa
         }
     )
         .
-        fail(failCallback);
+        fail(function () {
+            if (successParams != "") {
+                failCallback(successParams);
+            }
+            else {
+                failCallback();
+
+            }
+        });
 // .always(); -- Not used
 
 
@@ -1115,14 +1150,25 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback, successPa
 /**
  * Previews an article
  * */
-function previewArticle(pArticleUrl) {
+function previewArticle(element, pArticleUrl) {
+
+    if(window.previewing==1)
+        return;
+
+    window.previewing=1;
+
+
+    //Disable button
+    $(element).attr("disabled", true);
+    $("#previewNewArticleButton").attr("disabled", true);
+
 
     var articleUrl;
-    if(pArticleUrl==null || pArticleUrl==""){
-         articleUrl = $("#newArticleInput").val();
+    if (pArticleUrl == null || pArticleUrl == "") {
+        articleUrl = $("#newArticleInput").val();
     }
-    else{
-        articleUrl=pArticleUrl;
+    else {
+        articleUrl = pArticleUrl;
     }
 
     //Get the url for the article
@@ -1130,10 +1176,17 @@ function previewArticle(pArticleUrl) {
     var formData = new Object();
     formData['url'] = articleUrl;
 
+    var params = [];
+
+    //Push header of site filters
+    params.push(element);
+    params.push(pArticleUrl);
+
+
     ajaxJsonRequest("scripts/previewArticle.php",
         formData,
         getArticleSuccess,
-        ajaxFailed, articleUrl);
+        ajaxPreviewArticleFailed, params);
 
 
 }
@@ -1244,7 +1297,7 @@ function deletedArticleSuccess(data, element) {
  * TODO DIMITRI INFO
  *
  * */
-function getArticleSuccess(data, articleUrl) {
+function getArticleSuccess(data, params) {
 
     var jsonObj;
 
@@ -1258,6 +1311,11 @@ function getArticleSuccess(data, articleUrl) {
 
             makeShowNotification(0, "Failed to fetch article!", DELAY_MEDIUM);
 
+            //re Enable button
+            $("#previewNewArticleButton").attr("disabled", false);
+
+            window.previewing=0;
+
             return;
         }
     }
@@ -1269,9 +1327,10 @@ function getArticleSuccess(data, articleUrl) {
     //Failed to fetch data
     if (code == 0) {
         makeShowNotification(0, jsonObj['message'], DELAY_MEDIUM);
+        //re Enable button
+        $(params[0]).attr("disabled", false);
         return;
     }
-
 
 
     var title = jsonObj['title'];
@@ -1287,8 +1346,8 @@ function getArticleSuccess(data, articleUrl) {
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
-    $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", articleUrl);
-    $(".box.newpost.article #buttonsToolbar .readMore a").html("@" + siteName+"");
+    $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", params[1]);
+    $(".box.newpost.article #buttonsToolbar .readMore a").html("@" + siteName + "");
 
     $(".box.newpost.article .input .buttons button").addClass('fade in half');
     $(".box.newpost.article .input .buttons button").css("display", "inline");
@@ -1303,6 +1362,13 @@ function getArticleSuccess(data, articleUrl) {
 
         //Relayout isotope
         window.container.isotope('reLayout'); //Force reLayout
+
+        //re Enable button
+        $("#previewNewArticleButton").attr("disabled", false);
+        $(params[0]).attr("disabled", false);
+        //TODO
+
+        window.previewing=0;
 
     });
 
@@ -1381,7 +1447,7 @@ function getNewPostHtml() {
         + '<label for="newArticleInput">Post an article:</label>'
         + '<input id="newArticleInput" type="text">'
         + '<div class="buttons">'
-        + '<button class="btn" type="button" onclick="previewArticle()">Preview</button>'
+        + '<button id="previewNewArticleButton"  class="btn" type="button" onclick="previewArticle(this)">Preview</button>'
         + '<button id="postNewArticleButton" class="btn half" style="display: none" type="button" onclick="postArticle()">Post</button>'
         + '</div>'
         + '</div>'
@@ -1519,12 +1585,12 @@ function loadArticles(query) {
     var formData = new Object();
 
     //If we have query data
-    if (query != null && query!="") {
+    if (query != null && query != "") {
         formData['q'] = query;
-        window.allArticles=0;
+        window.allArticles = 0;
     }
-    else{
-        window.allArticles=1;
+    else {
+        window.allArticles = 1;
     }
 
 
@@ -1540,7 +1606,7 @@ function loadArticles(query) {
             // proceed only if we have data
             if (!data || !data.length || code == 0) {
                 fetchArticlesError();
-                window.allArticles=0; // no articles
+                window.allArticles = 0; // no articles
                 window.doingQuery = 0; //query finished!
 
                 return;
@@ -1632,11 +1698,11 @@ function loadArticles(query) {
                     }
                 }
                 http://www.nytimes.com/2013/05/05/opinion/sunday/wheres-my-ghost-money.html?smid=go-share&_r=0
-                //if sitename is unique, add it
-                if (isUnique == 1) {
-                    siteFilters.push(newSiteFilter);
-                    siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site.substring(0,10) + '</a></li>');
-                }
+                    //if sitename is unique, add it
+                    if (isUnique == 1) {
+                        siteFilters.push(newSiteFilter);
+                        siteFiltersDivs.push('<li><a href="#" data-option-value=".' + newSiteFilter + '">' + article.site.substring(0, 10) + '</a></li>');
+                    }
 
             }
 
@@ -1695,8 +1761,6 @@ function showBoxesAndFilters($items, siteFiltersDivs) {
 
 
     $('#filter ul #sitefilters').html("");
-
-
 
 
     //Show site filters on right content bar

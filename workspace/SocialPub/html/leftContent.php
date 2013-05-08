@@ -29,11 +29,12 @@ if($_SESSION['loggedin']==1){
 
 
         //When a latest addition is clicked
-        $("body").on("click", "ul.latestShares li a", function () {
+        $("body").on("click", "ul.latestShares li button", function () {
 
             var url = $(this).attr('data-filter-value');
 
-            previewArticle(url);
+
+            previewArticle(this, url);
         });
 
 
@@ -67,10 +68,10 @@ if($_SESSION['loggedin']==1){
                     title = obj[i].title;
                 }
 
-                $('ul.latestShares').append('<li><a  href="#" data-filter-value="' + obj[i].url + '">' + title + '</a>'
+                $('ul.latestShares').append('<li><button class="latestArticleButton" data-filter-value="' + obj[i].url + '">' + title + '</button>'
                     + '<div class="likeShares">'
-                    + '<button class="badge likes">+' + obj[i].likes + '</button>'
-                    + '<button class="badge shares" >Shares: ' + obj[i].shares + '</button>'
+                    + '<button class="badge likes" disabled>+' + obj[i].likes + '</button>'
+                    + '<button class="badge shares" disabled>Shares: ' + obj[i].shares + '</button>'
                     + '</div>'
                     + '</li>');
 

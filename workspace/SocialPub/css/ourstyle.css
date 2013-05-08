@@ -499,36 +499,60 @@ Left bar social buttons
 
 .latestShares li .likes{
     margin: 0px;
-    padding: 2px 8px;
+    padding: 0px 0px;
+    width: 100%;
     cursor:default;
 
     background-color: #1879bd;
 
-    border: 0;
+    border-style: solid;
+    border-color: #8b8b8b;
+    border-width: 0px 3px 0px 3px;
 
-    border-top-right-radius: 0px;
-    -moz-border-top-right-radius: 0px;
-    -webkit-border-top-right-radius: 0px;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
 
-    border-bottom-right-radius: 0px;
-    -moz-border-bottom-right-radius: 0px;
-    -webkit-border-bottom-right-radius: 0px;
+    /*border-top-right-radius: 0px;*/
+    /*-moz-border-top-right-radius: 0px;*/
+    /*-webkit-border-top-right-radius: 0px;*/
+
+    /*border-top-left-radius: 0px;*/
+    /*-moz-border-top-left-radius: 0px;*/
+    /*-webkit-border-top-left-radius: 0px;*/
+
+    /*border-bottom-right-radius: 0px;*/
+    /*-moz-border-bottom-right-radius: 0px;*/
+    /*-webkit-border-bottom-right-radius: 0px;*/
 }
 
 .latestShares li .shares{
     margin: 0px;
-    padding: 2px 4px;
+    padding: 2px 0px;
+    width: 100%;
     cursor:default;
 
     border: 0;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
 
-    border-top-left-radius: 0px;
-    -moz-border-top-left-radius: 0px;
-    -webkit-border-top-left-radius: 0px;
 
-    border-bottom-left-radius: 0px;
-    -moz-border-bottom-left-radius: 0px;
-    -webkit-border-bottom-left-radius: 0px;
+    /*border-top-left-radius: 0px;*/
+    /*-moz-border-top-left-radius: 0px;*/
+    /*-webkit-border-top-left-radius: 0px;*/
+
+    /*border-top-right-radius: 0px;*/
+    /*-moz-border-top-right-radius: 0px;*/
+    /*-webkit-border-top-right-radius: 0px;*/
+
+    border-bottom-right-radius: 4px;
+    -moz-border-bottom-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+
+    border-bottom-left-radius: 4px;
+    -moz-border-bottom-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
 }
 /*
 user likes an article
@@ -641,13 +665,37 @@ Notification
     text-shadow: 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd, 1px -1px 0 #cdcdcd;
 }getUserArticles.php
 
-#rightContent ul li a, #leftContent  ul li a {
+#rightContent ul li a {
     text-decoration: none;
     color: #4c4c4c;
     text-shadow: 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 0px 0px 0 #cdcdcd, 1px -1px 0 #cdcdcd;
     font-size: 15px;
 }
-#leftContent  ul li a {
+#leftContent  ul li .latestArticleButton {
+    font-size: 13px;
+    background: none;
+    border: 2px solid #8b8b8b;
+    /*border-radius: 4px;*/
+
+    width: 100%;
+
+    overflow: visible;
+
+    word-break: break-all;
+    padding: 1px;
+
+
+    border-top-left-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+
+    border-top-right-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+
+}
+
+#leftContent  ul li  {
     font-size: 13px;
     line-height: 0px;
 }
@@ -656,19 +704,15 @@ Notification
 }
 #rightContent ul li a{
     font-size: 13px;
-    /*padding: 0px 0px 0px 10px;*/
-    /*position: relative;*/
-    /*left:-10px;*/
 
-    /*overflow-wrap: break-word;*/
 }
-#rightContent ul li a.selected, #leftContent ul li a.selected  {
+#rightContent ul li a.selected, #leftContent ul li .latestArticleButton.selected  {
     font-weight: bold;
     color: #1173ce;
     text-shadow: none;
 }
 
-#rightContent ul li a:hover, #leftContent ul li a:hover{
+#rightContent ul li a:hover, #leftContent ul li .latestArticleButton:hover{
     color: #1173ce;
 }
 

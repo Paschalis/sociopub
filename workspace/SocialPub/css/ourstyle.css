@@ -779,6 +779,13 @@ Notification
 .navbar-search button.add-on:hover{
     background-color: #bfbfbf;
 }
+/* Search clean button*/
+#boxsearchClear{
+    color: white;
+    text-shadow: none;
+    font-weight: bold;
+}
+
 /*
 Register screen overrides
 */

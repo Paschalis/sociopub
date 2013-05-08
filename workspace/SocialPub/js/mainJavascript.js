@@ -446,8 +446,6 @@ function getReadlaterSuccess(data, element) {
         }
         //Successfully added read later
         else {
-
-
             $(element).addClass('readLater');
             $($($($(element).parent()).parent()).parent()).addClass('readLater');
         }

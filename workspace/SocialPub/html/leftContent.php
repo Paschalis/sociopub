@@ -68,10 +68,11 @@ if($_SESSION['loggedin']==1){
                 }
 
                 $('ul.latestShares').append('<li><a  href="#" data-filter-value="' + obj[i].url + '">' + title + '</a>'
-                    + '<span class="badge likes">+' + obj[i].likes + '</span>'
-                    + '<span class="badge shares" >Shares: ' + obj[i].shares + '</span>'
-                    + '<span class="badge views" >Views: ' + obj[i].views + '</span>' +
-                    '</li>');
+                    + '<div class="likeShares">'
+                    + '<button class="badge likes">+' + obj[i].likes + '</button>'
+                    + '<button class="badge shares" >Shares: ' + obj[i].shares + '</button>'
+                    + '</div>'
+                    + '</li>');
 
             }
 

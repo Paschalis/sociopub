@@ -11,7 +11,7 @@ if($_SESSION['loggedin']==1){
 
 ?>
 
-<h4>Latest</h4>
+<h4>Latest Additions</h4>
 <ul class="latestShares">
 
 </ul>

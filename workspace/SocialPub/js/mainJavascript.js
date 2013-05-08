@@ -18,7 +18,7 @@ var DELAY_REGISTER_FORM_ERROR = 6000;
  */
 $(document).ready(function () {
 
-    window.previewing=0;
+    window.previewing = 0;
 
 
     //When register button is clicked
@@ -91,6 +91,9 @@ $(document).ready(function () {
     //When user presses like button
     $("body").on("click", ".box button.likes", function () {
 
+        //Toggle like, and hope user will make it!
+        toggleLike(this);
+
 
         //Disable the button
         $(this).attr("disabled", true);
@@ -102,15 +105,21 @@ $(document).ready(function () {
 
         formData['articleID'] = articleID;
 
+
+
         ajaxJsonRequest("scripts/likeArticle.php",
             formData,
             getLikeSuccess,
-            ajaxFailed, this);
+            ajaxLikeFailed, this);
+
     });
 
 
     //When user presses read button
     $("body").on("click", ".box button.read", function () {
+
+        //Toggle read, and hope user will make it!
+        toggleRead(this);
 
         //Disable the button
         $(this).attr("disabled", true);
@@ -125,7 +134,7 @@ $(document).ready(function () {
         ajaxJsonRequest("scripts/readLaterArticle.php",
             formData,
             getReadlaterSuccess,
-            ajaxFailed, this);
+            ajaxReadFailed, this);
     });
 
 
@@ -278,6 +287,65 @@ function doQuery(q) {
     // Load new articles based on query
     loadArticles(q);
 
+
+}
+/*
+* Toggle like button for faster response!
+* */
+function toggleLike(element){
+
+    //Do unlike
+    if($(element).hasClass('liked')){
+        $(element).removeClass('liked');
+        $($($($(element).parent()).parent()).parent()).removeClass('liked');
+    }
+    // do like
+    else{
+        $(element).addClass('liked');
+        $($($($(element).parent()).parent()).parent()).addClass('liked');
+    }
+
+
+}
+
+/*
+ * Toggle read button for faster response!
+ * */
+function toggleRead(element){
+
+    //Do unlike
+    if($(element).hasClass('readLater')){
+        $(element).removeClass('readLater');
+        $($($($(element).parent()).parent()).parent()).removeClass('readLater');
+    }
+    // do like
+    else{
+        $(element).addClass('readLater');
+        $($($($(element).parent()).parent()).parent()).addClass('readLater');
+    }
+
+
+}
+
+
+/*
+ * Ajax like failed. so restore the element as it was
+ * */
+function ajaxReadFailed(element){
+    toggleRead(element);
+
+    ajaxFailed(element);
+
+}
+
+
+/*
+* Ajax like failed. so restore the element as it was
+* */
+function ajaxLikeFailed(element){
+    toggleLike(element);
+
+    ajaxFailed(element);
 
 }
 
@@ -557,7 +625,7 @@ function registerUser(formData) {
 function ajaxPreviewArticleFailed(params) {
 
 
-    window.previewing=0;
+    window.previewing = 0;
     $("#previewNewArticleButton").attr("disabled", false);
 
     //Re enable button
@@ -1155,10 +1223,10 @@ function ajaxJsonRequest(url, formData, successCallback, failCallback, successPa
  * */
 function previewArticle(element, pArticleUrl) {
 
-    if(window.previewing==1)
+    if (window.previewing == 1)
         return;
 
-    window.previewing=1;
+    window.previewing = 1;
 
 
     //Disable button
@@ -1317,7 +1385,7 @@ function getArticleSuccess(data, params) {
             //re Enable button
             $("#previewNewArticleButton").attr("disabled", false);
 
-            window.previewing=0;
+            window.previewing = 0;
 
             return;
         }
@@ -1371,7 +1439,7 @@ function getArticleSuccess(data, params) {
         $(params[0]).attr("disabled", false);
         //TODO
 
-        window.previewing=0;
+        window.previewing = 0;
 
     });
 
@@ -1385,9 +1453,6 @@ function getArticleSuccess(data, params) {
  * */
 function postArticle() {
     var categories = "";
-
-
-
 
 
     //When categories are clicked

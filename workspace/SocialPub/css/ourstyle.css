@@ -221,13 +221,16 @@ Close Button of box
 .box button.btn.closebox {
     color: white;
     background: rgba(76, 76, 76, 0.30);
-    line-height: 10px;
+    /*background: none;*/
+    line-height: 4px;
     margin: 0px;
-    padding: 4px 5px 4px 5px;
+    padding: 4px;
     position: absolute;
     top: 5px;
     right: 5px;
-    border: 1px solid #737373;
+    border: 0px;
+    box-shadow: 0;
+    /*border: 1px solid #737373;*/
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-bottom-radius: 10px;
@@ -248,8 +251,8 @@ Close Button of box
 Close Button of box on Hover
 */
 .box button.btn.closebox:hover {
-    padding: 3px 4px 3px 4px;
-    border: 2px solid #ce4613;
+    padding: 2px;
+    border: 2px solid #ce4613;;
 }
 
 /*

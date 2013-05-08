@@ -90,7 +90,7 @@ $(document).ready(function () {
     $("body").on("click", ".box button.likes", function () {
 
         //Get the article ID
-        var articleID = $($(this).siblings(".articleID")[0]).html();
+        var articleID = $($($(this).parent()).siblings(".articleID")[0]).html();
 
         var formData = new Object();
 
@@ -107,7 +107,7 @@ $(document).ready(function () {
     $("body").on("click", ".box button.read", function () {
 
         //Get the article ID
-        var articleID = $($(this).siblings(".articleID")[0]).html();
+        var articleID = $($($(this).parent()).siblings(".articleID")[0]).html();
 
         var formData = new Object();
 

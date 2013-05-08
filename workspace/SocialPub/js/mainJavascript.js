@@ -618,6 +618,9 @@ function ajaxSuccessPost(result) {
 
     showNotification(jsonObj, DELAY_MEDIUM);
 
+    // Re-Enable button
+    $("#postNewArticleButton").attr("disabled", false);
+
 }
 
 
@@ -1383,6 +1386,10 @@ function getArticleSuccess(data, params) {
 function postArticle() {
     var categories = "";
 
+
+
+
+
     //When categories are clicked
     $("#buttonsToolbar button ").each(function () {
         // Get categories
@@ -1399,6 +1406,9 @@ function postArticle() {
         return;
     }
 
+    // Disable button
+    $("#postNewArticleButton").attr("disabled", true);
+
     categories = categories.substring(0, categories.length - 1);
 
 
@@ -1410,7 +1420,7 @@ function postArticle() {
     ajaxJsonRequest("scripts/postArticle.php",
         formData,
         ajaxSuccessPost,
-        ajaxFailed);
+        ajaxFailed, $("#postNewArticleButton"));
 }
 
 

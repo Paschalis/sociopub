@@ -72,9 +72,18 @@ $resultCode = $row['RESULT'];
  *
  * */
 function printArticleData($resultCode, $row, $postArticleSrt){
+
+    include('Encoding.php');
+
     $renamedRow['code'] = $resultCode;
     $renamedRow['uid'] = $row['idARTICLE'];
-    $renamedRow['title'] = $row['TITLE'];
+
+    $renamedRow['title'] = Encoding::toUTF8($row['TITLE']);
+    $renamedRow['description']  = Encoding::toUTF8($row['DESCRIPTION']);
+
+
+
+
     $renamedRow['url'] = $row['URL'];
     $renamedRow['added'] = strtotime($row['TIME']);
     $renamedRow['views'] = $row['VIEWS'];
@@ -96,14 +105,17 @@ function printArticleData($resultCode, $row, $postArticleSrt){
         $renamedRow['image'] = "";
     }
 
-    $renamedRow['description'] = $row['DESCRIPTION'];
+
     $renamedRow['query'] =  $postArticleSrt;
 
     $categoriesTables = explode(',', $row['CATEGORY']);
 
     $renamedRow['tags'] = $categoriesTables;
 
-    echo json_encode($renamedRow);
+    $json = json_encode($renamedRow);
+
+    echo iconv("UTF-8", "UTF-8//IGNORE", $json);
+
 
     die();
 

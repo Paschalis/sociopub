@@ -1415,7 +1415,6 @@ function getArticleSuccess(data, params) {
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
 
 
-    debugger;
 
     $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", params[1]);
     $(".box.newpost.article #buttonsToolbar .readMore a").html("@" + siteName + "");

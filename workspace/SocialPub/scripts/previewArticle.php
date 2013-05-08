@@ -90,6 +90,7 @@ foreach ($ret as $element) {
 //}
 
 
+
 // ########################### Remove bloat from Titles (like Title title - superwebpage.com)
 // Ant1-iWO stupidness patch
 //ant1wo hack (ant1iwo dont know how to do meta tags!!!!)
@@ -112,10 +113,7 @@ else if (strpos($URL, 'livenews.com.cy') !== false) { // livenews workaround
     $title = $title[1];
 }
 else if (strpos($URL, '24h.com.cy') !== false) { // livenews workaround
-
     $title = str_replace("www.24h.com.cy -  ", "", $title);
-    $title = preg_replace('/\(.*\)$/', '', $title);
-
 }
 
 
@@ -219,6 +217,10 @@ if ($siteName == "") {
 //}
 //
 
+
+//Remove unneseccary parts of title
+$title = preg_replace('/\(.*\)$/', '', $title);
+
 //Remove unneseccary parts of url/site name
 $siteName = preg_replace('/^https?:\/\//', '', $siteName);
 $siteName = preg_replace('/^www\./', '', $siteName);
@@ -226,7 +228,14 @@ $siteName = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.
 
 
 
+include('Encoding.php');
 
+
+//$title = Encoding::toUTF8($title);
+//$description = Encoding::toUTF8($description);
+
+$title = Encoding::toUTF8($title);
+$description = Encoding::toUTF8($description);
 
 
 //TODO Dimitri: an prokipsoun alla null, kame ta replace mesw toutou tou pinaka okay?
@@ -235,12 +244,29 @@ $siteName = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.
 // CHECK THAT GR SITE AND TRY AGAIN!
 ////Modify data to be more compatible - DIMITRI CHECK, &#039; is the > ' < character (single quotes)
 // Change single quote character
-$title = str_replace("'", "&#039;", $title);
-$description = str_replace("'", "&#039;", $description);
+//$title = str_replace("'", "&#039;", $title);
+//$description = str_replace("'", "&#039;", $description);
+//
+////// Change '-' character
+//$title = str_replace("-", ".", $title); //&#45;
+//$description = str_replace("-", ". ", $description);
+//
+//// :
+//$title = str_replace(":", "&#58;", $title);
+//$description = str_replace(":", "&#58;", $description);
+//
+//
+//$title = str_replace("«", "&#171;", $title);
+//$description = str_replace("«", "&#171;", $description);
+//
+//$title = str_replace("»", "&#187;", $title);
+//$description = str_replace("»", "&#187;", $description);
 
-//// Change '-' character
-$title = str_replace("-", ".", $title); //&#45;
-$description = str_replace("-", ". ", $description);
+//$title = str_replace("60 ", "", $title);// TODO RM
+
+//$title = iconv("UTF-8", "UTF-8", $title);
+
+//$title = mb_convert_encoding($title, "utf-8", "UTF-16BE");
 
 //Save article results
 // Article is valid

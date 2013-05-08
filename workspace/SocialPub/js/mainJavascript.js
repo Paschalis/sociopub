@@ -1249,14 +1249,13 @@ function previewArticle(element, pArticleUrl) {
 
     //Push header of site filters
     params.push(element);
-    params.push(pArticleUrl);
+    params.push(articleUrl);
 
 
     ajaxJsonRequest("scripts/previewArticle.php",
         formData,
         getArticleSuccess,
         ajaxPreviewArticleFailed, params);
-
 
 }
 
@@ -1414,6 +1413,9 @@ function getArticleSuccess(data, params) {
     $(".box.newpost.article #buttonsToolbar .articletitle").html(title);
 
     $(".box.newpost.article #buttonsToolbar .articledesc").html(description);
+
+
+    debugger;
 
     $(".box.newpost.article #buttonsToolbar .readMore a").attr("href", params[1]);
     $(".box.newpost.article #buttonsToolbar .readMore a").html("@" + siteName + "");

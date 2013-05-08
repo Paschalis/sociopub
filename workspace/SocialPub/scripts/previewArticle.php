@@ -111,6 +111,12 @@ else if (strpos($URL, 'livenews.com.cy') !== false) { // livenews workaround
     $title = explode(' - ', $title);
     $title = $title[1];
 }
+else if (strpos($URL, '24h.com.cy') !== false) { // livenews workaround
+
+    $title = str_replace("www.24h.com.cy -  ", "", $title);
+    $title = preg_replace('/\(.*\)$/', '', $title);
+
+}
 
 
 
@@ -193,17 +199,30 @@ if ($title == "" && $description == "") {
 
 //Find site name if dont exists
 if ($siteName == "") {
-    $pSiteName = str_replace("http://", "", $URL);
-    $pSiteName = preg_replace('/\.[^.]+$/', '', $pSiteName);
-    $siteName = $pSiteName;
+    $siteName = $URL;
+//    $pSiteName = str_replace("http://", "", $URL);
+//    $result = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.*)/', '$1$2$3$4$5', $result);
+//    $siteName = $pSiteName;
 }
 
-// Site name patch
-if (strpos($siteName, 'www.') !== false) {
-    $siteName = str_replace("www.", "", $siteName);
-    $siteName = preg_replace('/\.[^.]+$/', '', $siteName);
-}
+//// remove http
+//if (strpos($siteName, 'http.') !== false) {
+//    $siteName = str_replace("www.", "", $siteName);
+//    $result = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.*)/', '$1$2$3$4$5', $result);
+//}
+//
+//
+//// Site name patch
+//if (strpos($siteName, 'www.') !== false) {
+//    $siteName = str_replace("www.", "", $siteName);
+//    $result = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.*)/', '$1$2$3$4$5', $result);
+//}
+//
 
+//Remove unneseccary parts of url/site name
+$siteName = preg_replace('/^https?:\/\//', '', $siteName);
+$siteName = preg_replace('/^www\./', '', $siteName);
+$siteName = preg_replace('/([a-zA-Z0-9]+)(\.)([a-zA-Z0-9]+)(\.?)([a-zA-Z0-9]*)(.*)/', '$1$2$3$4$5', $siteName);
 
 
 
@@ -220,7 +239,7 @@ $title = str_replace("'", "&#039;", $title);
 $description = str_replace("'", "&#039;", $description);
 
 //// Change '-' character
-$title = str_replace("-", ". ", $title); //&#45;
+$title = str_replace("-", ".", $title); //&#45;
 $description = str_replace("-", ". ", $description);
 
 //Save article results

@@ -1397,6 +1397,8 @@ function getArticleSuccess(data, params) {
         makeShowNotification(0, jsonObj['message'], DELAY_MEDIUM);
         //re Enable button
         $(params[0]).attr("disabled", false);
+        $("#previewNewArticleButton").attr("disabled", false);
+        window.previewing = 0;
         return;
     }
 

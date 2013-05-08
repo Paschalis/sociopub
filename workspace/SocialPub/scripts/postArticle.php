@@ -37,7 +37,7 @@ $url = mysql_real_escape_string($url);
 $username = mysql_real_escape_string($username);
 
 
-$postArticleSrt = "CALL post_users_article('".$title."','".$description."','".$image."','".$siteName."','".$url."','".$username."','".$categories."')";
+$postArticleSrt = "CALL post_users_article(\"".$title."\",\"".$description."\",\"".$image."\",\"".$siteName."\",\"".$url."\",\"".$username."\",\"".$categories."\")";
 
 
 $result = mysql_query($postArticleSrt) or handleGetArticlesError(mysql_error());
@@ -53,7 +53,7 @@ $resultCode = $row['RESULT'];
     switch($resultCode){
         case 2:
         case 1:
-            printArticleData($resultCode, $row);
+            printArticleData($resultCode, $row, $postArticleSrt);
             break;
         case -1:
             // Print result code
@@ -71,7 +71,7 @@ $resultCode = $row['RESULT'];
  * code: 2 article existed for other users and just added for current user
  *
  * */
-function printArticleData($resultCode, $row){
+function printArticleData($resultCode, $row, $postArticleSrt){
     $renamedRow['code'] = $resultCode;
     $renamedRow['uid'] = $row['idARTICLE'];
     $renamedRow['title'] = $row['TITLE'];
@@ -97,6 +97,7 @@ function printArticleData($resultCode, $row){
     }
 
     $renamedRow['description'] = $row['DESCRIPTION'];
+    $renamedRow['query'] =  $postArticleSrt;
 
     $categoriesTables = explode(',', $row['CATEGORY']);
 

@@ -14,14 +14,26 @@ $URL = $_POST['url'];
 
 // TODO DIMITRI REANBLE THIS FOR DEBUG DEBUG
 //$URL = "http://www.news.gr/kosmos/evroph/article/63078/protomagia-me-epeisodia-synthhmata-kai-ekatommy.html"; //TODO RM
+//$URL = 'http://www.livenews.com.cy/cgibin/hweb?-A=16408&-V=news';
 
+//$URL = 'http://www.ant1iwo.com/oikonomia/2013/05/07/sthn-ep-oikonomikwn-toy-eyrwkoinonoylioy/';
+
+//$URL = 'http://www.bbc.co.uk/news/world-us-canada-22438417';
 
 if ($URL == "") {
     printMessage(0, "Articles URL cant be emtpy");
 }
 
 
+
+
 $html = file_get_html($URL);
+
+//Find charset of webpage
+preg_match('~charset=([-a-z0-9_]+)~i',$html,$charset);
+
+$charset= str_replace("charset=", "", $charset);
+$charset =  strtolower ($charset[0]);
 
 
 $title = "";
@@ -55,7 +67,8 @@ foreach ($ret as $element) {
     }
 
 }
-// ############################    CONVERT CHARSETS
+
+
 // WORKAROUND: convert charset 1253 to UTF8
 $ret = $html->find('meta[http-equiv=content-type]');
 
@@ -67,6 +80,15 @@ foreach ($ret as $element) {
         $description = iconv("windows-1253", "UTF-8", $description);
     }
 }
+//// CHECK THIS UNIVERSAL PATTCH THAT DONT WORKS!
+//if ($charset !="utf-8") {
+//$title = utf8_encode($title);
+//    $description = utf8_encode($description);
+//
+////    $title = iconv($charset, "utf-8", $title);
+////    $description = iconv($charset, "utf-8", $description);
+//}
+
 
 // ########################### Remove bloat from Titles (like Title title - superwebpage.com)
 // Ant1-iWO stupidness patch
@@ -85,6 +107,12 @@ else if (strpos($URL, 'sigmalive.com') !== false) { // sigma live
     $title = explode('|', $title);
     $title = $title[0];
 }
+else if (strpos($URL, 'livenews.com.cy') !== false) { // livenews workaround
+    $title = explode(' - ', $title);
+    $title = $title[1];
+}
+
+
 
 
 // Make another try to fetch results
@@ -177,11 +205,23 @@ if (strpos($siteName, 'www.') !== false) {
 }
 
 
-//Modify data to be more compatible - DIMITRI CHECK, &#039; is the > ' < character (single quotes)
+
+
+
+
+
+//TODO Dimitri: an prokipsoun alla null, kame ta replace mesw toutou tou pinaka okay?
+// se touti tin selida: http://www.degraeve.com/reference/specialcharacters.php
+
+// CHECK THAT GR SITE AND TRY AGAIN!
+////Modify data to be more compatible - DIMITRI CHECK, &#039; is the > ' < character (single quotes)
+// Change single quote character
 $title = str_replace("'", "&#039;", $title);
 $description = str_replace("'", "&#039;", $description);
-$siteName = str_replace("'", "&#039;", $siteName);
 
+//// Change '-' character
+$title = str_replace("-", ". ", $title); //&#45;
+$description = str_replace("-", ". ", $description);
 
 //Save article results
 // Article is valid

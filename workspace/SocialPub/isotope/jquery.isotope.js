@@ -152,6 +152,8 @@
     var transformFnNotations = Modernizr.csstransforms3d ?
       { // 3D transform functions
         translate : function ( position ) {
+            position[0] = Math.round(position[0]);
+            position[1] = Math.round(position[1]);
           return 'translate3d(' + position[0] + 'px, ' + position[1] + 'px, 0) ';
         },
         scale : function ( scale ) {
@@ -160,6 +162,8 @@
       } :
       { // 2D transform functions
         translate : function ( position ) {
+            position[0] = Math.round(position[0]);
+            position[1] = Math.round(position[1]);
           return 'translate(' + position[0] + 'px, ' + position[1] + 'px) ';
         },
         scale : function ( scale ) {

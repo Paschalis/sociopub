@@ -11,6 +11,11 @@
 
 
             <div class="nav-collapse collapse navbar-responsive-collapse topnavbar">
+
+                <?php
+                //If user is logged in, show search bar
+                if ($_SESSION['loggedin'] == 1) {
+                ?>
                 <form id="searchForm" class="navbar-search pull-left" onsubmit="return false;">
                     <div class="input-prepend">
                         <button id="boxsearchClear" type="button" class="add-on">x</button>
@@ -18,6 +23,7 @@
                         <input id="boxSubmitButton" type="submit" onclick="submitForm();" style="opacity:0;"/>
                     </div>
                 </form>
+                <?php } ?>
                 <!--                <ul class="nav">-->
                 <!--                    <li class="active"><a href="#">Home</a></li>-->
                 <!--                </ul>-->

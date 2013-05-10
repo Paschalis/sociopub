@@ -1636,6 +1636,7 @@ function loadArticles(query) {
     var curwidth = window.container.width();
 
     window.container.isotope({
+        animationEngine: 'jquery',
         sortBy: 'date',
         sortAscending: false,
         getSortData: {

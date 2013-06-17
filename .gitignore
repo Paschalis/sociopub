@@ -2,7 +2,8 @@
 *~
 # phpstorm
 .idea/
-
+Other/*
+workspace/SocialPub/scripts/CONFIG.php
 # Numerous always-ignore extensions
 *.diff
 *.err

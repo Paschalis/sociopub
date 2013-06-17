@@ -5,7 +5,7 @@ Copyright 2013, Internet Technologies course Team, at Computer Science Dept., Un
 
 Members:
 Dr. Marios Dikaiakos,
-Dimitris Christofi, Paschalis Mpeis, Charalambos Charalambous.
+Dimitris Christofi, Paschalis Mpeis, Pampos Charalambous.
 
 
 Licensed under the Apache License, Version 2.0 (the "License");

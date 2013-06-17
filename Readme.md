@@ -35,24 +35,24 @@ HTML, CSS, PhP, Javascript(Ajax, jQuery, Bootstrap, Isotope), MySQL.
 
 Repository structure:
 --------
-SQL
-.SQL Code
-..Creation of tables
-...some table atlering
-..Functions
-..Procedures
+* SQL
+	* SQL Code
+		* Creation of tables
+			* some table atlering
+		* Functions
+		* Procedures
 
-Workspace/SocialPub
-.PHP STORM workspace
-..scripts: php code (the result is the web2.0 API in json)
-..isotope: isotope plugin
-..html: html parts of webpage (rightbar, leftbar, navbar, maincontent etc)
-..css: bootstrap css, isotope css, our css(+overrides on isotope/bootstrap)
-..js:
-...bootstrap (main js + collapse plugin + other currenlty unused js)
-...extra plugins
-....html5shiv of google: support html5 on osbolete browsers
-....timeago: human readable time
-....jQuery libary
-....mainJavascript(our javascript code): most of the client side JS/jQuery (other code may be embedded in webpages)
+* Workspace/SocialPub
+	* PHP STORM workspace
+		* scripts: php code (the result is the web2.0 API in json)
+		* isotope: isotope plugin
+		* html: html parts of webpage (rightbar, leftbar, navbar, maincontent etc)
+		* css: bootstrap css, isotope css, our css(+overrides on isotope/bootstrap)
+		* js:
+			* bootstrap (main js + collapse plugin + other currenlty unused js)
+			* extra plugins
+				* html5shiv of google: support html5 on osbolete browsers
+				* timeago: human readable time
+				* jQuery libary
+				* mainJavascript(our javascript code): most of the client side JS/jQuery (other code may be embedded in webpages)
 

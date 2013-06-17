@@ -50,9 +50,8 @@ Repository structure:
 		* css: bootstrap css, isotope css, our css(+overrides on isotope/bootstrap)
 		* js:
 			* bootstrap (main js + collapse plugin + other currenlty unused js)
+			* mainJavascript(our javascript code): most of the client side JS/jQuery (other code may be embedded in webpages)
 			* extra plugins
 				* html5shiv of google: support html5 on osbolete browsers
 				* timeago: human readable time
 				* jQuery libary
-				* mainJavascript(our javascript code): most of the client side JS/jQuery (other code may be embedded in webpages)
-

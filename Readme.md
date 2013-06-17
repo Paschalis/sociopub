@@ -18,15 +18,23 @@ Sociopub - Social Publishing System
 	limitations under the License.
 
 
-
-425 Project
----------------
-
-Project is hosted on private git repository @bitbucket
+---
 
 
-Source code folder descriptions:
+Sociopub
+=======
 
+A system that will enable people to publish personal journals, where the articles are ranked and placed according to their popularity.
+
+References:
+--------
+Fliboard, Personspot, paper.li, bit.ly.
+Technologies:
+HTML, CSS, PhP, Javascript(Ajax, jQuery, Bootstrap, Isotope), MySQL.
+
+
+Repository structure:
+--------
 SQL
 .SQL Code
 ..Creation of tables
@@ -45,7 +53,6 @@ Workspace/SocialPub
 ...extra plugins
 ....html5shiv of google: support html5 on osbolete browsers
 ....timeago: human readable time
-....hirestext.js: some isotope blurry text fixes(eventually not used. changed isotope source and text isnt blurry now)
 ....jQuery libary
 ....mainJavascript(our javascript code): most of the client side JS/jQuery (other code may be embedded in webpages)
 

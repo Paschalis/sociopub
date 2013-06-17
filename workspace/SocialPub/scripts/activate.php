@@ -1,9 +1,13 @@
 <?php
 
 
-/*
+/**
 
-Copyright 2013 Paschalis Mpeis
+Copyright 2013, Internet Technologies course Team, at Computer Science Dept., University of Cyprus,
+
+Members:
+Dr. Marios Dikaiakos,
+Dimitris Christofi, Paschalis Mpeis, Charalambos Charalambous.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

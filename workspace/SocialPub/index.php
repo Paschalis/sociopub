@@ -1,7 +1,12 @@
 <?php
 /**
 
-Copyright 2013 Paschalis Mpeis
+Copyright 2013, Internet Technologies course Team, at Computer Science Dept., University of Cyprus,
+
+Members:
+Dr. Marios Dikaiakos,
+Dimitris Christofi, Paschalis Mpeis, Charalambos Charalambous.
+
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,13 +20,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-
-
- * Created by JetBrains PhpStorm.
- * User: paschalis
- * Date: 4/10/13
- * Time: 10:00 PM
- * To change this template use File | Settings | File Templates.
  */
 
 include("scripts/initializeSession.php");

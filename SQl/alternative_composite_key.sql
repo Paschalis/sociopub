@@ -1,4 +1,0 @@
-
-ALTER TABLE `USER_ARTICLE` 
- ADD CONSTRAINT AK_Alternate_Key Unique (`idUSER`,`idARTICLE`)
-;

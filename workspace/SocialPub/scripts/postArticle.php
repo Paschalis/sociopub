@@ -1,7 +1,7 @@
 <?php
 /**
 
-Copyright 2013, Internet Technologies course Team, at Computer Science Dept., University of Cyprus,
+Copyright 2013, Internet Technologies course (code epl425) Team, at Computer Science Dept., University of Cyprus,
 
 Members:
 Dr. Marios Dikaiakos,
@@ -24,7 +24,7 @@ limitations under the License.
 
  * Created by JetBrains PhpStorm.
  * User: paschalis
- * Date: 4/22/13
+ * Date: 4/22/13 
  * Time: 10:49 PM
  * To change this template use File | Settings | File Templates.
  */
